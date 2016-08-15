@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Iran Hotel Advisor</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body class="animated fadeIn delay1">
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal_login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document" style="width:400px">
+            <div class="modal-content" id="modal_container">
+
+            </div>
+            </div>
+            
+    </div>
+     <!-- END MODAL-->
+
+    <div class="navbar navbar-default navbar-fixed-top" id="header">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+               <a class="navbar-brand" href="http://www.iranhoteladvisor.com">
+                    <img alt="Brand" src="~/Images/logo.jpg">
+                   <img alt="Brand" src="~/Images/logo-text.png">
+                </a>
+            </div>
+            <div class="navbar-collapse collapse" id="div_partial">
+                @Html.Partial("_LoginPartial")
+           
+            </div><!-- /.navbar-collapse -->
+
+        
+        </div><!-- /.container -->
+  
+    
+    </div>
+    <div class="container body-content">
+        @RenderSection("ContentBody")
+       
+        
+         <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

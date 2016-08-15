@@ -1,0 +1,177 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+/************************* Slider *************************/
+#home {
+ width:100%;
+}
+#fullscreenslider {
+  text-align: center;
+}
+
+#fullscreenslider .carousel-caption {
+  top:0;  
+}
+
+#fullscreenslider .carousel-caption .border{
+  margin-top: 35px;
+  margin-bottom: 30px;
+}
+
+#fullscreenslider h1 {
+  text-align: left;
+  color:#111;
+  font-weight:600;
+  margin:10px 0 0 -30px;
+  font-family:'Times New Roman'
+}
+
+#fullscreenslider h2 {
+  color: #111;
+  font-size: 30px;
+  font-weight: 500;
+  text-align: left;
+    margin:10px 0 0 -30px;
+  line-height: 1.5;
+  font-family:'Times New Roman'
+
+}
+
+
+#home #fullscreenslider .carousel-indicators {
+  top:80%;
+}
+
+#home #fullscreenslider .carousel-control.right{
+  right:0;
+  top: 45%;
+  z-index: 99999999;
+  background:none !important;
+
+}
+
+#home #fullscreenslider .carousel-control.left{
+  left: 0;
+  top: 45%;
+  z-index: 99999999;
+  background:none !important;
+}
+
+.carousel-fade .item {
+  opacity: 0.3;
+  -webkit-transition: opacity 2s ease-in-out;
+  -moz-transition: opacity 2s ease-in-out;
+  -ms-transition: opacity 2s ease-in-out;
+  -o-transition: opacity 2s ease-in-out;
+  transition: opacity 2s ease-in-out;
+  left: 0 !important;
+}
+
+.carousel-fade .active {
+  opacity: 1 !important;
+}
+
+.carousel-fade .left {
+  opacity: 0.8 !important;
+  -webkit-transition: opacity 0.5s ease-in-out !important;
+  -moz-transition: opacity 0.5s ease-in-out !important;
+  -ms-transition: opacity 0.5s ease-in-out !important;
+  -o-transition: opacity 0.5s ease-in-out !important;
+  transition: opacity 0.5s ease-in-out !important;
+}
+
+.carousel-fade .carousel-control {
+  opacity: 1 !important;
+}
+
+/* NavBar*/
+
+.navbar-brand {
+    margin:0;
+    padding:5px;
+}
+.navbar-text,.navbar-text:hover {
+cursor:pointer;
+    text-decoration:none;
+}
+/***ICONS*/
+
+.fa-lock {
+margin-left:10px;
+cursor:pointer;
+
+}
+
+/***MODAL*****/
+.modal-header-login{
+     height:40px;
+	color:#6e97ab;
+    padding:8px;
+    border-bottom:1px solid #eee;
+    background-color: #d9edf7;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;
+}
+
+.modal-content {
+    border: 2px solid #6793a9;
+  border-radius: 4px;
+}
+
+/****FORms****/
+.form-horizontal .control-label {
+    font-size:10pt;
+    font-weight:normal;
+    margin:0;
+    padding-top:5px;
+    text-align:left;
+}
+.text-danger {
+font-size:90%;
+}
+
+/****************SEARCH****************/
+.searchbar {
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fce432+1,f4edb7+52,f2dc37+100 */
+/*background: #fce432;*/ 
+/*background: -moz-linear-gradient(45deg,  #fce432 1%, #f4edb7 52%, #f2dc37 100%);*/ /* FF3.6-15 */
+/*background: -webkit-linear-gradient(45deg,  #fce432 1%,#f4edb7 52%,#f2dc37 100%);*/ /* Chrome10-25,Safari5.1-6 */
+/*background: linear-gradient(45deg,  #fce432 1%,#f4edb7 52%,#f2dc37 100%);*/ /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+/*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fce432', endColorstr='#f2dc37',GradientType=1 );*/ /* IE6-9 fallback on horizontal gradient */
+ 
+
+width:100%;
+/*margin:-2% auto;*/
+border-radius:3px; 
+height:70px;
+/*z-index:1;
+position:relative;*/
+margin-top:1%;
+}
+
+

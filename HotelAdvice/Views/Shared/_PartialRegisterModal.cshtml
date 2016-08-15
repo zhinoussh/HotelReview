@@ -1,0 +1,82 @@
+﻿@model HotelAdvice.ViewModels.RegisterViewModel
+@{
+    Layout = null;
+}
+<div class="modal-header modal-header-login">
+
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <div style="float:right; font-size: 80%; margin:1%"><a href="#" onclick="show_login()">Sign in</a></div>
+
+    <h4 class="modal-title" id="myModalLabel">Sign Up</h4>
+</div>
+
+
+    @using (Ajax.BeginForm("Register", "Account", new AjaxOptions
+    {
+        InsertionMode = InsertionMode.ReplaceWith,
+        HttpMethod = "Post",
+        OnSuccess = "SuccessRegister"
+    }))
+    {
+
+        <div class="modal-body" style="margin-bottom:10%;">
+
+            <div class="col-sm-5 col-sm-offset-4 text-primary"> Join Us on</div>
+
+            <img alt="Brand" src="~/Images/logo-text.png" style="margin:2% 0 3% 10%;width:80%">
+
+
+            @Html.AntiForgeryToken()
+
+            <div class="col-sm-12">
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <div class="form-group col-sm-12">
+                    <div class="form-group col-md-6" style="padding-left:0;">
+                        @Html.TextBoxFor(m => m.fname, new { @class = "form-control", @placeholder = "First Name" })
+                    </div>
+
+                    <div class="form-group col-md-6" style="padding-right:0;">
+                        @Html.TextBoxFor(m => m.lname, new { @class = "form-control", @placeholder = "Larst Name" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.lname, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(m => m.fname, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-12">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-12">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-12">
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-sm-offset-2 col-sm-8">
+                    <input type="submit" class="btn btn-info" value="Register" style="width:100%" />
+                </div>
+                </div>
+       </div>
+    }
+<div class="modal-footer">
+
+    <div class="col-sm-12">
+        <button class="btn btn-social btn-facebook  col-sm-8 col-sm-offset-2">
+            <i class="fa fa-facebook" aria-hidden="true"></i>
+            Sign in with Facebook
+        </button>
+    </div>
+    <div class="col-sm-12" style="margin-top:12%">
+
+        <button class="btn btn-social btn-google col-sm-8 col-sm-offset-2">
+            <i class="fa fa-google" aria-hidden="true"></i>
+            Sign in with Google
+        </button>
+
+    </div>
+
+
+</div>
+       
