@@ -169,8 +169,17 @@ height:70px;
 position:relative;*/
 margin-top:1%;
 }
-.destination_search {
-    width:1500px;
+#txt_dest_name {
+max-width:100%;
+width:100%;
+border-bottom-right-radius:0px;
+    border-top-right-radius:0px;
+}
+
+.btn_search {
+    border-bottom-left-radius:0px;
+    border-top-left-radius:0px;
+    width:100px
 }
 
 

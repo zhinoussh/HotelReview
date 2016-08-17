@@ -64,10 +64,14 @@
 <!-- end slider -->
 
     <div id="searchbar" class="well">
-        <div class="form-horizontal col-sm-12">
-            <div class="form-group" style="border:1px solid red">
-                @Html.TextBoxFor(model=>model.Destination_Name, new { @class = "form-control", @placeholder = "Hotel, City, Destination...",id="txt_dest_name" })
-                <button type="submit" class="btn btn-danger">Search</button>
+        <div class="form-horizontal">
+            <div class="form-group" >
+                <div class="col-sm-8 col-sm-offset-1" style="padding-right:0;">
+                    @Html.TextBoxFor(model => model.Destination_Name, new { @class = "form-control", @placeholder = "Find Hotel, City or Destination...", id = "txt_dest_name" })
+                </div>
+                <div class="col-sm-3" style="padding-left:0;">
+                    <button type="submit" class="btn btn-danger btn_search"><i class="glyphicon glyphicon-search"></i>&nbsp;Search</button>
+                </div>
             </div>
         </div>
     </div>
