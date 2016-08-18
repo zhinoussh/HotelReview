@@ -7,13 +7,13 @@ namespace HotelAdvice.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class add_TBL_Hotel_AND_TBL_CITY : IMigrationMetadata
+    public sealed partial class add_TBL_HOTEL_AND_TBL_CITY : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(add_TBL_Hotel_AND_TBL_CITY));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(add_TBL_HOTEL_AND_TBL_CITY));
         
         string IMigrationMetadata.Id
         {
-            get { return "201608180551268_add_TBL_Hotel_AND_TBL_CITY"; }
+            get { return "201608180721342_add_TBL_HOTEL_AND_TBL_CITY"; }
         }
         
         string IMigrationMetadata.Source

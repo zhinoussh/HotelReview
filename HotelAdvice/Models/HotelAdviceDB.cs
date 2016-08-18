@@ -5,7 +5,7 @@ using System.Web;
 using System.Data.Entity;
 using HotelAdvice.Models;
 
-namespace HotelAdvice.App_Code
+namespace HotelAdvice
 {
     public class HotelAdviceDB : DbContext
     {
@@ -25,5 +25,5 @@ namespace HotelAdvice.App_Code
                .HasForeignKey(e => e.CityId)
                .WillCascadeOnDelete();
         }
-    }   
+    }
 }

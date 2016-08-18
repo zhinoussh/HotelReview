@@ -36,7 +36,7 @@ namespace HotelAdvice.Models
         [StringLength(int.MaxValue)]
         public string OtherFacilities { get; set; }
 
-        public int CityId { get; set; }
+        public int? CityId { get; set; }
 
         [ForeignKey("CityId")]
         public virtual tbl_City City { get; set; }

@@ -5,7 +5,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using HotelAdvice.ViewModels;
+using HotelAdvice.Models;
 
 namespace HotelAdvice
 {

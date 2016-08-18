@@ -1,18 +1,18 @@
-namespace HotelAdvice.Migrations
+﻿namespace HotelAdvice.Migrations
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<HotelAdvice.Models.ApplicationDbContext>
+    internal sealed class Config_ProjectDB : DbMigrationsConfiguration<HotelAdvice.HotelAdviceDB>
     {
-        public Configuration()
+        public Config_ProjectDB()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(HotelAdvice.Models.ApplicationDbContext context)
+        protected override void Seed(HotelAdvice.HotelAdviceDB context)
         {
             //  This method will be called after migrating to the latest version.
 
