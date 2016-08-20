@@ -21,7 +21,9 @@ namespace HotelAdvice
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/bootstrap.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/HomePage").Include(
                       "~/Scripts/respond.js"
                       , "~/Scripts/Carousel.js"
                        , "~/Scripts/app_script/homePage.js"));
@@ -32,6 +34,11 @@ namespace HotelAdvice
                       , "~/Content/font-awesome.min.css"
                       , "~/Content/animate.css"
                       , "~/Content/bootstrap-social.css"));
+
+            bundles.Add(new StyleBundle("~/Content/AdminCss").Include(
+                     "~/Content/bootstrap.min.css",
+                     "~/Content/sidebar.css"
+                     , "~/Content/font-awesome.min.css"));
         }
     }
 }
