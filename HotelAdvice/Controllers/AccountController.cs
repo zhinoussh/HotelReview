@@ -82,19 +82,23 @@ namespace HotelAdvice.Controllers
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
-                case SignInStatus.Success:
+                    case SignInStatus.Success:
                     {
-                        return Json(new { url = "/Home/Index" });
+                        var user = await UserManager.FindAsync(model.Email, model.Password);
+                        if (UserManager.IsInRole(user.Id, "Administrator"))
+                            return Json(new { url = "/Admin/Index" });
+                        else
+                            return Json(new { url = "/Home/Index" });
                     }
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    ViewBag.Fail = "true";
-                    return PartialView("_PartialLoginModal", model);
+                    case SignInStatus.LockedOut:
+                        return View("Lockout");
+                    case SignInStatus.RequiresVerification:
+                        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    case SignInStatus.Failure:
+                    default:
+                        ModelState.AddModelError("", "Invalid login attempt.");
+                        ViewBag.Fail = "true";
+                        return PartialView("_PartialLoginModal", model);
             }
 
         }
@@ -166,6 +170,8 @@ namespace HotelAdvice.Controllers
                 {
                     await UserManager.AddClaimAsync(user.Id, new Claim("FirstName", user.FirstName));
 
+                    await this.UserManager.AddToRoleAsync(user.Id, "PublicUser");   
+                    
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771

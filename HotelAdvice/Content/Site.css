@@ -115,6 +115,9 @@ textarea {
 cursor:pointer;
     text-decoration:none;
 }
+.navbar-header {
+height:55px;
+}
 /***ICONS*/
 
 .fa-lock {

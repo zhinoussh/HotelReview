@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using HotelAdvice.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace HotelAdvice
 {
@@ -63,6 +64,38 @@ namespace HotelAdvice
             //    ClientId = "",
             //    ClientSecret = ""
             //});
+
+            createRolesandUsers();
         }
+
+        private void createRolesandUsers()
+        {
+            ApplicationDbContext context = new ApplicationDbContext();
+
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+
+            // In Startup iam creating first Admin Role and creating a default Admin User    
+            if (!roleManager.RoleExists("Administrator"))
+            {
+
+                // first we create Admin rool   
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "Administrator";
+                roleManager.Create(role);
+            }
+
+            
+
+            // creating Creating Employee role    
+            if (!roleManager.RoleExists("PublicUser"))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "PublicUser";
+                roleManager.Create(role);
+
+            }
+        } 
     }
 }
