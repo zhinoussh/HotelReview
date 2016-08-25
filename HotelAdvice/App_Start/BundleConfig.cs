@@ -28,9 +28,12 @@ namespace HotelAdvice
                       , "~/Scripts/Carousel.js"
                        , "~/Scripts/app_script/homePage.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/AdminPage").Include(
+                      "~/Scripts/admin.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"
+                      "~/Content/Site.css"
                       , "~/Content/font-awesome.min.css"
                       , "~/Content/animate.css"
                       , "~/Content/bootstrap-social.css"));
@@ -38,7 +41,9 @@ namespace HotelAdvice
             bundles.Add(new StyleBundle("~/Content/AdminCss").Include(
                      "~/Content/bootstrap.min.css",
                      "~/Content/sidebar.css"
-                     , "~/Content/font-awesome.min.css"));
+                     , "~/Content/font-awesome.min.css"
+                     , "~/Content/AdminStyle.css"
+                     ));
         }
     }
 }
