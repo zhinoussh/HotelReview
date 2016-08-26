@@ -1,0 +1,31 @@
+﻿@model HotelAdvice.ViewModels.CityViewModel
+
+@{
+    Layout = null;
+}
+
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header modal-header-info">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                     @Html.DisplayFor(model => model.cityName)
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        @Html.DisplayFor(model => model.cityAttractions, new { @class = "form-control" })
+                    </div>
+                </div>
+            
+
+            </div>
+        </div>
+    </div>
+    @Html.HiddenFor(m => m.cityID, new { id = "hd_city_id" })
+
+
+

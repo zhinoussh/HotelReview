@@ -1,60 +1,59 @@
-﻿@{
+﻿@model List<HotelAdvice.ViewModels.CityViewModel>
+
+@{
     ViewBag.Title = "City Management";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<div class="modal fade" id="modal_add" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content" id="modal-container">
-           
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
+
+<div id="CityModal"></div>
+
+
 <h2>City List</h2>
 
-<div class="table-responsive" style="margin:5% 3% 0 3%">
+<div class="alert alert-success" role="alert" id="div_alert" style="display:none;">
+    <a href="#" id="close_alert" class="close">&times;</a>
+    <label id="alert_success" style="margin-right:5px"></label>
+</div> 
+<div class="form-group">
+    <button type="button" class="btn btn-success" id="btn_add_newCity">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add New
+    </button>
+</div>
 
-    <div class="form-group">
-        <button type="button" class="btn btn-success" id="btn_add_newCity">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add New
-        </button>
-    </div>
+
+
+<div class="table-responsive" >
+
+    
     <table id="mytable" class="table table-bordred table-striped table-hover">
 
        <thead>
-
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Address</th>
-            <th>Email</th>
-            <th>Contact</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </thead>
+          <tr>
+              <th class="hidden">City ID</th>
+              <th>City Name</th>
+              <th>Attractions</th>
+              <th>Actions</th>
+          </tr>
+       </thead>
         <tbody>
-
+                
+                
+            @foreach (var item in Model)
+            {
             <tr>
-                <td>Mohsin</td>
-                <td>Irshad</td>
-                <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td>
-                <td>isometric.mohsin@gmail.com</td>
-                <td>+923335586757</td>
-                <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button></p></td>
+                <td class="hidden">@item.cityID</td>
+                <td class="col-sm-2 cityName">@item.cityName</td>
+                <td class="col-sm-9">@item.cityAttractions</td>
+                <td>
+                    <a data-toggle="tooltip" data-id="@item.cityID" title="Edit" class="glyphicon glyphicon-edit editItem"></a>
+                    <a data-toggle="tooltip" data-id="@item.cityID" title="Delete" class="glyphicon glyphicon-trash deleteItem"></a>
+                    <a data-toggle="tooltip" data-id="@item.cityID" title="FullShow" class="glyphicon glyphicon-search fullshowItem"></a>
+                </td>
             </tr>
+            }
 
-
-            <tr>
-                <td>Mohsin</td>
-                <td>Irshad</td>
-                <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td>
-                <td>isometric.mohsin@gmail.com</td>
-                <td>+923335586757</td>
-                <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button></p></td>
-            </tr>
+         
 
     </table>
 

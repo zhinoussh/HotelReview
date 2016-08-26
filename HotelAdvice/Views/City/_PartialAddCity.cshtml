@@ -4,20 +4,46 @@
     Layout = null;
 }
 
-<div class="modal-header modal-header-add">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-    <h4 class="modal-title custom_align" id="Heading">Edit Your Detail</h4>
-</div>
-<div class="modal-body">
-    <div class="form-group">
-        <input class="form-control " type="text" placeholder="City Name">
+
+@using (Ajax.BeginForm("ADD_New_City", "City", new AjaxOptions
+{
+    HttpMethod = "Post"
+    ,
+    OnSuccess = "Success_AjaxReturn"
+    ,
+    InsertionMode = InsertionMode.ReplaceWith
+}))
+{
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header modal-header-add">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">
+                        <span class="glyphicon glyphicon-pencil"></span> Add / Edit City
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.cityName, new { @placeholder = "City Name", @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.TextAreaFor(model => model.cityAttractions, new { @placeholder = "Tourist Attractions", @class = "form-control",style="min-height:300px" })
+                    </div>
+                </div>
+                <div class="modal-footer ">
+
+                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok-circle"></span>Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle"></span>Cancel</button>
+
+                </div>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
     </div>
-   
-    <div class="form-group">
-        <textarea rows="2" class="form-control" placeholder="Tourist Attractions"></textarea>
-    </div>
-</div>
-<div class="modal-footer ">
-    <button type="button" class="btn btn-primary" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Save</button>
-    <button type="button" class="btn btn-primary" style="width: 100%;"><span class="glyphicon glyphicon-remove-sign"></span >Cancel</button>
-</div>
+    @Html.HiddenFor(model => model.cityID, new { id = "hd_city_id" })
+}

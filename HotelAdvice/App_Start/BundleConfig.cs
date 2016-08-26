@@ -29,10 +29,10 @@ namespace HotelAdvice
                        , "~/Scripts/app_script/homePage.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/AdminPage").Include(
-                      "~/Scripts/admin.js"));
+                      "~/Scripts/app_script/admin.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap.css",                      
                       "~/Content/Site.css"
                       , "~/Content/font-awesome.min.css"
                       , "~/Content/animate.css"
@@ -40,6 +40,7 @@ namespace HotelAdvice
 
             bundles.Add(new StyleBundle("~/Content/AdminCss").Include(
                      "~/Content/bootstrap.min.css",
+                     "~/Content/bootstrap-theme.min.css", 
                      "~/Content/sidebar.css"
                      , "~/Content/font-awesome.min.css"
                      , "~/Content/AdminStyle.css"

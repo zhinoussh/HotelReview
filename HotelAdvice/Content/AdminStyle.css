@@ -1,5 +1,67 @@
-﻿.modal-header-add {
+﻿a{text-decoration: none !important}
 
-    background-color:#ff965e;
-    color:#170f0a;
+.modal-title {
+    font-size   :12pt;
+
+}
+.modal-header-add {
+    height:40px;
+	color:	#fff;
+    padding:8px;
+    border-bottom:1px solid #eee;
+    background-color:#5cb85c;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;
+}
+
+.modal-header-info {
+  height:40px;
+	color:	#fff;
+    padding:8px;
+    border-bottom:1px solid #eee;
+    background-color:#5bc0de;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;
+}
+
+.modal-header-danger{
+     height:40px;
+	color:	#fff;
+    padding:8px;
+    border-bottom:1px solid #eee;
+    background-color:#d9534f;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;
+}
+.btn-default {
+background-color:#eee;
+width:100px;
+}
+
+.glyphicon-edit,.glyphicon-trash,.glyphicon-search {
+font-size:13pt;
+cursor:pointer;
+
+}
+.glyphicon-ok-circle {
+font-size:14pt;
+margin:5px 10px 0 0;
+color:#5cb85c;
+}
+.glyphicon-remove-circle {
+font-size:14pt;
+margin:5px 10px 0 0;
+color:#d9534f;
 }

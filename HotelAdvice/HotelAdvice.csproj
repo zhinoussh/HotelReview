@@ -155,7 +155,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Code\DAL.cs" />
+    <Compile Include="App_Code\DAL.cs" />
     <Content Include="App_Code\HttpParamActionAttribute .cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -173,6 +173,10 @@
     <Compile Include="Migrations\201608180721342_add_TBL_HOTEL_AND_TBL_CITY.cs" />
     <Compile Include="Migrations\201608180721342_add_TBL_HOTEL_AND_TBL_CITY.Designer.cs">
       <DependentUpon>201608180721342_add_TBL_HOTEL_AND_TBL_CITY.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608260546489_alterCityTable_addAttractionColumn.cs" />
+    <Compile Include="Migrations\201608260546489_alterCityTable_addAttractionColumn.Designer.cs">
+      <DependentUpon>201608260546489_alterCityTable_addAttractionColumn.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Config_ProjectDB.cs" />
@@ -327,6 +331,8 @@
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\City\Index.cshtml" />
     <Content Include="Views\City\_PartialAddCity.cshtml" />
+    <Content Include="Views\City\_PartialDescription.cshtml" />
+    <Content Include="Views\City\_PartialDeleteCity.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -338,6 +344,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201608180721342_add_TBL_HOTEL_AND_TBL_CITY.resx">
       <DependentUpon>201608180721342_add_TBL_HOTEL_AND_TBL_CITY.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608260546489_alterCityTable_addAttractionColumn.resx">
+      <DependentUpon>201608260546489_alterCityTable_addAttractionColumn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

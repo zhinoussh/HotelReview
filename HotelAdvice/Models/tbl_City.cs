@@ -19,6 +19,9 @@ namespace HotelAdvice.Models
         [StringLength(100)]
         public string CityName { get; set; }
 
+        [StringLength(500)]
+        public string CityAttractions { get; set; }
+
         public virtual ICollection<tbl_Hotel> Hotels { get; set; }
 
 
