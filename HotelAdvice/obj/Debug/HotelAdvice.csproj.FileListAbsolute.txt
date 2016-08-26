@@ -112,3 +112,5 @@ D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.Migrations.alterCityT
 D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.csproj.GenerateResource.Cache
 D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.dll
 D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.pdb
+D:\Git_repos\HowtlReview\HotelAdvice\bin\MvcPaging.dll
+D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.csprojResolveAssemblyReference.cache
