@@ -5,20 +5,25 @@ using System.Web;
 using System.Web.Mvc;
 using HotelAdvice.ViewModels;
 using HotelAdvice.App_Code;
+using MvcPaging;
 
 namespace HotelAdvice.Controllers
 {
     [Authorize(Roles = "Administrator")]
     public class CityController : Controller
     {
+        private const int defaultPageSize = 20;
         DAL db = new DAL();
 
         // GET: City
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-           List<CityViewModel> lst_cities = db.get_cities();
+            int currentPageIndex = page.HasValue ? page.Value : 1;
+
+           IList<CityViewModel> lst_cities = db.get_cities();
            foreach (CityViewModel c in lst_cities)
                 c.cityAttractions = (c.cityAttractions.Length < 100 ? c.cityAttractions : (c.cityAttractions.Substring(0, 100) + "..."));
+           lst_cities = lst_cities.ToPagedList(currentPageIndex, defaultPageSize);
            return View(lst_cities);
         }
 

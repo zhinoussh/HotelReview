@@ -204,6 +204,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\paging.css" />
     <Content Include="Content\sidebar.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -256,6 +257,8 @@
     <Content Include="Images\logo2.png" />
     <Content Include="Images\slider1.jpg" />
     <Content Include="Images\slider2.jpg" />
+    <Content Include="lib\MvcPaging.dll" />
+    <Content Include="lib\MvcPaging.XML" />
     <Content Include="Scripts\app_script\admin.js" />
     <Content Include="Scripts\app_script\homePage.js" />
     <Content Include="Scripts\bootstrap.js" />

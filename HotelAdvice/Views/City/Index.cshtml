@@ -1,5 +1,6 @@
 ﻿@*@model List<HotelAdvice.ViewModels.CityViewModel>*@
-@model MvcPaging.IPagedList<HotelAdvice.ViewModels.CityViewModel> 
+
+@model IPagedList<HotelAdvice.ViewModels.CityViewModel> 
 @{
     ViewBag.Title = "City Management";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -57,7 +58,7 @@
 
     </table>
 
-    <div class="clearfix"></div>
+    @*<div class="clearfix"></div>
     <ul class="pagination pull-right">
         <li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
         <li class="active"><a href="#">1</a></li>
@@ -66,6 +67,35 @@
         <li><a href="#">4</a></li>
         <li><a href="#">5</a></li>
         <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
-    </ul>
+    </ul>*@
+
+    <div class="pager1">
+        @Html.Raw(Ajax.Pager(
+            new Options
+            {
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
+                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
+                Size = Size.normal,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+                IsShowFirstLast = true,
+                CssClass = ""
+            },
+            new AjaxOptions
+            {
+                UpdateTargetId = "grid-list",
+                OnBegin = "beginPaging",
+                OnSuccess = "successPaging",
+                OnFailure = "failurePaging"
+            }, new { controller = "Home", action = "Index", employee_name = ViewData["employee_name"] }))
+        <div class="well">
+            Showing <span class="badge badge-success">@Model.ItemStart</span> to <span class="badge badge-success">@Model.ItemEnd</span>
+            of <span class="badge badge-info">@Model.TotalItemCount</span> entries
+        </div>
+    </div>
 
 </div>
