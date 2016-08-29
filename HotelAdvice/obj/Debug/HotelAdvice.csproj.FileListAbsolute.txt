@@ -73,6 +73,9 @@ D:\Git_repos\HowtlReview\HotelAdvice\bin\Microsoft.Owin.Security.Google.dll
 D:\Git_repos\HowtlReview\HotelAdvice\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
 D:\Git_repos\HowtlReview\HotelAdvice\bin\Microsoft.Owin.Security.OAuth.dll
 D:\Git_repos\HowtlReview\HotelAdvice\bin\Microsoft.Owin.Security.Twitter.dll
+D:\Git_repos\HowtlReview\HotelAdvice\bin\Microsoft.Threading.Tasks.dll
+D:\Git_repos\HowtlReview\HotelAdvice\bin\Microsoft.Threading.Tasks.Extensions.Desktop.dll
+D:\Git_repos\HowtlReview\HotelAdvice\bin\Microsoft.Threading.Tasks.Extensions.dll
 D:\Git_repos\HowtlReview\HotelAdvice\bin\Microsoft.Web.Infrastructure.dll
 D:\Git_repos\HowtlReview\HotelAdvice\bin\Newtonsoft.Json.dll
 D:\Git_repos\HowtlReview\HotelAdvice\bin\Owin.dll
@@ -84,8 +87,13 @@ D:\Git_repos\HowtlReview\HotelAdvice\bin\System.Web.WebPages.Deployment.dll
 D:\Git_repos\HowtlReview\HotelAdvice\bin\System.Web.WebPages.dll
 D:\Git_repos\HowtlReview\HotelAdvice\bin\System.Web.WebPages.Razor.dll
 D:\Git_repos\HowtlReview\HotelAdvice\bin\WebGrease.dll
+D:\Git_repos\HowtlReview\HotelAdvice\bin\X.PagedList.dll
+D:\Git_repos\HowtlReview\HotelAdvice\bin\X.PagedList.Mvc.dll
 D:\Git_repos\HowtlReview\HotelAdvice\bin\EntityFramework.xml
 D:\Git_repos\HowtlReview\HotelAdvice\bin\EntityFramework.SqlServer.xml
+D:\Git_repos\HowtlReview\HotelAdvice\bin\Microsoft.Threading.Tasks.xml
+D:\Git_repos\HowtlReview\HotelAdvice\bin\Microsoft.Threading.Tasks.Extensions.xml
+D:\Git_repos\HowtlReview\HotelAdvice\bin\Microsoft.Threading.Tasks.Extensions.Desktop.xml
 D:\Git_repos\HowtlReview\HotelAdvice\bin\System.Web.Helpers.xml
 D:\Git_repos\HowtlReview\HotelAdvice\bin\System.Web.Mvc.xml
 D:\Git_repos\HowtlReview\HotelAdvice\bin\System.Web.Optimization.xml
@@ -112,11 +120,3 @@ D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.Migrations.alterCityT
 D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.csproj.GenerateResource.Cache
 D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.dll
 D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.pdb
-D:\Git_repos\HowtlReview\HotelAdvice\bin\Microsoft.Threading.Tasks.dll
-D:\Git_repos\HowtlReview\HotelAdvice\bin\Microsoft.Threading.Tasks.Extensions.Desktop.dll
-D:\Git_repos\HowtlReview\HotelAdvice\bin\Microsoft.Threading.Tasks.Extensions.dll
-D:\Git_repos\HowtlReview\HotelAdvice\bin\X.PagedList.dll
-D:\Git_repos\HowtlReview\HotelAdvice\bin\X.PagedList.Mvc.dll
-D:\Git_repos\HowtlReview\HotelAdvice\bin\Microsoft.Threading.Tasks.xml
-D:\Git_repos\HowtlReview\HotelAdvice\bin\Microsoft.Threading.Tasks.Extensions.xml
-D:\Git_repos\HowtlReview\HotelAdvice\bin\Microsoft.Threading.Tasks.Extensions.Desktop.xml
