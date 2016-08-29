@@ -5,14 +5,14 @@ using System.Web;
 using System.Web.Mvc;
 using HotelAdvice.ViewModels;
 using HotelAdvice.App_Code;
-using X.PagedList;
+using PagedList;
 
 namespace HotelAdvice.Controllers
 {
     [Authorize(Roles = "Administrator")]
     public class CityController : Controller
     {
-        private const int defaultPageSize = 20;
+        private const int defaultPageSize = 2;
         DAL db = new DAL();
 
         // GET: City
@@ -22,8 +22,8 @@ namespace HotelAdvice.Controllers
 
            List<CityViewModel> lst_cities = db.get_cities();
            foreach (CityViewModel c in lst_cities)
-                c.cityAttractions = (c.cityAttractions.Length < 100 ? c.cityAttractions : (c.cityAttractions.Substring(0, 100) + "..."));
-           IPagedList paged_list_city= lst_cities.ToPagedList(currentPageIndex, defaultPageSize);
+               c.cityAttractions = (c.cityAttractions.Length < 100 ? c.cityAttractions : (c.cityAttractions.Substring(0, 100) + "..."));
+           IPagedList paged_list_city = lst_cities.ToPagedList(currentPageIndex, defaultPageSize);
            return View(paged_list_city);
         }
 
