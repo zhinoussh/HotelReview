@@ -1,5 +1,6 @@
 ﻿@*@model List<HotelAdvice.ViewModels.CityViewModel>*@
-
+@using X.PagedList
+@using X.PagedList.Mvc
 @model IPagedList<HotelAdvice.ViewModels.CityViewModel> 
 @{
     ViewBag.Title = "City Management";
@@ -22,25 +23,22 @@
     </button>
 </div>
 
+<div id="grid-list">
+
+        <table id="mytable" class="table table-bordred table-striped table-hover">
+
+            <thead>
+                <tr>
+                    <th class="hidden">City ID</th>
+                    <th>City Name</th>
+                    <th>Attractions</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
 
 
-<div class="table-responsive" >
-
-    
-    <table id="mytable" class="table table-bordred table-striped table-hover">
-
-       <thead>
-          <tr>
-              <th class="hidden">City ID</th>
-              <th>City Name</th>
-              <th>Attractions</th>
-              <th>Actions</th>
-          </tr>
-       </thead>
-        <tbody>
-                
-                
-            @foreach (var item in Model)
+                @foreach (var item in Model)
             {
             <tr>
                 <td class="hidden">@item.cityID</td>
@@ -54,22 +52,12 @@
             </tr>
             }
 
-         
 
-    </table>
 
-    @*<div class="clearfix"></div>
-    <ul class="pagination pull-right">
-        <li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
-        <li class="active"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
-    </ul>*@
+        </table>
 
-    <div class="pager1">
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+    @*<div class="pager1">
         @Html.Raw(Ajax.Pager(
             new Options
             {
@@ -77,7 +65,7 @@
                 TotalItemCount = Model.TotalItemCount,
                 CurrentPage = Model.PageNumber,
                 ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
-                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                ItemIcon = new ItemIcon() { First = "glyphicon-backward", Previous = "glyphicon-chevron-left", Next = "glyphicon-chevron-right", Last = "glyphicon-forward" },
                 TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
                 Size = Size.normal,
                 Alignment = Alignment.centered,
@@ -96,6 +84,27 @@
             Showing <span class="badge badge-success">@Model.ItemStart</span> to <span class="badge badge-success">@Model.ItemEnd</span>
             of <span class="badge badge-info">@Model.TotalItemCount</span> entries
         </div>
-    </div>
-
+    </div>*@
 </div>
+@*@section scripts{
+
+    <script type="text/javascript">
+
+    function beginPaging(args) {
+        // Animate
+        $('#grid-list').fadeOut('normal');
+    }
+
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        $('a').tooltip();
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+
+</script>
+    }*@
+

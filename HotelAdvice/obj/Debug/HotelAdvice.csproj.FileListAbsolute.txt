@@ -112,5 +112,11 @@ D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.Migrations.alterCityT
 D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.csproj.GenerateResource.Cache
 D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.dll
 D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.pdb
-D:\Git_repos\HowtlReview\HotelAdvice\bin\MvcPaging.dll
-D:\Git_repos\HowtlReview\HotelAdvice\bin\MvcPaging.xml
+D:\Git_repos\HowtlReview\HotelAdvice\bin\Microsoft.Threading.Tasks.dll
+D:\Git_repos\HowtlReview\HotelAdvice\bin\Microsoft.Threading.Tasks.Extensions.Desktop.dll
+D:\Git_repos\HowtlReview\HotelAdvice\bin\Microsoft.Threading.Tasks.Extensions.dll
+D:\Git_repos\HowtlReview\HotelAdvice\bin\X.PagedList.dll
+D:\Git_repos\HowtlReview\HotelAdvice\bin\X.PagedList.Mvc.dll
+D:\Git_repos\HowtlReview\HotelAdvice\bin\Microsoft.Threading.Tasks.xml
+D:\Git_repos\HowtlReview\HotelAdvice\bin\Microsoft.Threading.Tasks.Extensions.xml
+D:\Git_repos\HowtlReview\HotelAdvice\bin\Microsoft.Threading.Tasks.Extensions.Desktop.xml

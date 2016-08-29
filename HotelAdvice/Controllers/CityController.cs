@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using HotelAdvice.ViewModels;
 using HotelAdvice.App_Code;
-using MvcPaging;
+using X.PagedList;
 
 namespace HotelAdvice.Controllers
 {
@@ -20,11 +20,11 @@ namespace HotelAdvice.Controllers
         {
             int currentPageIndex = page.HasValue ? page.Value : 1;
 
-           IList<CityViewModel> lst_cities = db.get_cities();
+           List<CityViewModel> lst_cities = db.get_cities();
            foreach (CityViewModel c in lst_cities)
                 c.cityAttractions = (c.cityAttractions.Length < 100 ? c.cityAttractions : (c.cityAttractions.Substring(0, 100) + "..."));
-           lst_cities = lst_cities.ToPagedList(currentPageIndex, defaultPageSize);
-           return View(lst_cities);
+           IPagedList paged_list_city= lst_cities.ToPagedList(currentPageIndex, defaultPageSize);
+           return View(paged_list_city);
         }
 
         [HttpGet]
