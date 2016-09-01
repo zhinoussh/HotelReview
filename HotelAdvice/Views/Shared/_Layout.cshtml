@@ -42,7 +42,6 @@
     <div class="container body-content">
         @RenderSection("ContentBody")
        
-        
          <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
@@ -56,3 +55,12 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $(window).on('load', function () {
+            if ("@ViewBag.ReturnUrl" != null && "@ViewBag.ReturnUrl" != '')
+                show_login();
+        });
+    });
+    </script>
+

@@ -4,6 +4,8 @@
     Layout = null;
 }
 
+
+
 @using (Ajax.BeginForm("Login", "Account", new AjaxOptions
                     {
                         InsertionMode = InsertionMode.ReplaceWith
@@ -11,7 +13,7 @@
                         HttpMethod = "Post"
                         ,
                         OnSuccess = "SuccessLogin"
-                    }, new { id="frm_login"}))
+                    }, new { id = "frm_login", returnUrl = Request.QueryString["returnUrl"] }))
     {
 <div class="modal-header modal-header-login">
 

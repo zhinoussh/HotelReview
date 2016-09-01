@@ -1,5 +1,4 @@
 ﻿
-
 var modalIsOpen = false;
 
 $('#modal_login').on('shown.bs.modal', function (e) { modalIsOpen = true; })

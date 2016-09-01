@@ -53,13 +53,15 @@ namespace HotelAdvice.Controllers
             }
         }
 
-        //
-        // GET: /Account/Login
+        
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            ViewBag.ReturnUrl = returnUrl;
-            return PartialView("_PartialLoginModal");
+
+            if (Request.IsAjaxRequest())
+                return PartialView("_PartialLoginModal");
+            else
+                return RedirectToAction("Index", "Home", new { returnUrl = returnUrl });
         }
 
         //
