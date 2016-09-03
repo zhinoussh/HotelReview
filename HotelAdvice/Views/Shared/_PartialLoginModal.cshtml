@@ -14,7 +14,9 @@
                         ,
                         OnSuccess = "SuccessLogin"
                     }, new { id = "frm_login", returnUrl = Request.QueryString["returnUrl"] }))
-    {
+{
+    @Html.AntiForgeryToken()
+
 <div class="modal-header modal-header-login">
 
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -33,7 +35,6 @@
     </div>
     <div  id="login-alert" class="alert alert-danger col-sm-12" style="display:none">Username or password is incorrect.</div>
 
-        @Html.AntiForgeryToken()
     <div class="form-group col-sm-12" >
         <div class="input-group ">
             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>

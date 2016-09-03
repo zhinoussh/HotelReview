@@ -26,6 +26,7 @@ namespace HotelAdvice
 
             bundles.Add(new ScriptBundle("~/bundles/HomePage").Include(
                       "~/Scripts/respond.js"
+                      , "~/Scripts/jquery-ui-1.12.0.min.js"
                       , "~/Scripts/Carousel.js"
                        , "~/Scripts/app_script/homePage.js"));
 
@@ -37,7 +38,9 @@ namespace HotelAdvice
                       "~/Content/Site.css"
                       , "~/Content/font-awesome.min.css"
                       , "~/Content/animate.css"
-                      , "~/Content/bootstrap-social.css"));
+                      , "~/Content/bootstrap-social.css"
+                      , "~/Content/themes/base/jquery-ui.css"
+                      ));
 
             bundles.Add(new StyleBundle("~/Content/AdminCss").Include(
                      "~/Content/bootstrap.min.css",

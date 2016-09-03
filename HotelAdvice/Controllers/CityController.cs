@@ -12,7 +12,7 @@ namespace HotelAdvice.Controllers
     [Authorize(Roles = "Administrator")]
     public class CityController : Controller
     {
-        private const int defaultPageSize = 2;
+        private const int defaultPageSize = 5;
         DAL db = new DAL();
 
         // GET: City
@@ -22,9 +22,13 @@ namespace HotelAdvice.Controllers
 
            List<CityViewModel> lst_cities = db.get_cities();
            foreach (CityViewModel c in lst_cities)
-               c.cityAttractions = (c.cityAttractions.Length < 100 ? c.cityAttractions : (c.cityAttractions.Substring(0, 100) + "..."));
+               if(c.cityAttractions!=null)
+                   c.cityAttractions = (c.cityAttractions.Length < 100 ? c.cityAttractions : (c.cityAttractions.Substring(0, 100) + "..."));
            IPagedList paged_list_city = lst_cities.ToPagedList(currentPageIndex, defaultPageSize);
-           return View(paged_list_city);
+
+           return Request.IsAjaxRequest()
+               ? (ActionResult)PartialView("_PartialCityList", paged_list_city)
+               : View(paged_list_city);
         }
 
         [HttpGet]
@@ -47,16 +51,23 @@ namespace HotelAdvice.Controllers
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult ADD_New_City(CityViewModel city)
         {
-            db.add_city(city.cityID, city.cityName, city.cityAttractions);
-            return Json(new { msg="The city inserted successfully." });
+            if (ModelState.IsValid)
+            {
+                db.add_city(city.cityID, city.cityName, city.cityAttractions);
+                return Json(new { msg = "The city inserted successfully." });
+            }
+            else
+                return PartialView("_PartialAddCity", city);
         }
 
+
         [HttpGet]
-        public ActionResult CityDescription(int city_id)
+        public ActionResult CityDescription(int id)
         {
-           List<string> city_prop= db.get_city_byId(city_id);
+            List<string> city_prop = db.get_city_byId(id);
            CityViewModel vm = new CityViewModel();
            vm.cityName = city_prop[0];
            vm.cityAttractions = city_prop[1];
@@ -74,6 +85,7 @@ namespace HotelAdvice.Controllers
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Delete_City(CityViewModel city)
         {
             db.delete_city(city.cityID);

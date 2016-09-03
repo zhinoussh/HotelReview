@@ -65,3 +65,45 @@ font-size:14pt;
 margin:5px 10px 0 0;
 color:#d9534f;
 }
+
+.label-pill {
+  padding:5px 8px 5px 8px 5px;
+  border-radius: 10em;
+}
+
+/*******Paginaton*********/
+ul.pagination li a {
+    border-radius: 30px;
+    margin:0 2px 0 2px;
+}
+
+ul.pagination li a.active {
+    border-radius: 30px;
+}
+
+.pagination > li:first-child > a,
+.pagination > li:first-child > span {
+  margin-left: 0;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  background-color: #5bc0de;
+  border-color: #3594b0;
+}
+.pagination > li > a,
+.pagination > li > span {
+    color:#3594b0;
+    border: 1px solid #84b4c1;
+}

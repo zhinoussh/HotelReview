@@ -11,6 +11,8 @@ namespace HotelAdvice
     {
         public virtual DbSet<tbl_Hotel> tbl_Hotel { get; set; }
         public virtual DbSet<tbl_City> tbl_city { get; set; }
+        public virtual DbSet<tbl_Restuarant> tbl_Restaurant { get; set; }
+        public virtual DbSet<tbl_Hotel_Restaurants> tbl_Hotel_Restaurants { get; set; }
 
         public HotelAdviceDB()
             : base("name=HotelAdviceConnection")
@@ -24,6 +26,18 @@ namespace HotelAdvice
                .WithOptional(e => e.City)
                .HasForeignKey(e => e.CityId)
                .WillCascadeOnDelete();
+
+            modelBuilder.Entity<tbl_Hotel>()
+               .HasMany(e => e.HotelRests)
+               .WithOptional(e => e.Hotel)
+               .HasForeignKey(e => e.HotelID)
+               .WillCascadeOnDelete();
+
+            modelBuilder.Entity<tbl_Restuarant>()
+              .HasMany(e => e.HotelRests)
+              .WithOptional(e => e.Restaurant)
+              .HasForeignKey(e => e.RestaurantID)
+              .WillCascadeOnDelete();
         }
     }
 }

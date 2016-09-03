@@ -55,6 +55,7 @@ D:\Projects\HotelAdvice\HotelAdvice\bin\Microsoft.Owin.Security.MicrosoftAccount
 D:\Projects\HotelAdvice\HotelAdvice\obj\Debug\HotelAdvice.dll
 D:\Projects\HotelAdvice\HotelAdvice\obj\Debug\HotelAdvice.pdb
 D:\Projects\HotelAdvice\HotelAdvice\obj\Debug\HotelAdvice.csprojResolveAssemblyReference.cache
+D:\Git_repos\HowtlReview\HotelAdvice\bin\System.Web.Helpers.dll
 D:\Git_repos\HowtlReview\HotelAdvice\bin\HotelAdvice.dll.config
 D:\Git_repos\HowtlReview\HotelAdvice\bin\HotelAdvice.dll
 D:\Git_repos\HowtlReview\HotelAdvice\bin\HotelAdvice.pdb
@@ -81,7 +82,6 @@ D:\Git_repos\HowtlReview\HotelAdvice\bin\Newtonsoft.Json.dll
 D:\Git_repos\HowtlReview\HotelAdvice\bin\Owin.dll
 D:\Git_repos\HowtlReview\HotelAdvice\bin\PagedList.dll
 D:\Git_repos\HowtlReview\HotelAdvice\bin\PagedList.Mvc.dll
-D:\Git_repos\HowtlReview\HotelAdvice\bin\System.Web.Helpers.dll
 D:\Git_repos\HowtlReview\HotelAdvice\bin\System.Web.Mvc.dll
 D:\Git_repos\HowtlReview\HotelAdvice\bin\System.Web.Optimization.dll
 D:\Git_repos\HowtlReview\HotelAdvice\bin\System.Web.Razor.dll
@@ -122,3 +122,7 @@ D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.Migrations.alterCityT
 D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.csproj.GenerateResource.Cache
 D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.dll
 D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.pdb
+D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.Migrations.HotelTableRevise.resources
+D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.Migrations.HotelRestaurantsRelationsAndTables.resources
+D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.Migrations.fixHetlRestaurantRelations.resources
+D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.Migrations.fixStringLength.resources

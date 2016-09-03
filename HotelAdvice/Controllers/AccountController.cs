@@ -409,12 +409,11 @@ namespace HotelAdvice.Controllers
 
         //
         // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult LogOff()
+       public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
-            return Json(new { url="/Home/Index"});
+            return Json(new { url="/Home/Index"},JsonRequestBehavior.AllowGet);
+
         }
 
         //

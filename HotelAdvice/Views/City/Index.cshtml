@@ -1,6 +1,4 @@
-﻿@*@model List<HotelAdvice.ViewModels.CityViewModel>*@
-@using PagedList
-@using PagedList.Mvc
+﻿@using PagedList
 @model IPagedList<HotelAdvice.ViewModels.CityViewModel> 
 @{
     ViewBag.Title = "City Management";
@@ -8,103 +6,26 @@
 }
 
 
-<div id="CityModal"></div>
+<div id="MyModal"></div>
 
 
-<h2>City List</h2>
+        <h2 class="col-sm-2" >City List</h2>
+        <div class="col-sm-2 col-sm-offset-8 text-right" style="margin-top:2%">
+            <button type="button" class="btn btn-success" id="btn_add_new" data-url="/City/ADD_New_City">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add New
+            </button>
+        </div>
+  
 
 <div class="alert alert-success" role="alert" id="div_alert" style="display:none;">
     <a href="#" id="close_alert" class="close">&times;</a>
     <label id="alert_success" style="margin-right:5px"></label>
 </div> 
-<div class="form-group">
-    <button type="button" class="btn btn-success" id="btn_add_newCity">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add New
-    </button>
+
+<div id="table_container">
+
+    @Html.Partial("_PartialCityList", Model)
 </div>
 
-<div id="grid-list">
-
-        <table id="mytable" class="table table-bordred table-striped table-hover">
-
-            <thead>
-                <tr>
-                    <th class="hidden">City ID</th>
-                    <th>City Name</th>
-                    <th>Attractions</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-
-
-                @foreach (var item in Model)
-            {
-            <tr>
-                <td class="hidden">@item.cityID</td>
-                <td class="col-sm-2 cityName">@item.cityName</td>
-                <td class="col-sm-9">@item.cityAttractions</td>
-                <td>
-                    <a data-toggle="tooltip" data-id="@item.cityID" title="Edit" class="glyphicon glyphicon-edit editItem"></a>
-                    <a data-toggle="tooltip" data-id="@item.cityID" title="Delete" class="glyphicon glyphicon-trash deleteItem"></a>
-                    <a data-toggle="tooltip" data-id="@item.cityID" title="FullShow" class="glyphicon glyphicon-search fullshowItem"></a>
-                </td>
-            </tr>
-            }
-
-
-
-        </table>
-
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
-    @*<div class="pager1">
-        @Html.Raw(Ajax.Pager(
-            new Options
-            {
-                PageSize = Model.PageSize,
-                TotalItemCount = Model.TotalItemCount,
-                CurrentPage = Model.PageNumber,
-                ItemTexts = new ItemTexts() { Next = "Next", Previous = "Previous", Page = "P" },
-                ItemIcon = new ItemIcon() { First = "glyphicon-backward", Previous = "glyphicon-chevron-left", Next = "glyphicon-chevron-right", Last = "glyphicon-forward" },
-                TooltipTitles = new TooltipTitles() { Next = "Next page", Previous = "Previous page", Page = "Page {0}." },
-                Size = Size.normal,
-                Alignment = Alignment.centered,
-                IsShowControls = true,
-                IsShowFirstLast = true,
-                CssClass = ""
-            },
-            new AjaxOptions
-            {
-                UpdateTargetId = "grid-list",
-                OnBegin = "beginPaging",
-                OnSuccess = "successPaging",
-                OnFailure = "failurePaging"
-            }, new { controller = "Home", action = "Index", employee_name = ViewData["employee_name"] }))
-        <div class="well">
-            Showing <span class="badge badge-success">@Model.ItemStart</span> to <span class="badge badge-success">@Model.ItemEnd</span>
-            of <span class="badge badge-info">@Model.TotalItemCount</span> entries
-        </div>
-    </div>*@
-</div>
-@*@section scripts{
-
-    <script type="text/javascript">
-
-    function beginPaging(args) {
-        // Animate
-        $('#grid-list').fadeOut('normal');
-    }
-
-    function successPaging() {
-        // Animate
-        $('#grid-list').fadeIn('normal');
-        $('a').tooltip();
-    }
-
-    function failurePaging() {
-        alert("Could not retrieve list.");
-    }
-
-</script>
-    }*@
+ 
 

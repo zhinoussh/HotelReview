@@ -1,7 +1,51 @@
-﻿@{
+﻿@model HotelAdvice.ViewModels.HomeViewModel
+@{
     ViewBag.Title = "About";
+    Layout = null;
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+<html>
+<head>
+
+    <script src="~/Scripts/jquery-3.1.0.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.0.min.js"></script>
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/menu.css" rel="stylesheet" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#txt_dest_name").autocomplete({
+                source: function (request, response) {
+                    var list_array = new Array();
+                    $.ajax({
+                        url: "/Home/SearchList",
+                        type: "POST",
+                        dataType: "json",
+                        data: { Prefix: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return item;
+                            }))
+
+                        }
+                    });
+                }
+                , messages: {
+                    noResults: "", results: ""
+                }
+            })
+        });
+
+    </script>
+
+
+
+</head>
+<body class="animated fadeIn delay1">
+    <div class="col-sm-8 col-sm-offset-1" style="padding-right:0;">
+        @Html.TextBoxFor(model => model.Destination_Name, new { @class = "form-control", @placeholder = "Find Hotel, City or Destination...", id = "txt_dest_name" })
+    </div>
+    
+</body>
+</html>
+
+

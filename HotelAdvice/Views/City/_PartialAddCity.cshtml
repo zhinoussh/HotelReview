@@ -14,6 +14,8 @@
     InsertionMode = InsertionMode.ReplaceWith
 }))
 {
+    @Html.AntiForgeryToken()
+
     <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -27,10 +29,12 @@
                 <div class="modal-body">
                     <div class="form-group">
                         @Html.TextBoxFor(model => model.cityName, new { @placeholder = "City Name", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.cityName, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-group">
                         @Html.TextAreaFor(model => model.cityAttractions, new { @placeholder = "Tourist Attractions", @class = "form-control",style="min-height:300px" })
+                        @Html.ValidationMessageFor(m => m.cityAttractions, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="modal-footer ">

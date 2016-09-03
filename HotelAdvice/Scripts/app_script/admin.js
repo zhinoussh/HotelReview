@@ -17,45 +17,22 @@
         return false;
     });
 
-    /*******************City Region***********************/
 
-    $("#btn_add_newCity").click(function () {
-        var url = "/City/ADD_New_City/";
-        $.get(url, function (data)
-        {
-            $("#CityModal").html(data).find('.modal').modal('show');
+    function showModal() {
+        var url = $(this).data('url');
+
+        $.get(url, function (data) {
+            $("#MyModal").html(data).find('.modal').modal('show');
         });
-    });
+    }
+    $("#btn_add_new").click(showModal);
+    $(".actionButton").click(showModal);
 
-    $(".fullshowItem").click(function () {
+   
 
-        var cityId = $(this).data('id');
 
-        $.get("/City/CityDescription", { city_id: cityId }, function (data)
-        {
-            $("#CityModal").html(data).find('.modal').modal('show');
-        });
-    });
-
-    $(".editItem").click(function () {
-
-        var cityId = $(this).data('id');
-
-        $.get("/City/ADD_New_City/"+cityId, function (data) {
-            $("#CityModal").html(data).find('.modal').modal('show');
-        });
-    });
-    
-
-    $(".deleteItem").click(function () {
-
-        var cityId = $(this).data('id');
-
-        $.get("/City/Delete_City/" + cityId, function (data) {
-            $("#CityModal").html(data).find('.modal').modal('show');
-        });
-    });
     /*******************Hotel Region***********************/
+    /*******************City Region***********************/
 
 
     
@@ -69,3 +46,4 @@ var Success_AjaxReturn = function (result) {
         location.reload();
     }
 }
+

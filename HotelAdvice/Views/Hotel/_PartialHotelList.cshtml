@@ -1,0 +1,83 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model IPagedList<HotelAdvice.ViewModels.HotelViewModel>
+<table id="mytable" class="table table-bordred table-striped table-hover ">
+
+    <thead>
+        <tr>
+            <th class="hidden">Hotel ID</th>
+            <th>Hotel Name</th>
+            <th>star rating</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="hidden">@item.HotelId</td>
+                <td class="col-sm-2 cityName">@item.HotelName</td>
+                <td class="col-sm-9">@item.Description</td>
+                <td>
+                    <a data-toggle="tooltip" data-url="/Hotel/ADD_New_Hotel/@item.HotelId" title="Edit" class="glyphicon glyphicon-edit actionButton"></a>
+                    <a data-toggle="tooltip" data-url="/Hotel/Delete_Hotel/@item.HotelId" title="Delete" class="glyphicon glyphicon-trash actionButton"></a>
+                    <a data-toggle="tooltip" data-url="/Hotel/HotelDescription/@item.HotelId" title="FullShow" class="glyphicon glyphicon-search actionButton"></a>
+                    <a data-toggle="tooltip" data-url="/Hotel/AddImage/@item.HotelId" title="AddImage" class="glyphicon glyphicon-picture actionButton"></a>
+                </td>
+            </tr>
+        }
+
+</table>
+
+<div class="col-sm-9">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
+    new PagedListRenderOptions
+    {
+        DisplayLinkToFirstPage = PagedListDisplayMode.IfNeeded,
+        DisplayLinkToLastPage = PagedListDisplayMode.IfNeeded,
+        DisplayLinkToPreviousPage = PagedListDisplayMode.IfNeeded,
+        DisplayLinkToNextPage = PagedListDisplayMode.IfNeeded,
+        LinkToNextPageFormat = "Next",
+        LinkToPreviousPageFormat = "Previous",
+        LinkToFirstPageFormat = "First",
+        LinkToLastPageFormat = "Last",
+        MaximumPageNumbersToDisplay = 10,
+        DisplayEllipsesWhenNotShowingAllPageNumbers = true,
+        EllipsesFormat = "&#8230;"
+    },
+    new AjaxOptions
+    {
+        HttpMethod = "GET",
+        UpdateTargetId = "table_container",
+        InsertionMode = InsertionMode.Replace,
+        OnBegin = "beginPaging",
+        OnSuccess = "successPaging",
+        OnFailure = "failurePaging"
+    }))
+</div>
+
+<div class="col-sm-3 pager pull-right" style="font-size:12pt">
+    Showing <span class="label label-info label-pill">@Model.FirstItemOnPage</span> to <span class="label label-info label-pill">@Model.LastItemOnPage</span>
+    of <span class="label label-info label-pill">@Model.TotalItemCount</span> entries
+</div>
+
+<script type="text/javascript">
+
+    function beginPaging(args) {
+        // Animate
+        $('#table_container').fadeOut(300);
+    }
+
+    function successPaging() {
+        // Animate
+        $('#table_container').fadeIn(100);
+    }
+
+    function failurePaging() {
+        alert("Could not retrieve list.");
+    }
+
+</script>
