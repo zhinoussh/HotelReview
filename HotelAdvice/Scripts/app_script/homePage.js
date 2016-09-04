@@ -51,11 +51,7 @@
 
     };
 
-    $("#btn_logoff").on('click', function () {
-        $.get("/Account/LogOff", function (result) {
-              window.location =result.url;
-        })
-    });
+  
 });
 
 

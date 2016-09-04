@@ -30,29 +30,29 @@
 
                 @Html.ValidationSummary("", new { @class = "text-danger" })
                 <div class="form-group col-sm-12" style="margin-bottom:0">
-                    <div class="form-group col-md-6" style="padding-left:0;">
+                    <div class="form-group col-sm-6" style="padding-left:0;">
                         @Html.TextBoxFor(m => m.fname, new { @class = "form-control", @placeholder = "First Name" })
                     </div>
 
-                    <div class="form-group col-md-6" style="padding-right:0;">
+                    <div class="form-group col-sm-6" style="padding-right:0;">
                         @Html.TextBoxFor(m => m.lname, new { @class = "form-control", @placeholder = "Larst Name" })
                     </div>
                     @Html.ValidationMessageFor(m => m.lname, "", new { @class = "text-danger" })
                     @Html.ValidationMessageFor(m => m.fname, "", new { @class = "text-danger" })
                 </div>
-            <div class="form-group col-md-12">
+            <div class="form-group col-sm-12">
                 @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email", style = "max-width:100%" })
                 @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
             </div>
 
-                <div class="form-group col-md-12">
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", style = "max-width:100%" })
-                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                </div>
-                <div class="form-group col-md-12">
-                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password", style = "max-width:100%" })
-                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
-                </div>
+            <div class="form-group col-sm-12">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", style = "max-width:100%" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-sm-12">
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password", style = "max-width:100%" })
+                @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+            </div>
 
                 <div class="row">
 

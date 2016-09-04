@@ -9,19 +9,22 @@
 <div id="MyModal"></div>
 
 
-<h2>City List</h2>
+<h2 class="col-sm-2">Hotel List</h2>
 
-<div class="alert alert-success" role="alert" id="div_alert" style="display:none;">
-    <a href="#" id="close_alert" class="close">&times;</a>
-    <label id="alert_success" style="margin-right:5px"></label>
-</div>
-<div class="form-group">
+<div class="col-sm-2 col-sm-offset-8 text-right" style="margin-top:2%">
     <button type="button" class="btn btn-success" id="btn_add_new" data-url="/Hotel/ADD_New_Hotel">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add New
     </button>
 </div>
 
-<div id="table_container">
 
+<div class="col-sm-12">
+    <div class="alert alert-success" role="alert" id="div_alert" style="display:none;">
+        <a href="#" id="close_alert" class="close">&times;</a>
+        <label id="alert_success" style="margin-right:5px"></label>
+    </div>
+</div>
+
+<div id="table_container">
     @Html.Partial("_PartialHotelList", Model)
 </div>

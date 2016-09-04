@@ -9,8 +9,8 @@
 
 @if (Request.IsAuthenticated)
 {
-   
-    
+
+
     //using (Ajax.BeginForm("LogOff", "Account",null
     //    , new AjaxOptions
     //    {
@@ -22,21 +22,21 @@
     //    }
     //    , new { id = "logoutForm", @class = "navbar-right" }))
     //{
-
+    <a class="navbar-right navbar-btn btn btn-warning " href='@Url.Action("LogOff", "Account")'>
+        <span class="glyphicon glyphicon-log-out"></span> Sign Out
+    </a>
     <ul class="nav navbar-nav navbar-right">
         <li>
             @Html.ActionLink("Welcome " + ((ClaimsIdentity)User.Identity).FindFirst("FirstName").Value + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
-        <li><button type="button" id="btn_logoff" class="navbar-right navbar-btn btn btn-warning" >
-            <span class="glyphicon glyphicon-log-out"></span> Sign Out
-            </button>
-        </li>
+        
     </ul>
+  
     //}
 }
 else
 {
-    
+
 
     <a class="navbar-btn navbar-right btn btn-primary" onclick="show_login()"><i class="fa fa-lock"></i> Sign In</a>
 }

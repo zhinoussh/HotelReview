@@ -54,6 +54,7 @@ namespace HotelAdvice.Controllers
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
+           
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
@@ -64,6 +65,10 @@ namespace HotelAdvice.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
+
+            if (UserManager.IsInRole(userId, "Administrator"))
+                return RedirectToAction("Index", "Admin");
+
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),

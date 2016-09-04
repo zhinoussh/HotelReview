@@ -412,7 +412,9 @@ namespace HotelAdvice.Controllers
        public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
-            return Json(new { url="/Home/Index"},JsonRequestBehavior.AllowGet);
+            return RedirectToAction("Index", "Home");
+
+          //  return Json(new { url="/Home/Index"},JsonRequestBehavior.AllowGet);
 
         }
 

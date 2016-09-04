@@ -74,7 +74,68 @@ namespace HotelAdvice.App_Code
         #endregion City
 
         #region Hotel
+        public void add_hotel(int id, string name, string desc,int cityID)
+        {
+            tbl_Hotel new_obj;
 
+            if (id == 0)
+            {
+                new_obj = new tbl_Hotel();
+                new_obj.HotelName = name;
+                new_obj.CityId = cityID;
+                new_obj.Description = desc;
+                db.tbl_Hotel.Add(new_obj);
+            }
+            else
+            {
+                new_obj = db.tbl_Hotel.Find(id);
+                if (new_obj != null)
+                {
+                    new_obj.HotelName = name;
+                    new_obj.CityId = cityID;
+                    new_obj.Description = desc;
+                }
+            }
+
+            db.SaveChanges();
+
+        }
+
+        public List<HotelViewModel> get_hotels()
+        {
+            List<HotelViewModel> lst_hotel = (from h in db.tbl_Hotel
+                                             join c in db.tbl_city on h.CityId equals c.CityId
+                                            select new HotelViewModel
+                                            {
+                                                HotelId  = h.HotelId,
+                                                HotelName = h.HotelName,
+                                                CityName=c.CityName,
+                                                HotelStars = h.HotelStars
+                                            }).OrderBy(x => x.HotelName).ToList();
+
+            return lst_hotel;
+
+        }
+        public List<String> get_hotel_byId(int id)
+        {
+            List<string> hotel_prop = new List<string>();
+            tbl_Hotel h = db.tbl_Hotel.Find(id);
+            hotel_prop.Add(h.HotelName);
+            hotel_prop.Add(h.Description);
+            hotel_prop.Add(h.CityId+"");
+
+            return hotel_prop;
+        }
+
+        public void delete_hotel(int id)
+        {
+            tbl_Hotel c = db.tbl_Hotel.Find(id);
+            if (c != null)
+            {
+                db.tbl_Hotel.Remove(c);
+                db.SaveChanges();
+            }
+        }
         #endregion Hotel
 
         #region Review

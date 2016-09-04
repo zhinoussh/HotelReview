@@ -1,0 +1,62 @@
+﻿
+@model HotelAdvice.ViewModels.HotelViewModel
+
+@{
+    Layout = null;
+}
+
+
+@using (Ajax.BeginForm("ADD_New_Hotel", "Hotel", new AjaxOptions
+{
+    HttpMethod = "Post"
+    ,
+    OnSuccess = "Success_AjaxReturn"
+    ,
+    InsertionMode = InsertionMode.ReplaceWith
+}))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header modal-header-add">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">
+                        <span class="glyphicon glyphicon-pencil"></span> Add / Edit Hotel
+                    </h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="input-group col-sm-12">
+
+                        <div class="form-group col-sm-6">
+                            <div class="form-group col-sm-12">
+                                 @Html.TextBoxFor(model => model.HotelName, new { @placeholder = "Hotel Name", @class = "form-control" })
+                                 @Html.ValidationMessageFor(m => m.HotelName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-sm-12">
+                                @Html.DropDownListFor(model => model.CityId, new SelectList(Model.lst_city, "Value", "Text")
+                                , new { @class = "dropdown", id = "dropdown_city" })
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-6">
+                            <img src="~/Images/empty.gif" alt="..." class="img-thumbnail">
+                        </div>
+                    </div>
+                 </div>
+                <div class="modal-footer ">
+                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok-circle"></span>Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle"></span>Cancel</button>
+                </div>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    @Html.HiddenFor(model => model.HotelId, new { id = "hd_hotel_id" })
+}
+@Scripts.Render("~/bundles/jqueryval")

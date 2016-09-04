@@ -48,7 +48,7 @@ namespace HotelAdvice
                      "~/Content/sidebar.css"
                      , "~/Content/font-awesome.min.css"
                      , "~/Content/AdminStyle.css"
-                     //, "~/Content/PagedList.css"
+                     , "~/Content/PagedList.css"
                      ));
         }
     }
