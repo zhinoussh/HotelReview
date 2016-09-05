@@ -12,3 +12,6 @@
 /// <reference path="jquery.validate.unobtrusive.min.js" />
 /// <reference path="jquery-ui-1.12.0.min.js" />
 /// <reference path="app_script/admin.js" />
+/// <reference path="starrating/star-rating.js" />
+/// <reference path="starrating/theme.min.js" />
+/// <reference path="bootstrap-timepicker.min.js" />

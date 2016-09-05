@@ -5,7 +5,6 @@
     Layout = null;
 }
 
-
 @using (Ajax.BeginForm("ADD_New_Hotel", "Hotel", new AjaxOptions
 {
     HttpMethod = "Post"
@@ -17,7 +16,7 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+    <div class="modal fade " tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
 
@@ -29,24 +28,75 @@
                 </div>
                 <div class="modal-body">
 
-                    <div class="input-group col-sm-12">
+                    <div class="tabbable"><!-- Only required for left/right tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#tab_general" data-toggle="tab">General Properties</a></li>
+                            <li><a href="#tab_contact" data-toggle="tab">Contact Details</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <!-- TAB 1- General Description-->
+                            <div class="tab-pane active" id="tab_general">
+                                <div class="row top-buffer">
 
-                        <div class="form-group col-sm-6">
-                            <div class="form-group col-sm-12">
-                                 @Html.TextBoxFor(model => model.HotelName, new { @placeholder = "Hotel Name", @class = "form-control" })
-                                 @Html.ValidationMessageFor(m => m.HotelName, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-group col-sm-12">
-                                @Html.DropDownListFor(model => model.CityId, new SelectList(Model.lst_city, "Value", "Text")
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(model => model.HotelName, new { @placeholder = "Hotel Name", @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.HotelName, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.DropDownListFor(model => model.CityId, new SelectList(Model.lst_city, "Value", "Text")
                                 , new { @class = "dropdown", id = "dropdown_city" })
-                            </div>
-                        </div>
+                                        </div>
+                                        <div class="form-group">
 
-                        <div class="form-group col-sm-6">
-                            <img src="~/Images/empty.gif" alt="..." class="img-thumbnail">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class=" glyphicon glyphicon-star"></i> Star Rating</span>
+                                                <div class="form-control">
+                                                    <input id="input-1-ltr-star-xs" name="input-1-ltr-star-xs" class="kv-ltr-theme-fa-star"
+                                                           data-step="1" value="1" dir="ltr" data-size="s">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon" style="width:110px"><i class=" glyphicon glyphicon-time"></i> Check In</span>
+                                                @Html.TextBoxFor(model => model.checkin, new { @class = "form-control", id = "checkin" })
+                                            </div>
+                                            @Html.ValidationMessageFor(m => m.checkin, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon" style="width:110px"><i class=" glyphicon glyphicon-time"></i> Check Out</span>
+                                                @Html.TextBoxFor(model => model.checkout, new { @class = "form-control", id = "checkout" })
+                                            </div>
+                                            @Html.ValidationMessageFor(m => m.checkout, "", new { @class = "text-danger" })
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <img src="~/Images/empty.gif" alt="..." class="img-thumbnail">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        @Html.TextAreaFor(model => model.Description, new { @placeholder = "Description", @class = "form-control", style = "min-height:100px" })
+                                        @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                          
+                              <!-- TAB 2- Contact Details-->
+                            <div class="tab-pane" id="tab_contact">
+                                <p>Contact</p>
+                            </div>
                         </div>
                     </div>
-                 </div>
+                    
+
+                </div>
                 <div class="modal-footer ">
                     <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok-circle"></span>Save</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle"></span>Cancel</button>
@@ -59,4 +109,36 @@
     </div>
     @Html.HiddenFor(model => model.HotelId, new { id = "hd_hotel_id" })
 }
+
+
+
 @Scripts.Render("~/bundles/jqueryval")
+
+
+<script type="text/javascript">
+    $('.kv-ltr-theme-fa-star').rating({
+        hoverOnClear: false,
+        theme: 'krajee-fa'
+        , 'showClear': false
+    , 'showCaption': false
+    });
+
+    $('#checkin').timepicker({
+        template: false,
+        showInputs: false,
+        minuteStep: 1
+    });
+    $('#checkout').timepicker({
+        template: false,
+        showInputs: false,
+        minuteStep: 1
+    });
+</script>
+
+
+
+
+
+ 
+
+

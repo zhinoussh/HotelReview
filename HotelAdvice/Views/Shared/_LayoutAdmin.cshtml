@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - @ViewBag.Title</title>
     @Styles.Render("~/Content/AdminCss")
+    @Styles.Render("~/Content/StarRating")
+
 </head>
 <body>
        
@@ -61,6 +63,8 @@
         @Scripts.Render("~/bundles/jqueryval")
         @Scripts.Render("~/bundles/bootstrap")
         @Scripts.Render("~/bundles/AdminPage")    
+         @Scripts.Render("~/bundles/StarRating")
+
    
         @RenderSection("scripts", required: false)
 </body>

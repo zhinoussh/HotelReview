@@ -1,5 +1,7 @@
 ﻿a{text-decoration: none !important}
 
+
+
 .modal-title {
     font-size   :12pt;
 
@@ -119,4 +121,16 @@ ul.pagination li a.active {
     border-radius: 4px;
     background-color:#eee !important;
 
+}
+
+.nopadding {
+   padding: 0 !important;
+}
+.nopadding_right {
+   padding-right: 0 !important;
+}
+.top-buffer { margin-top:20px; }
+
+.img-thumbnail{
+   height:220px; 
 }

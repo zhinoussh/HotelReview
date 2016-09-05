@@ -21,6 +21,13 @@
     $(".actionButton").on('click', showModal);
 
     /*******************Hotel Region***********************/
+
+    $('.kv-ltr-theme-fa-star').rating({
+        hoverOnClear: false,
+        theme: 'krajee-fa'
+       , 'showClear': false
+   , 'showCaption': false
+    });
     /*******************City Region***********************/
 
     

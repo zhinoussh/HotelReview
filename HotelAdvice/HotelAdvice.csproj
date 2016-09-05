@@ -233,12 +233,15 @@
     <Content Include="Content\bootstrap-social.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap-timepicker.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\sidebar.css" />
+    <Content Include="Content\StarRating\star-rating.min.css" />
+    <Content Include="Content\StarRating\theme.min.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -293,6 +296,7 @@
     <Content Include="Images\slider2.jpg" />
     <Content Include="Scripts\app_script\admin.js" />
     <Content Include="Scripts\app_script\homePage.js" />
+    <Content Include="Scripts\bootstrap-timepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
@@ -328,6 +332,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\StarRating\star-rating.js" />
+    <Content Include="Scripts\StarRating\star-rating.min.js" />
+    <Content Include="Scripts\StarRating\theme.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

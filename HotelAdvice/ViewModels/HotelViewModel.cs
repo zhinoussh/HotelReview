@@ -33,7 +33,10 @@ namespace HotelAdvice.ViewModels
         public string Description { get; set; }
 
         [StringLength(20, ErrorMessage = "max length has been exceeded.")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh:mm}")]
+        [DataType(DataType.Time)]
         public string checkin { get; set; }
+        
         [StringLength(20, ErrorMessage = "max length has been exceeded.")]
         public string checkout { get; set; }
         [StringLength(20, ErrorMessage = "max length has been exceeded.")]
