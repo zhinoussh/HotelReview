@@ -20,11 +20,17 @@ namespace HotelAdvice.ViewModels
         public string HotelAddress { get; set; }
 
         [StringLength(20, ErrorMessage = "max length has been exceeded.")]
+        [Phone]
         public string Tel { get; set; }
+        
         [StringLength(20, ErrorMessage = "max length has been exceeded.")]
+        [DataType(DataType.PhoneNumber)]
         public string Fax { get; set; }
+        
         [StringLength(20, ErrorMessage = "max length has been exceeded.")]
+        [EmailAddress]
         public string Email { get; set; }
+        
         [StringLength(20, ErrorMessage = "max length has been exceeded.")]
         public string Website { get; set; }
         public int HotelStars { get; set; }
@@ -33,8 +39,6 @@ namespace HotelAdvice.ViewModels
         public string Description { get; set; }
 
         [StringLength(20, ErrorMessage = "max length has been exceeded.")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh:mm}")]
-        [DataType(DataType.Time)]
         public string checkin { get; set; }
         
         [StringLength(20, ErrorMessage = "max length has been exceeded.")]
@@ -49,5 +53,6 @@ namespace HotelAdvice.ViewModels
         public SelectList lst_city { get; set; }
 
         public List<tbl_Restuarant> restaurants{ get; set; }
+        public HttpPostedFileBase PhotoFile { get; set; }
     }
 }

@@ -34,7 +34,8 @@ namespace HotelAdvice
             bundles.Add(new ScriptBundle("~/bundles/StarRating").Include(
                       "~/Scripts/StarRating/star-rating.min.js"
                       , "~/Scripts/StarRating/theme.min.js"
-                       , "~/Scripts/bootstrap-timepicker.min.js"));
+                       , "~/Scripts/bootstrap-timepicker.min.js"
+                       , "~/Scripts/fileinput.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/AdminPage").Include(
                       "~/Scripts/app_script/admin.js"));
@@ -61,6 +62,7 @@ namespace HotelAdvice
                      "~/Content/StarRating/star-rating.min.css"
                     , "~/Content/StarRating/theme.min.css"
                     , "~/Content/bootstrap-timepicker.min.css"
+                    , "~/Content/fileinput.min.css"
                     ));
         }
     }

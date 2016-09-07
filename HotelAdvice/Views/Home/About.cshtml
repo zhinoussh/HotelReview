@@ -1,4 +1,4 @@
-﻿@model HotelAdvice.ViewModels.HomeViewModel
+﻿@model HotelAdvice.ViewModels.HotelViewModel
 @{
     ViewBag.Title = "About";
     Layout = null;
@@ -7,38 +7,71 @@
 <html>
 <head>
     <title></title>
+
     <script src="~/Scripts/jquery-3.1.0.min.js"></script>
-    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <script src="~/Scripts/StarRating/star-rating.min.js"></script>
-    <link href="~/Content/StarRating/star-rating.min.css" rel="stylesheet" />
-    <link href="~/Content/StarRating/theme.min.css" rel="stylesheet" />
-    <script src="~/Scripts/StarRating/theme.min.js"></script>
+    <link href="~/Content/fileinput.min.css" rel="stylesheet" />
+    <script src="~/Scripts/fileinput.min.js"></script>
+
+    <style>
+        .kv-avatar .file-preview-frame, .kv-avatar .file-preview-frame:hover {
+            margin: 0;
+            padding: 0;
+            border: none;
+            box-shadow: none;
+            text-align: center;
+        }
+
+        .kv-avatar .file-input {
+            display: table-cell;
+            max-width: 230px;
+        }
+        
+    </style>
 </head>
 <body >
+
+    <div id="kv-avatar-errors-1" class="center-block" style="width:800px;display:none"></div>
     
-    <input id="input-1" name="input-1" class="rating" data-min="0" data-max="5" data-step="1" showCaption="false">
-    <input id="input-1-ltr-star-xs" name="input-1-ltr-star-xs" class="kv-ltr-theme-fa-star rating-loading" data-step="1" value="1" dir="ltr" data-size="xs">
-    <input type="button" id="btn" />
+    @using (Ajax.BeginForm("ADD_New_Hotel", "Hotel",null, new AjaxOptions
+    {
+    HttpMethod = "Post"
+    ,
+    OnSuccess = "Success_AjaxReturn"
+    ,
+    InsertionMode = InsertionMode.ReplaceWith
+    
+    }, new {enctype = "multipart/form-data" }))
+    {
+    @Html.AntiForgeryToken()
+        <div class="kv-avatar center-block" style="width:200px">
+            @*<input id="image_hotel" name="image_hotel" type="file" class="file">*@
+
+            @Html.TextBoxFor(m => m.PhotoFile,new{id="image_hotel" ,name="image_hotel" ,type="file" ,@class="file"})
+            <input type="submit" value="upload" class="btn btn-s btn-success" />
+        </div>
+        }
 </body>
 </html>
 
-<script type="text/javascript">
-    $("#input-1").rating({
-        'size': 'lg',
-        'showClear': false
-    , 'showCaption':false
-    });
-
-    $('.kv-ltr-theme-fa-star').rating({
-        hoverOnClear: false,
-        theme: 'krajee-fa'
-        , 'showClear': false
-    , 'showCaption': false
-    });
-
-    $("#btn").on('click', function () {
-        alert($("#input-1").val());
+<script>
+    
+    $("#image_hotel").fileinput({
+        overwriteInitial: true,
+        maxFileSize: 1024,
+        showClose: false,
+        showCaption: false,
+        browseLabel: 'Choose Image',
+        browseClass: "btn btn-sm btn-success",
+        removeClass: "btn btn-sm btn-danger",
+        removeLabel: 'Delete Image',
+        removeTitle: 'Cancel or reset changes',
+        elErrorContainer: '#kv-avatar-errors-1',
+        msgErrorClass: 'alert alert-block alert-danger',
+        defaultPreviewContent: '<img src="/images/empty.gif" alt="Hotel Image" style="width:220px">',
+        layoutTemplates: { main2: '{preview} '  + ' {remove} {browse}' },
+        allowedFileExtensions: ["jpg", "png", "gif"],
+        browseOnZoneClick: true
     });
 </script>
 

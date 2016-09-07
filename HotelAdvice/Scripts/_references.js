@@ -15,3 +15,4 @@
 /// <reference path="starrating/star-rating.js" />
 /// <reference path="starrating/theme.min.js" />
 /// <reference path="bootstrap-timepicker.min.js" />
+/// <reference path="fileinput.min.js" />

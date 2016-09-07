@@ -1,7 +1,10 @@
 ﻿a{text-decoration: none !important}
 
+.text-danger {
+font-size:9pt;
+}
 
-
+//*****************MODAL***************/
 .modal-title {
     font-size   :12pt;
 
@@ -47,6 +50,8 @@
      border-top-left-radius: 5px;
      border-top-right-radius: 5px;
 }
+
+/****************GLyph Icons*****************/
 .btn-default {
 background-color:#eee;
 width:100px;
@@ -131,6 +136,28 @@ ul.pagination li a.active {
 }
 .top-buffer { margin-top:20px; }
 
-.img-thumbnail{
-   height:220px; 
+/************Krajee Input File*/
+ .kv-avatar .file-preview-frame, .kv-avatar .file-preview-frame:hover {
+            margin: 0;
+            padding: 0;
+            border: none;
+            box-shadow: none;
+            text-align: center;
+        }
+.kv-avatar .file-input {
+    display: table-cell;
+    max-width: 240px;
 }
+.file-thumbnail-footer {
+    display:none;
+}
+
+.file-preview-frame {
+    height: 220px !important;
+}
+
+.file-preview-image {
+    height:220px !important;
+    width:220px !important;
+}
+
