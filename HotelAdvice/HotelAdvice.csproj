@@ -236,6 +236,7 @@
     <Content Include="Content\bootstrap-timepicker.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\fileinput.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\PagedList.css" />
@@ -294,6 +295,8 @@
     <Content Include="Images\logo2.png" />
     <Content Include="Images\slider1.jpg" />
     <Content Include="Images\slider2.jpg" />
+    <Content Include="img\loading-sm.gif" />
+    <Content Include="img\loading.gif" />
     <Content Include="Scripts\app_script\admin.js" />
     <Content Include="Scripts\app_script\homePage.js" />
     <Content Include="Scripts\bootstrap-timepicker.min.js" />
@@ -314,6 +317,7 @@
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
+    <Content Include="Scripts\fileinput.min.js" />
     <Content Include="Scripts\jquery-3.1.0.js" />
     <Content Include="Scripts\jquery-3.1.0.min.js" />
     <Content Include="Scripts\jquery-3.1.0.slim.js" />
@@ -388,6 +392,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Upload\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using HotelAdvice.ViewModels;
 using PagedList;
+using System.IO;
 
 namespace HotelAdvice.Controllers
 {
@@ -60,11 +61,28 @@ namespace HotelAdvice.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.add_hotel(Hotel.HotelId, Hotel.HotelName, Hotel.Description,Hotel.CityId);
+                db.add_hotel(Hotel.HotelId, Hotel.HotelName, Hotel.Description, Hotel.CityId);
+
+                HttpPostedFileBase file = Hotel.PhotoFile;
+                if (file != null)
+                {
+                    string hotel_dir = Server.MapPath(@"~\Upload\" + Hotel.HotelName);
+                    if (!Directory.Exists(hotel_dir))
+                        Directory.CreateDirectory(hotel_dir);
+                    var filename = file.FileName;
+                    var ext = filename.Substring(filename.LastIndexOf('.'));
+                    filename = "main" + ext;
+                    string savePath = Server.MapPath(@"~\Upload\" + hotel_dir + "\\" + filename);
+                    file.SaveAs(savePath);
+                }
                 return Json(new { msg = "The Hotel inserted successfully." });
             }
             else
                 return PartialView("_PartialAddHotel", Hotel);
+
+           
+        
+
         }
 
 
@@ -95,6 +113,8 @@ namespace HotelAdvice.Controllers
             db.delete_hotel(Hotel.HotelId);
             return Json(new { msg = "Row is deleted successfully!" });
         }
+
+      
 
     }
 }
