@@ -74,7 +74,8 @@ namespace HotelAdvice.App_Code
         #endregion City
 
         #region Hotel
-        public void add_hotel(int id, string name, string desc,int cityID)
+        public void add_hotel(int id, string name, string desc,int cityID,int stars,string checkin,string checkout
+            ,string tel,string fax,string website,string email,string address)
         {
             tbl_Hotel new_obj;
 
@@ -84,6 +85,15 @@ namespace HotelAdvice.App_Code
                 new_obj.HotelName = name;
                 new_obj.CityId = cityID;
                 new_obj.Description = desc;
+                new_obj.HotelStars = stars;
+                new_obj.checkin = checkin;
+                new_obj.checkout = checkout;
+                new_obj.Tel = tel;
+                new_obj.Fax = fax;
+                new_obj.Website = website;
+                new_obj.Email = email;
+                new_obj.HotelAddress = address;
+
                 db.tbl_Hotel.Add(new_obj);
             }
             else
@@ -94,6 +104,14 @@ namespace HotelAdvice.App_Code
                     new_obj.HotelName = name;
                     new_obj.CityId = cityID;
                     new_obj.Description = desc;
+                    new_obj.HotelStars = stars;
+                    new_obj.checkin = checkin;
+                    new_obj.checkout = checkout;
+                    new_obj.Tel = tel;
+                    new_obj.Fax = fax;
+                    new_obj.Website = website;
+                    new_obj.Email = email;
+                    new_obj.HotelAddress = address;
                 }
             }
 
