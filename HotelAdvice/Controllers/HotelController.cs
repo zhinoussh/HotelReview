@@ -37,19 +37,15 @@ namespace HotelAdvice.Controllers
             vm.HotelId = HotelId;
 
             List<CityViewModel> cities = db.get_cities();
-            vm.lst_city = new SelectList(cities, "cityID", "cityName");
             vm.CityId = cities.First().cityID;
-
 
             //this is edit
             if (id != null)
             {
-                List<string> Hotel_prop = db.get_hotel_byId(HotelId);
-                vm.HotelName = Hotel_prop[0];
-                vm.Description = Hotel_prop[1];
-                vm.CityId = Int32.Parse(Hotel_prop[2]);
-
+                vm = db.get_hotel_byId(HotelId);
             }
+
+            vm.lst_city = new SelectList(cities, "cityID", "cityName");
 
             return PartialView("_PartialAddHotel", vm);
         }
@@ -61,7 +57,7 @@ namespace HotelAdvice.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.add_hotel(Hotel.HotelId, Hotel.HotelName, Hotel.Description, Hotel.CityId);
+                db.add_hotel(Hotel);
 
                 HttpPostedFileBase file = Hotel.PhotoFile;
                 if (file != null)
@@ -89,10 +85,7 @@ namespace HotelAdvice.Controllers
         [HttpGet]
         public ActionResult HotelDescription(int id)
         {
-            List<string> Hotel_prop = db.get_hotel_byId(id);
-            HotelViewModel vm = new HotelViewModel();
-            vm.HotelName = Hotel_prop[0];
-            vm.Description = Hotel_prop[1];
+            HotelViewModel  vm = db.get_hotel_byId(id);
             return PartialView("_PartialDescription", vm);
         }
 

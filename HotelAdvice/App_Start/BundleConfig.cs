@@ -35,7 +35,9 @@ namespace HotelAdvice
                       "~/Scripts/StarRating/star-rating.min.js"
                       , "~/Scripts/StarRating/theme.min.js"
                        , "~/Scripts/bootstrap-timepicker.min.js"
-                       , "~/Scripts/fileinput.min.js"));
+                       , "~/Scripts/fileinput.min.js"
+                       , "~/Scripts/bootstrap-tagsinput.js"
+                       , "~/Scripts/bootstrap-typeahead.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/AdminPage").Include(
                       "~/Scripts/app_script/admin.js"));
@@ -63,6 +65,7 @@ namespace HotelAdvice
                     , "~/Content/StarRating/theme.min.css"
                     , "~/Content/bootstrap-timepicker.min.css"
                     , "~/Content/fileinput.min.css"
+                    , "~/Content/bootstrap-tagsinput.css"
                     ));
         }
     }

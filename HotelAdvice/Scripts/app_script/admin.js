@@ -55,6 +55,29 @@ var Success_AjaxReturn = function (result) {
 }
 
 function SetUp_AddHotel() {
+    $('#txt_restaurant').tagsinput({
+        typeahead: {
+            source: function (request, response) {
+                var list_array = new Array();
+                $.ajax({
+                    url: "/Home/SearchList",
+                    type: "POST",
+                    dataType: "json",
+                    data: { Prefix: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.CName, value: item.CID };
+                        }))
+
+                    }
+
+                });
+            }
+
+        },
+        freeInput: true
+    });
+
     $('#checkin').timepicker({
         template: false,
         showInputs: false,
@@ -66,11 +89,13 @@ function SetUp_AddHotel() {
         minuteStep: 1
     });
 
-    $('.kv-ltr-theme-fa-star').rating({
+    $('.HotelStars').rating({
+        step: 1,
+        size: 's',
         hoverOnClear: false,
         theme: 'krajee-fa'
-       , 'showClear': false
-   , 'showCaption': false
+        ,'showClear': false
+        , 'showCaption': false
     });
 
     $("#image_hotel").fileinput({

@@ -88,6 +88,7 @@ D:\Git_repos\HowtlReview\HotelAdvice\bin\System.Web.Razor.dll
 D:\Git_repos\HowtlReview\HotelAdvice\bin\System.Web.WebPages.Deployment.dll
 D:\Git_repos\HowtlReview\HotelAdvice\bin\System.Web.WebPages.dll
 D:\Git_repos\HowtlReview\HotelAdvice\bin\System.Web.WebPages.Razor.dll
+D:\Git_repos\HowtlReview\HotelAdvice\bin\WebActivatorEx.dll
 D:\Git_repos\HowtlReview\HotelAdvice\bin\WebGrease.dll
 D:\Git_repos\HowtlReview\HotelAdvice\bin\EntityFramework.xml
 D:\Git_repos\HowtlReview\HotelAdvice\bin\EntityFramework.SqlServer.xml
@@ -126,4 +127,3 @@ D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.Migrations.fixStringL
 D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.csproj.GenerateResource.Cache
 D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.dll
 D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.pdb
-D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.csprojResolveAssemblyReference.cache

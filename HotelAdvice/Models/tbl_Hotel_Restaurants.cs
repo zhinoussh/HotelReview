@@ -9,7 +9,7 @@ namespace HotelAdvice.Models
 {
     public class tbl_Hotel_Restaurants
     {
-        tbl_Hotel_Restaurants() { }
+        public tbl_Hotel_Restaurants() { }
       
         [Key]
         public int HotelRestID { get; set; }

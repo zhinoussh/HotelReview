@@ -74,48 +74,68 @@ namespace HotelAdvice.App_Code
         #endregion City
 
         #region Hotel
-        public void add_hotel(int id, string name, string desc,int cityID,int stars,string checkin,string checkout
-            ,string tel,string fax,string website,string email,string address)
+        public void add_hotel(HotelViewModel hotel)
         {
             tbl_Hotel new_obj;
 
-            if (id == 0)
+            if (hotel.HotelId == 0)
             {
                 new_obj = new tbl_Hotel();
-                new_obj.HotelName = name;
-                new_obj.CityId = cityID;
-                new_obj.Description = desc;
-                new_obj.HotelStars = stars;
-                new_obj.checkin = checkin;
-                new_obj.checkout = checkout;
-                new_obj.Tel = tel;
-                new_obj.Fax = fax;
-                new_obj.Website = website;
-                new_obj.Email = email;
-                new_obj.HotelAddress = address;
+                new_obj.HotelName = hotel.HotelName;
+                new_obj.CityId = hotel.CityId;
+                new_obj.Description = hotel.Description;
+                new_obj.HotelStars = hotel.HotelStars;
+                new_obj.checkin = hotel.checkin;
+                new_obj.checkout = hotel.checkout;
+                new_obj.Tel = hotel.Tel;
+                new_obj.Fax = hotel.Fax;
+                new_obj.Website = hotel.Website;
+                new_obj.Email = hotel.Email;
+                new_obj.HotelAddress = hotel.HotelAddress;
 
                 db.tbl_Hotel.Add(new_obj);
             }
             else
             {
-                new_obj = db.tbl_Hotel.Find(id);
+                new_obj = db.tbl_Hotel.Find(hotel.HotelId);
                 if (new_obj != null)
                 {
-                    new_obj.HotelName = name;
-                    new_obj.CityId = cityID;
-                    new_obj.Description = desc;
-                    new_obj.HotelStars = stars;
-                    new_obj.checkin = checkin;
-                    new_obj.checkout = checkout;
-                    new_obj.Tel = tel;
-                    new_obj.Fax = fax;
-                    new_obj.Website = website;
-                    new_obj.Email = email;
-                    new_obj.HotelAddress = address;
+                    new_obj.HotelName = hotel.HotelName;
+                    new_obj.CityId = hotel.CityId;
+                    new_obj.Description = hotel.Description;
+                    new_obj.HotelStars = hotel.HotelStars;
+                    new_obj.checkin = hotel.checkin;
+                    new_obj.checkout = hotel.checkout;
+                    new_obj.Tel = hotel.Tel;
+                    new_obj.Fax = hotel.Fax;
+                    new_obj.Website = hotel.Website;
+                    new_obj.Email = hotel.Email;
+                    new_obj.HotelAddress = hotel.HotelAddress;
                 }
             }
 
             db.SaveChanges();
+
+            //Save Restaurants
+            List<String> lst_restaurants = hotel.restaurants.Split(',').ToList<String>();
+            foreach (string r in lst_restaurants)
+            {
+                tbl_Restuarant rest = db.tbl_Restaurant.Where(x => x.RestaurantName == r).FirstOrDefault();
+                if (rest == null)
+                {
+                    rest = new tbl_Restuarant() { RestaurantName =r};
+                    db.tbl_Restaurant.Add(rest);
+                    db.SaveChanges();
+                }
+                
+                db.tbl_Hotel_Restaurants.Add(new tbl_Hotel_Restaurants()
+                {
+                    Restaurant = rest,
+                    HotelID = hotel.HotelId
+                });
+            }
+               
+
 
         }
 
@@ -134,14 +154,28 @@ namespace HotelAdvice.App_Code
             return lst_hotel;
 
         }
-        public List<String> get_hotel_byId(int id)
+        
+        public HotelViewModel get_hotel_byId(int id)
         {
-            List<string> hotel_prop = new List<string>();
-            tbl_Hotel h = db.tbl_Hotel.Find(id);
-            hotel_prop.Add(h.HotelName);
-            hotel_prop.Add(h.Description);
-            hotel_prop.Add(h.CityId+"");
-
+           // List<string> hotel_prop = new List<string>();
+            HotelViewModel hotel_prop = (from h in db.tbl_Hotel
+                                         where h.HotelId==id
+                                          select new HotelViewModel
+                                          {
+                                              HotelName = h.HotelName,
+                                              CityId = h.CityId,
+                                              Description = h.Description,
+                                              HotelStars = h.HotelStars,
+                                              checkin = h.checkin,
+                                              checkout = h.checkout,
+                                              Tel = h.Tel,
+                                              Fax = h.Fax,
+                                              Website = h.Website,
+                                              Email = h.Email,
+                                              HotelAddress = h.HotelAddress
+                                          }).FirstOrDefault();
+                                     
+           
             return hotel_prop;
         }
 

@@ -8,7 +8,7 @@ namespace HotelAdvice.Models
 {
     public class tbl_Restuarant
     {
-        tbl_Restuarant() {
+        public tbl_Restuarant() {
             HotelRests = new HashSet<tbl_Hotel_Restaurants>();
         }
        
