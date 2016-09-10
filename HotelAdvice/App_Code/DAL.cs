@@ -117,6 +117,9 @@ namespace HotelAdvice.App_Code
             db.SaveChanges();
 
             //Save Restaurants
+            if (hotel.HotelId != 0)
+                db.tbl_Hotel_Restaurants.RemoveRange(db.tbl_Hotel_Restaurants.Where(x => x.HotelID == hotel.HotelId));
+
             List<String> lst_restaurants = hotel.restaurants.Split(',').ToList<String>();
             foreach (string r in lst_restaurants)
             {
@@ -133,6 +136,7 @@ namespace HotelAdvice.App_Code
                     Restaurant = rest,
                     HotelID = hotel.HotelId
                 });
+                db.SaveChanges();
             }
                
 
@@ -162,6 +166,7 @@ namespace HotelAdvice.App_Code
                                          where h.HotelId==id
                                           select new HotelViewModel
                                           {
+                                              HotelId=h.HotelId,
                                               HotelName = h.HotelName,
                                               CityId = h.CityId,
                                               Description = h.Description,
@@ -188,6 +193,28 @@ namespace HotelAdvice.App_Code
                 db.SaveChanges();
             }
         }
+
+        public List<tbl_Restuarant> get_restaurants()
+        {
+            List<tbl_Restuarant> lst_restaurant = db.tbl_Restaurant.Select(r =>r)
+                .OrderBy(r => r.RestaurantName).ToList();
+
+            return lst_restaurant;
+            
+        }
+
+        public List<tbl_Restuarant> get_hotel_restaurants(int hotelID)
+        {
+            List<tbl_Restuarant> lst_restaurant = (from r in db.tbl_Hotel_Restaurants
+                                                  join Rest in db.tbl_Restaurant on r.RestaurantID equals Rest.RestaurantID
+                                                  where r.HotelID==hotelID
+                                                  select Rest)
+                                                   .OrderBy(r => r.RestaurantName).ToList();
+
+            return lst_restaurant;
+
+        }
+       
         #endregion Hotel
 
         #region Review

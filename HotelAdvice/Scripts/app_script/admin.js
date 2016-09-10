@@ -105,11 +105,11 @@ function SetUp_AddHotel() {
 
 function Set_Restaurants_tag()
 {
-    var citynames = new Bloodhound({
+    var Restnames = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace,
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         remote: {
-            url: '/Home/SearchList',
+            url: '/Hotel/Get_Restaurants',
             
             prepare: function (query, settings) {
                 settings.type = "POST";
@@ -119,18 +119,19 @@ function Set_Restaurants_tag()
             },
             filter: function (list) {
                 return $.map(list, function (object) {
-                    return object.CName;
+                    return object.RestName;
                 });
             }
         }
     });
-    citynames.initialize();
+
+    Restnames.initialize();
+
     $('#txt_restaurant').tagsinput({
         typeaheadjs: {
-            name: 'citynames',            
-            source: citynames.ttAdapter(),
-            limit: 10
-        
+            name: 'Restnames',
+            source: Restnames.ttAdapter(),
+            limit: 10        
         },
         freeInput: true
     });

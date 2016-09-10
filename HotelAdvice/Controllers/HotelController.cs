@@ -5,16 +5,21 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using HotelAdvice.ViewModels;
+using HotelAdvice.Models;
 using PagedList;
 using System.IO;
 
 namespace HotelAdvice.Controllers
 {
     [Authorize(Roles = "Administrator")]
+   
+    
     public class HotelController : Controller
     {
         private const int defaultPageSize = 5;
         DAL db = new DAL();
+
+        #region Hotel
 
         // GET: Hotel
         public ActionResult Index(int? page)
@@ -40,9 +45,16 @@ namespace HotelAdvice.Controllers
             vm.CityId = cities.First().cityID;
 
             //this is edit
-            if (id != null)
+            if (HotelId != 0)
             {
                 vm = db.get_hotel_byId(HotelId);
+                
+                //add restaurants
+                List<tbl_Restuarant> lst_rest=db.get_hotel_restaurants(HotelId);
+                if (lst_rest.Count > 0)
+                {
+                    vm.restaurants = string.Join(",", lst_rest.Select(x=>x.RestaurantName));
+                }
             }
 
             vm.lst_city = new SelectList(cities, "cityID", "cityName");
@@ -106,8 +118,21 @@ namespace HotelAdvice.Controllers
             db.delete_hotel(Hotel.HotelId);
             return Json(new { msg = "Row is deleted successfully!" });
         }
+        #endregion Hotel
 
-      
+
+        #region Restaurant
+        [HttpPost]
+        public JsonResult Get_Restaurants(string Prefix)
+        {
+            List<tbl_Restuarant> restList = db.get_restaurants();
+
+            var result = restList.Where(x => x.RestaurantName.ToLower().Contains(Prefix.ToLower()))
+                .Select(x => new { RestName = x.RestaurantName }).ToList();
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        #endregion Restaurant
 
     }
 }

@@ -24,6 +24,7 @@ namespace HotelAdvice.Controllers
 
             return View();
         }
+        
         [HttpPost]
         public JsonResult SearchList(string Prefix)
         {
