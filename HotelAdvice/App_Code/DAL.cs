@@ -118,28 +118,33 @@ namespace HotelAdvice.App_Code
 
             //Save Restaurants
             if (hotel.HotelId != 0)
-                db.tbl_Hotel_Restaurants.RemoveRange(db.tbl_Hotel_Restaurants.Where(x => x.HotelID == hotel.HotelId));
-
-            List<String> lst_restaurants = hotel.restaurants.Split(',').ToList<String>();
-            foreach (string r in lst_restaurants)
             {
-                tbl_Restuarant rest = db.tbl_Restaurant.Where(x => x.RestaurantName == r).FirstOrDefault();
-                if (rest == null)
-                {
-                    rest = new tbl_Restuarant() { RestaurantName =r};
-                    db.tbl_Restaurant.Add(rest);
-                    db.SaveChanges();
-                }
-                
-                db.tbl_Hotel_Restaurants.Add(new tbl_Hotel_Restaurants()
-                {
-                    Restaurant = rest,
-                    HotelID = hotel.HotelId
-                });
+                db.tbl_Hotel_Restaurants.RemoveRange(db.tbl_Hotel_Restaurants.Where(x => x.HotelID == hotel.HotelId));
                 db.SaveChanges();
             }
-               
 
+            if (hotel.restaurants != null)
+            {
+                List<String> lst_restaurants = hotel.restaurants.Split(',').ToList<String>();
+                foreach (string r in lst_restaurants)
+                {
+                    tbl_Restuarant rest = db.tbl_Restaurant.Where(x => x.RestaurantName == r).FirstOrDefault();
+                    if (rest == null)
+                    {
+                        rest = new tbl_Restuarant() { RestaurantName = r };
+                        db.tbl_Restaurant.Add(rest);
+                        db.SaveChanges();
+                    }
+
+                    db.tbl_Hotel_Restaurants.Add(new tbl_Hotel_Restaurants()
+                    {
+                        Restaurant = rest,
+                        HotelID = hotel.HotelId
+                    });
+                    db.SaveChanges();
+                }
+
+            }
 
         }
 
