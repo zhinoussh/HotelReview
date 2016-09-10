@@ -24,7 +24,8 @@
     /*******************Hotel Region***********************/
 
     /*******************City Region***********************/
-    
+ 
+   
 });
 
 function showModal() {
@@ -35,8 +36,10 @@ function showModal() {
         reparseform();
 
         //only do for add hotel dialog
-        if (url = '/Hotel/ADD_New_Hotel')
+        if (url = '/Hotel/ADD_New_Hotel') {
             SetUp_AddHotel();
+            Set_Restaurants_tag();
+        }
     });
 }
 
@@ -55,29 +58,7 @@ var Success_AjaxReturn = function (result) {
 }
 
 function SetUp_AddHotel() {
-    $('#txt_restaurant').tagsinput({
-        typeahead: {
-            source: function (request, response) {
-                var list_array = new Array();
-                $.ajax({
-                    url: "/Home/SearchList",
-                    type: "POST",
-                    dataType: "json",
-                    data: { Prefix: request.term },
-                    success: function (data) {
-                        response($.map(data, function (item) {
-                            return { label: item.CName, value: item.CID };
-                        }))
-
-                    }
-
-                });
-            }
-
-        },
-        freeInput: true
-    });
-
+   
     $('#checkin').timepicker({
         template: false,
         showInputs: false,
@@ -122,5 +103,41 @@ function SetUp_AddHotel() {
     });
 }
 
+function Set_Restaurants_tag()
+{
+    var citynames = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace,
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+            url: '/Home/SearchList',
+            
+            prepare: function (query, settings) {
+                settings.type = "POST";
+                settings.contentType = "application/json; charset=UTF-8";
+                settings.data = JSON.stringify({ "Prefix": query });
+                return settings;
+            },
+            filter: function (list) {
+                //alert('here');
+                return $.map(list, function (object) {
+                    return { value: object.CName, id: object.CID };
+                });
+            }
+        }
+    });
+    citynames.initialize();
+    $('#txt_restaurant').tagsinput({
+        typeaheadjs: {
+            name: 'citynames',
+            highlight: true,
+            minLength: 3,
+            displayKey: 'value',
+            valueKey: 'id',
+            source: citynames.ttAdapter()
+        
+        },
+        freeInput: true
+    });
+}
 
 
