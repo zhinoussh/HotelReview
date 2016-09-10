@@ -59,14 +59,15 @@ namespace HotelAdvice
                      , "~/Content/font-awesome.min.css"
                      , "~/Content/AdminStyle.css"
                      , "~/Content/PagedList.css"
+                    , "~/Content/bootstrap-timepicker.min.css"
+                    , "~/Content/fileinput.min.css"
+                    , "~/Content/bootstrap-tagsinput.css"
+                    , "~/Content/typeahead_style.css"
                      ));
 
             bundles.Add(new StyleBundle("~/Content/StarRating").Include(
                      "~/Content/StarRating/star-rating.min.css"
                     , "~/Content/StarRating/theme.min.css"
-                    , "~/Content/bootstrap-timepicker.min.css"
-                    , "~/Content/fileinput.min.css"
-                    , "~/Content/bootstrap-tagsinput.css"
                     ));
         }
     }

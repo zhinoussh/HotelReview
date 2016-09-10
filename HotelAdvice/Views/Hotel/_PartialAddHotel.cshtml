@@ -146,7 +146,11 @@
                                         <div class="col-sm-12">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-apple"></i></span>
-                                                @Html.TextBoxFor(model => model.restaurants, new {id="txt_restaurant", @class = "form-control", @placeholder = "Enter Restaurants..."
+                                                @Html.TextBoxFor(model => model.restaurants, new
+                                           {
+                                               id = "txt_restaurant",
+                                               @class = "form-control",
+                                               @placeholder = "Enter Restaurants..."
                                               })
                                             </div>
                                            

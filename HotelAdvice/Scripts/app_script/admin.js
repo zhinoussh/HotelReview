@@ -76,7 +76,7 @@ function SetUp_AddHotel() {
         hoverOnClear: false,
         theme: 'krajee-fa'
         ,'showClear': false
-        , 'showCaption': false
+        ,'showCaption': false
     });
 
     $("#image_hotel").fileinput({
@@ -118,9 +118,8 @@ function Set_Restaurants_tag()
                 return settings;
             },
             filter: function (list) {
-                //alert('here');
                 return $.map(list, function (object) {
-                    return { value: object.CName, id: object.CID };
+                    return object.CName;
                 });
             }
         }
@@ -128,12 +127,9 @@ function Set_Restaurants_tag()
     citynames.initialize();
     $('#txt_restaurant').tagsinput({
         typeaheadjs: {
-            name: 'citynames',
-            highlight: true,
-            minLength: 3,
-            displayKey: 'value',
-            valueKey: 'id',
-            source: citynames.ttAdapter()
+            name: 'citynames',            
+            source: citynames.ttAdapter(),
+            limit: 10
         
         },
         freeInput: true
