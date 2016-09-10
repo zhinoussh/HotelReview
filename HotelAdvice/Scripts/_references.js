@@ -18,4 +18,4 @@
 /// <reference path="fileinput.min.js" />
 /// <reference path="bootstrap-tagsinput.js" />
 /// <reference path="bloodhound.min.js" />
-/// <reference path="bootstrap-typeahead.js" />
+/// <reference path="typeahead.js" />

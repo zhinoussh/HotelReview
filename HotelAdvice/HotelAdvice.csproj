@@ -310,7 +310,7 @@
     <Content Include="Scripts\bloodhound.min.js" />
     <Content Include="Scripts\bootstrap-tagsinput.js" />
     <Content Include="Scripts\bootstrap-timepicker.min.js" />
-    <Content Include="Scripts\bootstrap-typeahead.js" />
+    <Content Include="Scripts\typeahead.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\fontawesome-webfont.woff2" />

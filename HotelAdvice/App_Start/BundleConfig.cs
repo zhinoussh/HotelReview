@@ -34,13 +34,14 @@ namespace HotelAdvice
             bundles.Add(new ScriptBundle("~/bundles/StarRating").Include(
                       "~/Scripts/StarRating/star-rating.min.js"
                       , "~/Scripts/StarRating/theme.min.js"
+                      ));
+
+            bundles.Add(new ScriptBundle("~/bundles/AdminPage").Include(
+                      "~/Scripts/app_script/admin.js"
                        , "~/Scripts/bootstrap-timepicker.min.js"
                        , "~/Scripts/fileinput.min.js"
                        , "~/Scripts/bootstrap-tagsinput.js"
-                       , "~/Scripts/bootstrap-typeahead.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/AdminPage").Include(
-                      "~/Scripts/app_script/admin.js"));
+                       , "~/Scripts/typeahead.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",                      
