@@ -5,16 +5,21 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using HotelAdvice.ViewModels;
+using HotelAdvice.Models;
 using PagedList;
 using System.IO;
 
 namespace HotelAdvice.Controllers
 {
     [Authorize(Roles = "Administrator")]
+   
+    
     public class HotelController : Controller
     {
         private const int defaultPageSize = 5;
         DAL db = new DAL();
+
+        #region Hotel
 
         // GET: Hotel
         public ActionResult Index(int? page)
@@ -37,19 +42,22 @@ namespace HotelAdvice.Controllers
             vm.HotelId = HotelId;
 
             List<CityViewModel> cities = db.get_cities();
-            vm.lst_city = new SelectList(cities, "cityID", "cityName");
             vm.CityId = cities.First().cityID;
 
-
             //this is edit
-            if (id != null)
+            if (HotelId != 0)
             {
-                List<string> Hotel_prop = db.get_hotel_byId(HotelId);
-                vm.HotelName = Hotel_prop[0];
-                vm.Description = Hotel_prop[1];
-                vm.CityId = Int32.Parse(Hotel_prop[2]);
-
+                vm = db.get_hotel_byId(HotelId);
+                
+                //add restaurants
+                List<tbl_Restuarant> lst_rest=db.get_hotel_restaurants(HotelId);
+                if (lst_rest.Count > 0)
+                {
+                    vm.restaurants = string.Join(",", lst_rest.Select(x=>x.RestaurantName));
+                }
             }
+
+            vm.lst_city = new SelectList(cities, "cityID", "cityName");
 
             return PartialView("_PartialAddHotel", vm);
         }
@@ -61,7 +69,7 @@ namespace HotelAdvice.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.add_hotel(Hotel.HotelId, Hotel.HotelName, Hotel.Description, Hotel.CityId);
+                db.add_hotel(Hotel);
 
                 HttpPostedFileBase file = Hotel.PhotoFile;
                 if (file != null)
@@ -89,10 +97,7 @@ namespace HotelAdvice.Controllers
         [HttpGet]
         public ActionResult HotelDescription(int id)
         {
-            List<string> Hotel_prop = db.get_hotel_byId(id);
-            HotelViewModel vm = new HotelViewModel();
-            vm.HotelName = Hotel_prop[0];
-            vm.Description = Hotel_prop[1];
+            HotelViewModel  vm = db.get_hotel_byId(id);
             return PartialView("_PartialDescription", vm);
         }
 
@@ -113,8 +118,21 @@ namespace HotelAdvice.Controllers
             db.delete_hotel(Hotel.HotelId);
             return Json(new { msg = "Row is deleted successfully!" });
         }
+        #endregion Hotel
 
-      
+
+        #region Restaurant
+        [HttpPost]
+        public JsonResult Get_Restaurants(string Prefix)
+        {
+            List<tbl_Restuarant> restList = db.get_restaurants();
+
+            var result = restList.Where(x => x.RestaurantName.ToLower().Contains(Prefix.ToLower()))
+                .Select(x => new { RestName = x.RestaurantName }).ToList();
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        #endregion Restaurant
 
     }
 }

@@ -16,3 +16,6 @@
 /// <reference path="starrating/theme.min.js" />
 /// <reference path="bootstrap-timepicker.min.js" />
 /// <reference path="fileinput.min.js" />
+/// <reference path="bootstrap-tagsinput.js" />
+/// <reference path="bloodhound.min.js" />
+/// <reference path="typeahead.js" />

@@ -24,7 +24,8 @@
     /*******************Hotel Region***********************/
 
     /*******************City Region***********************/
-    
+ 
+   
 });
 
 function showModal() {
@@ -35,8 +36,10 @@ function showModal() {
         reparseform();
 
         //only do for add hotel dialog
-        if (url = '/Hotel/ADD_New_Hotel')
+        if (url = '/Hotel/ADD_New_Hotel') {
             SetUp_AddHotel();
+            Set_Restaurants_tag();
+        }
     });
 }
 
@@ -55,6 +58,7 @@ var Success_AjaxReturn = function (result) {
 }
 
 function SetUp_AddHotel() {
+   
     $('#checkin').timepicker({
         template: false,
         showInputs: false,
@@ -66,11 +70,13 @@ function SetUp_AddHotel() {
         minuteStep: 1
     });
 
-    $('.kv-ltr-theme-fa-star').rating({
+    $('.HotelStars').rating({
+        step: 1,
+        size: 's',
         hoverOnClear: false,
         theme: 'krajee-fa'
-       , 'showClear': false
-   , 'showCaption': false
+        ,'showClear': false
+        ,'showCaption': false
     });
 
     $("#image_hotel").fileinput({
@@ -97,5 +103,38 @@ function SetUp_AddHotel() {
     });
 }
 
+function Set_Restaurants_tag()
+{
+    var Restnames = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace,
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+            url: '/Hotel/Get_Restaurants',
+            
+            prepare: function (query, settings) {
+                settings.type = "POST";
+                settings.contentType = "application/json; charset=UTF-8";
+                settings.data = JSON.stringify({ "Prefix": query });
+                return settings;
+            },
+            filter: function (list) {
+                return $.map(list, function (object) {
+                    return object.RestName;
+                });
+            }
+        }
+    });
+
+    Restnames.initialize();
+
+    $('#txt_restaurant').tagsinput({
+        typeaheadjs: {
+            name: 'Restnames',
+            source: Restnames.ttAdapter(),
+            limit: 10        
+        },
+        freeInput: true
+    });
+}
 
 

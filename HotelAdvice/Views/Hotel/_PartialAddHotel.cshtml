@@ -52,10 +52,9 @@
                                         <div class="form-group">
 
                                             <div class="input-group">
-                                                <span class="input-group-addon"><i class=" glyphicon glyphicon-star"></i> Star Rating</span>
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-star"></i> Star Rating</span>
                                                 <div class="form-control">
-                                                    <input id="input-1-ltr-star-xs" name="input-1-ltr-star-xs" class="kv-ltr-theme-fa-star"
-                                                           data-step="1" value="1" dir="ltr" data-size="s">
+                                                    @Html.TextBoxFor(model => model.HotelStars, new { @class = "HotelStars"})
                                                 </div>
                                             </div>
                                         </div>
@@ -147,7 +146,12 @@
                                         <div class="col-sm-12">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-apple"></i></span>
-                                                @Html.TextBoxFor(model => model.restaurants, new { @class = "form-control", @placeholder = "Telephone Number"})
+                                                @Html.TextBoxFor(model => model.restaurants, new
+                                           {
+                                               id = "txt_restaurant",
+                                               @class = "form-control",
+                                               @placeholder = "Enter Restaurants..."
+                                              })
                                             </div>
                                            
                                         </div>
