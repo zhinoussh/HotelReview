@@ -17,18 +17,15 @@
         return false;
     });
 
-    $("#btn_add_new").on('click',showModal);
-    $(".actionButton").on('click', showModal);
-   // $(document).on('click', '#btn_add_new', showModal);
-
-    /*******************Hotel Region***********************/
-
-    /*******************City Region***********************/
- 
+    $("#btn_add_new").on('click', showModal);
+  
    
 });
 
+$(document).on("click", ".actionButton", showModal);
+
 function showModal() {
+    
     var url = $(this).data('url');
 
     $.get(url, function (data) {
@@ -49,16 +46,42 @@ var reparseform = function () {
     $.validator.unobtrusive.parse("form");
 
 };
+
 var Success_AjaxReturn = function (result) {
     
     if (result.msg) {
         localStorage.setItem("msg", result.msg)
         location.reload();
     }
+    
 }
 
 function SetUp_AddHotel() {
-   
+    var img_path = $('#img_hotel').val();
+    $("#image_hotel").fileinput({
+        overwriteInitial: true,
+        cache:false,
+        maxFileSize: 1024,
+        maxFileCount: 1,
+        showClose: false,
+        showCaption: false,
+        browseLabel: 'Choose Image',
+        browseClass: "btn btn-sm btn-success",
+        removeClass: "btn btn-sm btn-danger",
+        removeLabel: 'Delete Image',
+        removeTitle: 'Delete Image',
+        browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+        removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+        elErrorContainer: '#kv-avatar-errors-1',
+        msgErrorClass: 'alert alert-block alert-danger',
+        defaultPreviewContent: "<img src='" + img_path + "' alt='Hotel Image' style='width:220px; height:220px'>",
+        layoutTemplates: { main2: '{preview}  {remove} {browse}' },
+        allowedFileExtensions: ["jpg", "png", "gif"],
+        browseOnZoneClick: true,
+        showZoom: false
+
+    });
+
     $('#checkin').timepicker({
         template: false,
         showInputs: false,
@@ -79,28 +102,7 @@ function SetUp_AddHotel() {
         ,'showCaption': false
     });
 
-    $("#image_hotel").fileinput({
-        overwriteInitial: true,
-        maxFileSize: 1024,
-        maxFileCount: 1,
-        showClose: false,
-        showCaption: false,
-        browseLabel: 'Choose Image',
-        browseClass: "btn btn-sm btn-success",
-        removeClass: "btn btn-sm btn-danger",
-        removeLabel: 'Delete Image',
-        removeTitle: 'Delete Image',
-        browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
-        removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
-        elErrorContainer: '#kv-avatar-errors-1',
-        msgErrorClass: 'alert alert-block alert-danger',
-        defaultPreviewContent: '<img src="/images/empty.gif" alt="Hotel Image" style="width:220px">',
-        layoutTemplates: { main2: '{preview}  {remove} {browse}' },
-        allowedFileExtensions: ["jpg", "png", "gif"],
-        browseOnZoneClick: true,
-        showZoom: false
-
-    });
+    
 }
 
 function Set_Restaurants_tag()
@@ -137,4 +139,25 @@ function Set_Restaurants_tag()
     });
 }
 
+function add_hotel_click()
+{
+    var formData = new FormData($('#frm_add_hotel')[0]);
+
+     var action = $("#frm_add_hotel").attr("action");
+     $.ajax({
+         type: "POST",
+         url: action,
+         data: formData,
+         dataType: "json", 
+         contentType: false,
+         processData: false,
+         success: function (data) {
+             Success_AjaxReturn(data);
+         },
+         error: function (jqXHR, textStatus, errorThrown) {
+             //do your own thing
+             alert("fail");
+         }
+     });
+}
 

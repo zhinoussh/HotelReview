@@ -52,7 +52,10 @@ namespace HotelAdvice.ViewModels
         public string CityName { get; set; }
         public SelectList lst_city { get; set; }
 
-        public String restaurants{ get; set; }
+        public String restaurants { get; set; }
+        public String rooms { get; set; }
         public HttpPostedFileBase PhotoFile { get; set; }
+
+        public string imgPath;
     }
 }

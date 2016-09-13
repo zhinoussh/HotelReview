@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using HotelAdvice.Models;
 using HotelAdvice.ViewModels;
 using HotelAdvice.App_Code;
+using System.IO;
 
 namespace HotelAdvice.Controllers
 {
@@ -36,5 +37,6 @@ namespace HotelAdvice.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+     
     }
 }

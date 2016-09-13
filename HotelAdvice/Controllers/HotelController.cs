@@ -43,12 +43,18 @@ namespace HotelAdvice.Controllers
 
             List<CityViewModel> cities = db.get_cities();
             vm.CityId = cities.First().cityID;
-
+            vm.imgPath = "/images/empty.gif";
             //this is edit
             if (HotelId != 0)
             {
                 vm = db.get_hotel_byId(HotelId);
-                
+               
+                string path= "/Upload/" + vm.HotelName + "/main.jpg";
+                if (System.IO.File.Exists(Server.MapPath(@path)))
+                    vm.imgPath = path;    
+                else
+                    vm.imgPath = "/images/empty.gif";   
+
                 //add restaurants
                 List<tbl_Restuarant> lst_rest=db.get_hotel_restaurants(HotelId);
                 if (lst_rest.Count > 0)
@@ -71,28 +77,25 @@ namespace HotelAdvice.Controllers
             {
                 db.add_hotel(Hotel);
 
-                HttpPostedFileBase file = Hotel.PhotoFile;
-                if (file != null)
+                if (Hotel.PhotoFile != null)
                 {
+                    HttpPostedFileBase file = Hotel.PhotoFile;
                     string hotel_dir = Server.MapPath(@"~\Upload\" + Hotel.HotelName);
                     if (!Directory.Exists(hotel_dir))
                         Directory.CreateDirectory(hotel_dir);
                     var filename = file.FileName;
-                    var ext = filename.Substring(filename.LastIndexOf('.'));
-                    filename = "main" + ext;
-                    string savePath = Server.MapPath(@"~\Upload\" + hotel_dir + "\\" + filename);
-                    file.SaveAs(savePath);
+                    //var ext = filename.Substring(filename.LastIndexOf('.'));
+                    //filename = "main" + ext;
+                    file.SaveAs(hotel_dir + "\\main.jpg");
                 }
-                return Json(new { msg = "The Hotel inserted successfully." });
+                return Json(new { msg = "The Hotel inserted successfully."});
             }
             else
                 return PartialView("_PartialAddHotel", Hotel);
 
-           
-        
-
         }
 
+       
 
         [HttpGet]
         public ActionResult HotelDescription(int id)
@@ -132,6 +135,7 @@ namespace HotelAdvice.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+        
         #endregion Restaurant
 
     }
