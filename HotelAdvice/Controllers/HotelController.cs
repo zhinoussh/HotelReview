@@ -124,8 +124,7 @@ namespace HotelAdvice.Controllers
         #endregion Hotel
 
 
-        #region Restaurant
-        [HttpPost]
+         [HttpPost]
         public JsonResult Get_Restaurants(string Prefix)
         {
             List<tbl_Restuarant> restList = db.get_restaurants();
@@ -135,8 +134,19 @@ namespace HotelAdvice.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+         [HttpPost]
+         public JsonResult Get_Rooms(string Prefix)
+         {
+             List<tbl_Restuarant> RoomList = db.get_rooms();
+
+             var result = restList.Where(x => x.RestaurantName.ToLower().Contains(Prefix.ToLower()))
+                 .Select(x => new { RestName = x.RestaurantName }).ToList();
+
+             return Json(result, JsonRequestBehavior.AllowGet);
+         }
         
-        #endregion Restaurant
+      
 
     }
 }

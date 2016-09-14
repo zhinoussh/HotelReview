@@ -139,6 +139,39 @@ function Set_Restaurants_tag()
     });
 }
 
+function Set_Rooms_tag() {
+    var roomTypes = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace,
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+            url: '/Hotel/Get_Rooms',
+
+            prepare: function (query, settings) {
+                settings.type = "POST";
+                settings.contentType = "application/json; charset=UTF-8";
+                settings.data = JSON.stringify({ "Prefix": query });
+                return settings;
+            },
+            filter: function (list) {
+                return $.map(list, function (object) {
+                    return object.RoomType;
+                });
+            }
+        }
+    });
+
+    roomTypes.initialize();
+
+    $('#txt_room').tagsinput({
+        typeaheadjs: {
+            name: 'Restnames',
+            source: roomTypes.ttAdapter(),
+            limit: 10
+        },
+        freeInput: true
+    });
+}
+
 function add_hotel_click()
 {
     var formData = new FormData($('#frm_add_hotel')[0]);

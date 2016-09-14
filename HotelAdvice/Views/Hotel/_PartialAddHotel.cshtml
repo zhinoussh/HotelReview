@@ -143,7 +143,7 @@
                                 </div>
                             </div>
 
-                            <!-- TAB 1- General Description-->
+                            <!-- TAB 3- Restaurants and Rooms-->
                             <div class="tab-pane" id="tab_restaurant">
                                 <div class="row top-buffer">
 
@@ -159,6 +159,20 @@
                                             </div>
                                            
                                         </div>
+
+                                    <div class="col-sm-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                                            @Html.TextBoxFor(model => model.rooms, new
+                                           {
+                                               id = "txt_room",
+                                               @class = "form-control",
+                                               @placeholder = "Enter Room Types..."
+                                           })
+                                        </div>
+
+                                    </div>
+
                                     </div>
                             </div>
 
