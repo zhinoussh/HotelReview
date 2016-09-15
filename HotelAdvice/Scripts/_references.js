@@ -19,3 +19,6 @@
 /// <reference path="bootstrap-tagsinput.js" />
 /// <reference path="bloodhound.min.js" />
 /// <reference path="typeahead.js" />
+/// <reference path="bootstrap-sortable.js" />
+/// <reference path="moment-with-locales.min.js" />
+/// <reference path="moment.min.js" />

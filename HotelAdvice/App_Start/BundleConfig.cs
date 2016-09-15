@@ -41,7 +41,8 @@ namespace HotelAdvice
                        , "~/Scripts/bootstrap-timepicker.min.js"
                        , "~/Scripts/fileinput.min.js"
                        , "~/Scripts/bootstrap-tagsinput.js"
-                       , "~/Scripts/typeahead.js"));
+                       , "~/Scripts/typeahead.js"
+                       , "~/Scripts/bootstrap-sortable.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",                      
@@ -63,6 +64,7 @@ namespace HotelAdvice
                     , "~/Content/fileinput.min.css"
                     , "~/Content/bootstrap-tagsinput.css"
                     , "~/Content/typeahead_style.css"
+                    , "~/Content/bootstrap-sortable.css"
                      ));
 
             bundles.Add(new StyleBundle("~/Content/StarRating").Include(

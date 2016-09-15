@@ -161,3 +161,15 @@ ul.pagination li a.active {
     width:220px !important;
 }
 
+/************TABLE*/
+#table_container {
+margin-top:10%;
+}
+
+.thead-default {
+background-color:#d2e9ef;
+color:#05576c;
+}
+
+
+

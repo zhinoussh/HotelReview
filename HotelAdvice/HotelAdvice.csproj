@@ -255,6 +255,7 @@
     <Content Include="Content\AdminStyle.css" />
     <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap-social.css" />
+    <Content Include="Content\bootstrap-sortable.css" />
     <Content Include="Content\bootstrap-tagsinput.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -327,9 +328,13 @@
     <Content Include="Scripts\app_script\homePage.js" />
     <Content Include="Scripts\bloodhound.js" />
     <Content Include="Scripts\bloodhound.min.js" />
+    <Content Include="Scripts\bootstrap-sortable.js" />
     <Content Include="Scripts\bootstrap-tagsinput.js" />
     <Content Include="Scripts\bootstrap-timepicker.min.js" />
-    <Content Include="Scripts\fileinput.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\typeahead.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

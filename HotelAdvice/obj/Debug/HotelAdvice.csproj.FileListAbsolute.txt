@@ -130,3 +130,4 @@ D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.pdb
 D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.Migrations.add_TBL_Room_Type.resources
 D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.Migrations.add_TBL_Amenity.resources
 D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.Migrations.add_TBL_Sightseeing.resources
+D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.csprojResolveAssemblyReference.cache
