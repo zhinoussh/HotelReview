@@ -61,6 +61,20 @@ namespace HotelAdvice.Controllers
                 {
                     vm.restaurants = string.Join(",", lst_rest.Select(x=>x.RestaurantName));
                 }
+
+                //add rooms
+                List<tbl_room_type> lst_room = db.get_hotel_rooms(HotelId);
+                if (lst_room.Count > 0)
+                {
+                    vm.rooms = string.Join(",", lst_room.Select(x => x.Room_Type));
+                }
+
+                //add amenities
+                List<tbl_amenity> lst_amenity = db.get_hotel_amenities(HotelId);
+                if (lst_amenity.Count > 0)
+                {
+                    vm.amenities = string.Join(",", lst_amenity.Select(x => x.AmenityName));
+                }
             }
 
             vm.lst_city = new SelectList(cities, "cityID", "cityName");
@@ -94,8 +108,6 @@ namespace HotelAdvice.Controllers
                 return PartialView("_PartialAddHotel", Hotel);
 
         }
-
-       
 
         [HttpGet]
         public ActionResult HotelDescription(int id)
@@ -138,15 +150,26 @@ namespace HotelAdvice.Controllers
          [HttpPost]
          public JsonResult Get_Rooms(string Prefix)
          {
-             List<tbl_Restuarant> RoomList = db.get_rooms();
+             List<tbl_room_type> RoomList = db.get_roomTypes();
 
-             var result = restList.Where(x => x.RestaurantName.ToLower().Contains(Prefix.ToLower()))
-                 .Select(x => new { RestName = x.RestaurantName }).ToList();
+             var result = RoomList.Where(x => x.Room_Type.ToLower().Contains(Prefix.ToLower()))
+                 .Select(x => new { RoomType = x.Room_Type }).ToList();
+
+             return Json(result, JsonRequestBehavior.AllowGet);
+         }
+
+
+
+         [HttpPost]
+         public JsonResult Get_Amenities(string Prefix)
+         {
+             List<tbl_amenity> AmenityList = db.get_Amenities();
+
+             var result = AmenityList.Where(x => x.AmenityName.ToLower().Contains(Prefix.ToLower()))
+                 .Select(x => new { Amenity = x.AmenityName }).ToList();
 
              return Json(result, JsonRequestBehavior.AllowGet);
          }
         
-      
-
     }
 }

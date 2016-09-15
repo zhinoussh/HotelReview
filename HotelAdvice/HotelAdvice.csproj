@@ -216,12 +216,22 @@
     <Compile Include="Migrations\201609031259193_fixStringLength.Designer.cs">
       <DependentUpon>201609031259193_fixStringLength.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609140513309_add_TBL_Room_Type.cs" />
+    <Compile Include="Migrations\201609140513309_add_TBL_Room_Type.Designer.cs">
+      <DependentUpon>201609140513309_add_TBL_Room_Type.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609150616468_add_TBL_Amenity.cs" />
+    <Compile Include="Migrations\201609150616468_add_TBL_Amenity.Designer.cs">
+      <DependentUpon>201609150616468_add_TBL_Amenity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Config_ProjectDB.cs" />
     <Compile Include="Models\Autocomplete.cs" />
     <Compile Include="Models\HotelAdviceDB.cs" />
+    <Compile Include="Models\tbl_amenity.cs" />
     <Compile Include="Models\tbl_City.cs" />
     <Compile Include="Models\tbl_Hotel.cs" />
+    <Compile Include="Models\tbl_hotel_amenity.cs" />
     <Compile Include="Models\tbl_Hotel_Restaurants.cs" />
     <Compile Include="Models\tbl_Hotel_Rooms.cs" />
     <Compile Include="Models\tbl_Restuarant.cs" />
@@ -431,6 +441,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609031259193_fixStringLength.resx">
       <DependentUpon>201609031259193_fixStringLength.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609140513309_add_TBL_Room_Type.resx">
+      <DependentUpon>201609140513309_add_TBL_Room_Type.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609150616468_add_TBL_Amenity.resx">
+      <DependentUpon>201609150616468_add_TBL_Amenity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

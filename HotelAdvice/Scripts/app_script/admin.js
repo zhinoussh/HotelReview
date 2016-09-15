@@ -34,8 +34,7 @@ function showModal() {
 
         //only do for add hotel dialog
         if (url = '/Hotel/ADD_New_Hotel') {
-            SetUp_AddHotel();
-            Set_Restaurants_tag();
+            SetUp_AddHotel();            
         }
     });
 }
@@ -102,7 +101,9 @@ function SetUp_AddHotel() {
         ,'showCaption': false
     });
 
-    
+    Set_Restaurants_tag();
+    Set_Rooms_tag();
+    Set_Amenities_tag();
 }
 
 function Set_Restaurants_tag()
@@ -164,8 +165,41 @@ function Set_Rooms_tag() {
 
     $('#txt_room').tagsinput({
         typeaheadjs: {
-            name: 'Restnames',
+            name: 'roomTypes',
             source: roomTypes.ttAdapter(),
+            limit: 10
+        },
+        freeInput: true
+    });
+}
+
+function Set_Amenities_tag() {
+    var amenities = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace,
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+            url: '/Hotel/Get_Amenities',
+
+            prepare: function (query, settings) {
+                settings.type = "POST";
+                settings.contentType = "application/json; charset=UTF-8";
+                settings.data = JSON.stringify({ "Prefix": query });
+                return settings;
+            },
+            filter: function (list) {
+                return $.map(list, function (object) {
+                    return object.Amenity;
+                });
+            }
+        }
+    });
+
+    amenities.initialize();
+
+    $('#txt_amenities').tagsinput({
+        typeaheadjs: {
+            name: 'amenities',
+            source: amenities.ttAdapter(),
             limit: 10
         },
         freeInput: true

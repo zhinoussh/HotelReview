@@ -14,8 +14,10 @@ namespace HotelAdvice
         public virtual DbSet<tbl_Restuarant> tbl_Restaurant { get; set; }
         public virtual DbSet<tbl_Hotel_Restaurants> tbl_Hotel_Restaurants { get; set; }
         public virtual DbSet<tbl_room_type> tbl_Room_Type { get; set; }
-        
+
         public virtual DbSet<tbl_Hotel_Rooms> tbl_Hotel_Rooms { get; set; }
+        public virtual DbSet<tbl_amenity> tbl_Amenity { get; set; }
+        public virtual DbSet<tbl_hotel_amenity> tbl_Hotel_Amenities { get; set; }
 
         public HotelAdviceDB()
             : base("name=HotelAdviceConnection")
@@ -52,6 +54,18 @@ namespace HotelAdvice
               .HasMany(e => e.HotelRooms)
               .WithOptional(e => e.RoomType)
               .HasForeignKey(e => e.RoomTypeID)
+              .WillCascadeOnDelete();
+
+            modelBuilder.Entity<tbl_Hotel>()
+             .HasMany(e => e.HotelAmenities)
+             .WithOptional(e => e.Hotel)
+             .HasForeignKey(e => e.HotelID)
+             .WillCascadeOnDelete();
+
+            modelBuilder.Entity<tbl_amenity>()
+              .HasMany(e => e.amenities)
+              .WithOptional(e => e.Amenity)
+              .HasForeignKey(e => e.AmenityID)
               .WillCascadeOnDelete();
         }
     }

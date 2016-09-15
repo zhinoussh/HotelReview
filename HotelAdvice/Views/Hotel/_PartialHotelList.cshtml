@@ -6,15 +6,15 @@
 @if (Model.Count > 0)
 { 
 
-<table id="mytable" class="table table-bordred table-striped table-hover ">
+<table id="mytable" class="table table-bordred table-striped table-hover " >
 
     <thead>
         <tr>
             <th class="hidden">Hotel ID</th>
-            <th>Hotel Name</th>
-            <th>City</th>
-            <th>Star Rating</th>
-            <th>Actions</th>
+            <th class="text-center">Hotel Name</th>
+            <th class="text-center">City</th>
+            <th class="text-center">Star Rating</th>
+            <th class="text-center">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -24,9 +24,9 @@
         {
             <tr>
                 <td class="hidden">@item.HotelId</td>
-                <td class="col-sm-3 cityName">@item.HotelName</td>
-                <td class="col-sm-3">@item.CityName</td>
-                <td class="col-sm-4">@item.HotelStars</td>
+                <td class="col-sm-4 text-center">@item.HotelName</td>
+                <td class="col-sm-4 text-center">@item.CityName</td>
+                <td class="col-sm-3 text-center">@item.HotelStars</td>
                 <td>
                     <a data-toggle="tooltip" data-url="/Hotel/ADD_New_Hotel/@item.HotelId" title="Edit" class="glyphicon glyphicon-edit actionButton" ></a>
                     <a data-toggle="tooltip" data-url="/Hotel/Delete_Hotel/@item.HotelId" title="Delete" class="glyphicon glyphicon-trash actionButton"></a>

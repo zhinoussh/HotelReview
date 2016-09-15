@@ -43,17 +43,26 @@ namespace HotelAdvice.ViewModels
         
         [StringLength(20, ErrorMessage = "max length has been exceeded.")]
         public string checkout { get; set; }
+       
         [StringLength(20, ErrorMessage = "max length has been exceeded.")]
         public string distance_citycenter { get; set; }
+        
         [StringLength(20, ErrorMessage = "max length has been exceeded.")]
         public string distance_airport { get; set; }
 
         public int? CityId { get; set; }
+        
         public string CityName { get; set; }
+        
         public SelectList lst_city { get; set; }
 
         public String restaurants { get; set; }
+
         public String rooms { get; set; }
+
+        public String amenities { get; set; }
+        public String sightseeing { get; set; }
+        
         public HttpPostedFileBase PhotoFile { get; set; }
 
         public string imgPath;

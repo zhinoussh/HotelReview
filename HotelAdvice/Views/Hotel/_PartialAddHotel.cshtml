@@ -24,7 +24,7 @@
                 <div class="modal-header modal-header-add">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">
-                        <span class="glyphicon glyphicon-pencil"></span> Add / Edit Hotel
+                        <span class="glyphicon glyphicon-pencil"></span> Hotel Features
                     </h4>
                 </div>
                 <div class="modal-body">
@@ -32,9 +32,10 @@
                     <div class="tabbable">
                         <!-- Only required for left/right tabs -->
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#tab_general" data-toggle="tab">General Properties</a></li>
-                            <li><a href="#tab_contact" data-toggle="tab">Contact Details</a></li>
-                            <li><a href="#tab_restaurant" data-toggle="tab">Rooms & Restaurants</a></li>
+                            <li class="active"><a href="#tab_general" data-toggle="tab">General</a></li>
+                            <li><a href="#tab_contact" data-toggle="tab">Location/Contact</a></li>
+                            <li><a href="#tab_restaurant" data-toggle="tab">Rooms/Restaurants</a></li>
+                            <li><a href="#tab_amenity" data-toggle="tab">Amenities/Sightseeing</a></li>
                         </ul>
                         <div class="tab-content">
                             <!-- TAB 1- General Description-->
@@ -98,23 +99,26 @@
 
                             <!-- TAB 2- Contact Details-->
                             <div class="tab-pane" id="tab_contact">
-                                <div class="row top-buffer">
-                                    <div class="col-sm-6">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-                                            @Html.TextBoxFor(model => model.Tel, new { @class = "form-control", @placeholder = "Telephone Number"})
-                                        </div>
-                                        @Html.ValidationMessageFor(m => m.Tel, "", new { @class = "text-danger" })
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h5><strong>Contact Details</strong> </h5>
                                     </div>
+                                        <div class="col-sm-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
+                                                @Html.TextBoxFor(model => model.Tel, new { @class = "form-control", @placeholder = "Telephone Number"})
+                                            </div>
+                                            @Html.ValidationMessageFor(m => m.Tel, "", new { @class = "text-danger" })
+                                        </div>
 
-                                    <div class="col-sm-6">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                                            @Html.TextBoxFor(model => model.Fax, new { @class = "form-control", @placeholder = "Fax Number" })
+                                        <div class="col-sm-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                                                @Html.TextBoxFor(model => model.Fax, new { @class = "form-control", @placeholder = "Fax Number" })
+                                            </div>
+                                            @Html.ValidationMessageFor(m => m.Fax, "", new { @class = "text-danger" })
                                         </div>
-                                        @Html.ValidationMessageFor(m => m.Fax, "", new { @class = "text-danger" })
                                     </div>
-                                </div>
 
                                 <div class="row top-buffer">
                                     <div class="col-sm-6">
@@ -136,6 +140,29 @@
                                 </div>
 
                                 <div class="row top-buffer">
+                                    <div class="col-sm-12">
+                                        <h5><strong>Location & Address</strong> </h5>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-plane"></i></span>
+                                            @Html.TextBoxFor(model => model.distance_airport, new { @class = "form-control", @placeholder = "Distance from Airport" })
+                                        </div>
+                                        @Html.ValidationMessageFor(m => m.Website, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+                                            @Html.TextBoxFor(model => model.distance_citycenter, new { @class = "form-control", @placeholder = "Distance from City Center" })
+                                        </div>
+                                        @Html.ValidationMessageFor(m => m.distance_citycenter, "", new { @class = "text-danger" })
+                                    </div>
+
+                                </div>
+
+                                <div class="row top-buffer">
+
                                     <div class="col-sm-12 ">
                                         @Html.TextAreaFor(model => model.HotelAddress, new { @placeholder = "Address", @class = "form-control", style = "min-height:100px" })
                                         @Html.ValidationMessageFor(m => m.HotelAddress, "", new { @class = "text-danger" })
@@ -149,7 +176,7 @@
 
                                         <div class="col-sm-12">
                                             <div class="input-group">
-                                                <span class="input-group-addon"><i class="glyphicon glyphicon-apple"></i></span>
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-cutlery"></i></span>
                                                 @Html.TextBoxFor(model => model.restaurants, new
                                            {
                                                id = "txt_restaurant",
@@ -160,9 +187,9 @@
                                            
                                         </div>
 
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-12 top-buffer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-bed"></i></span>
                                             @Html.TextBoxFor(model => model.rooms, new
                                            {
                                                id = "txt_room",
@@ -175,6 +202,41 @@
 
                                     </div>
                             </div>
+
+                            <!-- TAB 4- Amenities & SightSeeing-->
+                            <div class="tab-pane" id="tab_amenity">
+                                <div class="row top-buffer">
+
+                                    <div class="col-sm-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-lamp"></i></span>
+                                            @Html.TextBoxFor(model => model.amenities, new
+                                           {
+                                               id = "txt_amenities",
+                                               @class = "form-control",
+                                               @placeholder = "Enter Amenities..."
+                                           })
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-sm-12 top-buffer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-eye-open"></i></span>
+                                            @Html.TextBoxFor(model => model.sightseeing, new
+                                           {
+                                               id = "txt_sightseeing",
+                                               @class = "form-control",
+                                               @placeholder = "Enter Sightseeing..."
+                                           })
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
 
 
                         </div>

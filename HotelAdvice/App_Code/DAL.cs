@@ -116,17 +116,28 @@ namespace HotelAdvice.App_Code
 
             db.SaveChanges();
 
-            //Save Restaurants
-            if (hotel.HotelId != 0)
+            //Save Restaurants,Rooms           
+            Save_Restaurants(hotel.restaurants, hotel.HotelId);
+            Save_Rooms(hotel.rooms, hotel.HotelId);
+            Save_Amenities(hotel.amenities, hotel.HotelId);
+            
+
+        }
+
+        private void Save_Restaurants(string restaurants, int HotelId)
+        {
+            //Edit
+            if (HotelId != 0)
             {
-                db.tbl_Hotel_Restaurants.RemoveRange(db.tbl_Hotel_Restaurants.Where(x => x.HotelID == hotel.HotelId));
+                db.tbl_Hotel_Restaurants.RemoveRange(db.tbl_Hotel_Restaurants.Where(x => x.HotelID == HotelId));
                 db.SaveChanges();
             }
 
-            if (hotel.restaurants != null)
+            List<String> temp_list = new List<string>();
+            if (restaurants != null)
             {
-                List<String> lst_restaurants = hotel.restaurants.Split(',').ToList<String>();
-                foreach (string r in lst_restaurants)
+                temp_list = restaurants.Split(',').ToList<String>();
+                foreach (string r in temp_list)
                 {
                     tbl_Restuarant rest = db.tbl_Restaurant.Where(x => x.RestaurantName == r).FirstOrDefault();
                     if (rest == null)
@@ -138,14 +149,81 @@ namespace HotelAdvice.App_Code
 
                     db.tbl_Hotel_Restaurants.Add(new tbl_Hotel_Restaurants()
                     {
-                        Restaurant = rest,
-                        HotelID = hotel.HotelId
+                        RestaurantID = rest.RestaurantID,
+                        HotelID = HotelId
                     });
                     db.SaveChanges();
                 }
 
             }
+        }
 
+        private void Save_Rooms(string rooms, int HotelId)
+        {
+            //Edit
+            if (HotelId != 0)
+            {
+                db.tbl_Hotel_Rooms.RemoveRange(db.tbl_Hotel_Rooms.Where(x => x.HotelID ==HotelId));
+                db.SaveChanges();
+            }
+
+            List<String> temp_list = new List<string>();
+            if (rooms != null)
+            {
+                temp_list = rooms.Split(',').ToList<String>();
+                foreach (string r in temp_list)
+                {
+                    tbl_room_type room = db.tbl_Room_Type.Where(x => x.Room_Type == r).FirstOrDefault();
+                    if (room == null)
+                    {
+                        room = new tbl_room_type() { Room_Type = r };
+                        db.tbl_Room_Type.Add(room);
+                        db.SaveChanges();
+                    }
+
+                    db.tbl_Hotel_Rooms.Add(new tbl_Hotel_Rooms()
+                    {
+                        RoomTypeID = room.RoomTypeID,
+                        HotelID = HotelId
+                    });
+                    db.SaveChanges();
+                }
+
+            }
+        }
+
+        private void Save_Amenities(string amenities, int HotelId)
+        {
+            //Edit
+            if (HotelId != 0)
+            {
+                db.tbl_Hotel_Amenities.RemoveRange(db.tbl_Hotel_Amenities.Where(x => x.HotelID == HotelId));
+                db.SaveChanges();
+            }
+
+            List<String> temp_list = new List<string>();
+            if (amenities != null)
+            {
+                temp_list = amenities.Split(',').ToList<String>();
+                foreach (string r in temp_list)
+                {
+                    tbl_amenity amenity = db.tbl_Amenity.Where(x => x.AmenityName == r).FirstOrDefault();
+                    if (amenity == null)
+                    {
+                        amenity = new tbl_amenity() { AmenityName = r };
+                        db.tbl_Amenity.Add(amenity);
+                        db.SaveChanges();
+                    }
+
+                    db.tbl_Hotel_Amenities.Add(new tbl_hotel_amenity()
+                    {
+                         AmenityID= amenity.AmenityID,
+                        HotelID = HotelId
+                    });
+                    db.SaveChanges();
+                }
+
+            }
         }
 
         public List<HotelViewModel> get_hotels()
@@ -210,16 +288,50 @@ namespace HotelAdvice.App_Code
 
         public List<tbl_Restuarant> get_hotel_restaurants(int hotelID)
         {
-            List<tbl_Restuarant> lst_restaurant = (from r in db.tbl_Hotel_Restaurants
+            List<tbl_Restuarant> lst_restaurant = (from r in db.tbl_Hotel_Restaurants.Where(x=>x.HotelID==hotelID)
                                                   join Rest in db.tbl_Restaurant on r.RestaurantID equals Rest.RestaurantID
-                                                  where r.HotelID==hotelID
-                                                  select Rest)
+                                                   select Rest)
                                                    .OrderBy(r => r.RestaurantName).ToList();
 
             return lst_restaurant;
 
         }
-       
+
+        public List<tbl_room_type> get_roomTypes()
+        {
+            List<tbl_room_type> lst_rooms= db.tbl_Room_Type.Select(r => r)
+                .OrderBy(r => r.Room_Type).ToList();
+
+            return lst_rooms;
+            
+        }
+
+        public List<tbl_room_type> get_hotel_rooms(int hotelID)
+        {
+            List<tbl_room_type> lst_rooms = (from t in db.tbl_Hotel_Rooms.Where(r => r.HotelID == hotelID)
+                                             join r in db.tbl_Room_Type on t.RoomTypeID equals r.RoomTypeID
+                                             select r)
+                                          .OrderBy(x => x.Room_Type).ToList();
+            return lst_rooms;
+        }
+
+        public List<tbl_amenity> get_Amenities()
+        {
+            List<tbl_amenity> lst_amenity = db.tbl_Amenity.Select(r => r)
+                .OrderBy(r => r.AmenityName).ToList();
+
+            return lst_amenity;
+
+        }
+
+        public List<tbl_amenity> get_hotel_amenities(int hotelID)
+        {
+            List<tbl_amenity> lst_amenities = (from h in db.tbl_Hotel_Amenities.Where(r => r.HotelID == hotelID)
+                                             join a in db.tbl_Amenity on h.AmenityID equals a.AmenityID
+                                             select a)
+                                          .OrderBy(x => x.AmenityName).ToList();
+            return lst_amenities;
+        }
         #endregion Hotel
 
         #region Review

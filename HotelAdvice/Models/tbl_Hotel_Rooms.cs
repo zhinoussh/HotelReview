@@ -14,8 +14,8 @@ namespace HotelAdvice.Models
         [Key]
         public int HotelRoomID { get; set; }
 
-        public int HotelID { get; set; }
-        public int RoomTypeID { get; set; }
+        public int? HotelID { get; set; }
+        public int? RoomTypeID { get; set; }
 
         [ForeignKey("HotelID")]
         public virtual tbl_Hotel Hotel{ get; set; }
