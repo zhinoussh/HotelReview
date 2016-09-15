@@ -104,6 +104,7 @@ function SetUp_AddHotel() {
     Set_Restaurants_tag();
     Set_Rooms_tag();
     Set_Amenities_tag();
+    Set_Sightseeing_tag();
 }
 
 function Set_Restaurants_tag()
@@ -200,6 +201,40 @@ function Set_Amenities_tag() {
         typeaheadjs: {
             name: 'amenities',
             source: amenities.ttAdapter(),
+            limit: 10
+        },
+        freeInput: true
+    });
+}
+
+function Set_Sightseeing_tag() {
+
+    var sightseeings = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace,
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+            url: '/Hotel/Get_SightSeeing',
+
+            prepare: function (query, settings) {
+                settings.type = "POST";
+                settings.contentType = "application/json; charset=UTF-8";
+                settings.data = JSON.stringify({ "Prefix": query });
+                return settings;
+            },
+            filter: function (list) {
+                return $.map(list, function (object) {
+                    return object.SightSeeing;
+                });
+            }
+        }
+    });
+
+    sightseeings.initialize();
+
+    $('#txt_sightseeing').tagsinput({
+        typeaheadjs: {
+            name: 'sightseeings',
+            source: sightseeings.ttAdapter(),
             limit: 10
         },
         freeInput: true

@@ -75,6 +75,13 @@ namespace HotelAdvice.Controllers
                 {
                     vm.amenities = string.Join(",", lst_amenity.Select(x => x.AmenityName));
                 }
+
+                //add sightseeings
+                List<tbl_sightseeing> lst_sightseeing = db.get_hotel_sightseeings(HotelId);
+                if (lst_sightseeing.Count > 0)
+                {
+                    vm.sightseeing = string.Join(",", lst_sightseeing.Select(x => x.Sightseeing_Type));
+                }
             }
 
             vm.lst_city = new SelectList(cities, "cityID", "cityName");
@@ -159,7 +166,6 @@ namespace HotelAdvice.Controllers
          }
 
 
-
          [HttpPost]
          public JsonResult Get_Amenities(string Prefix)
          {
@@ -167,6 +173,17 @@ namespace HotelAdvice.Controllers
 
              var result = AmenityList.Where(x => x.AmenityName.ToLower().Contains(Prefix.ToLower()))
                  .Select(x => new { Amenity = x.AmenityName }).ToList();
+
+             return Json(result, JsonRequestBehavior.AllowGet);
+         }
+
+         [HttpPost]
+         public JsonResult Get_SightSeeing(string Prefix)
+         {
+             List<tbl_sightseeing> SightList = db.get_Sightseeing();
+
+             var result = SightList.Where(x => x.Sightseeing_Type.ToLower().Contains(Prefix.ToLower()))
+                 .Select(x => new { Amenity = x.Sightseeing_Type }).ToList();
 
              return Json(result, JsonRequestBehavior.AllowGet);
          }

@@ -224,6 +224,10 @@
     <Compile Include="Migrations\201609150616468_add_TBL_Amenity.Designer.cs">
       <DependentUpon>201609150616468_add_TBL_Amenity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609150701170_add_TBL_Sightseeing.cs" />
+    <Compile Include="Migrations\201609150701170_add_TBL_Sightseeing.Designer.cs">
+      <DependentUpon>201609150701170_add_TBL_Sightseeing.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Config_ProjectDB.cs" />
     <Compile Include="Models\Autocomplete.cs" />
@@ -234,8 +238,10 @@
     <Compile Include="Models\tbl_hotel_amenity.cs" />
     <Compile Include="Models\tbl_Hotel_Restaurants.cs" />
     <Compile Include="Models\tbl_Hotel_Rooms.cs" />
+    <Compile Include="Models\tbl_hotel_sightseeing.cs" />
     <Compile Include="Models\tbl_Restuarant.cs" />
     <Compile Include="Models\tbl_room_type.cs" />
+    <Compile Include="Models\tbl_sightseeing.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="ViewModels\CityViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
@@ -447,6 +453,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609150616468_add_TBL_Amenity.resx">
       <DependentUpon>201609150616468_add_TBL_Amenity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609150701170_add_TBL_Sightseeing.resx">
+      <DependentUpon>201609150701170_add_TBL_Sightseeing.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

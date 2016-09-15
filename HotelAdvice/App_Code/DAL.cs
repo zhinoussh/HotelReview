@@ -120,6 +120,7 @@ namespace HotelAdvice.App_Code
             Save_Restaurants(hotel.restaurants, hotel.HotelId);
             Save_Rooms(hotel.rooms, hotel.HotelId);
             Save_Amenities(hotel.amenities, hotel.HotelId);
+            Save_Sighseeings(hotel.sightseeing, hotel.HotelId);
             
 
         }
@@ -218,6 +219,40 @@ namespace HotelAdvice.App_Code
                     db.tbl_Hotel_Amenities.Add(new tbl_hotel_amenity()
                     {
                          AmenityID= amenity.AmenityID,
+                        HotelID = HotelId
+                    });
+                    db.SaveChanges();
+                }
+
+            }
+        }
+
+        private void Save_Sighseeings(string sightseeing, int HotelId)
+        {
+            //Edit
+            if (HotelId != 0)
+            {
+                db.tbl_Hotel_Sightseeings.RemoveRange(db.tbl_Hotel_Sightseeings.Where(x => x.HotelID == HotelId));
+                db.SaveChanges();
+            }
+
+            List<String> temp_list = new List<string>();
+            if (sightseeing != null)
+            {
+                temp_list = sightseeing.Split(',').ToList<String>();
+                foreach (string r in temp_list)
+                {
+                    tbl_sightseeing sight = db.tbl_Sightseeing.Where(x => x.Sightseeing_Type == r).FirstOrDefault();
+                    if (sight == null)
+                    {
+                        sight = new tbl_sightseeing() { Sightseeing_Type = r };
+                        db.tbl_Sightseeing.Add(sight);
+                        db.SaveChanges();
+                    }
+
+                    db.tbl_Hotel_Sightseeings.Add(new tbl_hotel_sightseeing()
+                    {
+                        SightseeingID = sight.SightseeingID,
                         HotelID = HotelId
                     });
                     db.SaveChanges();
@@ -332,6 +367,27 @@ namespace HotelAdvice.App_Code
                                           .OrderBy(x => x.AmenityName).ToList();
             return lst_amenities;
         }
+
+
+
+        public List<tbl_sightseeing> get_Sightseeing()
+        {
+            List<tbl_sightseeing> lst_sightseeing = db.tbl_Sightseeing.Select(r => r)
+                .OrderBy(r => r.Sightseeing_Type).ToList();
+
+            return lst_sightseeing;
+
+        }
+
+        public List<tbl_sightseeing> get_hotel_sightseeings(int hotelID)
+        {
+            List<tbl_sightseeing> lst_sightseeing = (from h in db.tbl_Hotel_Sightseeings.Where(r => r.HotelID == hotelID)
+                                             join s in db.tbl_Sightseeing on h.SightseeingID equals s.SightseeingID
+                                             select s)
+                                          .OrderBy(x => x.Sightseeing_Type).ToList();
+            return lst_sightseeing;
+        }
+        
         #endregion Hotel
 
         #region Review

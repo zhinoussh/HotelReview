@@ -10,7 +10,6 @@ namespace HotelAdvice.Models
     {
         public tbl_room_type()
         {
-            HotelRests = new HashSet<tbl_Hotel_Restaurants>();
             HotelRooms = new HashSet<tbl_Hotel_Rooms>();
         }
        
@@ -20,7 +19,6 @@ namespace HotelAdvice.Models
         [StringLength(50)]
         public string Room_Type { get; set; }
 
-        public virtual ICollection<tbl_Hotel_Restaurants> HotelRests { get; set; }
         public virtual ICollection<tbl_Hotel_Rooms> HotelRooms { get; set; }
     }
 }
