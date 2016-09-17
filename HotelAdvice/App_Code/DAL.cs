@@ -263,15 +263,14 @@ namespace HotelAdvice.App_Code
 
         public List<HotelViewModel> get_hotels()
         {
-            List<HotelViewModel> lst_hotel = (from h in db.tbl_Hotel
-                                             join c in db.tbl_city on h.CityId equals c.CityId
-                                            select new HotelViewModel
-                                            {
-                                                HotelId  = h.HotelId,
-                                                HotelName = h.HotelName,
-                                                CityName=c.CityName,
-                                                HotelStars = h.HotelStars
-                                            }).OrderBy(x => x.HotelName).ToList();
+            List<HotelViewModel> lst_hotel = db.tbl_Hotel.Join(db.tbl_city, h => h.CityId, c => c.CityId, (hotel, city) =>
+                new HotelViewModel
+                {
+                    HotelId = hotel.HotelId,
+                    HotelName = hotel.HotelName,
+                    CityName = city.CityName,
+                    HotelStars = hotel.HotelStars
+                }).ToList();
 
             return lst_hotel;
 

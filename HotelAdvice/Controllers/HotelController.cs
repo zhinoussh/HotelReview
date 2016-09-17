@@ -16,18 +16,40 @@ namespace HotelAdvice.Controllers
     
     public class HotelController : Controller
     {
-        private const int defaultPageSize = 5;
+        private const int defaultPageSize = 10;
         DAL db = new DAL();
 
         #region Hotel
 
         // GET: Hotel
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page,string filter=null)
         {
-            int currentPageIndex = page.HasValue ? page.Value : 1;
+            ViewBag.filter = filter;
 
+            int currentPageIndex = page.HasValue ? page.Value : 1;
             List<HotelViewModel> lst_hotels = db.get_hotels();
-            IPagedList paged_list = lst_hotels.ToPagedList(currentPageIndex, defaultPageSize);
+            if (filter != null)
+            {
+                filter= filter.ToLower();
+                lst_hotels = lst_hotels.Where(x =>
+                                          (x.HotelName.ToLower().Contains(filter))
+                                          ||
+                                          (x.CityName.ToLower().Contains(filter))
+                                          ||
+                                          (!String.IsNullOrEmpty(x.Description) && x.Description.ToLower().Contains(filter))).ToList();
+            }
+
+            //sort and set row number
+            lst_hotels = lst_hotels.OrderBy(x => x.HotelName).Select((x, index) => new HotelViewModel
+            {
+                    RowNum=index+1,
+                    HotelId = x.HotelId,
+                    HotelName = x.HotelName,
+                    CityName = x.CityName,
+                    HotelStars = x.HotelStars
+                }).ToList();
+
+           IPagedList paged_list = lst_hotels.ToPagedList(currentPageIndex, defaultPageSize);
 
             return Request.IsAjaxRequest()
                 ? (ActionResult)PartialView("_PartialHotelList", paged_list)
