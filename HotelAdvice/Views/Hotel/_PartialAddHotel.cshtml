@@ -253,6 +253,8 @@
         <!-- /.modal-dialog -->
     </div>
     @Html.HiddenFor(model => model.HotelId, new { id = "hd_hotel_id" })
+    @Html.HiddenFor(model => model.CurrentPage)
+    @Html.HiddenFor(model => model.CurrentFilter)
 }
 
 

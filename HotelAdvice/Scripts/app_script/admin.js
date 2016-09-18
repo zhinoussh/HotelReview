@@ -50,7 +50,8 @@ var Success_AjaxReturn = function (result) {
     
     if (result.msg) {
         localStorage.setItem("msg", result.msg)
-        location.reload();
+        // location.reload();
+        location.href = "Index?page=" + result.cur_pg + "&filter=" + result.filter;
     }
     
 }

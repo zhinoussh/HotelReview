@@ -30,7 +30,7 @@
                         <td class="col-sm-3 text-center" data-defaultsign="AZ">@item.CityName</td>
                         <td class="col-sm-3 text-center" data-defaultsign="_19">@item.HotelStars</td>
                         <td >
-                            <a data-toggle="tooltip" data-url="/Hotel/ADD_New_Hotel/@item.HotelId" title="Edit" class="glyphicon glyphicon-edit actionButton"></a>
+                            <a data-toggle="tooltip" data-url="/Hotel/ADD_New_Hotel/@item.HotelId?page=@Request.QueryString["page"]&filter=@Request.QueryString["filter"]" title="Edit" class="glyphicon glyphicon-edit actionButton"></a>
                             <a data-toggle="tooltip" data-url="/Hotel/Delete_Hotel/@item.HotelId" title="Delete" class="glyphicon glyphicon-trash actionButton"></a>
                             <a data-toggle="tooltip" data-url="/Hotel/AddImage/@item.HotelId" title="AddImage" class="glyphicon glyphicon-picture actionButton"></a>
                         </td>

@@ -16,7 +16,7 @@ namespace HotelAdvice.Controllers
     
     public class HotelController : Controller
     {
-        private const int defaultPageSize = 10;
+        private const int defaultPageSize = 2;
         DAL db = new DAL();
 
         #region Hotel
@@ -24,11 +24,11 @@ namespace HotelAdvice.Controllers
         // GET: Hotel
         public ActionResult Index(int? page,string filter=null)
         {
-            ViewBag.filter = filter;
 
+            ViewBag.filter = filter;
             int currentPageIndex = page.HasValue ? page.Value : 1;
             List<HotelViewModel> lst_hotels = db.get_hotels();
-            if (filter != null)
+            if (!String.IsNullOrEmpty(filter))
             {
                 filter= filter.ToLower();
                 lst_hotels = lst_hotels.Where(x =>
@@ -57,7 +57,7 @@ namespace HotelAdvice.Controllers
         }
 
         [HttpGet]
-        public ActionResult ADD_New_Hotel(int? id)
+        public ActionResult ADD_New_Hotel(int? id, int? page,string filter=null)
         {
             HotelViewModel vm = new HotelViewModel();
             int HotelId = Int32.Parse(id == null ? "0" : id + "");
@@ -106,6 +106,8 @@ namespace HotelAdvice.Controllers
                 }
             }
 
+            vm.CurrentPage = page.HasValue ? page.Value : 1;
+            vm.CurrentFilter = !String.IsNullOrEmpty(filter) ? filter.ToString() : "";
             vm.lst_city = new SelectList(cities, "cityID", "cityName");
 
             return PartialView("_PartialAddHotel", vm);
@@ -131,7 +133,7 @@ namespace HotelAdvice.Controllers
                     //filename = "main" + ext;
                     file.SaveAs(hotel_dir + "\\main.jpg");
                 }
-                return Json(new { msg = "The Hotel inserted successfully."});
+                return Json(new { msg = "The Hotel inserted successfully.",cur_pg=Hotel.CurrentPage,filter=Hotel.CurrentFilter+""});
             }
             else
                 return PartialView("_PartialAddHotel", Hotel);

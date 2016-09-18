@@ -12,6 +12,8 @@ namespace HotelAdvice.ViewModels
     {
         public int HotelId { get; set; }
         public int RowNum { get; set; }
+        public int CurrentPage { get; set; }
+        public string CurrentFilter { get; set; }
        
         [StringLength(100, ErrorMessage = "max length has been exceeded.")]
         [Required( ErrorMessage = "This field is required.")]
