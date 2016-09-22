@@ -32,9 +32,9 @@ namespace HotelAdvice.Models
         public string Tel { get; set; }
         [StringLength(20)]
         public string Fax { get; set; }
-        [StringLength(20)]
+        [StringLength(50)]
         public string Email { get; set; }
-        [StringLength(20)]
+        [StringLength(50)]
         public string Website { get; set; }
         public int HotelStars { get; set; }
 

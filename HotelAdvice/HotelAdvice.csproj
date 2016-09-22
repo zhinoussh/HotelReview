@@ -236,6 +236,10 @@
     <Compile Include="Migrations\201609201016009_alter_TBL_hotelPhoto.Designer.cs">
       <DependentUpon>201609201016009_alter_TBL_hotelPhoto.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609220941146_alter_TBL_HOTEL_columns.cs" />
+    <Compile Include="Migrations\201609220941146_alter_TBL_HOTEL_columns.Designer.cs">
+      <DependentUpon>201609220941146_alter_TBL_HOTEL_columns.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Config_ProjectDB.cs" />
     <Compile Include="Models\Autocomplete.cs" />
@@ -480,6 +484,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609201016009_alter_TBL_hotelPhoto.resx">
       <DependentUpon>201609201016009_alter_TBL_hotelPhoto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609220941146_alter_TBL_HOTEL_columns.resx">
+      <DependentUpon>201609220941146_alter_TBL_HOTEL_columns.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

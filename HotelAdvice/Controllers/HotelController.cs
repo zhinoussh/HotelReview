@@ -65,7 +65,7 @@ namespace HotelAdvice.Controllers
 
             List<CityViewModel> cities = db.get_cities();
             vm.CityId = cities.First().cityID;
-            vm.imgPath = "/images/empty.gif";
+            vm.imgPath = "/images/empty.gif?" + DateTime.Now.ToString("ddMMyyyyhhmmsstt") ;
             //this is edit
             if (HotelId != 0)
             {
@@ -73,9 +73,9 @@ namespace HotelAdvice.Controllers
                
                 string path= "/Upload/" + vm.HotelName + "/main.jpg";
                 if (System.IO.File.Exists(Server.MapPath(@path)))
-                    vm.imgPath = path;    
+                    vm.imgPath = path+"?"+ DateTime.Now.ToString("ddMMyyyyhhmmsstt");
                 else
-                    vm.imgPath = "/images/empty.gif";   
+                    vm.imgPath = "/images/empty.gif?"+ DateTime.Now.ToString("ddMMyyyyhhmmsstt");  
 
                 //add restaurants
                 List<tbl_Restuarant> lst_rest=db.get_hotel_restaurants(HotelId);

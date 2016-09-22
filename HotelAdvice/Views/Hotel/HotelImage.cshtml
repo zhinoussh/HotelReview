@@ -18,8 +18,15 @@
 </div>
 
 
-<form enctype="multipart/form-data">
-  
+@using (Ajax.BeginForm("", "", null, new AjaxOptions
+{
+    HttpMethod = "Post"
+    ,
+    InsertionMode = InsertionMode.ReplaceWith
+
+}, new { enctype = "multipart/form-data" ,id="frm_add_hotel"}))
+{
+
     <div class="col-sm-12 top-buffer form-group">
       
             @Html.TextBoxFor(model => model.image, new { id = "inputimages", name = "inputimages[]", type = "file"
@@ -33,7 +40,7 @@
     <div class="col-sm-12 top-buffer">
 
         @{
-            if (Model.uploaded_images != null)
+            if (Model.uploaded_images != null && Model.uploaded_images.Length>0)
             {
                 <div class="panel panel-default">
                     <table class="table table-bordred table-hover table-condensed table-striped">
@@ -80,6 +87,6 @@
         </div>
 
         @Html.HiddenFor(model => model.HotelId, new { id = "hd_hotel_id" })
-</form>
+}
 
 <div id="MyModal"></div>

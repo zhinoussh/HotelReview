@@ -79,8 +79,12 @@ namespace HotelAdvice.App_Code
             tbl_Hotel new_obj;
 
             if (hotel.HotelId == 0)
-            {
                 new_obj = new tbl_Hotel();
+            else
+                new_obj = db.tbl_Hotel.Find(hotel.HotelId);
+
+            if (new_obj != null)
+            {
                 new_obj.HotelName = hotel.HotelName;
                 new_obj.CityId = hotel.CityId;
                 new_obj.Description = hotel.Description;
@@ -92,28 +96,14 @@ namespace HotelAdvice.App_Code
                 new_obj.Website = hotel.Website;
                 new_obj.Email = hotel.Email;
                 new_obj.HotelAddress = hotel.HotelAddress;
+                new_obj.distance_airport = hotel.distance_airport;
+                new_obj.distance_citycenter = hotel.distance_citycenter;
+            }
 
+            //this is insert
+            if (hotel.HotelId == 0)
                 db.tbl_Hotel.Add(new_obj);
-            }
-            else
-            {
-                new_obj = db.tbl_Hotel.Find(hotel.HotelId);
-                if (new_obj != null)
-                {
-                    new_obj.HotelName = hotel.HotelName;
-                    new_obj.CityId = hotel.CityId;
-                    new_obj.Description = hotel.Description;
-                    new_obj.HotelStars = hotel.HotelStars;
-                    new_obj.checkin = hotel.checkin;
-                    new_obj.checkout = hotel.checkout;
-                    new_obj.Tel = hotel.Tel;
-                    new_obj.Fax = hotel.Fax;
-                    new_obj.Website = hotel.Website;
-                    new_obj.Email = hotel.Email;
-                    new_obj.HotelAddress = hotel.HotelAddress;
-                }
-            }
-
+            
             db.SaveChanges();
 
             //Save Restaurants,Rooms           
@@ -293,7 +283,9 @@ namespace HotelAdvice.App_Code
                                               Fax = h.Fax,
                                               Website = h.Website,
                                               Email = h.Email,
-                                              HotelAddress = h.HotelAddress
+                                              HotelAddress = h.HotelAddress,
+                                              distance_airport=h.distance_airport,
+                                              distance_citycenter=h.distance_citycenter
                                           }).FirstOrDefault();
                                      
            
