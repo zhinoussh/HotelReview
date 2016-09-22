@@ -47,7 +47,7 @@ namespace HotelAdvice.App_Code
                     cityID = c.CityId,
                     cityName = c.CityName,
                     cityAttractions = c.CityAttractions
-                }).OrderBy(c=>c.cityName).ToList();
+                }).ToList();
 
             return lst_city;
             
@@ -278,8 +278,7 @@ namespace HotelAdvice.App_Code
         
         public HotelViewModel get_hotel_byId(int id)
         {
-           // List<string> hotel_prop = new List<string>();
-            HotelViewModel hotel_prop = (from h in db.tbl_Hotel
+           HotelViewModel hotel_prop = (from h in db.tbl_Hotel
                                          where h.HotelId==id
                                           select new HotelViewModel
                                           {
@@ -367,8 +366,6 @@ namespace HotelAdvice.App_Code
             return lst_amenities;
         }
 
-
-
         public List<tbl_sightseeing> get_Sightseeing()
         {
             List<tbl_sightseeing> lst_sightseeing = db.tbl_Sightseeing.Select(r => r)
@@ -387,6 +384,47 @@ namespace HotelAdvice.App_Code
             return lst_sightseeing;
         }
         
+        public string save_hotel_image(int hotel_id)
+        {
+            string file_name="";
+            string hotel_name=db.tbl_Hotel.Where(x=>x.HotelId==hotel_id).Select(x=>x.HotelName).FirstOrDefault();
+            if(hotel_name!=null)
+            {
+               tbl_Hotel_Photo last_photo= db.tbl_Hotel_Photo.Where(x => x.HotelID == hotel_id).OrderByDescending(x => x.PhotoID).FirstOrDefault();
+               if (last_photo!=null)
+               {
+                   int index_from = last_photo.photo_name.LastIndexOf('_') + 1;
+                   int index_to =  last_photo.photo_name.LastIndexOf('.');
+                   int photo_num = Int32.Parse(last_photo.photo_name.Substring(index_from, index_to - index_from)) + 1;
+                   file_name = hotel_name + "_" + photo_num + ".jpg";
+                  
+               }
+               else
+                   file_name = hotel_name + "_1.jpg";
+
+               db.tbl_Hotel_Photo.Add(new tbl_Hotel_Photo
+               {
+                   photo_name = file_name,
+                   HotelID = hotel_id
+               });
+               db.SaveChanges();
+            }
+
+            return file_name;
+        }
+
+
+
+        public void delete_hotel_image(string photo_name)
+        {
+            tbl_Hotel_Photo c = db.tbl_Hotel_Photo.Where(x=>x.photo_name==photo_name).FirstOrDefault();
+            if (c != null)
+            {
+                db.tbl_Hotel_Photo.Remove(c);
+                db.SaveChanges();
+            }
+        }
+
         #endregion Hotel
 
         #region Review

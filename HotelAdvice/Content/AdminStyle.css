@@ -4,7 +4,12 @@
 font-size:9pt;
 }
 
-//*****************MODAL***************/
+/*****************MODAL***************/
+.modal-header-photo {
+height:30px;
+padding:5px;
+background-color:#eee
+}
 .modal-title {
     font-size   :12pt;
 
@@ -49,6 +54,10 @@ font-size:9pt;
     -moz-border-radius-topright: 5px;
      border-top-left-radius: 5px;
      border-top-right-radius: 5px;
+}
+
+#modal_delete_image {
+	margin-top:100px;
 }
 
 /****************GLyph Icons*****************/

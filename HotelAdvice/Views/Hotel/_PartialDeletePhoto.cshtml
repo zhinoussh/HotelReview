@@ -1,23 +1,24 @@
-﻿@model HotelAdvice.ViewModels.HotelViewModel
+﻿
+@model HotelAdvice.ViewModels.HotelImagesViewModel
 
 @{
     Layout = null;
 }
 
 
-@using (Ajax.BeginForm("Delete_Hotel", "Hotel", new AjaxOptions
+@using (Ajax.BeginForm("Delete_HotelPhoto", "Hotel", new AjaxOptions
 {
     HttpMethod = "Post"
     ,
-    OnSuccess = "Success_AjaxReturn"
+    OnSuccess = "Success_AjaxReturn_deleteImage"
     ,
     InsertionMode = InsertionMode.ReplaceWith
 }))
 {
     @Html.AntiForgeryToken()
 
-    <div class="modal fade modal_main" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-        <div class="modal-dialog">
+    <div id="modal_delete_image" class="modal fade modal_main" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
             <div class="modal-content">
 
                 <div class="modal-header modal-header-danger">
@@ -40,9 +41,7 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
-    @Html.HiddenFor(model => model.HotelId, new { id = "hd_hotel_id" })
-    @Html.HiddenFor(model => model.CurrentPage)
-    @Html.HiddenFor(model => model.CurrentFilter)
+    @Html.HiddenFor(model => model.PhotoName)
 }
 
 

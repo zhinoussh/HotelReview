@@ -25,8 +25,8 @@
                         <td class="col-sm-2 cityName" data-defaultsign="AZ">@item.cityName</td>
                         <td class="col-sm-9">@item.cityAttractions</td>
                         <td>
-                            <a data-toggle="tooltip" data-url="/City/ADD_New_City/@item.cityID" title="Edit" class="glyphicon glyphicon-edit actionButton"></a>
-                            <a data-toggle="tooltip" data-url="/City/Delete_City/@item.cityID" title="Delete" class="glyphicon glyphicon-trash actionButton"></a>
+                            <a data-toggle="tooltip" data-url="/City/ADD_New_City/@item.cityID?page=@Request.QueryString["page"]&filter=@Request.QueryString["filter"]" title="Edit" class="glyphicon glyphicon-edit editButton"></a>
+                            <a data-toggle="tooltip" data-url="/City/Delete_City/@item.cityID?page=@Request.QueryString["page"]&filter=@Request.QueryString["filter"]" title="Delete" class="glyphicon glyphicon-trash actionButton"></a>
                             <a data-toggle="tooltip" data-url="/City/CityDescription/@item.cityID" title="FullShow" class="glyphicon glyphicon-search actionButton"></a>
                         </td>
                     </tr>

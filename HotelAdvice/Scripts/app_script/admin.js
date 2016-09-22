@@ -17,25 +17,49 @@
         return false;
     });
 
-    $("#btn_add_new").on('click', showModal);
+    $("#btn_add_new").on('click', showAddModal);
   
+    //SetUp_AddImages
+    $("#inputimages").fileinput({
+        uploadAsync: false,
+        uploadUrl: '/Hotel/AddImage/',
+        maxFilePreviewSize: 10240,
+        dropZoneEnabled: false,
+        uploadExtraData: { hotel_ID: $('#hd_hotel_id').val() }
+
+
+    }).on('filebatchuploadsuccess', function (event, data) {
+        //var form = data.form, files = data.files, extra = data.extra,
+        //    response = data.response, reader = data.reader;
+        localStorage.setItem("msg", "File uploaded successfully.");
+        location.reload();
+    });
    
 });
 
+$(document).on("click", ".editButton", showAddModal);
 $(document).on("click", ".actionButton", showModal);
 
-function showModal() {
+
+function showAddModal() {
     
     var url = $(this).data('url');
 
     $.get(url, function (data) {
         $("#MyModal").html(data).find('.modal_main').modal('show');
         reparseform();
+        SetUp_AddHotel();        
+    });
+}
 
-        //only do for add hotel dialog
-        if (url = '/Hotel/ADD_New_Hotel') {
-            SetUp_AddHotel();            
-        }
+function showModal() {
+
+    var url = $(this).data('url');
+
+    $.get(url, function (data) {
+        $("#MyModal").html(data).find('.modal_main').modal('show');
+        reparseform();
+       
     });
 }
 
@@ -49,13 +73,23 @@ var reparseform = function () {
 var Success_AjaxReturn = function (result) {
     
     if (result.msg) {
-        localStorage.setItem("msg", result.msg)
+        localStorage.setItem("msg", result.msg);
         // location.reload();
         location.href = "Index?page=" + result.cur_pg + "&filter=" + result.filter;
     }
     
 }
 
+
+var Success_AjaxReturn_deleteImage = function (result) {
+
+    if (result.msg) {
+        localStorage.setItem("msg", result.msg);
+        location.reload();
+        
+    }
+
+}
 function SetUp_AddHotel() {
     var img_path = $('#img_hotel').val();
     $("#image_hotel").fileinput({
@@ -107,6 +141,8 @@ function SetUp_AddHotel() {
     Set_Amenities_tag();
     Set_Sightseeing_tag();
 }
+
+
 
 function Set_Restaurants_tag()
 {

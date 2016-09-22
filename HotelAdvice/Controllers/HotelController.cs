@@ -16,7 +16,7 @@ namespace HotelAdvice.Controllers
     
     public class HotelController : Controller
     {
-        private const int defaultPageSize = 2;
+        private const int defaultPageSize = 10;
         DAL db = new DAL();
 
         #region Hotel
@@ -129,8 +129,6 @@ namespace HotelAdvice.Controllers
                     if (!Directory.Exists(hotel_dir))
                         Directory.CreateDirectory(hotel_dir);
                     var filename = file.FileName;
-                    //var ext = filename.Substring(filename.LastIndexOf('.'));
-                    //filename = "main" + ext;
                     file.SaveAs(hotel_dir + "\\main.jpg");
                 }
                 return Json(new { msg = "The Hotel inserted successfully.",cur_pg=Hotel.CurrentPage,filter=Hotel.CurrentFilter+""});
@@ -148,26 +146,99 @@ namespace HotelAdvice.Controllers
         }
 
         [HttpGet]
-        public ActionResult Delete_Hotel(int id)
+        public ActionResult Delete_Hotel(int id, int? page, string filter = null)
         {
             HotelViewModel vm = new HotelViewModel();
             vm.HotelId = id;
-
+            vm.CurrentPage = page.HasValue ? page.Value : 1;
+            vm.CurrentFilter = !String.IsNullOrEmpty(filter) ? filter.ToString() : "";
+           
             return PartialView("_PartialDeleteHotel", vm);
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete_Hotel(HotelViewModel Hotel)
         {
             db.delete_hotel(Hotel.HotelId);
+           return Json(new { msg = "Row is deleted successfully!", cur_pg = Hotel.CurrentPage, filter = Hotel.CurrentFilter + "" });
+        }
+
+         #endregion Hotel
+
+         #region Hotel_Image
+       
+        [HttpGet]
+        public ActionResult HotelImage(int id)
+        {
+            HotelImagesViewModel vm = new HotelImagesViewModel();
+            vm.HotelName=db.get_hotel_byId(id).HotelName;
+            string hotel_dir = Server.MapPath(@"~\Upload\" + vm.HotelName);
+            if(Directory.Exists(hotel_dir))
+                vm.uploaded_images = Directory.GetFiles(hotel_dir).Select(x => Path.GetFileName(x)).Where(x=>x!="main.jpg").ToArray();
+            vm.HotelId = id;
+
+            return View(vm);
+        }
+
+
+        [HttpPost]
+        public ActionResult AddImage(HotelImagesViewModel vm, int hotel_ID)
+        {
+            HttpPostedFileBase item = vm.image;
+
+            if (item != null && hotel_ID != 0)
+            {
+                string file_name = db.save_hotel_image(hotel_ID);
+                if (!String.IsNullOrEmpty(file_name))
+                {
+                    string hotel_name = file_name.Substring(0, file_name.LastIndexOf('_'));
+
+                    string hotel_dir = Server.MapPath(@"~\Upload\" + hotel_name);
+                    if (!Directory.Exists(hotel_dir))
+                        Directory.CreateDirectory(hotel_dir);
+
+                    item.SaveAs(hotel_dir + "\\" + file_name);
+                }
+            }
+
+
+            return Json(new { msg = "images were uploaded successfully!" });
+        }
+
+        [HttpGet]
+        public ActionResult Delete_HotelPhoto(string photo_name)
+        {
+            HotelImagesViewModel vm = new HotelImagesViewModel();
+            vm.PhotoName = photo_name;
+
+            return PartialView("_PartialDeletePhoto", vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete_HotelPhoto(HotelImagesViewModel photo)
+        {
+            db.delete_hotel_image(photo.PhotoName);
+            string file_path = Server.MapPath(@"\Upload\" + photo.PhotoName.Substring(0, photo.PhotoName.LastIndexOf('_')) + "\\" + photo.PhotoName);
+            if (System.IO.File.Exists(file_path))
+                System.IO.File.Delete(file_path);
+
             return Json(new { msg = "Row is deleted successfully!" });
         }
-        #endregion Hotel
+
+        public ActionResult Show_HotelPhoto(string photo_name)
+        {
+            HotelImagesViewModel vm = new HotelImagesViewModel();
+            vm.PhotoName =  photo_name.Substring(0, photo_name.LastIndexOf('_')) + "\\" + photo_name;
+
+            return PartialView("_PartialShowImage", vm);
+        }
+
+         #endregion Hotel_Image
 
 
-         [HttpPost]
+        [HttpPost]
         public JsonResult Get_Restaurants(string Prefix)
         {
             List<tbl_Restuarant> restList = db.get_restaurants();
