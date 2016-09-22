@@ -228,6 +228,14 @@
     <Compile Include="Migrations\201609150701170_add_TBL_Sightseeing.Designer.cs">
       <DependentUpon>201609150701170_add_TBL_Sightseeing.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609200737167_add_TBL_hotelPhoto.cs" />
+    <Compile Include="Migrations\201609200737167_add_TBL_hotelPhoto.Designer.cs">
+      <DependentUpon>201609200737167_add_TBL_hotelPhoto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609201016009_alter_TBL_hotelPhoto.cs" />
+    <Compile Include="Migrations\201609201016009_alter_TBL_hotelPhoto.Designer.cs">
+      <DependentUpon>201609201016009_alter_TBL_hotelPhoto.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Config_ProjectDB.cs" />
     <Compile Include="Models\Autocomplete.cs" />
@@ -236,6 +244,7 @@
     <Compile Include="Models\tbl_City.cs" />
     <Compile Include="Models\tbl_Hotel.cs" />
     <Compile Include="Models\tbl_hotel_amenity.cs" />
+    <Compile Include="Models\tbl_Hotel_Photo.cs" />
     <Compile Include="Models\tbl_Hotel_Restaurants.cs" />
     <Compile Include="Models\tbl_Hotel_Rooms.cs" />
     <Compile Include="Models\tbl_hotel_sightseeing.cs" />
@@ -246,6 +255,7 @@
     <Compile Include="ViewModels\CityViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="ViewModels\HotelImagesViewModel.cs" />
     <Compile Include="ViewModels\HotelViewModel.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -425,6 +435,9 @@
     <Content Include="Views\Hotel\_PartialHotelList.cshtml" />
     <Content Include="Views\Hotel\_PartialAddHotel.cshtml" />
     <Content Include="Views\Hotel\_PartialDeleteHotel.cshtml" />
+    <Content Include="Views\Hotel\_PartialDeletePhoto.cshtml" />
+    <Content Include="Views\Hotel\_PartialShowImage.cshtml" />
+    <Content Include="Views\Hotel\HotelImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -461,6 +474,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609150701170_add_TBL_Sightseeing.resx">
       <DependentUpon>201609150701170_add_TBL_Sightseeing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609200737167_add_TBL_hotelPhoto.resx">
+      <DependentUpon>201609200737167_add_TBL_hotelPhoto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609201016009_alter_TBL_hotelPhoto.resx">
+      <DependentUpon>201609201016009_alter_TBL_hotelPhoto.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
