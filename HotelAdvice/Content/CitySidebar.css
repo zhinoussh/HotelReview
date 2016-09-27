@@ -1,0 +1,152 @@
+﻿.city_sidebar {
+margin:0;
+padding:0;
+}
+ .city_sidebar li {
+   height:40px;
+   width:220px;
+   background: green;
+   display: block;
+   font-family: 'Century Gothic';
+   position: relative;
+   z-index: 100;
+   margin:1px 0;
+   -webkit-animation: menu 2s;
+   -webkit-animation-fill-mode: forwards;
+   -moz-animation: menu 2s; 
+   -moz-animation-fill-mode: forwards; 
+   -ms-animation: menu 2s; 
+   -ms-animation-fill-mode: forwards; 
+   animation: menu 2s; /* Safari and Chrome */
+   animation-fill-mode: forwards; 
+   opacity: 0;
+   direction:rtl;
+   border-radius:8px;
+   float:right
+}
+
+.city_sidebar li:hover {
+   cursor: pointer;
+  }
+  
+  
+.city_sidebar li:before {
+    display: block;
+    height: 40px;
+    width: 30px;
+    content: "\e079";
+   font-family: 'Glyphicons Halflings';
+    font-size: 15px;
+    position: relative;
+    left: 0;
+    top: 0;
+    border-left: rgba(255,255,255,0.2) 3px solid;
+    text-align: center;
+    color: #fff;
+    text-shadow: rgba(0,0,0,0.2) 1px 1px 1px;
+    z-index: 200;
+    line-height: 2.8em;
+  }
+    
+  
+ .city_sidebar li a {
+    
+     color: #fff;
+     display: block;
+     height: 40px;
+     width: 220px;
+     text-align:center;
+     z-index: 100;
+     text-decoration: none;
+     text-transform: uppercase;
+     font-size:18px;
+     font-weight:bold;
+     line-height: 2.2em;
+     position: absolute;
+     top: 0;
+     left: 0;
+     -webkit-transition: all 0.1s ease-in-out;
+     -moz-transition: all 0.1s ease-in-out;
+     -ms-transition: all 0.1s ease-in-out;
+     transition: all 0.1s ease-in-out;
+   border-radius:8px;
+
+}
+
+    
+
+  .city_sidebar li:nth-child(even) a {
+    background: #A49CFF;
+  }
+
+  .city_sidebar li:nth-child(odd) a {
+    background: #7E74FD;
+  }
+
+
+ .city_sidebar li a:hover {
+   opacity: 1.0;
+   padding-right: 3.0em;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+}
+
+/*.city_sidebar li:nth-child(2) {
+   -webkit-animation-delay: 0.4s;
+   -moz-animation-delay: 0.4s;
+   -ms-animation-delay: 0.4s;
+   animation-delay: 0.4s;
+}
+
+.city_sidebar li:nth-child(3) {
+   -webkit-animation-delay: 0.8s; 
+   -moz-animation-delay: 0.8s;
+   -ms-animation-delay: 0.8s;
+   animation-delay: 0.8s;
+}
+
+.city_sidebar li:nth-child(4) {
+   -webkit-animation-delay: 1.2s;
+   -moz-animation-delay: 1.2s; 
+   -ms-animation-delay: 1.2s; 
+   animation-delay: 1.2s; 
+}
+
+.city_sidebar li:nth-child(5) {
+   -webkit-animation-delay: 1.6s;
+   -moz-animation-delay: 1.6s;
+   -ms-animation-delay: 1.6s;
+   animation-delay: 1.6s;
+}
+     */
+@-webkit-keyframes menu {
+  0%   {opacity: 0;}
+  25%  {opacity: 0.7;}
+  50%  {opacity: 1;}
+  100% {opacity: 1;}
+}
+
+@-moz-keyframes menu {
+  0%   {opacity: 0;}
+  25%  {opacity: 0.7;}
+  50%  {opacity: 1;}
+  100% {opacity: 1;}
+}
+
+@-ms-keyframes menu {
+  0%   {opacity: 0;}
+  25%  {opacity: 0.7;}
+  50%  {opacity: 1;}
+  100% {opacity: 1;}
+}
+
+@keyframes menu {
+  0%   {opacity: 0;}
+  25%  {opacity: 0.7;}
+  50%  {opacity: 1;}
+  100% {opacity: 1;}
+}
+
+   

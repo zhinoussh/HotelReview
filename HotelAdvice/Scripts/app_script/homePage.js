@@ -1,5 +1,8 @@
 ﻿$(document).ready(function () {
 
+    $("#slider_guest_review").bootstrapSlider({
+        min: 0, max: 5, value:[0,5],step:0.5, focus: true
+    });
 
     $("#txt_dest_name").autocomplete({
         source: function (request, response) {
@@ -95,25 +98,3 @@ var SuccessRegister = function (result,e)
         $("#modal_container").html(result);
 }
 
-//var SuccessLogOf = function (result) {
-//    if (result.url) {
-//        window.location = result.url;
-//    }
-
-//}
-
-//$(document).ready(function () {
-//    var scroll_start = 0;
-//    var startchange = $('#searchbar');
-//    var offset = startchange.offset();
-//    $(document).scroll(function () {
-//        scroll_start = $(this).scrollTop();
-//        if (scroll_start > offset.top) {
-//            $('#header').removeClass()
-//            $('#header').slideToggle(500,'swing');
-//        }
-//        else {
-//          //  $('#searchbar').addClass("navbar navbar-default navbar-fixed-top");
-//        }
-//    });
-//});

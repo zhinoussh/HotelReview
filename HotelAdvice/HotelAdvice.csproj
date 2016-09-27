@@ -268,6 +268,8 @@
   <ItemGroup>
     <Content Include="Content\AdminStyle.css" />
     <Content Include="Content\animate.css" />
+    <Content Include="Content\awesome-bootstrap-checkbox.css" />
+    <Content Include="Content\bootstrap-slider.min.css" />
     <Content Include="Content\bootstrap-social.css" />
     <Content Include="Content\bootstrap-sortable.css" />
     <Content Include="Content\bootstrap-tagsinput.css" />
@@ -276,6 +278,7 @@
     <Content Include="Content\bootstrap-timepicker.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\CitySidebar.css" />
     <Content Include="Content\fileinput.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
@@ -342,6 +345,7 @@
     <Content Include="Scripts\app_script\homePage.js" />
     <Content Include="Scripts\bloodhound.js" />
     <Content Include="Scripts\bloodhound.min.js" />
+    <Content Include="Scripts\bootstrap-slider.min.js" />
     <Content Include="Scripts\bootstrap-sortable.js" />
     <Content Include="Scripts\bootstrap-tagsinput.js" />
     <Content Include="Scripts\bootstrap-timepicker.min.js" />

@@ -41,13 +41,12 @@
     
     </div>
     <div class="container body-content">
-        @RenderSection("ContentBody")
-       
-         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+            @RenderSection("ContentBody")
     </div>
+
+    @*<footer class="col-sm-12">
+        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+    </footer>*@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")

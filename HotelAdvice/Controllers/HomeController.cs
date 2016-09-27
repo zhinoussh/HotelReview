@@ -16,8 +16,19 @@ namespace HotelAdvice.Controllers
         public ActionResult Index(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
+            HomeViewModel vm = new HomeViewModel();
+            vm.lst_city = db.get_cities().OrderBy(x=>x.cityName).ToList();
 
-            return View();
+            List<string> lst_locations = new List<string>();
+            lst_locations.Add("Any Kilometers");
+            lst_locations.Add("less than 1 km");
+            lst_locations.Add("less than 2 km");
+            lst_locations.Add("less than 3 km");
+            lst_locations.Add("less than 4 km");
+            lst_locations.Add("less than 5 km");
+
+            
+            return View(vm);
         }
 
         public ActionResult About()

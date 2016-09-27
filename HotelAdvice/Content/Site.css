@@ -22,6 +22,17 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.nopadding {
+   padding: 0 !important;
+}
+.nopadding_left {
+   padding-left: 0 !important;
+}
+.nopadding_right {
+   padding-right: 0 !important;
+}
+.top-buffer { margin-top:20px; }
 /************************* Slider *************************/
 #home {
  width:100%;
@@ -160,20 +171,12 @@ font-size:90%;
 }
 
 /****************SEARCH****************/
-#searchbar{
-/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fce432+1,f4edb7+52,f2dc37+100 */
-    color:#6e97ab;
-    border:1px solid #66cccc;
+#searchbar {
+    color: #6e97ab;
+    border: 1px solid #66cccc;
     background-color: #c6e2ff;
-/*background: -moz-linear-gradient(45deg,  #324ffc 1%, #c3cbf9 52%, #324ffc 100%); 
-background: -webkit-linear-gradient(45deg,  #324ffc 1%,#c3cbf9 52%,#324ffc 100%); 
-background: linear-gradient(45deg,  #324ffc 1%,#c3cbf9 52%,#324ffc 100%); 
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fce432', endColorstr='#f2dc37',GradientType=1 );*/ 
-/*margin:-2% auto;*/
-height:70px;
-/*z-index:1;
-position:relative;*/
-margin-top:1%;
+    height: 70px;
+    margin-top: 1%;
 }
 .highlight_search {
     font-weight: bold;
@@ -195,6 +198,32 @@ border-bottom-right-radius:0px;
     color:#fff;
 }
 
+/*************ADVANCED SEARCH*****************/
+.advanced_search {
+    height:100%;
+}
+.divider_search {
+background:#e6e0e0;
+height:1px;
+margin:20px 0 20px 0;
+
+}
+.fa-star {
+color:#fce925;
+margin-right:2px;
+}
+.slider-track {
+    background:#dff5f5 !important;
+}
+.slider-selection{
+    background:#66cccc !important;
+
+}
+
+.checkbox:hover {
+background:#dedede;
+cursor:pointer;
+}
 
 /**********AUTO Compelete*/
 

@@ -22,3 +22,4 @@
 /// <reference path="bootstrap-sortable.js" />
 /// <reference path="moment-with-locales.min.js" />
 /// <reference path="moment.min.js" />
+/// <reference path="bootstrap-slider.min.js" />

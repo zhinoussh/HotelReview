@@ -29,6 +29,7 @@ namespace HotelAdvice
                       , "~/Scripts/jquery-ui-1.12.0.min.js"
                       , "~/Scripts/Carousel.js"
                        , "~/Scripts/app_script/homePage.js"
+                       , "~/Scripts/bootstrap-slider.min.js"
                        ));
 
             bundles.Add(new ScriptBundle("~/bundles/StarRating").Include(
@@ -51,6 +52,9 @@ namespace HotelAdvice
                       , "~/Content/animate.css"
                       , "~/Content/bootstrap-social.css"
                       , "~/Content/themes/base/jquery-ui.css"
+                      , "~/Content/CitySidebar.css"
+                      , "~/Content/awesome-bootstrap-checkbox.css"
+                      , "~/Content/bootstrap-slider.min.css"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/AdminCss").Include(

@@ -68,44 +68,96 @@
     <div id="searchbar" class="well">
         <div class="form-horizontal">
             <div class="form-group" >
-                <div class="col-sm-9 col-sm-offset-1" style="padding-right:0;">
+                <div class="col-sm-9 col-sm-offset-1 nopadding_right">
                     @Html.TextBoxFor(model => model.Destination_Name, new { @class = "form-control", @placeholder = "Find Hotel, City or Destination...", id = "txt_dest_name" })
                 </div>
-                <div class="col-sm-2" style="padding-left:0;">
+                <div class="col-sm-2 nopadding_left">
                     <button type="submit" class="btn btn_search"><i class="glyphicon glyphicon-search"></i>&nbsp;Search</button>
                 </div>
             </div>
         </div>
     </div>
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-    <br />
-    Salam
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-Salam
+
+       <div class="col-sm-3 nopadding">
+           <div class="well advanced_search">
+                   <i class="glyphicon glyphicon-search"></i>
+                   @Html.LabelFor(model => model.Hotel_Name)
+                   @Html.TextBoxFor(model => model.Hotel_Name, new { @placeholder = "Hotel Name", @class = "form-control" })
+               
+               <div class="divider_search"></div>
+
+               <div class="checkbox checkbox-info">
+                   @Html.HiddenFor(model => model.Star5, new { id = "hd_star5" })
+                   <input type="checkbox" id="checkbox_star5">
+                   <label for="checkbox_star5">
+                       <i class="fa fa-star fa-lg"></i><i class="fa fa-star fa-lg"></i><i class="fa fa-star fa-lg"></i><i class="fa fa-star fa-lg"></i><i class="fa fa-star fa-lg"></i>
+                   </label>
+               </div>
+               
+               <div class="checkbox checkbox-info">
+                   @Html.HiddenFor(model => model.Star4, new { id = "hd_star4" })
+                   <input type="checkbox" id="checkbox_star4">
+                   <label for="checkbox_star4">
+                       <i class="fa fa-star fa-lg"></i><i class="fa fa-star fa-lg"></i><i class="fa fa-star fa-lg"></i><i class="fa fa-star fa-lg"></i>
+                   </label>
+               </div>
+
+
+               <div class="checkbox checkbox-info">
+                   @Html.HiddenFor(model => model.Star3, new { id = "hd_star3" })
+                   <input type="checkbox" id="checkbox_star3">
+                   <label for="checkbox_star3">
+                       <i class="fa fa-star fa-lg"></i><i class="fa fa-star fa-lg"></i><i class="fa fa-star fa-lg"></i>
+                   </label>
+               </div>
+               <div class="checkbox checkbox-info">
+                   @Html.HiddenFor(model => model.Star2, new { id = "hd_star2" })
+                   <input type="checkbox" id="checkbox_star2">
+                   <label for="checkbox_star2">
+                       <i class="fa fa-star fa-lg"></i><i class="fa fa-star fa-lg"></i>
+                   </label>
+               </div>
+
+               <div class="checkbox checkbox-info">
+                   @Html.HiddenFor(model => model.Star1, new { id = "hd_star1" })
+                   <input type="checkbox" id="checkbox_star1">
+                   <label for="checkbox_star1">
+                       <i class="fa fa-star fa-lg"></i>
+                   </label>
+               </div>
+
+               <div class="divider_search"></div>
+
+               @Html.LabelFor(model => model.Guest_Rating)
+               @Html.TextBoxFor(model => model.Guest_Rating, new {  id = "slider_guest_review" })
+
+               <div class="divider_search"></div>
+               @Html.LabelFor(model => model.Location)
+               @Html.TextBoxFor(model => model.Location, new { id = "slider_guest_review" })
+
+
+
+
+
+             
+        </div>
+        </div>
+
+        <div class="col-sm-6">
+
+        </div>
+
+       
+
+<div class="col-sm-3 nopadding" >
+    <ul class="city_sidebar">
+        @foreach (var item in Model.lst_city)
+        {
+            <li><a href="#">@item.cityName</a></li>
+        }
+       
+    </ul>
+</div>
 }
 
 

@@ -129,7 +129,7 @@ D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.Migrations.add_TBL_Am
 D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.Migrations.add_TBL_Sightseeing.resources
 D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.Migrations.add_TBL_hotelPhoto.resources
 D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.Migrations.alter_TBL_hotelPhoto.resources
+D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.Migrations.alter_TBL_HOTEL_columns.resources
 D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.csproj.GenerateResource.Cache
 D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.dll
 D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.pdb
-D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.Migrations.alter_TBL_HOTEL_columns.resources
