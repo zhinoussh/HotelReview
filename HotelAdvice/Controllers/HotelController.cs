@@ -12,8 +12,6 @@ using System.IO;
 namespace HotelAdvice.Controllers
 {
     [Authorize(Roles = "Administrator")]
-   
-    
     public class HotelController : Controller
     {
         private const int defaultPageSize = 10;
@@ -92,11 +90,7 @@ namespace HotelAdvice.Controllers
                 }
 
                 //add amenities
-                List<tbl_amenity> lst_amenity = db.get_hotel_amenities(HotelId);
-                if (lst_amenity.Count > 0)
-                {
-                    vm.amenities = string.Join(",", lst_amenity.Select(x => x.AmenityName));
-                }
+               
 
                 //add sightseeings
                 List<tbl_sightseeing> lst_sightseeing = db.get_hotel_sightseeings(HotelId);
@@ -109,6 +103,7 @@ namespace HotelAdvice.Controllers
             vm.CurrentPage = page.HasValue ? page.Value : 1;
             vm.CurrentFilter = !String.IsNullOrEmpty(filter) ? filter.ToString() : "";
             vm.lst_city = new SelectList(cities, "cityID", "cityName");
+            vm.amenities = db.get_hotel_amenities(HotelId);
 
             return PartialView("_PartialAddHotel", vm);
         }
@@ -120,6 +115,9 @@ namespace HotelAdvice.Controllers
         {
             if (ModelState.IsValid)
             {
+                Hotel.distance_citycenter = Hotel.distance_citycenter!=null ?Hotel.distance_citycenter : 0;
+                Hotel.distance_airport = Hotel.distance_airport!=null ? Hotel.distance_airport : 0;
+
                 db.add_hotel(Hotel);
 
                 if (Hotel.PhotoFile != null)
@@ -260,17 +258,6 @@ namespace HotelAdvice.Controllers
              return Json(result, JsonRequestBehavior.AllowGet);
          }
 
-
-         [HttpPost]
-         public JsonResult Get_Amenities(string Prefix)
-         {
-             List<tbl_amenity> AmenityList = db.get_Amenities();
-
-             var result = AmenityList.Where(x => x.AmenityName.ToLower().Contains(Prefix.ToLower()))
-                 .Select(x => new { Amenity = x.AmenityName }).ToList();
-
-             return Json(result, JsonRequestBehavior.AllowGet);
-         }
 
          [HttpPost]
          public JsonResult Get_SightSeeing(string Prefix)

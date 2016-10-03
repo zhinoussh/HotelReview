@@ -45,10 +45,10 @@ namespace HotelAdvice.Models
         public string checkin { get; set; }
         [StringLength(20)]
         public string checkout { get; set; }
-        [StringLength(20)]
-        public string distance_citycenter { get; set; }
-        [StringLength(20)]
-        public string distance_airport { get; set; }
+        
+        public double? distance_citycenter { get; set; }
+
+        public double? distance_airport { get; set; }
 
         public int? CityId { get; set; }
 

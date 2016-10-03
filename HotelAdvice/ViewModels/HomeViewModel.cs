@@ -19,9 +19,22 @@ namespace HotelAdvice.ViewModels
         [Display(Name = "Guest Rating")]
         public float Guest_Rating { get; set; }
 
-        public SelectList Location { get; set; }
-        public string selected_location { get; set; }
+        [Display(Name="Amenities")]
+        public List<AmenityViewModel> lst_amenity { get; set; }
 
+        public SelectList Location { get; set; }
+        
+        [Display(Name = "from City Center")]
+        public int distance_city_center { get; set; }
+               
+        [Display(Name = "from Airport")]
+        public int distance_airport { get; set; }
+
+        public SelectList City_List { get; set; }
+        
+        public int selected_city { get; set; }
+       
+        [Display(Name = "Star Rating")]
         public bool Star1 { get; set; }
         public bool Star2 { get; set; }
         public bool Star3 { get; set; }

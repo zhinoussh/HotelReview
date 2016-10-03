@@ -40,6 +40,12 @@
 $(document).on("click", ".editButton", showAddModal);
 $(document).on("click", ".actionButton", showModal);
 
+$(document).on("click", ".editAmenityButton", function () {
+
+    $("#amenity_id").val($(this).data('id'));
+    $("#amenity_name").val($(this).data('name'));
+    
+});
 
 function showAddModal() {
     
@@ -90,6 +96,7 @@ var Success_AjaxReturn_deleteImage = function (result) {
     }
 
 }
+
 function SetUp_AddHotel() {
     var img_path = $('#img_hotel').val();
     $("#image_hotel").fileinput({
@@ -139,7 +146,6 @@ function SetUp_AddHotel() {
 
     Set_Restaurants_tag();
     Set_Rooms_tag();
-    Set_Amenities_tag();
     Set_Sightseeing_tag();
 }
 
@@ -206,39 +212,6 @@ function Set_Rooms_tag() {
         typeaheadjs: {
             name: 'roomTypes',
             source: roomTypes.ttAdapter(),
-            limit: 10
-        },
-        freeInput: true
-    });
-}
-
-function Set_Amenities_tag() {
-    var amenities = new Bloodhound({
-        datumTokenizer: Bloodhound.tokenizers.obj.whitespace,
-        queryTokenizer: Bloodhound.tokenizers.whitespace,
-        remote: {
-            url: '/Hotel/Get_Amenities',
-
-            prepare: function (query, settings) {
-                settings.type = "POST";
-                settings.contentType = "application/json; charset=UTF-8";
-                settings.data = JSON.stringify({ "Prefix": query });
-                return settings;
-            },
-            filter: function (list) {
-                return $.map(list, function (object) {
-                    return object.Amenity;
-                });
-            }
-        }
-    });
-
-    amenities.initialize();
-
-    $('#txt_amenities').tagsinput({
-        typeaheadjs: {
-            name: 'amenities',
-            source: amenities.ttAdapter(),
             limit: 10
         },
         freeInput: true

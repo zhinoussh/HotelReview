@@ -70,14 +70,17 @@
 
 .sidebar-nav li {
   line-height: 40px;
-  text-indent: 20px;
+  text-indent:20px;
+
 }
 
 .sidebar-nav li a{
   color: #999999;
   display: block;
   text-decoration: none;
+  cursor:pointer;
 }
+
 
 .sidebar-nav li a:hover{
   color: #704528;
@@ -142,16 +145,15 @@ color:#ce0a0a;
 
 
 
-
 .sub-menu li a{
-  background-color:#ffb47e;
-  color:#252525;
+    background-color:#ffe4d1;
+  color:#111;
   border: none;
-  line-height:30px;
+  line-height:35px;
   margin-left: 0px;
 }
 .sub-menu li a:hover{
-  background-color: #c1b4ab;
+  background-color: #fdc69f;
 }
 
 @media (max-width:767px) {

@@ -54,8 +54,24 @@
 
     };
 
+   
+
   
 });
+
+function checkbox_Checked(n)
+{
+    if ($("#checkbox_star"+n).is(":checked"))
+        $("#hd_star" + n).val('True');
+    else
+        $("#hd_star" + n).val('False');
+}
+function chk_amenity_changed(n) {
+    if ($("#chk_amenity" + n).is(":checked"))
+        $("#hd_amenity" + n).val('True');
+    else
+        $("#hd_amenity" + n).val('False');
+}
 
 
 var modalIsOpen = false;

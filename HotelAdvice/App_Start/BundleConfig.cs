@@ -69,6 +69,8 @@ namespace HotelAdvice
                     , "~/Content/bootstrap-tagsinput.css"
                     , "~/Content/typeahead_style.css"
                     , "~/Content/bootstrap-sortable.css"
+                      , "~/Content/awesome-bootstrap-checkbox.css"
+
                      ));
 
             bundles.Add(new StyleBundle("~/Content/StarRating").Include(

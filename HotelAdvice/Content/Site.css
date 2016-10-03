@@ -23,6 +23,10 @@ textarea {
     max-width: 280px;
 }
 
+.text-small {
+    font-size:9pt;
+    font-weight:normal;
+}
 .nopadding {
    padding: 0 !important;
 }
@@ -209,7 +213,7 @@ margin:20px 0 20px 0;
 
 }
 .fa-star {
-color:#fce925;
+color:#fbca0d;
 margin-right:2px;
 }
 .slider-track {

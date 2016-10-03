@@ -143,24 +143,39 @@
                                     <div class="col-sm-12">
                                         <h5><strong>Location & Address</strong> </h5>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-plane"></i></span>
-                                            @Html.TextBoxFor(model => model.distance_airport, new { @class = "form-control", @placeholder = "Distance from Airport" })
-                                        </div>
-                                        @Html.ValidationMessageFor(m => m.distance_airport, "", new { @class = "text-danger" })
-                                    </div>
 
-                                    <div class="col-sm-6">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
-                                            @Html.TextBoxFor(model => model.distance_citycenter, new { @class = "form-control", @placeholder = "Distance from City Center" })
-                                        </div>
-                                        @Html.ValidationMessageFor(m => m.distance_citycenter, "", new { @class = "text-danger" })
-                                    </div>
+                                    <div class="col-sm-6 nopadding">
+                                        <div class="col-sm-11 nopadding_left">
 
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-plane"></i></span>
+                                                @Html.TextBoxFor(model => model.distance_airport, new { @class = "form-control", @placeholder = "Distance from Airport" })
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1 nopadding" style="margin-top:2%">
+                                            km
+                                        </div>
+                                        <div class="col-sm-12">
+                                            @Html.ValidationMessageFor(m => m.distance_airport, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 nopadding">
+                                        <div class="col-sm-11 nopadding_left">
+
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+                                                @Html.TextBoxFor(model => model.distance_citycenter, new { @class = "form-control", @placeholder = "Distance from City Center" })
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1 nopadding" style="margin-top:2%">
+                                            km
+                                        </div>
+                                        <div class="col-sm-12">
+                                            @Html.ValidationMessageFor(m => m.distance_citycenter, "", new { @class = "text-danger" })
+                                        </div>
+
+                                    </div>
                                 </div>
-
                                 <div class="row top-buffer">
 
                                     <div class="col-sm-12 ">
@@ -208,17 +223,25 @@
                                 <div class="row top-buffer">
 
                                     <div class="col-sm-12">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-lamp"></i></span>
-                                            @Html.TextBoxFor(model => model.amenities, new
-                                           {
-                                               id = "txt_amenities",
-                                               @class = "form-control",
-                                               @placeholder = "Enter Amenities..."
-                                           })
-                                        </div>
+                                        @for (int i = 0; i < Model.amenities.Count;i++ )
+                                        {
+                                            <div class="col-sm-3 nopadding">
 
-                                    </div>
+                                                <div class="col-sm-1 nopadding" style="width:20px" >
+                                                        @Html.CheckBoxFor(model=>model.amenities[i].hotel_selected)
+                                                    
+                                                    @Html.HiddenFor(model=>model.amenities[i].AmenityID)
+                                                </div>
+                                                <div class="col-sm-11 text-small nopadding " >
+                                                    @Html.DisplayFor(model=>model.amenities[i].AmenityName)
+                                                </div>
+                                                </div>
+
+                                        }
+
+                                       </div>
+
+                                    <div class="divider_search"></div>
 
                                     <div class="col-sm-12 top-buffer">
                                         <div class="input-group">

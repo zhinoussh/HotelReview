@@ -184,6 +184,7 @@
     <Compile Include="App_Start\TypeaheadBundleConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AmenityController.cs" />
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HotelController.cs" />
@@ -240,6 +241,14 @@
     <Compile Include="Migrations\201609220941146_alter_TBL_HOTEL_columns.Designer.cs">
       <DependentUpon>201609220941146_alter_TBL_HOTEL_columns.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609280600404_alter_tblhotel_distnace_to_float.cs" />
+    <Compile Include="Migrations\201609280600404_alter_tblhotel_distnace_to_float.Designer.cs">
+      <DependentUpon>201609280600404_alter_tblhotel_distnace_to_float.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609301236204_Alter_tbl_hotel_change_distance_type.cs" />
+    <Compile Include="Migrations\201609301236204_Alter_tbl_hotel_change_distance_type.Designer.cs">
+      <DependentUpon>201609301236204_Alter_tbl_hotel_change_distance_type.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Config_ProjectDB.cs" />
     <Compile Include="Models\Autocomplete.cs" />
@@ -256,6 +265,7 @@
     <Compile Include="Models\tbl_room_type.cs" />
     <Compile Include="Models\tbl_sightseeing.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
+    <Compile Include="ViewModels\AmenityViewModel.cs" />
     <Compile Include="ViewModels\CityViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -446,6 +456,9 @@
     <Content Include="Views\Hotel\_PartialDeletePhoto.cshtml" />
     <Content Include="Views\Hotel\_PartialShowImage.cshtml" />
     <Content Include="Views\Hotel\HotelImage.cshtml" />
+    <Content Include="Views\Amenity\Index.cshtml" />
+    <Content Include="Views\Amenity\_PartialAmenityList.cshtml" />
+    <Content Include="Views\Amenity\_PartialDeleteAmenity.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -491,6 +504,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609220941146_alter_TBL_HOTEL_columns.resx">
       <DependentUpon>201609220941146_alter_TBL_HOTEL_columns.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609280600404_alter_tblhotel_distnace_to_float.resx">
+      <DependentUpon>201609280600404_alter_tblhotel_distnace_to_float.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609301236204_Alter_tbl_hotel_change_distance_type.resx">
+      <DependentUpon>201609301236204_Alter_tbl_hotel_change_distance_type.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

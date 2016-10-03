@@ -96,8 +96,8 @@ namespace HotelAdvice.App_Code
                 new_obj.Website = hotel.Website;
                 new_obj.Email = hotel.Email;
                 new_obj.HotelAddress = hotel.HotelAddress;
-                new_obj.distance_airport = hotel.distance_airport;
-                new_obj.distance_citycenter = hotel.distance_citycenter;
+                new_obj.distance_airport = (float)hotel.distance_airport;
+                new_obj.distance_citycenter = (float)hotel.distance_citycenter;
             }
 
             //this is insert
@@ -183,7 +183,7 @@ namespace HotelAdvice.App_Code
             }
         }
 
-        private void Save_Amenities(string amenities, int HotelId)
+        private void Save_Amenities(List<AmenityViewModel> amenities, int HotelId)
         {
             //Edit
             if (HotelId != 0)
@@ -192,29 +192,20 @@ namespace HotelAdvice.App_Code
                 db.SaveChanges();
             }
 
-            List<String> temp_list = new List<string>();
-            if (amenities != null)
+            foreach (AmenityViewModel item in amenities)
             {
-                temp_list = amenities.Split(',').ToList<String>();
-                foreach (string r in temp_list)
+                if (item.hotel_selected == true)
                 {
-                    tbl_amenity amenity = db.tbl_Amenity.Where(x => x.AmenityName == r).FirstOrDefault();
-                    if (amenity == null)
-                    {
-                        amenity = new tbl_amenity() { AmenityName = r };
-                        db.tbl_Amenity.Add(amenity);
-                        db.SaveChanges();
-                    }
-
                     db.tbl_Hotel_Amenities.Add(new tbl_hotel_amenity()
                     {
-                         AmenityID= amenity.AmenityID,
+                        AmenityID = item.AmenityID,
                         HotelID = HotelId
                     });
-                    db.SaveChanges();
                 }
-
+                db.SaveChanges();
             }
+
+
         }
 
         private void Save_Sighseeings(string sightseeing, int HotelId)
@@ -285,7 +276,7 @@ namespace HotelAdvice.App_Code
                                               Email = h.Email,
                                               HotelAddress = h.HotelAddress,
                                               distance_airport=h.distance_airport,
-                                              distance_citycenter=h.distance_citycenter
+                                              distance_citycenter = h.distance_citycenter 
                                           }).FirstOrDefault();
                                      
            
@@ -340,21 +331,62 @@ namespace HotelAdvice.App_Code
             return lst_rooms;
         }
 
-        public List<tbl_amenity> get_Amenities()
+        public List<AmenityViewModel> get_Amenities()
         {
-            List<tbl_amenity> lst_amenity = db.tbl_Amenity.Select(r => r)
-                .OrderBy(r => r.AmenityName).ToList();
+            List<AmenityViewModel> lst_amenity = db.tbl_Amenity.Select(r=>new AmenityViewModel { 
+                AmenityID=r.AmenityID,
+                AmenityName=r.AmenityName
+            }).ToList();
 
             return lst_amenity;
 
         }
 
-        public List<tbl_amenity> get_hotel_amenities(int hotelID)
+
+        public void delete_Amenity(int id)
         {
-            List<tbl_amenity> lst_amenities = (from h in db.tbl_Hotel_Amenities.Where(r => r.HotelID == hotelID)
-                                             join a in db.tbl_Amenity on h.AmenityID equals a.AmenityID
-                                             select a)
-                                          .OrderBy(x => x.AmenityName).ToList();
+           tbl_amenity a= db.tbl_Amenity.Find(id);
+           if (a != null)
+           {
+               db.tbl_Amenity.Remove(a);
+               db.SaveChanges();
+           }
+        }
+
+        public void add_amenity(int id, string amenity_name)
+        {
+            tbl_amenity new_obj;
+
+            if (id == 0)
+            {
+                new_obj = new tbl_amenity();
+                new_obj.AmenityName = amenity_name;
+                db.tbl_Amenity.Add(new_obj);
+            }
+            else
+            {
+                new_obj = db.tbl_Amenity.Find(id);
+                if (new_obj != null)
+                {
+                    new_obj.AmenityName = amenity_name;
+                }
+            }
+
+            db.SaveChanges();
+        }
+       
+        public List<AmenityViewModel> get_hotel_amenities(int hotelID)
+        {
+            List<AmenityViewModel> lst_amenities = (from a in db.tbl_Amenity
+                                                    join h in db.tbl_Hotel_Amenities.Where(x => x.HotelID == hotelID) 
+                                                    on a.AmenityID equals h.AmenityID
+                                                    into Hotel_Amenity
+                                                    from x in Hotel_Amenity.DefaultIfEmpty()
+                                                    select new AmenityViewModel { 
+                                                        AmenityID=a.AmenityID,
+                                                        AmenityName=a.AmenityName,
+                                                        hotel_selected=(x==null? false :true)
+                                                    }).OrderBy(x => x.AmenityName).ToList();
             return lst_amenities;
         }
 
