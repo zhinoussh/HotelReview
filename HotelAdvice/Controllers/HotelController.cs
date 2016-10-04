@@ -247,7 +247,7 @@ namespace HotelAdvice.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-         [HttpPost]
+        [HttpPost]
          public JsonResult Get_Rooms(string Prefix)
          {
              List<tbl_room_type> RoomList = db.get_roomTypes();
@@ -265,7 +265,7 @@ namespace HotelAdvice.Controllers
              List<tbl_sightseeing> SightList = db.get_Sightseeing();
 
              var result = SightList.Where(x => x.Sightseeing_Type.ToLower().Contains(Prefix.ToLower()))
-                 .Select(x => new { Amenity = x.Sightseeing_Type }).ToList();
+                 .Select(x => new { SightSeeing = x.Sightseeing_Type }).ToList();
 
              return Json(result, JsonRequestBehavior.AllowGet);
          }

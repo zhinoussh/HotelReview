@@ -28,11 +28,11 @@ namespace HotelAdvice.ViewModels
         [StringLength(20, ErrorMessage = "max length has been exceeded.")]
         public string Fax { get; set; }
         
-        [StringLength(20, ErrorMessage = "max length has been exceeded.")]
+        [StringLength(50, ErrorMessage = "max length has been exceeded.")]
         [EmailAddress(ErrorMessage="Enter a valid email address.")]
         public string Email { get; set; }
         
-        [StringLength(20, ErrorMessage = "max length has been exceeded.")]
+        [StringLength(50, ErrorMessage = "max length has been exceeded.")]
         public string Website { get; set; }
         public int HotelStars { get; set; }
 

@@ -24,7 +24,7 @@
                 <div class="modal-header modal-header-add">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">
-                        <span class="glyphicon glyphicon-pencil"></span> Hotel Features
+                        <span class="glyphicon glyphicon-pencil"></span> Hotel Features @if(!String.IsNullOrEmpty(@Model.HotelName)) { @("- "+Model.HotelName)}
                     </h4>
                 </div>
                 <div class="modal-body">
@@ -232,7 +232,7 @@
                                                     
                                                     @Html.HiddenFor(model=>model.amenities[i].AmenityID)
                                                 </div>
-                                                <div class="col-sm-11 text-small nopadding " >
+                                                <div class="col-sm-10 text-small nopadding " >
                                                     @Html.DisplayFor(model=>model.amenities[i].AmenityName)
                                                 </div>
                                                 </div>

@@ -459,6 +459,7 @@
     <Content Include="Views\Amenity\Index.cshtml" />
     <Content Include="Views\Amenity\_PartialAmenityList.cshtml" />
     <Content Include="Views\Amenity\_PartialDeleteAmenity.cshtml" />
+    <Content Include="Views\Home\ShowSearchResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

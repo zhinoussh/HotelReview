@@ -1,0 +1,18 @@
+﻿@model List<HotelAdvice.ViewModels.HotelViewModel>
+
+@{
+    ViewBag.Title = "ShowSearchResult";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <h3>Hotels in </h3>
+
+
+    @foreach (var item in Model)
+    {   
+            @item.HotelName
+    }
+
+
+

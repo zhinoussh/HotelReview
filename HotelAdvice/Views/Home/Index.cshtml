@@ -5,19 +5,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@section ContentBody{
 
 
- <!-- slider -->
+     <!-- slider -->
 <section id="home">
-    <div id="fullscreenslider" class="carousel slide" data-ride="carousel" >
+    <div id="fullscreenslider" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
             <li data-target="#fullscreenslider" data-slide-to="0" class="active"></li>
             <li data-target="#fullscreenslider" data-slide-to="1"></li>
             <li data-target="#fullscreenslider" data-slide-to="2"></li>
         </ol>
-       
+
         <!-- Controls -->
         <a class="left carousel-control" href="#fullscreenslider" data-slide="prev">
             <span class="fa fa-chevron-circle-left fa-2x"></span>
@@ -65,28 +64,29 @@
 </section>
 <!-- end slider -->
 
-    <div id="searchbar" class="well">
-        <div class="form-horizontal">
-            <div class="form-group" >
-                <div class="col-sm-9 col-sm-offset-1 nopadding_right">
-                    @Html.TextBoxFor(model => model.Destination_Name, new { @class = "form-control", @placeholder = "Find Hotel, City or Destination...", id = "txt_dest_name" })
-                </div>
-                <div class="col-sm-2 nopadding_left">
-                    <button type="submit" class="btn btn_search"><i class="glyphicon glyphicon-search"></i>&nbsp;Search</button>
-                </div>
+<!-- search bar -->
+<div id="searchbar" class="well">
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-9 col-sm-offset-1 nopadding_right">
+                @Html.TextBoxFor(model => model.Destination_Name, new { @class = "form-control", @placeholder = "Find Hotel, City or Destination...", id = "txt_dest_name" })
+            </div>
+            <div class="col-sm-2 nopadding_left">
+                <button type="submit" class="btn btn_search"><i class="glyphicon glyphicon-search"></i>&nbsp;Search</button>
             </div>
         </div>
     </div>
+</div>
+<!-- end search bar -->
 
     @using(Ajax.BeginForm("Advanced_Search", "Home", null, new AjaxOptions
     {
-        HttpMethod = "Post",
+        HttpMethod = "Get",
         OnSuccess = "Success_Advanced_Search"
         ,
         InsertionMode = InsertionMode.ReplaceWith
     }))
 {
-    @Html.AntiForgeryToken()
 
     @*Advanced Search*@
        <div class="col-sm-3 nopadding">
@@ -201,7 +201,6 @@
                    </div>
 
                <div class="col-sm-10 text-center top-buffer">
-
                    <button class="btn btn-primary" type="submit"> <span class="glyphicon glyphicon-search"></span> Search Hotels</button>
                </div>
                </div> @*END of WELL*@
@@ -218,12 +217,14 @@
     <ul class="city_sidebar">
         @foreach (var item in Model.lst_city)
         {
-            <li><a href="#">@item.cityName</a></li>
+            <li>
+            @Html.ActionLink(item.cityName, "SearchHotels", "Home", new { id = @item.cityID },null)
+            </li>
         }
        
     </ul>
 </div>
-}
+
 
 
 

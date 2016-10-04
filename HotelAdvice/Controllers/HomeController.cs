@@ -59,12 +59,25 @@ namespace HotelAdvice.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpGet]
         public JsonResult Advanced_Search(HomeViewModel vm, string slider_guest_review)
         {
             //db.Search_Hotels();
             return Json(new { result="success!"});
+           // return View("SearchResult",)
+        }
+
+        [HttpGet]
+        public ActionResult SearchHotels(int id)
+        {
+          //  return Json(db.Search_Hotels_in_city(id),JsonRequestBehavior.AllowGet);
+            return View("ShowSearchResult", db.Search_Hotels_in_city(id));
+        }
+
+        public ActionResult ShowSearchResult(List<HotelViewModel> vm)
+        {
+            //  return Json(db.Search_Hotels_in_city(id),JsonRequestBehavior.AllowGet);
+            return View();
         }
 
      

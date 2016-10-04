@@ -17,7 +17,7 @@ namespace HotelAdvice.ViewModels
         public string Hotel_Name { get; set; }
         
         [Display(Name = "Guest Rating")]
-        public float Guest_Rating { get; set; }
+        public string Guest_Rating { get; set; }
 
         [Display(Name="Amenities")]
         public List<AmenityViewModel> lst_amenity { get; set; }

@@ -455,5 +455,28 @@ namespace HotelAdvice.App_Code
 
         #endregion Review
 
+        #region Home Page
+
+        public List<HotelViewModel> Search_Hotels_in_city(int city_id)
+        {
+            List<HotelViewModel> lst_result = db.tbl_Hotel.Where(x => x.CityId == city_id).Select(x=>new HotelViewModel
+            {
+                HotelName=x.HotelName,
+                HotelAddress = x.HotelAddress,
+                Website = x.Website,
+                HotelStars = x.HotelStars,
+                Description = x.Description,
+                distance_airport = x.distance_airport,
+                distance_citycenter = x.distance_citycenter
+
+            }).ToList();
+
+            return lst_result;
+        }
+
+        
+        #endregion Home Page
+
+
     }
 }
