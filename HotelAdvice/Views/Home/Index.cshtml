@@ -186,7 +186,7 @@
                        @for (int i = 0; i < Model.lst_amenity.Count; i++)
                        {
 
-                       <div class="col-sm-6 nopadding">
+                       <div class="col-sm-6 nopadding" style="height:50px">
                            <div class="checkbox checkbox-info">
                                @Html.HiddenFor(model => model.lst_amenity[i].AmenityID)
                                @Html.HiddenFor(model => model.lst_amenity[i].hotel_selected, new { id = "hd_amenity"+Model.lst_amenity[i].AmenityID })
