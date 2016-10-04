@@ -60,6 +60,10 @@ namespace HotelAdvice.ViewModels
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
+        
+        public string returnUrl { get; set; }
+
+        public string Fail_login { get; set; }
     }
 
     public class RegisterViewModel

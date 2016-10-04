@@ -59,7 +59,11 @@ namespace HotelAdvice.Controllers
         {
 
             if (Request.IsAjaxRequest())
-                return PartialView("_PartialLoginModal");
+            {
+                LoginViewModel vm = new LoginViewModel();
+                vm.returnUrl = returnUrl;
+                return PartialView("_PartialLoginModal",vm);
+            }
             else
                 return RedirectToAction("Index", "Home", new { returnUrl = returnUrl });
         }
@@ -71,7 +75,8 @@ namespace HotelAdvice.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            ViewBag.Fail = "false";
+           // ViewBag.Fail = "false";
+            model.Fail_login = "false";
 
             if (!ModelState.IsValid)
             {
@@ -87,10 +92,14 @@ namespace HotelAdvice.Controllers
                     case SignInStatus.Success:
                     {
                         var user = await UserManager.FindAsync(model.Email, model.Password);
-                        if (UserManager.IsInRole(user.Id, "Administrator"))
-                            return Json(new { url = "/Admin/Index" });
+                      //  if (UserManager.IsInRole(user.Id, "Administrator"))
+                       //     return Json(new { url = "/Admin/Index" });
+                      //  else
+                        if (!String.IsNullOrEmpty(model.returnUrl))
+                            return Json(new { url = model.returnUrl });
                         else
                             return Json(new { url = "/Home/Index" });
+
                     }
                     case SignInStatus.LockedOut:
                         return View("Lockout");
@@ -99,8 +108,11 @@ namespace HotelAdvice.Controllers
                     case SignInStatus.Failure:
                     default:
                         ModelState.AddModelError("", "Invalid login attempt.");
-                        ViewBag.Fail = "true";
-                        return PartialView("_PartialLoginModal", model);
+                        //ViewBag.Fail = "true";
+                        //return PartialView("_PartialLoginModal", model);
+
+                        return Json(new { fail = "true" });
+
             }
 
         }

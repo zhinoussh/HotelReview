@@ -5,11 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Iran Hotel Advisor</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-
-
 </head>
-<body class="animated fadeIn delay1">
+<body>
 
     <!-- Modal -->
     <div class="modal fade" id="modal_login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -40,8 +37,10 @@
   
     
     </div>
+    <input type="hidden" value="@ViewBag.ReturnUrl" id="hd_return_url" name="hd_return_url" />
+
     <div class="container body-content">
-            @RenderSection("ContentBody")
+        @RenderBody()
     </div>
 
     @*<footer class="col-sm-12">
@@ -49,18 +48,12 @@
     </footer>*@
 
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/HomePage")
+     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/modernizr")
+     @Scripts.Render("~/bundles/bootstrap")
+     @Scripts.Render("~/bundles/HomePage")
     @RenderSection("scripts", required: false)
 </body>
 </html>
-    <script type="text/javascript">
-    $(document).ready(function () {
-        $(window).on('load', function () {
-            if ("@ViewBag.ReturnUrl" != null && "@ViewBag.ReturnUrl" != '')
-                show_login();
-        });
-    });
-    </script>
+
 

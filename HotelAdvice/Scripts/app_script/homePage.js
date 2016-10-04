@@ -54,10 +54,21 @@
 
     };
 
-   
-
-  
 });
+
+
+$(window).on('load', function () {
+    var returnUrl = $("#hd_return_url").val();
+    if (returnUrl != null && returnUrl != '')
+        show_login(returnUrl);
+});
+
+$(document).on('keypress', '#txt_username', Close_LoginAlert);
+$(document).on('keypress', '#txt_password', Close_LoginAlert); 
+
+function Close_LoginAlert() {
+    $('#login-alert').fadeOut(500);
+}
 
 function checkbox_Checked(n)
 {
@@ -80,12 +91,17 @@ $('#modal_login').on('shown.bs.modal', function (e) { modalIsOpen = true; })
 $('#modal_login').on('hidden.bs.modal', function (e) { modalIsOpen = false; })
 
 
-var show_login = function () {
-    $.get("/Account/Login", function (data) {
+var show_login = function (returnUrl) {
+    if (returnUrl == null)
+        returnUrl = window.location.pathname;
+   
+    $.get("/Account/Login?returnUrl=" + returnUrl, function (data) {
 
         $("#modal_container").html(data);
         if (!modalIsOpen)
             $("#modal_login").modal('show').fadeToggle(500);
+
+
     });
 }
 
@@ -99,10 +115,13 @@ var show_signUp = function () {
 }
 
 var SuccessLogin = function (result) {
-        if (result.url)
-            window.location.href = result.url;
-        else
-            $("#modal_container").html(result);
+    if (result.url)
+        window.location.href = result.url;
+    if (result.fail)
+        $('#login-alert').fadeIn(500);
+  //  else {
+      //  $("#modal_container").html(result);
+    //}
 }
 
 var SuccessRegister = function (result,e)

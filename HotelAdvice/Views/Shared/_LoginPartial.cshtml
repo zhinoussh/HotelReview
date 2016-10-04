@@ -31,12 +31,14 @@
         </li>
         
     </ul>
-  
+
     //}
 }
 else
 {
 
+    @*@Html.ActionLink("Log in", "Login", "Account"
+    , routeValues: new { @returnUrl = Url.Action(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString(), ViewContext.RouteData.Values["id"]) }, htmlAttributes: new { id = "loginLink" })*@
 
     <a class="navbar-btn navbar-right btn btn-primary" onclick="show_login()"><i class="fa fa-lock"></i> Sign In</a>
 }

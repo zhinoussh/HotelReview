@@ -5,70 +5,74 @@
 }
 
 
+<div id="Login_Partial">
 
-@using (Ajax.BeginForm("Login", "Account", new AjaxOptions
+    @using (Ajax.BeginForm("Login", "Account", null, new AjaxOptions
                     {
+                        UpdateTargetId = "Login_Partial",
                         InsertionMode = InsertionMode.ReplaceWith
                         ,
                         HttpMethod = "Post"
                         ,
                         OnSuccess = "SuccessLogin"
                     }, new { id = "frm_login", returnUrl = Request.QueryString["returnUrl"] }))
-{
-    @Html.AntiForgeryToken()
+    {
+        @Html.AntiForgeryToken()
 
-<div class="modal-header modal-header-login">
+        <div class="modal-header modal-header-login">
 
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <div style="float:right; font-size: 80%; margin:1%"><a href="#">Forgot password?</a></div>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <div style="float:right; font-size: 80%; margin:1%"><a href="#">Forgot password?</a></div>
 
-    <h4 class="modal-title" id="myModalLabel">Sign In</h4>
-</div>
-
-<div  class="modal-body">
-   
-     <div  style="margin:0 0 10% 10%">
-        Don't have an account!
-        <a href="#" onclick="show_signUp()">
-           Click to Sign Up
-        </a>
-    </div>
-    <div  id="login-alert" class="alert alert-danger col-sm-12" style="display:none">Username or password is incorrect.</div>
-
-    <div class="form-group col-sm-12" >
-        <div class="input-group ">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
+            <h4 class="modal-title" id="myModalLabel">Sign In</h4>
         </div>
-        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-    </div>
-    <div class="form-group col-sm-12" >
-        <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "password" })
-        </div>
-        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-    </div>
 
-        <div class="form-group col-sm-12">
+        <div class="modal-body">
+
+            <div style="margin:0 0 10% 10%">
+                Don't have an account!
+                <a href="#" onclick="show_signUp()">
+                    Click to Sign Up
+                </a>
+            </div>
+            <div id="login-alert" class="alert alert-danger col-sm-12" style="display:none">Username or password is incorrect.</div>
+
+            <div class="form-group col-sm-12">
+                <div class="input-group ">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email",id="txt_username" })
+                </div>
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-sm-12">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "password", id = "txt_password" })
+                </div>
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-sm-12">
                 @Html.CheckBoxFor(m => m.RememberMe)
-           
-                @Html.LabelFor(m => m.RememberMe)
-        </div>
 
-    <div class="row" >
-        <div class="col-sm-8 col-sm-offset-2">
-            <input type="submit" value="Login" class="btn btn-success" style="width:100%" />
+                @Html.LabelFor(m => m.RememberMe)
+
+                @Html.HiddenFor(m=>m.returnUrl)
+            </div>
+
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2">
+                    <input type="submit" value="Login" class="btn btn-success" style="width:100%" />
+                </div>
+            </div>
         </div>
-    </div>
-    </div>
-<div class="modal-footer" >
-        <div class="col-sm-12">
-            <button class="btn btn-social btn-facebook  col-sm-8 col-sm-offset-2">
-                <i class="fa fa-facebook" aria-hidden="true"></i>
-                Sign in with Facebook
-            </button>
-        </div>
+        <div class="modal-footer">
+            <div class="col-sm-12">
+                <button class="btn btn-social btn-facebook  col-sm-8 col-sm-offset-2">
+                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                    Sign in with Facebook
+                </button>
+            </div>
             <div class="col-sm-12" style="margin-top:2%">
 
                 <button class="btn btn-social btn-google col-sm-8 col-sm-offset-2">
@@ -78,29 +82,7 @@
 
             </div>
 
+        </div>
 
-    </div>
-    
     }
-
-
-<script type="text/javascript">
-
-
-    $(document).ready(function () {
-
-        $('.form-control').keypress(function () {
-            $('#login-alert').fadeOut(500);
-        });
-
-    });
-</script>
-
-
-    @if (ViewBag.Fail == "true")
-    {
-        <script type="text/javascript">
-            $('#login-alert').fadeIn(500);
-        </script>
-    }
-    
+</div>
