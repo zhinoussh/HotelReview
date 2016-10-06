@@ -1,0 +1,128 @@
+﻿@model HotelAdvice.ViewModels.AdvancedSearchViewModel
+@{
+    Layout=null;
+}
+
+@using(Ajax.BeginForm("Advanced_Search", "SearchHotel", null, new AjaxOptions
+    {
+        HttpMethod = "Get",
+        OnSuccess = "Success_Advanced_Search"
+        ,
+        InsertionMode = InsertionMode.ReplaceWith
+    }))
+{
+<div class="well advanced_search col-sm-12">
+
+    <div class="col-sm-12 nopadding">
+        @Html.LabelFor(model => model.Hotel_Name)
+        @Html.TextBoxFor(model => model.Hotel_Name, new { @placeholder = "Hotel Name", @class = "form-control" })
+    </div>
+    <div class="col-sm-12 nopadding top-buffer10">
+        @Html.DropDownListFor(model => model.selected_city, new SelectList(Model.City_List, "Value", "Text"), new { @class = "form-control" })
+    </div>
+
+
+    <div class="divider_search col-sm-12"></div>
+    @Html.LabelFor(model => model.Star1)
+
+    <div class="checkbox checkbox-info">
+        @Html.HiddenFor(model => model.Star5, new { id = "hd_star5" })
+        <input type="checkbox" id="checkbox_star5" onchange="checkbox_Checked('5')">
+        <label for="checkbox_star5">
+            <i class="fa fa-star fa-star-search fa-lg"></i><i class="fa fa-star fa-star-search fa-lg"></i><i class="fa fa-star fa-star-search fa-lg"></i><i class="fa fa-star fa-star-search fa-lg"></i><i class="fa fa-star fa-star-search fa-lg"></i>
+        </label>
+    </div>
+
+    <div class="checkbox checkbox-info">
+        @Html.HiddenFor(model => model.Star4, new { id = "hd_star4" })
+        <input type="checkbox" id="checkbox_star4" onchange="checkbox_Checked('4')">
+        <label for="checkbox_star4">
+            <i class="fa fa-star fa-star-search fa-lg"></i><i class="fa fa-star fa-star-search fa-lg"></i><i class="fa fa-star fa-star-search fa-lg"></i><i class="fa fa-star fa-star-search fa-lg"></i>
+        </label>
+    </div>
+
+
+    <div class="checkbox checkbox-info">
+        @Html.HiddenFor(model => model.Star3, new { id = "hd_star3" })
+        <input type="checkbox" id="checkbox_star3" onchange="checkbox_Checked('3')">
+        <label for="checkbox_star3">
+            <i class="fa fa-star fa-star-search fa-lg"></i><i class="fa fa-star fa-star-search fa-lg"></i><i class="fa fa-star fa-star-search fa-lg"></i>
+        </label>
+    </div>
+    <div class="checkbox checkbox-info">
+        @Html.HiddenFor(model => model.Star2, new { id = "hd_star2" })
+        <input type="checkbox" id="checkbox_star2" onchange="checkbox_Checked('2')">
+        <label for="checkbox_star2">
+            <i class="fa fa-star fa-star-search fa-lg"></i><i class="fa fa-star fa-star-search fa-lg"></i>
+        </label>
+    </div>
+
+    <div class="checkbox checkbox-info">
+        @Html.HiddenFor(model => model.Star1, new { id = "hd_star1" })
+        <input type="checkbox" id="checkbox_star1" onchange='checkbox_Checked("1")'>
+        <label for="checkbox_star1">
+            <i class="fa fa-star fa-star-search fa-lg"></i>
+        </label>
+    </div>
+
+    <div class="divider_search col-sm-12"></div>
+
+    <div class="col-sm-12 nopadding">
+
+        @Html.LabelFor(model => model.Guest_Rating)
+    </div>
+    <div class="col-sm-12 text-center">
+        @Html.TextBoxFor(model => model.Guest_Rating, new { id = "slider_guest_review", Name = "slider_guest_review" })
+    </div>
+
+    <div class="divider_search col-sm-12"></div>
+
+
+    <div class="col-sm-12 nopadding">
+        @Html.LabelFor(model => model.Location)
+    </div>
+    <div class="col-sm-7 nopadding">
+        @Html.DropDownListFor(model => model.distance_city_center, Model.Location, new { @class = "form-control" })
+    </div>
+    <div class="col-sm-5 nopadding_right top-buffer10">
+        @Html.LabelFor(model => model.distance_city_center, new { @class = "text-small" })
+    </div>
+
+    <div class="col-sm-12 nopadding top-buffer10">
+        <div class=" col-sm-7 nopadding">
+            @Html.DropDownListFor(model => model.distance_airport, Model.Location, new { @class = "form-control" })
+        </div>
+        <div class="col-sm-5 nopadding_right top-buffer10">
+            @Html.LabelFor(model => model.distance_airport, new { @class = "text-small" })
+        </div>
+    </div>
+
+    <div class="divider_search col-sm-12"></div>
+
+
+    <div class="col-sm-12 nopadding">
+        @Html.LabelFor(model => model.lst_amenity)
+    </div>
+    <div class="col-sm-12 nopadding">
+        @for (int i = 0; i < Model.lst_amenity.Count; i++)
+        {
+
+            <div class="col-sm-6 nopadding" style="height:30px">
+                <div class="checkbox checkbox-info">
+                    @Html.HiddenFor(model => model.lst_amenity[i].AmenityID)
+                    @Html.HiddenFor(model => model.lst_amenity[i].hotel_selected, new { id = "hd_amenity" + Model.lst_amenity[i].AmenityID })
+                    <input type="checkbox" id="chk_amenity@(Model.lst_amenity[i].AmenityID)" onchange="chk_amenity_changed(@(Model.lst_amenity[i].AmenityID))">
+                    <label for="chk_amenity@(Model.lst_amenity[i].AmenityID)" class="text-small">
+                        @Html.DisplayFor(model => model.lst_amenity[i].AmenityName)
+                    </label>
+                </div>
+            </div>
+        }
+
+    </div>
+
+    <div class="col-sm-10 text-center top-buffer20">
+        <button class="btn btn-primary" type="submit"> <span class="glyphicon glyphicon-search"></span> Search Hotels</button>
+    </div>
+</div> @*END of WELL*@
+}

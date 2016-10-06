@@ -154,7 +154,7 @@ ul.pagination li a.active {
 .nopadding_right {
    padding-right: 0 !important;
 }
-.top-buffer { margin-top:20px; }
+.top-buffer20 { margin-top:20px; }
 
 /************Krajee Input File*/
  .kv-avatar .file-preview-frame, .kv-avatar .file-preview-frame:hover {

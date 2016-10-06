@@ -175,6 +175,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\DAL.cs" />
+    <Compile Include="Controllers\SearchHotelController.cs" />
+    <Compile Include="ViewModels\HotelSearchViewModel.cs" />
+    <Compile Include="ViewModels\SearchResultViewModel.cs" />
     <Content Include="App_Code\HttpParamActionAttribute .cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -265,6 +268,7 @@
     <Compile Include="Models\tbl_room_type.cs" />
     <Compile Include="Models\tbl_sightseeing.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
+    <Compile Include="ViewModels\AdvancedSearchViewModel.cs" />
     <Compile Include="ViewModels\AmenityViewModel.cs" />
     <Compile Include="ViewModels\CityViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
@@ -416,8 +420,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -459,7 +461,9 @@
     <Content Include="Views\Amenity\Index.cshtml" />
     <Content Include="Views\Amenity\_PartialAmenityList.cshtml" />
     <Content Include="Views\Amenity\_PartialDeleteAmenity.cshtml" />
-    <Content Include="Views\Home\ShowSearchResult.cshtml" />
+    <Content Include="Views\SearchHotel\ShowSearchResult.cshtml" />
+    <Content Include="Views\Shared\_PartialAdvancedSearch.cshtml" />
+    <Content Include="Views\SearchHotel\HotelDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

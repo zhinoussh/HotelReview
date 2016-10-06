@@ -457,18 +457,15 @@ namespace HotelAdvice.App_Code
 
         #region Home Page
 
-        public List<HotelViewModel> Search_Hotels_in_city(int city_id)
+        public List<HotelSearchViewModel> Search_Hotels_in_city(int city_id)
         {
-            List<HotelViewModel> lst_result = db.tbl_Hotel.Where(x => x.CityId == city_id).Select(x=>new HotelViewModel
+            List<HotelSearchViewModel> lst_result = db.tbl_Hotel.Where(x => x.CityId == city_id).Select(x => new HotelSearchViewModel
             {
-                HotelName=x.HotelName,
-                HotelAddress = x.HotelAddress,
+                HotelId = x.HotelId,
+                HotelName = x.HotelName,
                 Website = x.Website,
                 HotelStars = x.HotelStars,
-                Description = x.Description,
-                distance_airport = x.distance_airport,
-                distance_citycenter = x.distance_citycenter
-
+                Description = x.Description
             }).ToList();
 
             return lst_result;

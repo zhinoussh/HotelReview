@@ -1,5 +1,27 @@
 ﻿$(document).ready(function () {
 
+    $('.HotelStars').rating({
+        step: 1,
+        size: 's',
+        displayOnly: true,
+        hoverOnClear: false,
+        theme: 'krajee-fa'
+    , 'showClear': false
+    , 'showCaption': false   
+    });
+    
+
+    $('.GuestRating').rating({
+        step:0.5,
+        size: 'xs',
+        //displayOnly: true,
+        hoverOnClear: false,
+        theme: 'krajee-fa'
+    , 'showClear': false
+    , 'showCaption': false,
+        filledStar: '<i class="fa fa-check-circle"></i>',
+        emptyStar: '<i class="fa fa-circle-thin"></i>'
+    });
     $("#slider_guest_review").bootstrapSlider({
         min: 0, max: 5, value:[0,5],step:0.5, focus: true
     });
@@ -92,9 +114,10 @@ $('#modal_login').on('hidden.bs.modal', function (e) { modalIsOpen = false; })
 
 
 var show_login = function (returnUrl) {
+   
     if (returnUrl == null)
         returnUrl = window.location.pathname;
-   
+    
     $.get("/Account/Login?returnUrl=" + returnUrl, function (data) {
 
         $("#modal_container").html(data);
@@ -132,4 +155,23 @@ var SuccessRegister = function (result,e)
     else
         $("#modal_container").html(result);
 }
+var SuccessAjax_AddFavorit = function (result) {
+    //login required
+    if (result.msg=="login_required") {
+        show_login(window.location.href);
+    }
+       //else if()
+}
+$(".dropdown-menu-sort li a").click(function () {
+
+    var dropdown = $(this).parents(".btn-group").find('.selection');
+
+    if ($(this).text() == 'No Matter')
+        dropdown.text('Stars');
+    else
+        dropdown.html($(this).html());
+   // $(this).parents(".btn-group").find('.selection').val($(this).text());
+
+});
+
 

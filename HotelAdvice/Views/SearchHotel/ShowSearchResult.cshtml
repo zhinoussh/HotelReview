@@ -1,0 +1,136 @@
+﻿@model HotelAdvice.ViewModels.SearchResultViewModel
+
+@{
+    ViewBag.Title = "Search Results";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- search bar -->
+<div id="searchbar" class="well" style="margin-top:5%" >
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-9 col-sm-offset-1 nopadding_right">
+                @Html.TextBoxFor(model => model.Destination_Name, new { @class = "form-control", @placeholder = "Find Hotel, City or Destination...", id = "txt_dest_name" })
+            </div>
+            <div class="col-sm-2 nopadding_left">
+                <button type="submit" class="btn btn_search"><i class="glyphicon glyphicon-search"></i>&nbsp;Search</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end search bar -->
+
+
+@*Advanced Search*@
+<div class="col-sm-3 nopadding">
+    @{Html.RenderPartial("_PartialAdvancedSearch", Model.Advnaced_Search);}
+</div>
+@*End of Advanced Search*@
+
+<div class="col-sm-9">
+    <h4>@Model.city_search</h4>
+
+
+    
+@if (Model.lst_hotels != null && Model.lst_hotels.Count > 0)
+{
+    <div class="col-sm-12 nopadding" >
+        <div class="col-sm-3 well well-sort-title" ><h4><i class="fa fa-sort fa-lg"></i> Sort Hotels By:</h4></div>
+        <div class="col-sm-9 well well_sortResult">
+            <button type="button" class="btn btn-sort" data-toggle="tooltip" title="Hotels located closest to Downtown">Distance</button>
+            <button type="button" class="btn btn-sort" style="margin-left:5%">Guest Rating</button>
+
+            <div class="btn-group" style="margin-left:5%">
+                <button type="button" class="btn btn-sort"><span class="selection">Stars</span></button>
+                <button type="button" class="btn btn-sort dropdown-toggle" data-toggle="dropdown" style="width:30px">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-sort" role="menu">
+                    <li><a href="#">No Matter</a></li>
+                    <li><a href="#">5<span class="fa fa-star fa-star-sort"></span> to 1<span class="fa fa-star fa-star-sort"></span></a></li>
+                    <li><a href="#">1<span class="fa fa-star fa-star-sort"></span> to 5<span class="fa fa-star fa-star-sort"></span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+        int count=Model.lst_hotels.Count;
+        for (int i = 0; i < count; i++)
+        {
+            <div id="Hotel_List">
+                @using (Ajax.BeginForm("AddToFavoite", "SearchHotel", new AjaxOptions
+        {
+            UpdateTargetId = "Hotel_List",
+            InsertionMode = InsertionMode.ReplaceWith
+            ,
+            HttpMethod = "Post"
+            ,
+            OnSuccess = "SuccessAjax_AddFavorit"
+        }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.lst_hotels[i].HotelId, new { Name = "hote_id" })
+                    <div class="col-sm-12 well well-result">
+                        <div class="col-sm-3 nopadding" style="height:160px">
+                            <a href="/SearchHotel/HotelDetails/@Model.lst_hotels[i].HotelId" target="_blank">
+                                <img src="~/Upload/@Model.lst_hotels[i].HotelName/main.jpg" alt="Responsive image" onerror='this.onerror=null;this.src="../../Images/empty.gif"'
+                                     class="img_result">
+                            </a>
+                        </div>
+                        <div class="col-sm-9 nopadding">
+                            <div class="col-sm-5">
+                                <h4 style="font-weight:bold; margin:0">
+                                    @Html.ActionLink(Model.lst_hotels[i].HotelName, "HotelDetails", "SearchHotel"
+                    , new { id = Model.lst_hotels[i].HotelId }, new { target = "_blank" })
+                                </h4>
+                                @Html.TextBox("txt_star_hotel", Model.lst_hotels[i].HotelStars, new { @class = "HotelStars" })
+                            </div>
+                            <div class="col-sm-3 col-sm-offset-4 nopadding">
+                                <button class="btn btn-danger col-sm-12 btn-like" type="submit" ><i class="fa fa-heart fa-lg"></i> Like it!</button>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-9">
+                            visit website <i class="glyphicon glyphicon-hand-right"></i>
+                            <a href="http://@Model.lst_hotels[i].Website" target="_blank"> @Model.lst_hotels[i].Website</a>
+                        </div>
+                        <div class="col-sm-9 top-buffer20">
+                            @Model.lst_hotels[i].Description
+                        </div>
+                        <div class="col-sm-9 top-buffer10">
+                            <div class="col-sm-4 ">
+                                @Html.TextBox("txt_rate_hotel", Model.lst_hotels[i].GuestRating, new { @class = "GuestRating" })
+                            </div>
+                            <div class="col-sm-3 nopadding top-buffer10">
+                                <a href="#">999 Reviews</a>
+                            </div>
+                            <div class="col-sm-3 col-sm-offset-2 nopadding">
+                                <a role="button" class="btn btn-primary btn-review col-sm-12" href="/SearchHotel/AddReview/@Model.lst_hotels[i].HotelId"
+                                   style="margin-left:10px">Write a Review <i class="glyphicon glyphicon-pencil"></i></a>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            </div>
+        }
+
+
+}
+else
+{
+            <div class="col-sm-12" style="margin-top:2%">
+                <div class="well well-sm well_noResult">
+                    No Results Found.
+                </div>
+            </div>
+            }
+
+        </div>
+
+
+
+
