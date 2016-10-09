@@ -106,12 +106,14 @@ namespace HotelAdvice.Controllers
                     case SignInStatus.RequiresVerification:
                         return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                     case SignInStatus.Failure:
+                        //return Json(new { fail = "true" },JsonRequestBehavior.AllowGet);
                     default:
                         ModelState.AddModelError("", "Invalid login attempt.");
                         //ViewBag.Fail = "true";
-                        //return PartialView("_PartialLoginModal", model);
+                       // model.Fail_login = "false";
+                        return PartialView("_PartialLoginModal", model);
 
-                        return Json(new { fail = "true" });
+                       // return Json(new { fail = "true" }, JsonRequestBehavior.AllowGet);
 
             }
 

@@ -1,0 +1,145 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model IPagedList<HotelAdvice.ViewModels.HotelSearchViewModel> 
+
+@if (Model != null && Model.Count > 0)
+{
+    @Html.AntiForgeryToken()
+    
+    //Sort Buttons
+    <div class="col-sm-12 nopadding">
+        <div class="col-sm-3 well well-sort-title"><h4><i class="fa fa-sort fa-lg"></i> Sort Hotels By:</h4></div>
+        <div class="col-sm-9 well well_sortResult">
+ 
+            <div class="col-sm-3">
+                @Ajax.ActionLink("Distance", "ShowSearchResult", new { Sorting_Order = "distance", city_id = Request["city_id"] },
+                            new AjaxOptions
+                            {
+                                HttpMethod = "GET",
+                                UpdateTargetId = "table_container",
+                                InsertionMode = InsertionMode.Replace
+                            }, new { @class = "btn btn-sort", @title = "Hotels located closest to Downtown" })
+            </div>
+               <div class="col-sm-3">
+                     @Ajax.ActionLink("Guest Rating", "ShowSearchResult", new { Sorting_Order = "rating", city_id = Request["city_id"] }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "table_container", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-sort" })
+            </div>
+
+            <div class="col-sm-5 btn-group" >
+                <button type="button" class="btn btn-sort"><span class="selection">Stars</span></button>
+                <button type="button" class="btn btn-sort dropdown-toggle" data-toggle="dropdown" style="width:30px">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-sort" role="menu">
+                    <li><a href="#">No Matter</a></li>
+                    <li>
+                         @Ajax.ActionLink("5 to 1", "ShowSearchResult", new { Sorting_Order = "5to1", city_id = Request["city_id"] },
+                            new AjaxOptions
+                            {
+                                HttpMethod = "GET",
+                                UpdateTargetId = "table_container",
+                                InsertionMode = InsertionMode.Replace
+                            })
+                    </li>
+                    <li>
+                   
+                    @Ajax.ActionLink("1 to 5", "ShowSearchResult", new { Sorting_Order = "1to5", city_id = Request["city_id"] },
+                            new AjaxOptions
+                            {
+                                HttpMethod = "GET",
+                                UpdateTargetId = "table_container",
+                                InsertionMode = InsertionMode.Replace
+                            })
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+    int count = Model.Count;
+    for (int i = 0; i < count; i++)
+    {
+     
+               
+                @Html.HiddenFor(model => model[i].HotelId, new { Name = "hote_id" })
+                <div class="col-sm-12 well well-result">
+                    <div class="col-sm-3 nopadding" style="height:160px">
+                        <a href="/SearchHotel/HotelDetails/@Model[i].HotelId" target="_blank">
+                            <img src="~/Upload/@Model[i].HotelName/main.jpg" alt="Responsive image" onerror='this.onerror=null;this.src="../../Images/empty.gif"'
+                                 class="img_result">
+                        </a>
+                    </div>
+                    <div class="col-sm-9 nopadding">
+                        <div class="col-sm-5">
+                            <h4 style="font-weight:bold; margin:0">
+                                @Html.ActionLink(Model[i].HotelName, "HotelDetails", "SearchHotel"
+                    , new { id = Model[i].HotelId }, new { target = "_blank" })
+                            </h4>
+                            @Html.TextBox("txt_star_hotel", Model[i].HotelStars, new { @class = "HotelStars" })
+                        </div>
+                        <div class="col-sm-3 col-sm-offset-4 nopadding">
+                            <button class="btn btn-danger col-sm-12 btn-outline" type="submit"><i class="fa fa-heart fa-lg"></i> Like it!</button>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-9">
+                        visit website <i class="glyphicon glyphicon-hand-right"></i>
+                        <a href="http://@Model[i].Website" target="_blank"> @Model[i].Website</a>
+                    </div>
+                    <div class="col-sm-9 top-buffer20">
+                        @Model[i].Description
+                    </div>
+                    <div class="col-sm-9 top-buffer10">
+                        <div class="col-sm-4 ">
+                            @Html.TextBox("txt_rate_hotel", Model[i].GuestRating, new { @class = "GuestRating" })
+                        </div>
+                        <div class="col-sm-3 nopadding top-buffer10">
+                            <a href="#">999 Reviews</a>
+                        </div>
+                        <div class="col-sm-3 col-sm-offset-2 nopadding">
+                            <a role="button" class="btn btn-primary btn-review col-sm-12" href="/SearchHotel/AddReview/@Model[i].HotelId"
+                               style="margin-left:10px">Write a Review<i class="glyphicon glyphicon-pencil"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+
+    }
+
+    if (Model.PageCount > 1)
+    {
+        <div class="col-sm-12 text-center">
+            @Html.PagedListPager(Model, page => Url.Action("ShowSearchResult", new { page=page,city_id=Request["city_id"] }),
+    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
+    new PagedListRenderOptions
+    {
+        DisplayLinkToFirstPage = PagedListDisplayMode.IfNeeded,
+        DisplayLinkToLastPage = PagedListDisplayMode.IfNeeded,
+        LinkToFirstPageFormat = "First",
+        LinkToLastPageFormat = "Last",
+        MaximumPageNumbersToDisplay = 10,
+        DisplayEllipsesWhenNotShowingAllPageNumbers = true,
+        EllipsesFormat = "&#8230;"
+    },
+    new AjaxOptions
+    {
+        HttpMethod = "GET",
+        UpdateTargetId = "table_container",
+        InsertionMode = InsertionMode.Replace
+    }))
+        </div>
+    }
+  
+
+
+
+}
+else
+{
+    <div class="col-sm-12" style="margin-top:2%">
+        <div class="well well-sm well_noResult">
+            No Results Found.
+        </div>
+    </div>
+}

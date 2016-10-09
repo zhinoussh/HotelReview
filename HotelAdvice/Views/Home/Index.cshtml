@@ -99,7 +99,8 @@
         @foreach (var item in Model.lst_city)
         {
             <li>
-            @Html.ActionLink(item.cityName, "SearchHotels_byCity", "SearchHotel", new { id = @item.cityID },null)
+            @Html.ActionLink(item.cityName, "ShowSearchResult", "SearchHotel", new { city_id = @item.cityID }, null)
+              
             </li>
         }
        

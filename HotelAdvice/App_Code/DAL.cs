@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using HotelAdvice.Models;
 using HotelAdvice.ViewModels;
 
@@ -465,7 +464,9 @@ namespace HotelAdvice.App_Code
                 HotelName = x.HotelName,
                 Website = x.Website,
                 HotelStars = x.HotelStars,
-                Description = x.Description
+                Description = x.Description,
+                distance_citycenter=x.distance_citycenter
+
             }).ToList();
 
             return lst_result;

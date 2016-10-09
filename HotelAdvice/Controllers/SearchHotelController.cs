@@ -5,16 +5,64 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using HotelAdvice.App_Code;
+using PagedList;
 
 namespace HotelAdvice.Controllers
 {
     public class SearchHotelController : Controller
     {
         DAL db = new DAL();
+        private const int defaultPageSize = 3;
 
         [HttpGet]
-        public ActionResult ShowSearchResult(SearchResultViewModel vm)
+        public ActionResult ShowSearchResult(int city_id, int? page, string Sorting_Order)
         {
+            SearchResultViewModel vm = new SearchResultViewModel();
+            //this is first time page load and not updating partial
+            if (!Request.IsAjaxRequest())
+            {
+                vm.Advnaced_Search = Set_Advanced_Search();
+                List<string> city_prop = db.get_city_byId(city_id);
+                if (city_prop != null)
+                    vm.city_search = "Hotels in " + city_prop[0];
+            }
+
+            //get hotel list in this city_id
+            List<HotelSearchViewModel> lst_hotels = db.Search_Hotels_in_city(city_id);
+
+            //sort
+            switch (Sorting_Order)
+            {
+                case "distance":
+                    lst_hotels = lst_hotels.OrderBy(x => x.distance_citycenter).ToList();
+                    break;
+
+                case "rating":
+                    lst_hotels = lst_hotels.OrderByDescending(x => x.GuestRating).ToList();
+                    break;
+                case "5to1":
+                    lst_hotels = lst_hotels.OrderByDescending(x => x.HotelStars).ToList();
+                    break;
+                case "1to5":
+                    lst_hotels = lst_hotels.OrderBy(x => x.HotelStars).ToList();
+                    break;
+                default:
+                    break;
+
+            }
+
+            //pagination
+            int currentPageIndex = page.HasValue ? page.Value : 1;
+            vm.paged_list_hotels = lst_hotels.ToPagedList(currentPageIndex, defaultPageSize);
+            
+
+            return Request.IsAjaxRequest() ? (ActionResult)PartialView("_PartialHotelListResults", vm.paged_list_hotels) :
+             View(vm);
+        }
+
+        public ActionResult ShowSearchResult( SearchResultViewModel vm)
+        {
+           // vm.paged_list_hotels = vm.lst_hotels.ToPagedList(currentPageIndex, defaultPageSize);
 
             return View(vm);
         }
@@ -37,15 +85,16 @@ namespace HotelAdvice.Controllers
         [HttpGet]
         public ActionResult SearchHotels_byCity(int id)
         {
-            SearchResultViewModel vm = new SearchResultViewModel();
-            vm.Advnaced_Search = Set_Advanced_Search();
-            List<string> city_prop = db.get_city_byId(id);
-            if (city_prop != null)
-                vm.city_search = "Hotels in " + city_prop[0];
+            //SearchResultViewModel vm = new SearchResultViewModel();
+            //vm.Advnaced_Search = Set_Advanced_Search();
+            //List<string> city_prop = db.get_city_byId(id);
+            //if (city_prop != null)
+            //    vm.city_search = "Hotels in " + city_prop[0];
 
-            vm.lst_hotels = db.Search_Hotels_in_city(id);
-
-             return View("ShowSearchResult", vm);
+            //vm.lst_hotels = db.Search_Hotels_in_city(id);
+            //vm.paged_list_hotels = vm.lst_hotels.ToPagedList(1, defaultPageSize);
+            
+             return View("ShowSearchResult");
         }
 
         [HttpPost]

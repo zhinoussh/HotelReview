@@ -17,6 +17,7 @@ namespace HotelAdvice.ViewModels
         public string Description { get; set; }
 
         public float GuestRating { get; set; }
+        public double? distance_citycenter { get; set; }
         public int num_reviews { get; set; }
       //  public bool is_favorite { get; set; }
 

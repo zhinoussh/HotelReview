@@ -1,27 +1,7 @@
 ﻿$(document).ready(function () {
 
-    $('.HotelStars').rating({
-        step: 1,
-        size: 's',
-        displayOnly: true,
-        hoverOnClear: false,
-        theme: 'krajee-fa'
-    , 'showClear': false
-    , 'showCaption': false   
-    });
-    
+    Set_Rating_Plugins();
 
-    $('.GuestRating').rating({
-        step:0.5,
-        size: 'xs',
-        //displayOnly: true,
-        hoverOnClear: false,
-        theme: 'krajee-fa'
-    , 'showClear': false
-    , 'showCaption': false,
-        filledStar: '<i class="fa fa-check-circle"></i>',
-        emptyStar: '<i class="fa fa-circle-thin"></i>'
-    });
     $("#slider_guest_review").bootstrapSlider({
         min: 0, max: 5, value:[0,5],step:0.5, focus: true
     });
@@ -78,6 +58,35 @@
 
 });
 
+$(document).ajaxComplete(function () {
+
+    Set_Rating_Plugins();
+});
+
+function Set_Rating_Plugins() {
+    $('.HotelStars').rating({
+        step: 1,
+        size: 's',
+        displayOnly: true,
+        hoverOnClear: false,
+        theme: 'krajee-fa'
+  , 'showClear': false
+  , 'showCaption': false
+    });
+
+
+    $('.GuestRating').rating({
+        step: 0.5,
+        size: 'xs',
+        //displayOnly: true,
+        hoverOnClear: false,
+        theme: 'krajee-fa'
+    , 'showClear': false
+    , 'showCaption': false,
+        filledStar: '<i class="fa fa-check-circle"></i>',
+        emptyStar: '<i class="fa fa-circle-thin"></i>'
+    });
+}
 
 $(window).on('load', function () {
     var returnUrl = $("#hd_return_url").val();
@@ -140,12 +149,18 @@ var show_signUp = function () {
 var SuccessLogin = function (result) {
     if (result.url)
         window.location.href = result.url;
-    if (result.fail)
+    else {
+        $("#modal_container").html(result);
         $('#login-alert').fadeIn(500);
-  //  else {
-      //  $("#modal_container").html(result);
-    //}
+        
+    }
+   
+   // if (result.fail=="true")
+       // $('#login-alert').fadeIn(500);
+   
 }
+
+
 
 var SuccessRegister = function (result,e)
 {
