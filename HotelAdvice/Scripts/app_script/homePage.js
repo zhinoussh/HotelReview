@@ -177,6 +177,11 @@ var SuccessAjax_AddFavorit = function (result) {
     }
        //else if()
 }
+
+var Success_paging_Results = function (result) {
+    $('html, body').animate({ scrollTop: 0 }, 0);
+}
+
 $(".dropdown-menu-sort li a").click(function () {
 
     var dropdown = $(this).parents(".btn-group").find('.selection');

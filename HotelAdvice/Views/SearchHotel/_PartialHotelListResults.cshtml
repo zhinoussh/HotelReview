@@ -1,27 +1,37 @@
-﻿@using PagedList
-@using PagedList.Mvc
-@model IPagedList<HotelAdvice.ViewModels.HotelSearchViewModel> 
+﻿@using PagedList;
+@using PagedList.Mvc;
+@using HotelAdvice.ViewModels;
+@model IPagedList<HotelSearchViewModel>
 
-@if (Model != null && Model.Count > 0)
-{
-    @Html.AntiForgeryToken()
+
     
+    @if (Model != null && Model.Count > 0)
+    {
+   
+                  
     //Sort Buttons
     <div class="col-sm-12 nopadding">
         <div class="col-sm-3 well well-sort-title"><h4><i class="fa fa-sort fa-lg"></i> Sort Hotels By:</h4></div>
         <div class="col-sm-9 well well_sortResult">
  
             <div class="col-sm-3">
-                @Ajax.ActionLink("Distance", "ShowSearchResult", new { Sorting_Order = "distance", city_id = Request["city_id"] },
-                            new AjaxOptions
-                            {
-                                HttpMethod = "GET",
-                                UpdateTargetId = "table_container",
-                                InsertionMode = InsertionMode.Replace
-                            }, new { @class = "btn btn-sort", @title = "Hotels located closest to Downtown" })
+                @*<button type="submit" class="btn btn-sort" name="sort" value="distance" data-toggle="tooltip" title="Hotels located closest to Downtown">Distance</button>*@
+                @Ajax.ActionLink("Distance", "HotelResults", new { sort = "distance", page = Request["page"], city_id = Request["city_id"] }
+                , new AjaxOptions
+                {
+                    HttpMethod = "GET",
+                    UpdateTargetId = "table_container",
+                    InsertionMode = InsertionMode.Replace
+                }, new { @class = "btn btn-sort", title = "Hotels located closest to Downtown" })
             </div>
                <div class="col-sm-3">
-                     @Ajax.ActionLink("Guest Rating", "ShowSearchResult", new { Sorting_Order = "rating", city_id = Request["city_id"] }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "table_container", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-sort" })
+                   @Ajax.ActionLink("Guest Rating", "HotelResults", new { sort = "rating", page = Request["page"], city_id = Request["city_id"] }
+                , new AjaxOptions
+                {
+                    HttpMethod = "GET",
+                    UpdateTargetId = "table_container",
+                    InsertionMode = InsertionMode.Replace
+                }, new { @class = "btn btn-sort"})
             </div>
 
             <div class="col-sm-5 btn-group" >
@@ -32,37 +42,34 @@
                 <ul class="dropdown-menu dropdown-menu-sort" role="menu">
                     <li><a href="#">No Matter</a></li>
                     <li>
-                         @Ajax.ActionLink("5 to 1", "ShowSearchResult", new { Sorting_Order = "5to1", city_id = Request["city_id"] },
-                            new AjaxOptions
-                            {
-                                HttpMethod = "GET",
-                                UpdateTargetId = "table_container",
-                                InsertionMode = InsertionMode.Replace
-                            })
+                        @Ajax.ActionLink("5 to 1 Stars", "HotelResults", new { sort = "5to1", page = Request["page"], city_id = Request["city_id"] }
+                , new AjaxOptions
+                {
+                    HttpMethod = "GET",
+                    UpdateTargetId = "table_container",
+                    InsertionMode = InsertionMode.Replace
+                }, new { @class = "btn btn-sort" })
                     </li>
                     <li>
-                   
-                    @Ajax.ActionLink("1 to 5", "ShowSearchResult", new { Sorting_Order = "1to5", city_id = Request["city_id"] },
-                            new AjaxOptions
-                            {
-                                HttpMethod = "GET",
-                                UpdateTargetId = "table_container",
-                                InsertionMode = InsertionMode.Replace
-                            })
+                        @Ajax.ActionLink("1 to 5 Stars", "HotelResults", new { sort = "1to5", page = Request["page"], city_id = Request["city_id"] }
+                , new AjaxOptions
+                {
+                    HttpMethod = "GET",
+                    UpdateTargetId = "table_container",
+                    InsertionMode = InsertionMode.Replace
+                }, new { @class = "btn btn-sort" })
                     </li>
                 </ul>
             </div>
         </div>
     </div>
 
-
+        
 
     int count = Model.Count;
     for (int i = 0; i < count; i++)
     {
      
-               
-                @Html.HiddenFor(model => model[i].HotelId, new { Name = "hote_id" })
                 <div class="col-sm-12 well well-result">
                     <div class="col-sm-3 nopadding" style="height:160px">
                         <a href="/SearchHotel/HotelDetails/@Model[i].HotelId" target="_blank">
@@ -74,7 +81,7 @@
                         <div class="col-sm-5">
                             <h4 style="font-weight:bold; margin:0">
                                 @Html.ActionLink(Model[i].HotelName, "HotelDetails", "SearchHotel"
-                    , new { id = Model[i].HotelId }, new { target = "_blank" })
+                            , new { id = Model[i].HotelId }, new { target = "_blank" })
                             </h4>
                             @Html.TextBox("txt_star_hotel", Model[i].HotelStars, new { @class = "HotelStars" })
                         </div>
@@ -106,19 +113,24 @@
                 </div>
 
     }
+    }
 
-    if (Model.PageCount > 1)
+    @if (Model.PageCount > 1)
     {
+       
         <div class="col-sm-12 text-center">
-            @Html.PagedListPager(Model, page => Url.Action("ShowSearchResult", new { page=page,city_id=Request["city_id"] }),
-    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
+            @Html.PagedListPager(Model, page => Url.Action("HotelResults"
+             , new RouteValueDictionary(){ {"page", page}, {"sort" ,Request["sort"] }
+               ,{"city_id",Request["city_id"]}
+           })
+   , PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
     new PagedListRenderOptions
     {
         DisplayLinkToFirstPage = PagedListDisplayMode.IfNeeded,
         DisplayLinkToLastPage = PagedListDisplayMode.IfNeeded,
         LinkToFirstPageFormat = "First",
         LinkToLastPageFormat = "Last",
-        MaximumPageNumbersToDisplay = 10,
+        MaximumPageNumbersToDisplay = 3,
         DisplayEllipsesWhenNotShowingAllPageNumbers = true,
         EllipsesFormat = "&#8230;"
     },
@@ -126,20 +138,23 @@
     {
         HttpMethod = "GET",
         UpdateTargetId = "table_container",
-        InsertionMode = InsertionMode.Replace
+        InsertionMode = InsertionMode.Replace,
+        OnSuccess = "Success_paging_Results"
     }))
         </div>
+    }    
+    else
+    {
+            <div class="col-sm-12" style="margin-top:2%">
+                <div class="well well-sm well_noResult">
+                    No Results Found.
+                </div>
+            </div>
     }
+
+   
   
 
 
 
-}
-else
-{
-    <div class="col-sm-12" style="margin-top:2%">
-        <div class="well well-sm well_noResult">
-            No Results Found.
-        </div>
-    </div>
-}
+

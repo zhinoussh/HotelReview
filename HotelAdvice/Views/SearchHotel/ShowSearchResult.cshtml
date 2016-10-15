@@ -1,5 +1,5 @@
 ﻿
-@model HotelAdvice.ViewModels.SearchResultViewModel
+@model HotelAdvice.ViewModels.SearchPageViewModel
 
 @{
     ViewBag.Title = "Search Results";
@@ -12,7 +12,7 @@
     <div class="form-horizontal">
         <div class="form-group">
             <div class="col-sm-9 col-sm-offset-1 nopadding_right">
-                @Html.TextBoxFor(model => model.Destination_Name, new { @class = "form-control", @placeholder = "Find Hotel, City or Destination...", id = "txt_dest_name" })
+                @Html.TextBoxFor(model => model.Destination_Name, new { @class = "form-control focus", @placeholder = "Find Hotel, City or Destination...", id = "txt_dest_name" })
             </div>
             <div class="col-sm-2 nopadding_left">
                 <button type="submit" class="btn btn_search"><i class="glyphicon glyphicon-search"></i>&nbsp;Search</button>
@@ -31,7 +31,7 @@
 
 @*Results*@
 <div class="col-sm-9">
-    <h4>@Model.city_search</h4>
+    <h4>@Model.city_name</h4>
 
     <div id="table_container" class="col-sm-12">
         @{Html.RenderPartial("_PartialHotelListResults", Model.paged_list_hotels);}
