@@ -22,6 +22,8 @@ namespace HotelAdvice.Areas.Admin
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
+                ,
+                  new[] { "HotelAdvice.Areas.Admin.Controllers" }
             );
         }
 	}
