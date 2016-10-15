@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using HotelAdvice.Models;
 using HotelAdvice.ViewModels;
+using HotelAdvice.Areas.Admin.ViewModels;
 using HotelAdvice.App_Code;
 
 namespace HotelAdvice.Controllers

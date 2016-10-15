@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using HotelAdvice.Models;
 using System.Web.Mvc;
 
-namespace HotelAdvice.ViewModels
+namespace HotelAdvice.Areas.Admin.ViewModels
 {
     public class HotelViewModel
     {

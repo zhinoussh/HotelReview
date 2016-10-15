@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 
-namespace HotelAdvice.ViewModels
+namespace HotelAdvice.Areas.Admin.ViewModels
 {
     public class AmenityViewModel
     {

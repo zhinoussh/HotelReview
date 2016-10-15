@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using HotelAdvice.ViewModels;
+using HotelAdvice.Areas.Admin.ViewModels;
 using HotelAdvice.App_Code;
 using PagedList;
 
-namespace HotelAdvice.Controllers
+namespace HotelAdvice.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Administrator")]
     public class CityController : Controller

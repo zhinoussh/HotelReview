@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using HotelAdvice.App_Code;
 using PagedList;
+using HotelAdvice.Areas.Admin.ViewModels;
 
 namespace HotelAdvice.Controllers
 {

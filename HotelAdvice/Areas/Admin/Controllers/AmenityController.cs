@@ -9,10 +9,10 @@ using System.Web.Mvc;
 using HotelAdvice;
 using HotelAdvice.Models;
 using HotelAdvice.App_Code;
-using HotelAdvice.ViewModels;
+using HotelAdvice.Areas.Admin.ViewModels;
 using PagedList;
 
-namespace HotelAdvice.Controllers
+namespace HotelAdvice.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Administrator")]
     public class AmenityController : Controller

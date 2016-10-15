@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using HotelAdvice.Models;
+using HotelAdvice.Areas.Admin.ViewModels;
 using HotelAdvice.ViewModels;
 
 namespace HotelAdvice.App_Code

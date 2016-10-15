@@ -5,7 +5,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
-namespace HotelAdvice.Controllers
+namespace HotelAdvice.Areas.Admin.Controllers
 {
     [Authorize(Roles="Administrator")]
     public class AdminController : Controller

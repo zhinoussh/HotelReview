@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace HotelAdvice.Areas.Admin
 {
-	public class AdminAreaRegistration
+	public class AdminAreaRegistration:AreaRegistration
 	{
         public override string AreaName
         {
