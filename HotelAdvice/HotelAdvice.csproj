@@ -176,6 +176,7 @@
   <ItemGroup>
     <Compile Include="App_Code\DAL.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\HomePage\HomePageAreaRegistration.cs" />
     <Compile Include="Controllers\SearchHotelController.cs" />
     <Compile Include="ViewModels\HotelSearchViewModel.cs" />
     <Compile Include="ViewModels\SearchPageViewModel.cs" />
@@ -385,6 +386,7 @@
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\HomePage\Views\web.config" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Scripts\fileinput.min.js" />
     <Content Include="Scripts\jquery-3.1.0.js" />
@@ -469,6 +471,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\HomePage\Controllers\" />
+    <Folder Include="Areas\HomePage\Models\" />
+    <Folder Include="Areas\HomePage\Views\Shared\" />
     <Folder Include="Helpers\" />
     <Folder Include="Upload\" />
   </ItemGroup>
