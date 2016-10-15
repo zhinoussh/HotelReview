@@ -1,0 +1,50 @@
+﻿@using PagedList
+@model IPagedList<HotelAdvice.ViewModels.CityViewModel> 
+@{
+    ViewBag.Title = "City Management";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+        <h2 class="col-sm-2" >City List</h2>
+ 
+  
+<div class="col-sm-12">
+    <div class="alert alert-success" role="alert" id="div_alert" style="display:none;">
+        <a href="#" id="close_alert" class="close">&times;</a>
+        <label id="alert_success" style="margin-right:5px"></label>
+    </div>
+</div>
+
+@using (Ajax.BeginForm("Index", new AjaxOptions
+    {
+        HttpMethod = "GET",
+        UpdateTargetId = "table_container",
+        InsertionMode = InsertionMode.Replace
+    }))
+{
+
+    <div class="col-sm-5">
+        <div class="input-group">
+            <input type="text" id="filter" name="filter" class="form-control" placeholder="Filter cities..." value="@ViewBag.filter" />
+
+            <span class="input-group-btn">
+                <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-search"></span> Search</button>
+            </span>
+        </div>
+    </div>
+}
+<div class="col-sm-2 col-sm-offset-5 text-right">
+    <button type="button" class="btn btn-success" id="btn_add_new" data-url="/City/ADD_New_City">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add New
+    </button>
+</div>
+<div id="table_container" class="col-sm-12 top-buffer20">
+
+    @Html.Partial("_PartialCityList", Model)
+</div>
+
+<div id="MyModal"></div>
+ 
+

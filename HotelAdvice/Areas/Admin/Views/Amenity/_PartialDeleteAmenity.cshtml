@@ -1,0 +1,41 @@
+﻿@model HotelAdvice.ViewModels.AmenityViewModel
+
+{
+    @Layout=null;
+}
+ @Ajax.BeginForm("Delete_Amenity", "Amenity", new AjaxOptions { 
+        HttpMethod="POST",
+        InsertionMode=InsertionMode.ReplaceWith,
+        OnSuccess = "Success_AjaxReturn"
+})
+{
+@Html.AntiForgeryToken()
+
+    <div class="modal fade modal_main" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header modal-header-danger">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">
+                    <span class="glyphicon glyphicon-trash"></span> Delete Hotel Amenity
+                </h4>
+            </div>
+            <div class="modal-body">
+                Are you shure to delete?
+            </div>
+            <div class="modal-footer ">
+                <button type="submit" class="btn btn-default">Yes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+@Html.HiddenFor(model => model.AmenityID, new { id = "hd_amenity_id" })
+@Html.HiddenFor(model => model.CurrentPage)
+@Html.HiddenFor(model => model.CurrentFilter)
+}

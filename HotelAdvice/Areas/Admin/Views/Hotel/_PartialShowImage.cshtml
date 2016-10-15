@@ -1,0 +1,24 @@
+﻿@model HotelAdvice.ViewModels.HotelImagesViewModel
+
+@{
+    Layout = null;
+}
+
+<div class="modal fade modal_main" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header modal-header-photo">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <img src='@Url.Content("../../Upload/" + Model.PhotoName)' alt="" style="width:100%; height:auto" />
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
