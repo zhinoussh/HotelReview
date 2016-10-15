@@ -311,13 +311,19 @@ cursor:pointer;
     color:#323232;
     border-color:#323232;
 }
-.btn-sort:focus,.btn-sort:hover {
-    background-color:#c6c2c2;
+.btn-sort:hover{
+    background-color:#dedede;
 }
+.dropdown-menu-sort{
+padding:0;
+text-align:center;
+min-width:120px;
+}
+
+
 .dropdown-menu-sort li a:hover {
     background-color:#c6c2c2;
-    }
-
+}
 .well-sort-title {
 background-color:#585757;
  color:#fff;

@@ -99,7 +99,7 @@ namespace HotelAdvice.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddToFavoite(int hote_id)
+        public ActionResult AddToFavoite(int hotel_id)
         {
             if (!User.Identity.IsAuthenticated)
             {
@@ -111,8 +111,9 @@ namespace HotelAdvice.Controllers
 
         public ActionResult HotelDetails(int id)
         {
+            HotelViewModel vm=db.get_hotel_byId(id);
 
-            return View();
+            return View(vm);
         }
         private AdvancedSearchViewModel Set_Advanced_Search()
         {
