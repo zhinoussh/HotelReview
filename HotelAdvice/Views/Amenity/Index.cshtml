@@ -15,10 +15,10 @@
     </div>
 </div>
 
-<div id="table_container" class="col-sm-6 top-buffer">
+<div id="table_container" class="col-sm-6 top-buffer20">
     @Html.Partial("_PartialAmenityList", Model)
 </div>
-<div class="col-sm-6 top-buffer">
+<div class="col-sm-6 top-buffer20">
 
     @using (Ajax.BeginForm("ADD_New_Amenity", new AjaxOptions
     {
@@ -49,7 +49,7 @@
     }))
     {
 
-        <div class="col-sm-12  top-buffer">
+        <div class="col-sm-12  top-buffer20">
             <div class="input-group">
                 <input type="text" id="filter" name="filter" class="form-control" placeholder="Filter Amenities..." value="@ViewBag.filter" />
 

@@ -36,6 +36,7 @@ namespace HotelAdvice.ViewModels
         public string Website { get; set; }
         public int HotelStars { get; set; }
 
+
         [StringLength(int.MaxValue, ErrorMessage = "max length has been exceeded.")]
         public string Description { get; set; }
 

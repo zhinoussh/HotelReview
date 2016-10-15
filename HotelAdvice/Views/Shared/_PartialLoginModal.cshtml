@@ -15,6 +15,7 @@
                         HttpMethod = "Post"
                         ,
                         OnSuccess = "SuccessLogin"
+                        
                     }, new { id = "frm_login", returnUrl = Request.QueryString["returnUrl"] }))
     {
         @Html.AntiForgeryToken()
@@ -57,7 +58,7 @@
 
                 @Html.LabelFor(m => m.RememberMe)
 
-                @Html.HiddenFor(m=>m.returnUrl)
+                @Html.HiddenFor(m => m.returnUrl)
             </div>
 
             <div class="row">

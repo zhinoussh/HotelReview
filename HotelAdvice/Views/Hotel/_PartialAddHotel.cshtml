@@ -40,7 +40,7 @@
                         <div class="tab-content">
                             <!-- TAB 1- General Description-->
                             <div class="tab-pane active" id="tab_general">
-                                <div class="row top-buffer">
+                                <div class="row top-buffer20">
 
                                     <div class="col-sm-6">
                                         <div class="form-group">
@@ -120,7 +120,7 @@
                                         </div>
                                     </div>
 
-                                <div class="row top-buffer">
+                                <div class="row top-buffer20">
                                     <div class="col-sm-6">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
@@ -139,7 +139,7 @@
 
                                 </div>
 
-                                <div class="row top-buffer">
+                                <div class="row top-buffer20">
                                     <div class="col-sm-12">
                                         <h5><strong>Location & Address</strong> </h5>
                                     </div>
@@ -176,7 +176,7 @@
 
                                     </div>
                                 </div>
-                                <div class="row top-buffer">
+                                <div class="row top-buffer20">
 
                                     <div class="col-sm-12 ">
                                         @Html.TextAreaFor(model => model.HotelAddress, new { @placeholder = "Address", @class = "form-control", style = "min-height:100px" })
@@ -187,7 +187,7 @@
 
                             <!-- TAB 3- Restaurants and Rooms-->
                             <div class="tab-pane" id="tab_restaurant">
-                                <div class="row top-buffer">
+                                <div class="row top-buffer20">
 
                                         <div class="col-sm-12">
                                             <div class="input-group">
@@ -202,7 +202,7 @@
                                            
                                         </div>
 
-                                    <div class="col-sm-12 top-buffer">
+                                    <div class="col-sm-12 top-buffer20">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-bed"></i></span>
                                             @Html.TextBoxFor(model => model.rooms, new
@@ -220,7 +220,7 @@
 
                             <!-- TAB 4- Amenities & SightSeeing-->
                             <div class="tab-pane" id="tab_amenity">
-                                <div class="row top-buffer">
+                                <div class="row top-buffer20">
 
                                     <div class="col-sm-12">
                                         @for (int i = 0; i < Model.amenities.Count;i++ )
@@ -243,7 +243,7 @@
 
                                     <div class="divider_search"></div>
 
-                                    <div class="col-sm-12 top-buffer">
+                                    <div class="col-sm-12 top-buffer20">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-eye-open"></i></span>
                                             @Html.TextBoxFor(model => model.sightseeing, new

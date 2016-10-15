@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Iran Hotel Advisor</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/StarRating")
+
+
 </head>
 <body>
 
@@ -18,7 +21,7 @@
     </div>
      <!-- END MODAL-->
 
-    <div class="navbar navbar-default navbar-fixed-top" id="header">
+    <div class="navbar navbar-inverse navbar-fixed-top" id="header">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -52,6 +55,9 @@
     @Scripts.Render("~/bundles/modernizr")
      @Scripts.Render("~/bundles/bootstrap")
      @Scripts.Render("~/bundles/HomePage")
+    @Scripts.Render("~/bundles/StarRating")
+
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

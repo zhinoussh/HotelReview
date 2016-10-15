@@ -27,7 +27,7 @@
 }, new { enctype = "multipart/form-data" ,id="frm_add_hotel"}))
 {
 
-    <div class="col-sm-12 top-buffer form-group">
+    <div class="col-sm-12 top-buffer20 form-group">
       
             @Html.TextBoxFor(model => model.image, new { id = "inputimages", name = "inputimages[]", type = "file"
                                                          ,@class = "file-loading",
@@ -37,7 +37,7 @@
         
     </div>
 
-    <div class="col-sm-12 top-buffer">
+    <div class="col-sm-12 top-buffer20">
 
         @{
             if (Model.uploaded_images != null && Model.uploaded_images.Length>0)
@@ -78,7 +78,7 @@
             }
             else
             {
-                <div class="well well-sm top-buffer">
+                <div class="well well-sm top-buffer20">
                     No Image...
                 </div>
 

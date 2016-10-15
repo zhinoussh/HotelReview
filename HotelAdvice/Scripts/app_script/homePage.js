@@ -1,5 +1,7 @@
 ﻿$(document).ready(function () {
 
+    Set_Rating_Plugins();
+
     $("#slider_guest_review").bootstrapSlider({
         min: 0, max: 5, value:[0,5],step:0.5, focus: true
     });
@@ -56,6 +58,35 @@
 
 });
 
+$(document).ajaxComplete(function () {
+
+    Set_Rating_Plugins();
+});
+
+function Set_Rating_Plugins() {
+    $('.HotelStars').rating({
+        step: 1,
+        size: 's',
+        displayOnly: true,
+        hoverOnClear: false,
+        theme: 'krajee-fa'
+  , 'showClear': false
+  , 'showCaption': false
+    });
+
+
+    $('.GuestRating').rating({
+        step: 0.5,
+        size: 'xs',
+        //displayOnly: true,
+        hoverOnClear: false,
+        theme: 'krajee-fa'
+    , 'showClear': false
+    , 'showCaption': false,
+        filledStar: '<i class="fa fa-check-circle"></i>',
+        emptyStar: '<i class="fa fa-circle-thin"></i>'
+    });
+}
 
 $(window).on('load', function () {
     var returnUrl = $("#hd_return_url").val();
@@ -92,9 +123,10 @@ $('#modal_login').on('hidden.bs.modal', function (e) { modalIsOpen = false; })
 
 
 var show_login = function (returnUrl) {
+   
     if (returnUrl == null)
         returnUrl = window.location.pathname;
-   
+    
     $.get("/Account/Login?returnUrl=" + returnUrl, function (data) {
 
         $("#modal_container").html(data);
@@ -117,12 +149,18 @@ var show_signUp = function () {
 var SuccessLogin = function (result) {
     if (result.url)
         window.location.href = result.url;
-    if (result.fail)
+    else {
+        $("#modal_container").html(result);
         $('#login-alert').fadeIn(500);
-  //  else {
-      //  $("#modal_container").html(result);
-    //}
+        
+    }
+   
+   // if (result.fail=="true")
+       // $('#login-alert').fadeIn(500);
+   
 }
+
+
 
 var SuccessRegister = function (result,e)
 {
@@ -132,4 +170,28 @@ var SuccessRegister = function (result,e)
     else
         $("#modal_container").html(result);
 }
+var SuccessAjax_AddFavorit = function (result) {
+    //login required
+    if (result.msg=="login_required") {
+        show_login(window.location.href);
+    }
+       //else if()
+}
+
+var Success_paging_Results = function (result) {
+    $('html, body').animate({ scrollTop: 0 }, 0);
+}
+
+$(".dropdown-menu-sort li a").click(function () {
+
+    var dropdown = $(this).parents(".btn-group").find('.selection');
+
+    if ($(this).text() == 'No Matter')
+        dropdown.text('Stars');
+    else
+        dropdown.html($(this).html());
+   // $(this).parents(".btn-group").find('.selection').val($(this).text());
+
+});
+
 
