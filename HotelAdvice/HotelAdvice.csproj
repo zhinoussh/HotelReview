@@ -356,7 +356,7 @@
     <Content Include="Images\slider2.jpg" />
     <Content Include="img\loading-sm.gif" />
     <Content Include="img\loading.gif" />
-    <Content Include="Scripts\app_script\admin.js" />
+    <Content Include="Areas\Admin\Scripts\admin.js" />
     <Content Include="Scripts\app_script\homePage.js" />
     <Content Include="Scripts\bloodhound.js" />
     <Content Include="Scripts\bloodhound.min.js" />

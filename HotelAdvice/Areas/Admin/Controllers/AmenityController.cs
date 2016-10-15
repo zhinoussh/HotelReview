@@ -58,7 +58,7 @@ namespace HotelAdvice.Areas.Admin.Controllers
             string current_page = page.HasValue ? page.Value.ToString() : "1";
             string CurrentFilter = String.IsNullOrEmpty(ViewBag.filter) ? "" : ViewBag.filter.ToString();
 
-            return Json(new { msg = "Amenity inserted successfully!", cur_pg = current_page, filter = CurrentFilter });
+            return Json(new { msg = "Amenity inserted successfully!", ctrl = "/Admin/Amenity", cur_pg = current_page, filter = CurrentFilter });
         }
 
         public ActionResult Delete_Amenity(int id, int? page, string filter = null)
@@ -76,7 +76,7 @@ namespace HotelAdvice.Areas.Admin.Controllers
         {
             db.delete_Amenity(vm.AmenityID);
 
-            return Json(new { msg = "Row deleted successfully!", cur_pg = vm.CurrentPage, filter =vm.CurrentFilter});
+            return Json(new { msg = "Row deleted successfully!", ctrl = "/Admin/Amenity", cur_pg = vm.CurrentPage, filter = vm.CurrentFilter });
         }
     }
 }

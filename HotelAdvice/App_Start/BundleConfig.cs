@@ -38,7 +38,7 @@ namespace HotelAdvice
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/AdminPage").Include(
-                      "~/Scripts/app_script/admin.js"
+                      "~/Areas/Admin/Scripts/admin.js"
                        , "~/Scripts/bootstrap-timepicker.min.js"
                        , "~/Scripts/fileinput.min.js"
                        , "~/Scripts/bootstrap-tagsinput.js"

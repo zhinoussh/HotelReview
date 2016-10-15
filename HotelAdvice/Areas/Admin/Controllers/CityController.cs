@@ -78,7 +78,7 @@ namespace HotelAdvice.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 db.add_city(city.cityID, city.cityName, city.cityAttractions);
-                return Json(new { msg = "The city inserted successfully." ,cur_pg=city.CurrentPage,filter=city.CurrentFilter+""});
+                return Json(new { msg = "The city inserted successfully.", ctrl = "/Admin/City", cur_pg = city.CurrentPage, filter = city.CurrentFilter + "" });
             }
             else
                 return PartialView("_PartialAddCity", city);
@@ -112,7 +112,7 @@ namespace HotelAdvice.Areas.Admin.Controllers
         public ActionResult Delete_City(CityViewModel city)
         {
             db.delete_city(city.cityID);
-           return Json(new {msg="Row is deleted successfully!",cur_pg=city.CurrentPage,filter=city.CurrentFilter+"" });
+            return Json(new { msg = "Row is deleted successfully!", ctrl = "/Admin/City", cur_pg = city.CurrentPage, filter = city.CurrentFilter + "" });
         }
 
     }

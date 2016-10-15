@@ -67,7 +67,7 @@ namespace HotelAdvice.Controllers
             var userId = User.Identity.GetUserId();
 
             if (UserManager.IsInRole(userId, "Administrator"))
-                return RedirectToAction("Index", "Admin");
+                return RedirectToAction("Index", "Admin", new { Area="Admin"});
 
             var model = new IndexViewModel
             {

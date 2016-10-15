@@ -129,7 +129,7 @@ namespace HotelAdvice.Areas.Admin.Controllers
                     var filename = file.FileName;
                     file.SaveAs(hotel_dir + "\\main.jpg");
                 }
-                return Json(new { msg = "The Hotel inserted successfully.",cur_pg=Hotel.CurrentPage,filter=Hotel.CurrentFilter+""});
+                return Json(new { msg = "The Hotel inserted successfully.", ctrl = "/Admin/Hotel", cur_pg = Hotel.CurrentPage, filter = Hotel.CurrentFilter + "" });
             }
             else
                 return PartialView("_PartialAddHotel", Hotel);
@@ -159,7 +159,7 @@ namespace HotelAdvice.Areas.Admin.Controllers
         public ActionResult Delete_Hotel(HotelViewModel Hotel)
         {
             db.delete_hotel(Hotel.HotelId);
-           return Json(new { msg = "Row is deleted successfully!", cur_pg = Hotel.CurrentPage, filter = Hotel.CurrentFilter + "" });
+            return Json(new { msg = "Row is deleted successfully!", ctrl = "/Admin/Hotel", cur_pg = Hotel.CurrentPage, filter = Hotel.CurrentFilter + "" });
         }
 
          #endregion Hotel

@@ -22,7 +22,7 @@
     //SetUp_AddImages
     $("#inputimages").fileinput({
         uploadAsync: false,
-        uploadUrl: '/Hotel/AddImage/',
+        uploadUrl: '/Admin/Hotel/AddImage/',
         maxFilePreviewSize: 10240,
         dropZoneEnabled: false,
         uploadExtraData: { hotel_ID: $('#hd_hotel_id').val() }
@@ -81,7 +81,7 @@ var Success_AjaxReturn = function (result) {
     if (result.msg) {
         localStorage.setItem("msg", result.msg);
         // location.reload();
-        location.href = "Index?page=" + result.cur_pg + "&filter=" + result.filter;
+        location.href =result.ctrl+ "/Index?page=" + result.cur_pg + "&filter=" + result.filter;
     }
     
 }
@@ -120,7 +120,7 @@ function SetUp_AddHotel() {
         allowedFileExtensions: ["jpg", "png", "gif"],
         browseOnZoneClick: true,
         showZoom: false
-        , deleteUrl: '/Hotel/DeleteImage/',
+        , deleteUrl: '/Admin/Hotel/DeleteImage/',
 
     });
 
@@ -157,7 +157,7 @@ function Set_Restaurants_tag()
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace,
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         remote: {
-            url: '/Hotel/Get_Restaurants',
+            url: '/Admin/Hotel/Get_Restaurants',
             
             prepare: function (query, settings) {
                 settings.type = "POST";
@@ -190,7 +190,7 @@ function Set_Rooms_tag() {
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace,
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         remote: {
-            url: '/Hotel/Get_Rooms',
+            url: '/Admin/Hotel/Get_Rooms',
 
             prepare: function (query, settings) {
                 settings.type = "POST";
@@ -224,7 +224,7 @@ function Set_Sightseeing_tag() {
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace,
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         remote: {
-            url: '/Hotel/Get_SightSeeing',
+            url: '/Admin/Hotel/Get_SightSeeing',
 
             prepare: function (query, settings) {
                 settings.type = "POST";

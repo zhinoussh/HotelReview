@@ -28,7 +28,7 @@
                         <td class="col-sm-10 text-center" data-defaultsign="AZ">@item.AmenityName</td>
                         <td>
                             <a data-toggle="tooltip" data-id="@item.AmenityID" data-name="@item.AmenityName" title="Edit" class="glyphicon glyphicon-edit editAmenityButton"></a>
-                            <a data-toggle="tooltip" data-url="/Amenity/Delete_Amenity/@item.AmenityID?page=@Request.QueryString["page"]&filter=@Request.QueryString["filter"]" title="Delete" class="glyphicon glyphicon-trash actionButton"></a>
+                            <a data-toggle="tooltip" data-url="/Admin/Amenity/Delete_Amenity/@item.AmenityID?page=@Request.QueryString["page"]&filter=@Request.QueryString["filter"]" title="Delete" class="glyphicon glyphicon-trash actionButton"></a>
                         </td>
                     </tr>
                 }
