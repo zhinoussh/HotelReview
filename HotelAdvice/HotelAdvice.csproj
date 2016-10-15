@@ -177,7 +177,7 @@
     <Compile Include="App_Code\DAL.cs" />
     <Compile Include="Controllers\SearchHotelController.cs" />
     <Compile Include="ViewModels\HotelSearchViewModel.cs" />
-    <Compile Include="ViewModels\SearchResultViewModel.cs" />
+    <Compile Include="ViewModels\SearchPageViewModel.cs" />
     <Content Include="App_Code\HttpParamActionAttribute .cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -254,7 +254,6 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Config_ProjectDB.cs" />
-    <Compile Include="Models\Autocomplete.cs" />
     <Compile Include="Models\HotelAdviceDB.cs" />
     <Compile Include="Models\tbl_amenity.cs" />
     <Compile Include="Models\tbl_City.cs" />
@@ -468,6 +467,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Helpers\" />
     <Folder Include="Upload\" />
   </ItemGroup>
   <ItemGroup>
