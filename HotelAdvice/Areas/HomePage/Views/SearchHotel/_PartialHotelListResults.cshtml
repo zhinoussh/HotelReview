@@ -1,7 +1,6 @@
 ﻿@using PagedList;
 @using PagedList.Mvc;
-@using HotelAdvice.ViewModels;
-@model IPagedList<HotelSearchViewModel>
+@model IPagedList<HotelAdvice.Areas.HomePage.ViewModels.HotelSearchViewModel>
 
 
     
@@ -24,7 +23,7 @@
                 }, new { @class = "btn btn-sort", title = "Hotels located closest to Downtown",role="button" })
             </div>
             <div class="col-sm-3 col-sm-offset-1">
-                @Ajax.ActionLink("Guest Rating", "HotelResults", new { sort = "rating", page = Request["page"], city_id = Request["city_id"] }
+                @Ajax.ActionLink("Guest Rating", "HotelResults", new { Area="HomePage",sort = "rating", page = Request["page"], city_id = Request["city_id"] }
                 , new AjaxOptions
                 {
                     HttpMethod = "GET",
@@ -40,7 +39,7 @@
                 </button>
                 <ul class="dropdown-menu-sort dropdown-menu" role="menu">
                     <li>
-                        @Ajax.ActionLink("5 to 1 Stars", "HotelResults", new { sort = "5to1", page = Request["page"], city_id = Request["city_id"] }
+                        @Ajax.ActionLink("5 to 1 Stars", "HotelResults", new { Area = "HomePage", sort = "5to1", page = Request["page"], city_id = Request["city_id"] }
                 , new AjaxOptions
                 {
                     HttpMethod = "GET",
@@ -49,7 +48,7 @@
                 })
                     </li>
                     <li>
-                        @Ajax.ActionLink("1 to 5 Stars", "HotelResults", new { sort = "1to5", page = Request["page"], city_id = Request["city_id"] }
+                        @Ajax.ActionLink("1 to 5 Stars", "HotelResults", new { Area = "HomePage", sort = "1to5", page = Request["page"], city_id = Request["city_id"] }
                 , new AjaxOptions
                 {
                     HttpMethod = "GET",
@@ -79,12 +78,12 @@
                         <div class="col-sm-5">
                             <h4 style="font-weight:bold; margin:0">
                                 @Html.ActionLink(Model[i].HotelName, "HotelDetails", "SearchHotel"
-                            , new { id = Model[i].HotelId }, new { target = "_blank" })
+         , new { Area = "HomePage", id = Model[i].HotelId }, new { target = "_blank" })
                             </h4>
                             @Html.TextBox("txt_star_hotel", Model[i].HotelStars, new { @class = "HotelStars" })
                         </div>
                         <div class="col-sm-3 col-sm-offset-4 nopadding">
-                            @using(Ajax.BeginForm("AddToFavoite", new { hotel_id = Model[i].HotelId }, new AjaxOptions
+                            @using (Ajax.BeginForm("AddToFavoite", new { Area = "HomePage", hotel_id = Model[i].HotelId }, new AjaxOptions
                             {
                             HttpMethod = "Post",
                             OnSuccess = "SuccessAjax_AddFavorit"
