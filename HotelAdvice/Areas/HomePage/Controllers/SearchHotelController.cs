@@ -7,8 +7,9 @@ using System.Web.Mvc;
 using HotelAdvice.App_Code;
 using PagedList;
 using HotelAdvice.Areas.Admin.ViewModels;
+using HotelAdvice.Areas.HomePage.ViewModels;
 
-namespace HotelAdvice.Controllers
+namespace HotelAdvice.Areas.HomePage.Controllers
 {
     public class SearchHotelController : Controller
     {

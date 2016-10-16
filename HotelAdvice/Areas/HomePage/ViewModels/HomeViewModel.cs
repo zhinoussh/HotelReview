@@ -5,7 +5,7 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 using HotelAdvice.Areas.Admin.ViewModels;
 
-namespace HotelAdvice.ViewModels
+namespace HotelAdvice.Areas.HomePage.ViewModels
 {
     public class HomeViewModel
     {
