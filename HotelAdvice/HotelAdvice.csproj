@@ -465,7 +465,7 @@
     <Content Include="Areas\Admin\Views\Amenity\_PartialAmenityList.cshtml" />
     <Content Include="Areas\Admin\Views\Amenity\_PartialDeleteAmenity.cshtml" />
     <Content Include="Areas\HomePage\Views\SearchHotel\ShowSearchResult.cshtml" />
-    <Content Include="Views\Shared\_PartialAdvancedSearch.cshtml" />
+    <Content Include="Areas\HomePage\Views\Shared\_PartialAdvancedSearch.cshtml" />
     <Content Include="Areas\HomePage\Views\SearchHotel\HotelDetails.cshtml" />
     <Content Include="Areas\HomePage\Views\SearchHotel\_PartialHotelListResults.cshtml" />
   </ItemGroup>
