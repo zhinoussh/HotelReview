@@ -6,9 +6,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using HotelAdvice.ViewModels;
+using HotelAdvice.Areas.Account.ViewModels;
 
-namespace HotelAdvice.Controllers
+namespace HotelAdvice.Areas.Account.Controllers
 {
     [Authorize]
     public class ManageController : Controller

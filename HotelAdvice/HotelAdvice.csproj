@@ -175,6 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\DAL.cs" />
+    <Compile Include="Areas\Account\AccountAreaRegistration.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\HomePage\HomePageAreaRegistration.cs" />
     <Compile Include="Areas\HomePage\Controllers\SearchHotelController.cs" />
@@ -187,14 +188,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\TypeaheadBundleConfig.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Areas\Account\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\AmenityController.cs" />
     <Compile Include="Areas\Admin\Controllers\CityController.cs" />
     <Compile Include="Areas\HomePage\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\HotelController.cs" />
     <Compile Include="Controllers\HtmlHelpers.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Areas\Account\Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -268,7 +269,7 @@
     <Compile Include="Models\tbl_Restuarant.cs" />
     <Compile Include="Models\tbl_room_type.cs" />
     <Compile Include="Models\tbl_sightseeing.cs" />
-    <Compile Include="ViewModels\AccountViewModels.cs" />
+    <Compile Include="Areas\Account\ViewModels\AccountViewModels.cs" />
     <Compile Include="Areas\HomePage\ViewModels\AdvancedSearchViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\AmenityViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\CityViewModel.cs" />
@@ -276,7 +277,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Areas\Admin\ViewModels\HotelImagesViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\HotelViewModel.cs" />
-    <Compile Include="ViewModels\ManageViewModels.cs" />
+    <Compile Include="Areas\Account\ViewModels\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -357,7 +358,7 @@
     <Content Include="img\loading-sm.gif" />
     <Content Include="img\loading.gif" />
     <Content Include="Areas\Admin\Scripts\admin.js" />
-    <Content Include="Scripts\app_script\homePage.js" />
+    <Content Include="Areas\HomePage\Scripts\homePage.js" />
     <Content Include="Scripts\bloodhound.js" />
     <Content Include="Scripts\bloodhound.min.js" />
     <Content Include="Scripts\bootstrap-slider.min.js" />
@@ -387,6 +388,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\HomePage\Views\web.config" />
+    <Content Include="Areas\Account\Views\web.config" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Scripts\fileinput.min.js" />
     <Content Include="Scripts\jquery-3.1.0.js" />
@@ -444,8 +446,8 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Shared\_PartialLoginModal.cshtml" />
-    <Content Include="Views\Shared\_PartialRegisterModal.cshtml" />
+    <Content Include="Areas\Account\Views\Shared\_PartialLoginModal.cshtml" />
+    <Content Include="Areas\Account\Views\Shared\_PartialRegisterModal.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
@@ -471,10 +473,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Account\Models\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\HomePage\Models\" />
     <Folder Include="Helpers\" />
     <Folder Include="Upload\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

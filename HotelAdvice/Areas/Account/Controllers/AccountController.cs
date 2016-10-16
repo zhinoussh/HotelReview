@@ -9,9 +9,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using HotelAdvice.Models;
-using HotelAdvice.ViewModels;
+using HotelAdvice.Areas.Account.ViewModels;
 
-namespace HotelAdvice.Controllers
+namespace HotelAdvice.Areas.Account.Controllers
 {
     [Authorize]
     public class AccountController : Controller
@@ -65,7 +65,7 @@ namespace HotelAdvice.Controllers
                 return PartialView("_PartialLoginModal",vm);
             }
             else
-                return RedirectToAction("Index", "Home", new { returnUrl = returnUrl });
+                return RedirectToAction("Index", "Home", new { Area="HomePage",returnUrl = returnUrl });
         }
 
         //
@@ -98,7 +98,7 @@ namespace HotelAdvice.Controllers
                         if (!String.IsNullOrEmpty(model.returnUrl))
                             return Json(new { url = model.returnUrl });
                         else
-                            return Json(new { url = "/Home/Index" });
+                            return Json(new { url = "/HomePage/Home/Index" });
 
                     }
                     case SignInStatus.LockedOut:
@@ -426,7 +426,7 @@ namespace HotelAdvice.Controllers
        public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home", new { Area="HomePage"});
 
           //  return Json(new { url="/Home/Index"},JsonRequestBehavior.AllowGet);
 

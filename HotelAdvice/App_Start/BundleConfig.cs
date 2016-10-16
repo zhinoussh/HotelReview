@@ -28,7 +28,7 @@ namespace HotelAdvice
                       "~/Scripts/respond.js"
                       , "~/Scripts/jquery-ui-1.12.0.min.js"
                       , "~/Scripts/Carousel.js"
-                       , "~/Scripts/app_script/homePage.js"
+                       , "~/Areas/HomePage/Scripts/homePage.js"
                        , "~/Scripts/bootstrap-slider.min.js"
                        ));
 
