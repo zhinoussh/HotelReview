@@ -258,23 +258,23 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Config_ProjectDB.cs" />
     <Compile Include="Models\HotelAdviceDB.cs" />
-    <Compile Include="Models\tbl_amenity.cs" />
-    <Compile Include="Models\tbl_City.cs" />
-    <Compile Include="Models\tbl_Hotel.cs" />
-    <Compile Include="Models\tbl_hotel_amenity.cs" />
-    <Compile Include="Models\tbl_Hotel_Photo.cs" />
-    <Compile Include="Models\tbl_Hotel_Restaurants.cs" />
-    <Compile Include="Models\tbl_Hotel_Rooms.cs" />
-    <Compile Include="Models\tbl_hotel_sightseeing.cs" />
-    <Compile Include="Models\tbl_Restuarant.cs" />
-    <Compile Include="Models\tbl_room_type.cs" />
-    <Compile Include="Models\tbl_sightseeing.cs" />
+    <Compile Include="Areas\Admin\Models\tbl_amenity.cs" />
+    <Compile Include="Areas\Admin\Models\tbl_City.cs" />
+    <Compile Include="Areas\Admin\Models\tbl_Hotel.cs" />
+    <Compile Include="Areas\Admin\Models\tbl_hotel_amenity.cs" />
+    <Compile Include="Areas\Admin\Models\tbl_Hotel_Photo.cs" />
+    <Compile Include="Areas\Admin\Models\tbl_Hotel_Restaurants.cs" />
+    <Compile Include="Areas\Admin\Models\tbl_Hotel_Rooms.cs" />
+    <Compile Include="Areas\Admin\Models\tbl_hotel_sightseeing.cs" />
+    <Compile Include="Areas\Admin\Models\tbl_Restuarant.cs" />
+    <Compile Include="Areas\Admin\Models\tbl_room_type.cs" />
+    <Compile Include="Areas\Admin\Models\tbl_sightseeing.cs" />
     <Compile Include="Areas\Account\ViewModels\AccountViewModels.cs" />
     <Compile Include="Areas\HomePage\ViewModels\AdvancedSearchViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\AmenityViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\CityViewModel.cs" />
     <Compile Include="Areas\HomePage\ViewModels\HomeViewModel.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Areas\Account\Models\IdentityModels.cs" />
     <Compile Include="Areas\Admin\ViewModels\HotelImagesViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\HotelViewModel.cs" />
     <Compile Include="Areas\Account\ViewModels\ManageViewModels.cs" />
@@ -473,8 +473,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Account\Models\" />
-    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\HomePage\Models\" />
     <Folder Include="Helpers\" />
     <Folder Include="Upload\" />

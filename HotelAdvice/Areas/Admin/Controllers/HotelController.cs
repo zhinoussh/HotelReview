@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using HotelAdvice.Areas.Admin.ViewModels;
-using HotelAdvice.Models;
+using HotelAdvice.Areas.Admin.Models;
 using PagedList;
 using System.IO;
 

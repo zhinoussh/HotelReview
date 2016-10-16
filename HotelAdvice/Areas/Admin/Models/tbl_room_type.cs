@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 
-namespace HotelAdvice.Models
+namespace HotelAdvice.Areas.Admin.Models
 {
     public class tbl_room_type
     {

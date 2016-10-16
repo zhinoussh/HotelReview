@@ -5,7 +5,7 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HotelAdvice.Models
+namespace HotelAdvice.Areas.Admin.Models
 {
     public class tbl_Hotel_Photo
     {

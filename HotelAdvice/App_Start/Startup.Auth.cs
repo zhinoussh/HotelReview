@@ -7,6 +7,7 @@ using Microsoft.Owin.Security.Google;
 using Owin;
 using HotelAdvice.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
+using HotelAdvice.Areas.Account.Models;
 
 namespace HotelAdvice
 {

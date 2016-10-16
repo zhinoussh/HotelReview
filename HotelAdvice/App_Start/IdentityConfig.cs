@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using HotelAdvice.Models;
+using HotelAdvice.Areas.Account.Models;
 
 namespace HotelAdvice
 {

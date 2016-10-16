@@ -4,6 +4,7 @@ using System.Linq;
 using HotelAdvice.Models;
 using HotelAdvice.Areas.Admin.ViewModels;
 using HotelAdvice.Areas.HomePage.ViewModels;
+using HotelAdvice.Areas.Admin.Models;
 
 namespace HotelAdvice.App_Code
 {
