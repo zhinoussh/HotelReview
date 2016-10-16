@@ -10,7 +10,7 @@
         source: function (request, response) {
             var list_array = new Array();
             $.ajax({
-                url: "/Home/SearchList",
+                url: "/HomePage/Home/SearchList",
                 type: "POST",
                 dataType: "json",
                 data: { Prefix: request.term },
@@ -123,11 +123,12 @@ $('#modal_login').on('hidden.bs.modal', function (e) { modalIsOpen = false; })
 
 
 var show_login = function (returnUrl) {
-   
-    if (returnUrl == null)
-        returnUrl = window.location.pathname;
+
+    if (returnUrl == null) {
+        returnUrl = window.location.pathname+window.location.search;
+    }
     
-    $.get("/Account/Login?returnUrl=" + returnUrl, function (data) {
+    $.get("/Account/Account/Login?returnUrl=" + returnUrl, function (data) {
 
         $("#modal_container").html(data);
         if (!modalIsOpen)
@@ -138,7 +139,7 @@ var show_login = function (returnUrl) {
 }
 
 var show_signUp = function () {
-    $.get("/Account/Register", function (data) {
+    $.get("/Account/Account/Register", function (data) {
 
         $("#modal_container").html(data)
         if (!modalIsOpen)

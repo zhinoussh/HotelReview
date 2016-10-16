@@ -22,7 +22,7 @@
     //    }
     //    , new { id = "logoutForm", @class = "navbar-right" }))
     //{
-    <a class="navbar-right navbar-btn btn btn-warning " href='@Url.Action("LogOff", "Account")'>
+    <a class="navbar-right navbar-btn btn btn-warning " href='@Url.Action("LogOff", "Account", new { Area="Account"})'>
         <span class="glyphicon glyphicon-log-out"></span> Sign Out
     </a>
     <ul class="nav navbar-nav navbar-right">

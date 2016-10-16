@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace HotelAdvice.ViewModels
+namespace HotelAdvice.Areas.Account.ViewModels
 {
     public class ExternalLoginConfirmationViewModel
     {
