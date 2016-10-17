@@ -110,7 +110,7 @@ namespace HotelAdvice.Areas.HomePage.Controllers
 
         public ActionResult HotelDetails(int id)
         {
-            HotelViewModel vm=db.get_hotel_byId(id);
+            HotelDetailViewModel vm=db.get_hoteldetails(id);
 
             return View(vm);
         }

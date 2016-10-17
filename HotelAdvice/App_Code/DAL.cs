@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using HotelAdvice.Models;
 using HotelAdvice.Areas.Admin.ViewModels;
 using HotelAdvice.Areas.HomePage.ViewModels;
 using HotelAdvice.Areas.Admin.Models;
@@ -284,6 +283,33 @@ namespace HotelAdvice.App_Code
             return hotel_prop;
         }
 
+        public HotelDetailViewModel get_hoteldetails(int id)
+        {
+            HotelDetailViewModel detail = (from h in db.tbl_Hotel.Where(x => x.HotelId == id)
+                                           join c in db.tbl_city on h.CityId.Value equals (int?)c.CityId
+                                           select new HotelDetailViewModel
+                                           {
+                                               HotelId=h.HotelId,
+                                               HotelName = h.HotelName,
+                                               HotelStars = h.HotelStars,
+                                               CityName = c.CityName,
+                                               GuestRating="4",
+                                               review_num=200,
+                                               Description = h.Description,
+                                               checkin = h.checkin,
+                                               checkout = h.checkout,
+                                               Tel = h.Tel,
+                                               Fax = h.Fax,
+                                               Website = h.Website,
+                                               Email = h.Email,
+                                               HotelAddress = h.HotelAddress,
+                                               distance_airport = h.distance_airport,
+                                               distance_citycenter = h.distance_citycenter
+                                           }).FirstOrDefault();
+
+            return detail;
+            
+        }
         public void delete_hotel(int id)
         {
             tbl_Hotel c = db.tbl_Hotel.Find(id);

@@ -56,6 +56,19 @@
 
     };
 
+
+    //photo slider inside hotel details
+    $('#myCarousel').carousel({
+        interval: 5000
+    });
+
+    //Handles the carousel thumbnails
+    $('[id^=carousel-selector-]').click(function () {
+        var id = this.id.substr(this.id.lastIndexOf("-") + 1);
+        var id = parseInt(id);
+        $('#myCarousel').carousel(id);
+    });
+
 });
 
 $(document).ajaxComplete(function () {
@@ -78,7 +91,7 @@ function Set_Rating_Plugins() {
     $('.GuestRating').rating({
         step: 0.5,
         size: 'xs',
-        //displayOnly: true,
+        displayOnly: true,
         hoverOnClear: false,
         theme: 'krajee-fa'
     , 'showClear': false
