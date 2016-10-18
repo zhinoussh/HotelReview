@@ -307,6 +307,9 @@ namespace HotelAdvice.App_Code
                                                distance_citycenter = h.distance_citycenter
                                            }).FirstOrDefault();
 
+            List<String> lst_temp = db.tbl_Hotel_Photo.Where(x => x.HotelID == id).Select(x => x.photo_name).ToList<String>();
+            detail.photos = lst_temp;
+            
             return detail;
             
         }
@@ -493,7 +496,8 @@ namespace HotelAdvice.App_Code
                 Website = x.Website,
                 HotelStars = x.HotelStars,
                 Description = x.Description,
-                distance_citycenter=x.distance_citycenter
+                distance_citycenter=x.distance_citycenter,
+                num_reviews=999
 
             }).ToList();
 
