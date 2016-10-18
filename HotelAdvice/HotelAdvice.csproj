@@ -179,6 +179,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\HomePage\HomePageAreaRegistration.cs" />
     <Compile Include="Areas\HomePage\Controllers\SearchHotelController.cs" />
+    <Compile Include="Areas\HomePage\ViewModels\HotelDetailViewModel.cs" />
     <Compile Include="Areas\HomePage\ViewModels\HotelSearchViewModel.cs" />
     <Compile Include="Areas\HomePage\ViewModels\SearchPageViewModel.cs" />
     <Content Include="App_Code\HttpParamActionAttribute .cs" />

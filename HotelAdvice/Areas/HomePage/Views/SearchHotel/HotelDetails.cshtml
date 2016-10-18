@@ -5,13 +5,13 @@
 }
 
 <!-- search bar -->
-<div id="searchbar" class="well" style="margin-top:5%">
+<div id="searchbar" class="well top-buffer100" >
     <div class="form-horizontal">
         <div class="form-group">
-            <div class="col-sm-9 col-sm-offset-1 nopadding_right">
+            <div class="col-xs-9 col-xs-offset-0 col-sm-offset-1 nopadding_right">
                 @Html.TextBoxFor(model => model.Destination_Name, new { @class = "form-control focus", @placeholder = "Find Hotel, City or Destination...", id = "txt_dest_name" })
             </div>
-            <div class="col-sm-2 nopadding_left">
+            <div class="col-xs-2 nopadding_left">
                 <button type="submit" class="btn btn_search"><i class="glyphicon glyphicon-search"></i>&nbsp;Search</button>
             </div>
         </div>
@@ -19,46 +19,55 @@
 </div>
 <!-- end search bar -->
 
-<div class="col-sm-8 top-buffer20">
-    <div class="col-sm-5" style="width:auto">
+<div class="col-xs-12 top-buffer20 nopadding">
+    <div class="col-sm-8 col-xs-6 nopadding">
         <h4 style="font-weight:bold; margin:0">
-            @Html.DisplayFor(model => model.HotelName) Hotel
+            @Html.DisplayFor(model => model.HotelName) Hotel - @Html.DisplayFor(model => model.CityName)
         </h4>
+  
     </div>
-    <div class="col-sm-5">
+    <div class="col-sm-2 col-xs-3 text-right">
+        Rate by Guests
+    </div>
+    <div class="col-sm-2 col-xs-3 nopadding" style="margin-top:-1%">
+        @Html.TextBoxFor(model => model.GuestRating, new { @class = "GuestRating" })
+ 
+    </div>
+</div>
+<div class="col-xs-12 nopadding">
+    <div class="col-xs-9 nopadding">
         @Html.TextBoxFor(model => model.HotelStars, new { @class = "HotelStars" })
     </div>
-    <div class="col-sm-12">
-        @Html.DisplayFor(model => model.CityName)
+    <div class="col-xs-3  nopadding">
+        @Html.ActionLink(Model.review_num + " reviews", "HotelReviews", "SearchHotel"
+            , new { Area = "HomePage", id = Model.HotelId }, new { target = "_blank" })
     </div>
 </div>
-<div class="col-sm-3 top-buffer20">
-    <div class="col-sm-6 nopadding">
-        <div class="col-sm-12 text-center">
-            Rate by Guests
-         </div>
-            <div class="col-sm-12 text-center">
-
-                @Html.ActionLink(Model.review_num + " reviews", "HotelReviews", "SearchHotel"
-                                , new { Area = "HomePage", id = Model.HotelId }, new { target = "_blank" })
-            </div>
-        </div>
-    <div class="col-sm-6 nopadding" style="margin-top:-3%">
-        @Html.TextBoxFor(model => model.GuestRating, new { @class = "GuestRating" })
-    </div>
-   
-</div>
 
 
- <!-- Slider -->
-    <div class="col-sm-12" id="slider">
+
+ <!--Photo Slider -->
+    <div class="col-xs-12" id="slider">
         <!-- Top part of the slider -->
         <div class="row top-buffer20">
-            <div class="col-sm-8 col-sm-offset-2" id="carousel-bounding-box">
+            <div class="col-xs-8 col-xs-offset-2" id="carousel-bounding-box">
                 <div class="carousel slide" id="myCarousel">
                     <!-- Carousel items -->
                     <div class="carousel-inner">
+
+                    @if(Model.photos.Count>0)
+                    {   
                         <div class="active item" data-slide-number="0">
+                            <img src='@Url.Content("../../../Upload/"+Model.HotelName+"/" + Model.photos[0])'>
+                        </div>
+                    }
+                    @for (int i = 1; i < Model.photos.Count;i++ )
+                    {
+                        <div class="item" data-slide-number="@i">
+                            <img src='@Url.Content("../../../Upload/" + Model.HotelName + "/" + Model.photos[i])'>
+                        </div>
+                    }
+                        @*<div class="active item" data-slide-number="0">
                             <img src="http://placehold.it/770x300&text=one">
                         </div>
 
@@ -80,7 +89,7 @@
 
                         <div class="item" data-slide-number="5">
                             <img src="http://placehold.it/770x300&text=six">
-                        </div>
+                        </div>*@
                     </div><!-- Carousel nav -->
                     <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
                         <span class="glyphicon glyphicon-chevron-left"></span>
@@ -98,27 +107,27 @@
 <div class="row hidden-xs" id="slider-thumbs">
     <!-- Bottom switcher of slider -->
     <ul class="hide-bullets">
-        <li class="col-sm-2">
+        <li class="col-xs-2">
             <a class="thumbnail" id="carousel-selector-0"><img src="http://placehold.it/170x100&text=one"></a>
         </li>
 
-        <li class="col-sm-2">
+        <li class="col-xs-2">
             <a class="thumbnail" id="carousel-selector-1"><img src="http://placehold.it/170x100&text=two"></a>
         </li>
 
-        <li class="col-sm-2">
+        <li class="col-xs-2">
             <a class="thumbnail" id="carousel-selector-2"><img src="http://placehold.it/170x100&text=three"></a>
         </li>
 
-        <li class="col-sm-2">
+        <li class="col-xs-2">
             <a class="thumbnail" id="carousel-selector-3"><img src="http://placehold.it/170x100&text=four"></a>
         </li>
 
-        <li class="col-sm-2">
+        <li class="col-xs-2">
             <a class="thumbnail" id="carousel-selector-4"><img src="http://placehold.it/170x100&text=five"></a>
         </li>
 
-        <li class="col-sm-2">
+        <li class="col-xs-2">
             <a class="thumbnail" id="carousel-selector-5"><img src="http://placehold.it/170x100&text=six"></a>
         </li>
     </ul>

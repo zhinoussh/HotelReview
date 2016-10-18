@@ -3,132 +3,159 @@
 @model IPagedList<HotelAdvice.Areas.HomePage.ViewModels.HotelSearchViewModel>
 
 
-    
-    @if (Model != null && Model.Count > 0)
-    {
-   
-                  
-    //Sort Buttons
-    <div class="col-sm-12 nopadding">
-        <div class="col-sm-3 well well-sort-title"><h4><i class="fa fa-sort fa-lg"></i> Sort Hotels By:</h4></div>
-        <div class="col-sm-9 well well_sortResult">
- 
-            <div class="col-sm-2 ">
-                @Ajax.ActionLink("Distance", "HotelResults", new { sort = "distance", page = Request["page"], city_id = Request["city_id"] }
-                , new AjaxOptions
-                {
-                    HttpMethod = "GET",
-                    UpdateTargetId = "table_container",
-                    InsertionMode = InsertionMode.Replace
-                }, new { @class = "btn btn-sort", title = "Hotels located closest to Downtown",role="button" })
-            </div>
-            <div class="col-sm-3 col-sm-offset-1">
-                @Ajax.ActionLink("Guest Rating", "HotelResults", new { Area="HomePage",sort = "rating", page = Request["page"], city_id = Request["city_id"] }
-                , new AjaxOptions
-                {
-                    HttpMethod = "GET",
-                    UpdateTargetId = "table_container",
-                    InsertionMode = InsertionMode.Replace
-                }, new { @class = "btn btn-sort" })
-            </div>
 
-            <div class="col-sm-4 btn-group nopadding_left" style="margin-left:10px">
-                <button type="button" class="btn btn-sort"><span class="selection">Stars</span></button>
-                <button type="button" class="btn btn-sort dropdown-toggle" data-toggle="dropdown" style="width:30px">
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu-sort dropdown-menu" role="menu">
-                    <li>
-                        @Ajax.ActionLink("5 to 1 Stars", "HotelResults", new { Area = "HomePage", sort = "5to1", page = Request["page"], city_id = Request["city_id"] }
-                , new AjaxOptions
-                {
-                    HttpMethod = "GET",
-                    UpdateTargetId = "table_container",
-                    InsertionMode = InsertionMode.Replace
-                })
-                    </li>
-                    <li>
-                        @Ajax.ActionLink("1 to 5 Stars", "HotelResults", new { Area = "HomePage", sort = "1to5", page = Request["page"], city_id = Request["city_id"] }
-                , new AjaxOptions
-                {
-                    HttpMethod = "GET",
-                    UpdateTargetId = "table_container",
-                    InsertionMode = InsertionMode.Replace
-                })
-                    </li>
-                </ul>
+@if (Model != null && Model.Count > 0)
+{
+
+
+    //Sort Buttons
+    <div class="col-xs-12 nopadding">
+        <div class="col-sm-3 col-xs-4 nopadding">
+            <div class="well well-sort-title"><i class="fa fa-sort fa-lg"></i> Sort Hotels</div>
+        </div>
+        
+        <div class="col-sm-9 col-xs-8 nopadding">
+            <div class="well well-sortResult">
+
+           
+                <div class="col-sm-3 col-xs-12">
+                   
+                    @Ajax.ActionLink("Distance", "HotelResults", new { Area = "HomePage", sort = "distance", page = Request["page"], city_id = Request["city_id"] }
+            , new AjaxOptions
+            {
+                HttpMethod = "GET",
+                UpdateTargetId = "table_container",
+                InsertionMode = InsertionMode.Replace
+            }, new { @class = "btn btn-sort btn-responsive", title = "Hotels located closest to Downtown" })
+
+                </div>
+
+                <div class="col-sm-3 col-xs-12" >
+                   
+                    @Ajax.ActionLink("Guest Rating", "HotelResults", new { Area = "HomePage", sort = "rating", page = Request["page"], city_id = Request["city_id"] }
+            , new AjaxOptions
+            {
+                HttpMethod = "GET",
+                UpdateTargetId = "table_container",
+                InsertionMode = InsertionMode.Replace
+            }, new { @class = "btn btn-sort btn-responsive" })
+                </div>
+
+
+
+                <div class="col-sm-4 col-xs-12 btn-group">
+                    <button type="button" class="btn btn-sort btn-responsive"><span class="selection">Stars</span></button>
+                    <button type="button" class="btn btn-sort btn-responsive dropdown-toggle " data-toggle="dropdown" style="width:30px">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu-sort dropdown-menu" role="menu">
+                        <li>
+                           
+                            @Ajax.ActionLink("5 to 1 Stars", "HotelResults", new { Area = "HomePage", sort = "5to1", page = Request["page"], city_id = Request["city_id"] }
+                    , new AjaxOptions
+                    {
+                        HttpMethod = "GET",
+                        UpdateTargetId = "table_container",
+                        InsertionMode = InsertionMode.Replace
+                    })
+                        </li>
+                        <li>
+                          
+                            @Ajax.ActionLink("1 to 5 Stars", "HotelResults", new { Area = "HomePage", sort = "1to5", page = Request["page"], city_id = Request["city_id"] }
+                    , new AjaxOptions
+                    {
+                        HttpMethod = "GET",
+                        UpdateTargetId = "table_container",
+                        InsertionMode = InsertionMode.Replace
+                    })
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 
-        
 
-    int count = Model.Count;
-    for (int i = 0; i < count; i++)
+    for (int i = 0; i < Model.Count; i++)
     {
-     
-                <div class="col-sm-12 well well-result">
-                    <div class="col-sm-3 nopadding" style="height:160px">
+            <div class="col-xs-12 nopadding">
+
+                <div class="well well-result">
+
+                    <div class="col-xs-3 nopadding" >
                         <a href="/SearchHotel/HotelDetails/@Model[i].HotelId" target="_blank">
                             <img src="~/Upload/@Model[i].HotelName/main.jpg" alt="Responsive image" onerror='this.onerror=null;this.src="../../Images/empty.gif"'
-                                 class="img_result">
+                                 class="img_result img-responsive">
                         </a>
                     </div>
-                    <div class="col-sm-9 nopadding">
-                        <div class="col-sm-5">
-                            <h4 style="font-weight:bold; margin:0">
-                                @Html.ActionLink(Model[i].HotelName, "HotelDetails", "SearchHotel"
-         , new { Area = "HomePage", id = Model[i].HotelId }, new { target = "_blank" })
-                            </h4>
-                            @Html.TextBox("txt_star_hotel", Model[i].HotelStars, new { @class = "HotelStars" })
-                        </div>
-                        <div class="col-sm-3 col-sm-offset-4 nopadding">
-                            @using (Ajax.BeginForm("AddToFavoite", new { Area = "HomePage", hotel_id = Model[i].HotelId }, new AjaxOptions
+                    <div class="col-xs-9 nopadding">
+                        <div class="col-xs-12 nopadding">
+                            <div class="col-sm-5 col-xs-12">
+                                <h4 style="font-weight:bold; margin:0">
+                                    @Html.ActionLink(Model[i].HotelName, "HotelDetails", "SearchHotel"
+                                , new { Area = "HomePage", id = Model[i].HotelId }, new { target = "_blank" })
+                                </h4>
+                                @Html.TextBox("txt_star_hotel", Model[i].HotelStars, new { @class = "HotelStars" })
+                            </div>
+                            <div class="col-sm-3 col-sm-offset-4 col-xs-8 col-xs-offset-1 nopadding">
+                                @using (Ajax.BeginForm("AddToFavoite", new { Area = "HomePage", hotel_id = Model[i].HotelId }, new AjaxOptions
                             {
-                            HttpMethod = "Post",
-                            OnSuccess = "SuccessAjax_AddFavorit"
+                                HttpMethod = "Post",
+                                OnSuccess = "SuccessAjax_AddFavorit"
                             }))
-                            {
-                            @Html.AntiForgeryToken()
+                                {
+                                    @Html.AntiForgeryToken()
 
-                            <button class="btn btn-danger col-sm-12 btn-outline" type="submit"><i class="fa fa-heart fa-lg"></i> Like it!</button>
-                            }
-                    
+                                    <button class="btn btn-danger btn-outline btn-responsive btn-block" type="submit">
+                                        <i class="fa fa-heart fa-lg"></i> Like it!
+</button>
+                                }
 
-                            
+
+
+                            </div>
+
+                        </div>
+                        <div class="col-xs-12">
+                            visit website <i class="glyphicon glyphicon-hand-right"></i>
+                            <a href="http://@Model[i].Website" target="_blank"> @Model[i].Website</a>
+                        </div>
+                        <div class="col-xs-12 top-buffer10 text-justify">
+                            @Model[i].Description
+                        </div>
+                        <div class="col-xs-12 nopadding">
+                            <div class="col-sm-6 col-xs-8">
+                                @Html.TextBox("txt_rate_hotel", Model[i].GuestRating, new { @class = "GuestRating" })
+                            </div>
+                            <div class="col-sm-3 col-sm-offset-3 col-xs-8 col-xs-offset-2 nopadding">
+                                <a role="button" class="btn btn-primary btn-review btn-responsive btn-block"
+                                   href="@Url.Action("AddReview", "SearchHotel", new { id = Model[i].HotelId, Area = "HomePage" })">
+                                     Review <i class="glyphicon glyphicon-pencil"></i>
+                                </a>
+
+
+                            </div>
                         </div>
 
-                    </div>
-                    <div class="col-sm-9">
-                        visit website <i class="glyphicon glyphicon-hand-right"></i>
-                        <a href="http://@Model[i].Website" target="_blank"> @Model[i].Website</a>
-                    </div>
-                    <div class="col-sm-9 top-buffer20">
-                        @Model[i].Description
-                    </div>
-                    <div class="col-sm-9 top-buffer10">
-                        <div class="col-sm-4 ">
-                            @Html.TextBox("txt_rate_hotel", Model[i].GuestRating, new { @class = "GuestRating" })
+                        <div class="col-xs-12 col-sm-offset-1 col-xs-offset-2">
+                            @Html.ActionLink(Model[i].num_reviews + " reviews", "HotelReviews", "SearchHotel"
+                                , new { Area = "HomePage", id = Model[i].HotelId }, new { target = "_blank" })
                         </div>
-                        <div class="col-sm-3 nopadding top-buffer10">
-                            <a href="#">999 Reviews</a>
-                        </div>
-                        <div class="col-sm-3 col-sm-offset-2 nopadding">
-                            <a role="button" class="btn btn-primary btn-review col-sm-12" href="/SearchHotel/AddReview/@Model[i].HotelId"
-                               style="margin-left:10px">Write a Review<i class="glyphicon glyphicon-pencil"></i></a>
-                        </div>
-                    </div>
-
+                      
+                   </div>
                 </div>
-
+            </div>
     }
-    }
 
-    @if (Model.PageCount > 1)
-    {
-       
-        <div class="col-sm-12 text-center">
-            @Html.PagedListPager(Model, page => Url.Action("HotelResults"
+
+
+}
+
+            @if (Model.PageCount > 1)
+{
+
+                <div class="col-xs-12 text-center">
+                    @Html.PagedListPager(Model, page => Url.Action("HotelResults"
              , new RouteValueDictionary(){ {"page", page}, {"sort" ,Request["sort"] }
                ,{"city_id",Request["city_id"]}
            })
@@ -150,19 +177,19 @@
         InsertionMode = InsertionMode.Replace,
         OnSuccess = "Success_paging_Results"
     }))
-        </div>
-    }    
-    else
-    {
-            <div class="col-sm-12" style="margin-top:2%">
-                <div class="well well-sm well_noResult">
-                    No Results Found.
                 </div>
-            </div>
-    }
+}
+else
+{
+                <div class="col-xs-12" style="margin-top:2%">
+                    <div class="well well-sm well_noResult">
+                        No Results Found.
+                    </div>
+                </div>
+}
 
-   
-  
+
+
 
 
 

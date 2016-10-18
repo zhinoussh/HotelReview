@@ -68,10 +68,10 @@
 <div id="searchbar" class="well">
     <div class="form-horizontal">
         <div class="form-group">
-            <div class="col-sm-9 col-sm-offset-1 nopadding_right">
+            <div class="col-xs-9 col-sm-offset-1 nopadding_right">
                 @Html.TextBoxFor(model => model.Destination_Name, new { @class = "form-control", @placeholder = "Find Hotel, City or Destination...", id = "txt_dest_name" })
             </div>
-            <div class="col-sm-2 nopadding_left">
+            <div class="col-xs-2 nopadding_left">
                 <button type="submit" class="btn btn_search"><i class="glyphicon glyphicon-search"></i>&nbsp;Search</button>
             </div>
         </div>
@@ -82,18 +82,18 @@
    
 
     @*Advanced Search*@
-       <div class="col-sm-3 nopadding">
+       <div class="col-xs-5 col-sm-3 nopadding">
             @{Html.RenderPartial("_PartialAdvancedSearch", Model.Advanced_Search);}
         </div>
     @*End of Advanced Search*@
     
-        <div class="col-sm-6">
+        <div class="col-xs-4 col-sm-6">
 
         </div>
 
        
 
-<div class="col-sm-3 nopadding" >
+<div class="col-xs-3 col-sm-3 nopadding" >
     <ul class="city_sidebar">
         @foreach (var item in Model.lst_city)
         {
