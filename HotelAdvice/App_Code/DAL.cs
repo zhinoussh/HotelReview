@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using HotelAdvice.Areas.Admin.ViewModels;
-using HotelAdvice.Areas.HomePage.ViewModels;
+using HotelAdvice.Areas.WebSite.ViewModels;
 using HotelAdvice.Areas.Admin.Models;
 
 namespace HotelAdvice.App_Code
@@ -307,9 +307,22 @@ namespace HotelAdvice.App_Code
                                                distance_citycenter = h.distance_citycenter
                                            }).FirstOrDefault();
 
-            List<String> lst_temp = db.tbl_Hotel_Photo.Where(x => x.HotelID == id).Select(x => x.photo_name).ToList<String>();
-            detail.photos = lst_temp;
-            
+            detail.photos = db.tbl_Hotel_Photo.Where(x => x.HotelID == id).Select(x => x.photo_name).ToList<String>();
+
+            detail.rooms  = (from r in db.tbl_Hotel_Rooms.Where(x => x.HotelID == id)
+                                     join t in db.tbl_Room_Type on r.RoomTypeID equals t.RoomTypeID
+                                     select t.Room_Type).ToList();
+
+            detail.restaurants = (from r in db.tbl_Hotel_Restaurants.Where(x => x.HotelID == id)
+                            join t in db.tbl_Restaurant on r.RestaurantID equals t.RestaurantID
+                            select t.RestaurantName).ToList();
+
+            detail.sightseeing = (from r in db.tbl_Hotel_Sightseeings.Where(x => x.HotelID == id)
+                                  join t in db.tbl_Sightseeing on r.SightseeingID equals t.SightseeingID
+                                  select t.Sightseeing_Type).ToList();
+
+            detail.amenities = get_hotel_amenities(id);
+
             return detail;
             
         }

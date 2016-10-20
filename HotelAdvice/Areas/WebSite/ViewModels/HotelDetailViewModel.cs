@@ -1,10 +1,11 @@
-﻿using System;
+﻿using HotelAdvice.Areas.Admin.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace HotelAdvice.Areas.HomePage.ViewModels
+namespace HotelAdvice.Areas.WebSite.ViewModels
 {
     public class HotelDetailViewModel
     {
@@ -15,6 +16,8 @@ namespace HotelAdvice.Areas.HomePage.ViewModels
 
         [Display(Name="Rate by Users")]
         public string GuestRating { get; set; }
+        public int YourRating { get; set; }
+
         public int review_num { get; set; }
 
         public string HotelAddress { get; set; }
@@ -46,7 +49,7 @@ namespace HotelAdvice.Areas.HomePage.ViewModels
 
         public List<String> rooms { get; set; }
 
-        public List<String> amenities { get; set; }
+        public List<AmenityViewModel> amenities { get; set; }
         public List<String> sightseeing { get; set; }
         public List<String> photos { get; set; }
 

@@ -10,7 +10,7 @@
         source: function (request, response) {
             var list_array = new Array();
             $.ajax({
-                url: "/HomePage/Home/SearchList",
+                url: "/WebSite/Home/SearchList",
                 type: "POST",
                 dataType: "json",
                 data: { Prefix: request.term },
@@ -69,6 +69,23 @@
         $('#myCarousel').carousel(id);
     });
 
+    //accordion
+    function toggleChevron(e) {
+        
+        $(e.target)
+            .prev('.panel-heading')
+            .find("i.indicator")
+            .toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
+      
+        if($(e.target).is( ":visible" ))
+            $(e.target).parent().removeClass("panel-default").addClass("panel-info");
+        else
+            $(e.target).parent().removeClass("panel-info").addClass("panel-default");
+
+
+    }
+    $('#accordion').on('hidden.bs.collapse', toggleChevron);
+    $('#accordion').on('shown.bs.collapse', toggleChevron);
 });
 
 $(document).ajaxComplete(function () {
@@ -98,6 +115,17 @@ function Set_Rating_Plugins() {
     , 'showCaption': false,
         filledStar: '<i class="fa fa-check-circle"></i>',
         emptyStar: '<i class="fa fa-circle-thin"></i>'
+    });
+
+    $('.YourRating').rating({
+        step: 1,
+        size: 'xs',
+        hoverOnClear: false,
+        theme: 'krajee-fa',
+        'showCaption': false,
+        clearButton: 'remove <i class="fa fa-eraser"></i>',
+        filledStar: '<i class="fa fa-check-circle fa-yourrating"></i>',
+        emptyStar: '<i class="fa fa-circle-thin fa-yourrating"></i>'
     });
 }
 

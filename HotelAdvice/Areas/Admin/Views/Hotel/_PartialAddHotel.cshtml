@@ -28,81 +28,81 @@
                     </h4>
                 </div>
                 <div class="modal-body">
+                    <div class="row-fluid">
+                        <div class="tabbable">
+                            <!-- Only required for left/right tabs -->
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#tab_general" data-toggle="tab">General</a></li>
+                                <li><a href="#tab_contact" data-toggle="tab">Location/Contact</a></li>
+                                <li><a href="#tab_restaurant" data-toggle="tab">Rooms/Restaurants</a></li>
+                                <li><a href="#tab_amenity" data-toggle="tab">Amenities/Sightseeing</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <!-- TAB 1- General Description-->
+                                <div class="tab-pane active" id="tab_general">
+                                    <div class="row top-buffer20">
 
-                    <div class="tabbable">
-                        <!-- Only required for left/right tabs -->
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a href="#tab_general" data-toggle="tab">General</a></li>
-                            <li><a href="#tab_contact" data-toggle="tab">Location/Contact</a></li>
-                            <li><a href="#tab_restaurant" data-toggle="tab">Rooms/Restaurants</a></li>
-                            <li><a href="#tab_amenity" data-toggle="tab">Amenities/Sightseeing</a></li>
-                        </ul>
-                        <div class="tab-content">
-                            <!-- TAB 1- General Description-->
-                            <div class="tab-pane active" id="tab_general">
-                                <div class="row top-buffer20">
-
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            @Html.TextBoxFor(model => model.HotelName, new { @placeholder = "Hotel Name", @class = "form-control" })
-                                            @Html.ValidationMessageFor(m => m.HotelName, "", new { @class = "text-danger" })
-                                        </div>
-                                        <div class="form-group">
-                                            @Html.DropDownListFor(model => model.CityId, new SelectList(Model.lst_city, "Value", "Text")
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                @Html.TextBoxFor(model => model.HotelName, new { @placeholder = "Hotel Name", @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.HotelName, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.DropDownListFor(model => model.CityId, new SelectList(Model.lst_city, "Value", "Text")
                                 , new { @class = "dropdown", id = "dropdown_city" })
-                                        </div>
-                                        <div class="form-group">
+                                            </div>
+                                            <div class="form-group">
 
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><i class="glyphicon glyphicon-star"></i> Star Rating</span>
-                                                <div class="form-control">
-                                                    @Html.TextBoxFor(model => model.HotelStars, new { @class = "HotelStars"})
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-star"></i> Star Rating</span>
+                                                    <div class="form-control">
+                                                        @Html.TextBoxFor(model => model.HotelStars, new { @class = "HotelStars"})
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon" style="width:110px"><i class=" glyphicon glyphicon-time"></i> Check In</span>
-                                                @Html.TextBoxFor(model => model.checkin, new { @class = "form-control", id = "checkin" })
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" style="width:110px"><i class=" glyphicon glyphicon-time"></i> Check In</span>
+                                                    @Html.TextBoxFor(model => model.checkin, new { @class = "form-control", id = "checkin" })
+                                                </div>
+                                                @Html.ValidationMessageFor(m => m.checkin, "", new { @class = "text-danger" })
                                             </div>
-                                            @Html.ValidationMessageFor(m => m.checkin, "", new { @class = "text-danger" })
+
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" style="width:110px"><i class=" glyphicon glyphicon-time"></i> Check Out</span>
+                                                    @Html.TextBoxFor(model => model.checkout, new { @class = "form-control", id = "checkout" })
+                                                </div>
+                                                @Html.ValidationMessageFor(m => m.checkout, "", new { @class = "text-danger" })
+                                            </div>
                                         </div>
 
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-addon" style="width:110px"><i class=" glyphicon glyphicon-time"></i> Check Out</span>
-                                                @Html.TextBoxFor(model => model.checkout, new { @class = "form-control", id = "checkout" })
+                                        <div class="col-sm-6  form-group">
+                                            <div class="kv-avatar center-block">
+
+                                                @Html.TextBoxFor(model => model.PhotoFile, new { id = "image_hotel",name = "image_hotel", type = "file", @class = "file" })
+                                                @Html.HiddenFor(model => model.imgPath, new { @placeholder = "Hotel Name", @class = "form-control", id = "img_hotel" })
+
+
                                             </div>
-                                            @Html.ValidationMessageFor(m => m.checkout, "", new { @class = "text-danger" })
+
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-6  form-group">
-                                        <div class="kv-avatar center-block">
-                                            
-                                            @Html.TextBoxFor(model => model.PhotoFile, new { id = "image_hotel",name = "image_hotel", type = "file", @class = "file" })
-                                            @Html.HiddenFor(model => model.imgPath, new { @placeholder = "Hotel Name", @class = "form-control", id = "img_hotel" })
-
-
-                                         </div>
-
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            @Html.TextAreaFor(model => model.Description, new { @placeholder = "Description", @class = "form-control", style = "min-height:100px" })
+                                            @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        @Html.TextAreaFor(model => model.Description, new { @placeholder = "Description", @class = "form-control", style = "min-height:100px" })
-                                        @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- TAB 2- Contact Details-->
-                            <div class="tab-pane" id="tab_contact">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <h5><strong>Contact Details</strong> </h5>
-                                    </div>
+                                <!-- TAB 2- Contact Details-->
+                                <div class="tab-pane" id="tab_contact">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h5><strong>Contact Details</strong> </h5>
+                                        </div>
                                         <div class="col-sm-6">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
@@ -120,74 +120,74 @@
                                         </div>
                                     </div>
 
-                                <div class="row top-buffer20">
-                                    <div class="col-sm-6">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
-                                            @Html.TextBoxFor(model => model.Website, new { @class = "form-control", @placeholder = "Web Site" })
-                                        </div>
-                                        @Html.ValidationMessageFor(m => m.Website, "", new { @class = "text-danger" })
-                                    </div>
-
-                                    <div class="col-sm-6">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @placeholder = "Email" })
-                                        </div>
-                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                                    </div>
-
-                                </div>
-
-                                <div class="row top-buffer20">
-                                    <div class="col-sm-12">
-                                        <h5><strong>Location & Address</strong> </h5>
-                                    </div>
-
-                                    <div class="col-sm-6 nopadding">
-                                        <div class="col-sm-11 nopadding_left">
-
+                                    <div class="row top-buffer20">
+                                        <div class="col-sm-6">
                                             <div class="input-group">
-                                                <span class="input-group-addon"><i class="glyphicon glyphicon-plane"></i></span>
-                                                @Html.TextBoxFor(model => model.distance_airport, new { @class = "form-control", @placeholder = "Distance from Airport" })
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
+                                                @Html.TextBoxFor(model => model.Website, new { @class = "form-control", @placeholder = "Web Site" })
+                                            </div>
+                                            @Html.ValidationMessageFor(m => m.Website, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @placeholder = "Email" })
+                                            </div>
+                                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row top-buffer20">
+                                        <div class="col-sm-12">
+                                            <h5><strong>Location & Address</strong> </h5>
+                                        </div>
+
+                                        <div class="col-sm-6 nopadding">
+                                            <div class="col-sm-11 nopadding_left">
+
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-plane"></i></span>
+                                                    @Html.TextBoxFor(model => model.distance_airport, new { @class = "form-control", @placeholder = "Distance from Airport" })
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-1 nopadding" style="margin-top:2%">
+                                                km
+                                            </div>
+                                            <div class="col-sm-12">
+                                                @Html.ValidationMessageFor(m => m.distance_airport, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
-                                        <div class="col-sm-1 nopadding" style="margin-top:2%">
-                                            km
-                                        </div>
-                                        <div class="col-sm-12">
-                                            @Html.ValidationMessageFor(m => m.distance_airport, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 nopadding">
-                                        <div class="col-sm-11 nopadding_left">
+                                        <div class="col-sm-6 nopadding">
+                                            <div class="col-sm-11 nopadding_left">
 
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
-                                                @Html.TextBoxFor(model => model.distance_citycenter, new { @class = "form-control", @placeholder = "Distance from City Center" })
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+                                                    @Html.TextBoxFor(model => model.distance_citycenter, new { @class = "form-control", @placeholder = "Distance from City Center" })
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-1 nopadding" style="margin-top:2%">
-                                            km
-                                        </div>
-                                        <div class="col-sm-12">
-                                            @Html.ValidationMessageFor(m => m.distance_citycenter, "", new { @class = "text-danger" })
-                                        </div>
+                                            <div class="col-sm-1 nopadding" style="margin-top:2%">
+                                                km
+                                            </div>
+                                            <div class="col-sm-12">
+                                                @Html.ValidationMessageFor(m => m.distance_citycenter, "", new { @class = "text-danger" })
+                                            </div>
 
+                                        </div>
+                                    </div>
+                                    <div class="row top-buffer20">
+
+                                        <div class="col-sm-12 ">
+                                            @Html.TextAreaFor(model => model.HotelAddress, new { @placeholder = "Address", @class = "form-control", style = "min-height:100px" })
+                                            @Html.ValidationMessageFor(m => m.HotelAddress, "", new { @class = "text-danger" })
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row top-buffer20">
 
-                                    <div class="col-sm-12 ">
-                                        @Html.TextAreaFor(model => model.HotelAddress, new { @placeholder = "Address", @class = "form-control", style = "min-height:100px" })
-                                        @Html.ValidationMessageFor(m => m.HotelAddress, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- TAB 3- Restaurants and Rooms-->
-                            <div class="tab-pane" id="tab_restaurant">
-                                <div class="row top-buffer20">
+                                <!-- TAB 3- Restaurants and Rooms-->
+                                <div class="tab-pane" id="tab_restaurant">
+                                    <div class="row top-buffer20">
 
                                         <div class="col-sm-12">
                                             <div class="input-group">
@@ -199,72 +199,73 @@
                                                @placeholder = "Enter Restaurants..."
                                               })
                                             </div>
-                                           
+
                                         </div>
 
-                                    <div class="col-sm-12 top-buffer20">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-bed"></i></span>
-                                            @Html.TextBoxFor(model => model.rooms, new
+                                        <div class="col-sm-12 top-buffer20">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-bed"></i></span>
+                                                @Html.TextBoxFor(model => model.rooms, new
                                            {
                                                id = "txt_room",
                                                @class = "form-control",
                                                @placeholder = "Enter Room Types..."
                                            })
+                                            </div>
+
                                         </div>
 
                                     </div>
+                                </div>
 
-                                    </div>
-                            </div>
+                                <!-- TAB 4- Amenities & SightSeeing-->
+                                <div class="tab-pane" id="tab_amenity">
+                                    <div class="row top-buffer20">
 
-                            <!-- TAB 4- Amenities & SightSeeing-->
-                            <div class="tab-pane" id="tab_amenity">
-                                <div class="row top-buffer20">
-
-                                    <div class="col-sm-12">
-                                        @for (int i = 0; i < Model.amenities.Count;i++ )
+                                        <div class="col-sm-12">
+                                            @for (int i = 0; i < Model.amenities.Count;i++ )
                                         {
-                                            <div class="col-sm-3 nopadding">
+                                                <div class="col-sm-3 nopadding">
 
-                                                <div class="col-sm-1 nopadding" style="width:20px" >
+                                                    <div class="col-sm-1 nopadding" style="width:20px">
                                                         @Html.CheckBoxFor(model=>model.amenities[i].hotel_selected)
-                                                    
-                                                    @Html.HiddenFor(model=>model.amenities[i].AmenityID)
-                                                </div>
-                                                <div class="col-sm-10 text-small nopadding " >
-                                                    @Html.DisplayFor(model=>model.amenities[i].AmenityName)
-                                                </div>
+
+                                                        @Html.HiddenFor(model=>model.amenities[i].AmenityID)
+                                                    </div>
+                                                    <div class="col-sm-10 text-small nopadding ">
+                                                        @Html.DisplayFor(model=>model.amenities[i].AmenityName)
+                                                    </div>
                                                 </div>
 
                                         }
 
-                                       </div>
+                                        </div>
 
-                                    <div class="divider_search"></div>
+                                        <div class="divider_search"></div>
 
-                                    <div class="col-sm-12 top-buffer20">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-eye-open"></i></span>
-                                            @Html.TextBoxFor(model => model.sightseeing, new
+                                        <div class="col-sm-12 top-buffer20">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-eye-open"></i></span>
+                                                @Html.TextBoxFor(model => model.sightseeing, new
                                            {
                                                id = "txt_sightseeing",
                                                @class = "form-control",
                                                @placeholder = "Enter Sightseeing..."
                                            })
+                                            </div>
+
                                         </div>
 
                                     </div>
-
                                 </div>
+
+
+
+
                             </div>
-
-
-
-
                         </div>
                     </div>
-                </div>
+                 </div>
                 <div class="modal-footer ">
                     <button type="button" class="btn btn-default" onclick="add_hotel_click()"><span class="glyphicon glyphicon-ok-circle"></span>Save</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle"></span>Cancel</button>

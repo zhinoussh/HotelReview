@@ -1,4 +1,35 @@
-﻿a{text-decoration: none !important}
+﻿@media (max-width: 768px) {
+  .btn-responsive {
+    padding:5px 4px;
+    font-size:90%;
+    line-height: 1;
+    border-radius:3px;
+  }
+    h2 {
+    font-size:90%;
+    font-weight:bold;
+    }
+    body {
+    font-size:100%;
+    }
+    .form-control {
+    font-size:90%;
+    height:100%;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+  .btn-responsive {
+    padding:5px 9px;
+    font-size:90%;
+    line-height: 1.2;
+  }
+    h2 {
+    font-size:100%;
+    }
+}
+
+a{text-decoration: none !important}
 
 .text-danger {
 font-size:9pt;
@@ -70,6 +101,7 @@ background-color:#eee
 #modal_delete_image {
 	margin-top:100px;
 }
+
 
 /****************GLyph Icons*****************/
 .btn-default {

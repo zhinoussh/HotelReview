@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using HotelAdvice.App_Code;
 
-namespace HotelAdvice.Areas.HomePage.ViewModels
+namespace HotelAdvice.Areas.WebSite.ViewModels
 {
     public class SearchPageViewModel
     {

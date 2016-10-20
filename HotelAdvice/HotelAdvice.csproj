@@ -177,11 +177,11 @@
     <Compile Include="App_Code\DAL.cs" />
     <Compile Include="Areas\Account\AccountAreaRegistration.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\HomePage\HomePageAreaRegistration.cs" />
-    <Compile Include="Areas\HomePage\Controllers\SearchHotelController.cs" />
-    <Compile Include="Areas\HomePage\ViewModels\HotelDetailViewModel.cs" />
-    <Compile Include="Areas\HomePage\ViewModels\HotelSearchViewModel.cs" />
-    <Compile Include="Areas\HomePage\ViewModels\SearchPageViewModel.cs" />
+    <Compile Include="Areas\WebSite\HomePageAreaRegistration.cs" />
+    <Compile Include="Areas\WebSite\Controllers\SearchHotelController.cs" />
+    <Compile Include="Areas\WebSite\ViewModels\HotelDetailViewModel.cs" />
+    <Compile Include="Areas\WebSite\ViewModels\HotelSearchViewModel.cs" />
+    <Compile Include="Areas\WebSite\ViewModels\SearchPageViewModel.cs" />
     <Content Include="App_Code\HttpParamActionAttribute .cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -193,7 +193,7 @@
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\AmenityController.cs" />
     <Compile Include="Areas\Admin\Controllers\CityController.cs" />
-    <Compile Include="Areas\HomePage\Controllers\HomeController.cs" />
+    <Compile Include="Areas\WebSite\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\HotelController.cs" />
     <Compile Include="Controllers\HtmlHelpers.cs" />
     <Compile Include="Areas\Account\Controllers\ManageController.cs" />
@@ -271,10 +271,10 @@
     <Compile Include="Areas\Admin\Models\tbl_room_type.cs" />
     <Compile Include="Areas\Admin\Models\tbl_sightseeing.cs" />
     <Compile Include="Areas\Account\ViewModels\AccountViewModels.cs" />
-    <Compile Include="Areas\HomePage\ViewModels\AdvancedSearchViewModel.cs" />
+    <Compile Include="Areas\WebSite\ViewModels\AdvancedSearchViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\AmenityViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\CityViewModel.cs" />
-    <Compile Include="Areas\HomePage\ViewModels\HomeViewModel.cs" />
+    <Compile Include="Areas\WebSite\ViewModels\HomeViewModel.cs" />
     <Compile Include="Areas\Account\Models\IdentityModels.cs" />
     <Compile Include="Areas\Admin\ViewModels\HotelImagesViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\HotelViewModel.cs" />
@@ -350,6 +350,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\back_fade.jpg" />
     <Content Include="Images\empty.gif" />
     <Content Include="Images\logo-text.png" />
     <Content Include="Images\logo.png" />
@@ -359,7 +360,7 @@
     <Content Include="img\loading-sm.gif" />
     <Content Include="img\loading.gif" />
     <Content Include="Areas\Admin\Scripts\admin.js" />
-    <Content Include="Areas\HomePage\Scripts\homePage.js" />
+    <Content Include="Areas\WebSite\Scripts\homePage.js" />
     <Content Include="Scripts\bloodhound.js" />
     <Content Include="Scripts\bloodhound.min.js" />
     <Content Include="Scripts\bootstrap-slider.min.js" />
@@ -388,7 +389,7 @@
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Areas\Admin\Views\web.config" />
-    <Content Include="Areas\HomePage\Views\web.config" />
+    <Content Include="Areas\WebSite\Views\web.config" />
     <Content Include="Areas\Account\Views\web.config" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Scripts\fileinput.min.js" />
@@ -425,8 +426,8 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Areas\HomePage\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\HomePage\Views\Home\Index.cshtml" />
+    <Content Include="Areas\WebSite\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\WebSite\Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -467,14 +468,14 @@
     <Content Include="Areas\Admin\Views\Amenity\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Amenity\_PartialAmenityList.cshtml" />
     <Content Include="Areas\Admin\Views\Amenity\_PartialDeleteAmenity.cshtml" />
-    <Content Include="Areas\HomePage\Views\SearchHotel\ShowSearchResult.cshtml" />
-    <Content Include="Areas\HomePage\Views\Shared\_PartialAdvancedSearch.cshtml" />
-    <Content Include="Areas\HomePage\Views\SearchHotel\HotelDetails.cshtml" />
-    <Content Include="Areas\HomePage\Views\SearchHotel\_PartialHotelListResults.cshtml" />
+    <Content Include="Areas\WebSite\Views\SearchHotel\ShowSearchResult.cshtml" />
+    <Content Include="Areas\WebSite\Views\Shared\_PartialAdvancedSearch.cshtml" />
+    <Content Include="Areas\WebSite\Views\SearchHotel\HotelDetails.cshtml" />
+    <Content Include="Areas\WebSite\Views\SearchHotel\_PartialHotelListResults.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\HomePage\Models\" />
+    <Folder Include="Areas\WebSite\Models\" />
     <Folder Include="Helpers\" />
     <Folder Include="Upload\" />
     <Folder Include="ViewModels\" />

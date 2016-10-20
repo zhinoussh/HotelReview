@@ -66,7 +66,7 @@ namespace HotelAdvice.Areas.Account.Controllers
                 return PartialView("_PartialLoginModal",vm);
             }
             else
-                return RedirectToAction("Index", "Home", new { Area="HomePage",returnUrl = returnUrl });
+                return RedirectToAction("Index", "Home", new { Area="WebSite",returnUrl = returnUrl });
         }
 
         //
@@ -99,7 +99,7 @@ namespace HotelAdvice.Areas.Account.Controllers
                         if (!String.IsNullOrEmpty(model.returnUrl))
                             return Json(new { url = model.returnUrl });
                         else
-                            return Json(new { url = "/HomePage/Home/Index" });
+                            return Json(new { url = "/WebSite/Home/Index" });
 
                     }
                     case SignInStatus.LockedOut:
@@ -427,7 +427,7 @@ namespace HotelAdvice.Areas.Account.Controllers
        public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home", new { Area="HomePage"});
+            return RedirectToAction("Index", "Home", new { Area="WebSite"});
 
           //  return Json(new { url="/Home/Index"},JsonRequestBehavior.AllowGet);
 

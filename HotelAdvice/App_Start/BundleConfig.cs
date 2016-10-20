@@ -24,11 +24,11 @@ namespace HotelAdvice
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.min.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/HomePage").Include(
+            bundles.Add(new ScriptBundle("~/bundles/WebSite").Include(
                       "~/Scripts/respond.js"
                       , "~/Scripts/jquery-ui-1.12.0.min.js"
                       , "~/Scripts/Carousel.js"
-                       , "~/Areas/HomePage/Scripts/homePage.js"
+                       , "~/Areas/WebSite/Scripts/homePage.js"
                        , "~/Scripts/bootstrap-slider.min.js"
                        ));
 

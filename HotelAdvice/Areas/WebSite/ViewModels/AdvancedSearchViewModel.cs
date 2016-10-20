@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using HotelAdvice.Areas.Admin.ViewModels;
 
-namespace HotelAdvice.Areas.HomePage.ViewModels
+namespace HotelAdvice.Areas.WebSite.ViewModels
 {
     public class AdvancedSearchViewModel
     {

@@ -4,11 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using HotelAdvice.Models;
-using HotelAdvice.Areas.HomePage.ViewModels;
+using HotelAdvice.Areas.WebSite.ViewModels;
 using HotelAdvice.Areas.Admin.ViewModels;
 using HotelAdvice.App_Code;
 
-namespace HotelAdvice.Areas.HomePage.Controllers
+namespace HotelAdvice.Areas.WebSite.Controllers
 {
     public class HomeController : Controller
     {

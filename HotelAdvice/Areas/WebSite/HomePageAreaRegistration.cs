@@ -1,22 +1,22 @@
 ﻿using System.Web.Mvc;
 
-namespace HotelAdvice.Areas.HomePage
+namespace HotelAdvice.Areas.WebSite
 {
-    public class HomePageAreaRegistration : AreaRegistration 
+    public class WebSiteAreaRegistration : AreaRegistration 
     {
         public override string AreaName 
         {
             get 
             {
-                return "HomePage";
+                return "WebSite";
             }
         }
 
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
-                "HomePage_default",
-                "HomePage/{controller}/{action}/{id}",
+                "WebSite_default",
+                "WebSite/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
             );
         }

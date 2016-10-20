@@ -4,9 +4,9 @@ using System.Web.Mvc;
 using HotelAdvice.App_Code;
 using PagedList;
 using HotelAdvice.Areas.Admin.ViewModels;
-using HotelAdvice.Areas.HomePage.ViewModels;
+using HotelAdvice.Areas.WebSite.ViewModels;
 
-namespace HotelAdvice.Areas.HomePage.Controllers
+namespace HotelAdvice.Areas.WebSite.Controllers
 {
     public class SearchHotelController : Controller
     {
@@ -106,6 +106,18 @@ namespace HotelAdvice.Areas.HomePage.Controllers
 
             }
             return Json(new {msg="add_success"});
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RateHotel(int hotel_id, int your_rating)
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Json(new { msg = "login_required" });
+
+            }
+            return Json(new { msg = "add_success" });
         }
 
         public ActionResult HotelDetails(int id)
