@@ -201,65 +201,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201608180721342_add_TBL_HOTEL_AND_TBL_CITY.cs" />
-    <Compile Include="Migrations\201608180721342_add_TBL_HOTEL_AND_TBL_CITY.Designer.cs">
-      <DependentUpon>201608180721342_add_TBL_HOTEL_AND_TBL_CITY.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201608260546489_alterCityTable_addAttractionColumn.cs" />
-    <Compile Include="Migrations\201608260546489_alterCityTable_addAttractionColumn.Designer.cs">
-      <DependentUpon>201608260546489_alterCityTable_addAttractionColumn.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609031148345_HotelTableRevise.cs" />
-    <Compile Include="Migrations\201609031148345_HotelTableRevise.Designer.cs">
-      <DependentUpon>201609031148345_HotelTableRevise.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609031247185_HotelRestaurantsRelationsAndTables.cs" />
-    <Compile Include="Migrations\201609031247185_HotelRestaurantsRelationsAndTables.Designer.cs">
-      <DependentUpon>201609031247185_HotelRestaurantsRelationsAndTables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609031255409_fixHetlRestaurantRelations.cs" />
-    <Compile Include="Migrations\201609031255409_fixHetlRestaurantRelations.Designer.cs">
-      <DependentUpon>201609031255409_fixHetlRestaurantRelations.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609031259193_fixStringLength.cs" />
-    <Compile Include="Migrations\201609031259193_fixStringLength.Designer.cs">
-      <DependentUpon>201609031259193_fixStringLength.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609140513309_add_TBL_Room_Type.cs" />
-    <Compile Include="Migrations\201609140513309_add_TBL_Room_Type.Designer.cs">
-      <DependentUpon>201609140513309_add_TBL_Room_Type.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609150616468_add_TBL_Amenity.cs" />
-    <Compile Include="Migrations\201609150616468_add_TBL_Amenity.Designer.cs">
-      <DependentUpon>201609150616468_add_TBL_Amenity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609150701170_add_TBL_Sightseeing.cs" />
-    <Compile Include="Migrations\201609150701170_add_TBL_Sightseeing.Designer.cs">
-      <DependentUpon>201609150701170_add_TBL_Sightseeing.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609200737167_add_TBL_hotelPhoto.cs" />
-    <Compile Include="Migrations\201609200737167_add_TBL_hotelPhoto.Designer.cs">
-      <DependentUpon>201609200737167_add_TBL_hotelPhoto.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609201016009_alter_TBL_hotelPhoto.cs" />
-    <Compile Include="Migrations\201609201016009_alter_TBL_hotelPhoto.Designer.cs">
-      <DependentUpon>201609201016009_alter_TBL_hotelPhoto.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609220941146_alter_TBL_HOTEL_columns.cs" />
-    <Compile Include="Migrations\201609220941146_alter_TBL_HOTEL_columns.Designer.cs">
-      <DependentUpon>201609220941146_alter_TBL_HOTEL_columns.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609280600404_alter_tblhotel_distnace_to_float.cs" />
-    <Compile Include="Migrations\201609280600404_alter_tblhotel_distnace_to_float.Designer.cs">
-      <DependentUpon>201609280600404_alter_tblhotel_distnace_to_float.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609301236204_Alter_tbl_hotel_change_distance_type.cs" />
-    <Compile Include="Migrations\201609301236204_Alter_tbl_hotel_change_distance_type.Designer.cs">
-      <DependentUpon>201609301236204_Alter_tbl_hotel_change_distance_type.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610210825088_add_tbl_wishList.cs" />
-    <Compile Include="Migrations\201610210825088_add_tbl_wishList.Designer.cs">
-      <DependentUpon>201610210825088_add_tbl_wishList.cs</DependentUpon>
+    <Compile Include="Migrations\201610211854561_add_wishlist_applicationUser_relation.cs" />
+    <Compile Include="Migrations\201610211854561_add_wishlist_applicationUser_relation.Designer.cs">
+      <DependentUpon>201610211854561_add_wishlist_applicationUser_relation.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Config_ProjectDB.cs" />
@@ -480,7 +424,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Helpers\" />
     <Folder Include="Upload\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
@@ -489,50 +432,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201608180721342_add_TBL_HOTEL_AND_TBL_CITY.resx">
-      <DependentUpon>201608180721342_add_TBL_HOTEL_AND_TBL_CITY.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608260546489_alterCityTable_addAttractionColumn.resx">
-      <DependentUpon>201608260546489_alterCityTable_addAttractionColumn.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609031148345_HotelTableRevise.resx">
-      <DependentUpon>201609031148345_HotelTableRevise.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609031247185_HotelRestaurantsRelationsAndTables.resx">
-      <DependentUpon>201609031247185_HotelRestaurantsRelationsAndTables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609031255409_fixHetlRestaurantRelations.resx">
-      <DependentUpon>201609031255409_fixHetlRestaurantRelations.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609031259193_fixStringLength.resx">
-      <DependentUpon>201609031259193_fixStringLength.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609140513309_add_TBL_Room_Type.resx">
-      <DependentUpon>201609140513309_add_TBL_Room_Type.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609150616468_add_TBL_Amenity.resx">
-      <DependentUpon>201609150616468_add_TBL_Amenity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609150701170_add_TBL_Sightseeing.resx">
-      <DependentUpon>201609150701170_add_TBL_Sightseeing.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609200737167_add_TBL_hotelPhoto.resx">
-      <DependentUpon>201609200737167_add_TBL_hotelPhoto.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609201016009_alter_TBL_hotelPhoto.resx">
-      <DependentUpon>201609201016009_alter_TBL_hotelPhoto.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609220941146_alter_TBL_HOTEL_columns.resx">
-      <DependentUpon>201609220941146_alter_TBL_HOTEL_columns.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609280600404_alter_tblhotel_distnace_to_float.resx">
-      <DependentUpon>201609280600404_alter_tblhotel_distnace_to_float.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609301236204_Alter_tbl_hotel_change_distance_type.resx">
-      <DependentUpon>201609301236204_Alter_tbl_hotel_change_distance_type.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610210825088_add_tbl_wishList.resx">
-      <DependentUpon>201610210825088_add_tbl_wishList.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201610211854561_add_wishlist_applicationUser_relation.resx">
+      <DependentUpon>201610211854561_add_wishlist_applicationUser_relation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

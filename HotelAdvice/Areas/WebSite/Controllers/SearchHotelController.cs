@@ -5,6 +5,8 @@ using HotelAdvice.App_Code;
 using PagedList;
 using HotelAdvice.Areas.Admin.ViewModels;
 using HotelAdvice.Areas.WebSite.ViewModels;
+using Microsoft.AspNet.Identity;
+
 
 namespace HotelAdvice.Areas.WebSite.Controllers
 {
@@ -103,9 +105,12 @@ namespace HotelAdvice.Areas.WebSite.Controllers
             if (!User.Identity.IsAuthenticated)
             {
                 return Json(new { msg = "login_required" });
-
             }
-            return Json(new {msg="add_success"});
+            int result=db.add_favorite_hotel(hotel_id,User.Identity.GetUserId());
+            if(result==1)
+                return Json(new {msg="add_success"});
+            else 
+                return Json(new { msg = "already_exist" });
         }
 
         [HttpPost]

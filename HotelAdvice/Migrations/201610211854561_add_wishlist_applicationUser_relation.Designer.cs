@@ -7,13 +7,13 @@ namespace HotelAdvice.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class HotelTableRevise : IMigrationMetadata
+    public sealed partial class add_wishlist_applicationUser_relation : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(HotelTableRevise));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(add_wishlist_applicationUser_relation));
         
         string IMigrationMetadata.Id
         {
-            get { return "201609031148345_HotelTableRevise"; }
+            get { return "201610211854561_add_wishlist_applicationUser_relation"; }
         }
         
         string IMigrationMetadata.Source

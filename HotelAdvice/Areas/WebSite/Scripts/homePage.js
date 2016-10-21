@@ -86,6 +86,11 @@
     }
     $('#accordion').on('hidden.bs.collapse', toggleChevron);
     $('#accordion').on('shown.bs.collapse', toggleChevron);
+
+    $("#close_alert").click(function () {
+        $("#div_alert").slideUp(500);
+        return false;
+    });
 });
 
 $(document).ajaxComplete(function () {
@@ -214,10 +219,13 @@ var SuccessRegister = function (result,e)
 }
 var SuccessAjax_AddFavorit = function (result) {
     //login required
-    if (result.msg=="login_required") {
+    if (result.msg == "login_required") {
         show_login(window.location.href);
     }
-       //else if()
+    else if (result.msg == "add_success")
+            ;
+    else if (result.msg == "already_exist")
+            ;
 }
 
 var Success_paging_Results = function (result) {

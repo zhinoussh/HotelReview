@@ -4,6 +4,7 @@ using System.Linq;
 using HotelAdvice.Areas.Admin.ViewModels;
 using HotelAdvice.Areas.WebSite.ViewModels;
 using HotelAdvice.Areas.Admin.Models;
+using HotelAdvice.Areas.WebSite.Models;
 
 namespace HotelAdvice.App_Code
 {
@@ -517,7 +518,21 @@ namespace HotelAdvice.App_Code
             return lst_result;
         }
 
-        
+        public int add_favorite_hotel(int hotel_id,string userId)
+        {
+           tbl_WishList w= db.tbl_Wish_List.Where(x => x.HotelId == hotel_id && x.UserId == userId).FirstOrDefault();
+
+           if (w == null)
+           {
+               w = new tbl_WishList() { UserId = userId, HotelId = hotel_id };
+               db.tbl_Wish_List.Add(w);
+               db.SaveChanges();
+               return 1;
+           }
+           else
+               return 0;
+            
+        }
         #endregion Home Page
 
 

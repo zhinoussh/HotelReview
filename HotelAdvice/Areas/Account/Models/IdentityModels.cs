@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Data.Entity;
 
 namespace HotelAdvice.Areas.Account.Models
 {
@@ -12,14 +13,14 @@ namespace HotelAdvice.Areas.Account.Models
     {
         public ApplicationUser()
         {
-            wishlist = new HashSet<tbl_WishList>();
+            WishList = new HashSet<tbl_WishList>();
         }
 
         public string FirstName { get; set; }
         
         public string LastName { get; set; }
 
-        public virtual ICollection<tbl_WishList> wishlist { get; set; }
+        public virtual ICollection<tbl_WishList> WishList { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -39,6 +40,19 @@ namespace HotelAdvice.Areas.Account.Models
         {
         }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ApplicationUser>()
+           .HasMany(e => e.WishList)
+           .WithOptional(e => e.ApplicationUser)
+           .HasForeignKey(e => e.UserId)
+           .WillCascadeOnDelete();
+
+            modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(l => l.UserId);
+            modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id);
+            modelBuilder.Entity<IdentityUserRole>().HasKey(r => new { r.RoleId, r.UserId });
+
+        }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

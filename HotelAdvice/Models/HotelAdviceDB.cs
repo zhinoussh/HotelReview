@@ -94,16 +94,12 @@ namespace HotelAdvice
              .WillCascadeOnDelete();
 
             modelBuilder.Entity<tbl_Hotel>()
-            .HasMany(e => e.WishList)
+            .HasMany(e => e.WishList_Hotel)
             .WithOptional(e => e.Hotel)
             .HasForeignKey(e => e.HotelId)
             .WillCascadeOnDelete();
 
-            modelBuilder.Entity<ApplicationUser>()
-              .HasMany(e => e.wishlist)
-              .WithOptional(e => e.ApplicationUser)
-              .HasForeignKey(e => e.UserId)
-              .WillCascadeOnDelete();
+
 
             modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(l => l.UserId);
             modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id);
