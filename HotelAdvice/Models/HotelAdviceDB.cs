@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Data.Entity;
 using HotelAdvice.Areas.Admin.Models;
+using HotelAdvice.Areas.WebSite.Models;
+using HotelAdvice.Areas.Account.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace HotelAdvice
 {
@@ -20,6 +23,7 @@ namespace HotelAdvice
         public virtual DbSet<tbl_sightseeing> tbl_Sightseeing { get; set; }
         public virtual DbSet<tbl_hotel_sightseeing> tbl_Hotel_Sightseeings { get; set; }
         public virtual DbSet<tbl_Hotel_Photo> tbl_Hotel_Photo { get; set; }
+        public virtual DbSet<tbl_WishList> tbl_Wish_List { get; set; }
 
 
         public HotelAdviceDB()
@@ -88,6 +92,25 @@ namespace HotelAdvice
              .WithOptional(e => e.hotel)
              .HasForeignKey(e => e.HotelID)
              .WillCascadeOnDelete();
+
+            modelBuilder.Entity<tbl_Hotel>()
+            .HasMany(e => e.WishList)
+            .WithOptional(e => e.Hotel)
+            .HasForeignKey(e => e.HotelId)
+            .WillCascadeOnDelete();
+
+            modelBuilder.Entity<ApplicationUser>()
+              .HasMany(e => e.wishlist)
+              .WithOptional(e => e.ApplicationUser)
+              .HasForeignKey(e => e.UserId)
+              .WillCascadeOnDelete();
+
+            modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(l => l.UserId);
+            modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id);
+            modelBuilder.Entity<IdentityUserRole>().HasKey(r => new { r.RoleId, r.UserId });
+
         }
+
+
     }
 }

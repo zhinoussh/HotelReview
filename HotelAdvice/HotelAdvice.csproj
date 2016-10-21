@@ -179,6 +179,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\WebSite\HomePageAreaRegistration.cs" />
     <Compile Include="Areas\WebSite\Controllers\SearchHotelController.cs" />
+    <Compile Include="Areas\WebSite\Models\tbl_WishList.cs" />
     <Compile Include="Areas\WebSite\ViewModels\HotelDetailViewModel.cs" />
     <Compile Include="Areas\WebSite\ViewModels\HotelSearchViewModel.cs" />
     <Compile Include="Areas\WebSite\ViewModels\SearchPageViewModel.cs" />
@@ -255,6 +256,10 @@
     <Compile Include="Migrations\201609301236204_Alter_tbl_hotel_change_distance_type.cs" />
     <Compile Include="Migrations\201609301236204_Alter_tbl_hotel_change_distance_type.Designer.cs">
       <DependentUpon>201609301236204_Alter_tbl_hotel_change_distance_type.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610210825088_add_tbl_wishList.cs" />
+    <Compile Include="Migrations\201610210825088_add_tbl_wishList.Designer.cs">
+      <DependentUpon>201610210825088_add_tbl_wishList.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Config_ProjectDB.cs" />
@@ -475,7 +480,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\WebSite\Models\" />
     <Folder Include="Helpers\" />
     <Folder Include="Upload\" />
     <Folder Include="ViewModels\" />
@@ -526,6 +530,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609301236204_Alter_tbl_hotel_change_distance_type.resx">
       <DependentUpon>201609301236204_Alter_tbl_hotel_change_distance_type.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610210825088_add_tbl_wishList.resx">
+      <DependentUpon>201610210825088_add_tbl_wishList.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
