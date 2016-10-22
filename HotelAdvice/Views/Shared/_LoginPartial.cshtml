@@ -30,7 +30,11 @@
             @Html.ActionLink("Welcome " + ((ClaimsIdentity)User.Identity).FindFirst("FirstName").Value + "!", "Index", "Manage", new { Area="Account"}, htmlAttributes: new { title = "Manage" })
         </li>
         <li>
-             <a href='@Url.Action("WishList","Review")' title="Click to visit your wish list!" class="nopadding_left" ><i class="fa fa-heart"></i></a>
+            @if(User.IsInRole("PublicUser"))
+            {
+              <a href='@Url.Action("WishList","Review")' title="Click to visit your wish list!" class="nopadding_left" >
+            <i class="fa fa-heart"></i></a>
+            }
         </li>
     </ul>
    
