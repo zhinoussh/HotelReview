@@ -18,10 +18,11 @@ namespace HotelAdvice.Areas.WebSite.Models
 
         [Key]
         public int wishListId { get; set; }
-        
 
+        [ForeignKey("ApplicationUser")]
         public string UserId { get; set; }
 
+        [ForeignKey("Hotel")]
         public int? HotelId { get; set; }
 
         [ForeignKey("HotelId")]

@@ -175,6 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\DAL.cs" />
+    <Compile Include="Areas\WebSite\Helper\RenderPartial.cs" />
     <Compile Include="Areas\Account\AccountAreaRegistration.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\WebSite\HomePageAreaRegistration.cs" />
@@ -201,9 +202,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201610211854561_add_wishlist_applicationUser_relation.cs" />
-    <Compile Include="Migrations\201610211854561_add_wishlist_applicationUser_relation.Designer.cs">
-      <DependentUpon>201610211854561_add_wishlist_applicationUser_relation.cs</DependentUpon>
+    <Compile Include="Migrations\201610211945510_add_relation_hotel_wihList.cs" />
+    <Compile Include="Migrations\201610211945510_add_relation_hotel_wihList.Designer.cs">
+      <DependentUpon>201610211945510_add_relation_hotel_wihList.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Config_ProjectDB.cs" />
@@ -233,6 +234,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\AdminStyle.css" />
+    <Content Include="Content\alert-with-arrow.css" />
     <Content Include="Content\animate.css" />
     <Content Include="Content\awesome-bootstrap-checkbox.css" />
     <Content Include="Content\bootstrap-slider.min.css" />
@@ -432,8 +434,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201610211854561_add_wishlist_applicationUser_relation.resx">
-      <DependentUpon>201610211854561_add_wishlist_applicationUser_relation.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201610211945510_add_relation_hotel_wihList.resx">
+      <DependentUpon>201610211945510_add_relation_hotel_wihList.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

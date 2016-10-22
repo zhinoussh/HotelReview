@@ -36,14 +36,30 @@
             <div class="navbar-collapse collapse" id="div_partial">
                 @Html.Partial("_LoginPartial")
             </div><!-- /.navbar-collapse -->
-        </div><!-- /.container -->
-  
-    
+
+
+         
+        
+           </div><!-- /.container -->
     </div>
+
+    <!-- Alert User Action -->
+    <div class="col-sm-3 hidden-xs pull-right" >
+        <div class="alert alert-success alert-white rounded" id="div_alert" role="alert" style="display:none">
+            <button type="button" id="close_alert" aria-hidden="true" class="close">×</button>
+            <div class="icon">
+                <i class="fa fa-check" id="icon_alert"></i>
+            </div>
+            <label id="alert_user_action"></label>
+        </div>
+    </div>
+    <!-- /Alert User Action -->
     <input type="hidden" value="@ViewBag.ReturnUrl" id="hd_return_url" name="hd_return_url" />
 
-    <div class="container body-content">
-        @RenderBody()
+    <div class="container body-content" >
+        <div class="col-xs-12">
+            @RenderBody()
+        </div>
     </div>
 
     @*<footer class="col-sm-12">

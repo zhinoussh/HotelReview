@@ -19,7 +19,8 @@ namespace HotelAdvice.Areas.WebSite.ViewModels
         public float GuestRating { get; set; }
         public double? distance_citycenter { get; set; }
         public int num_reviews { get; set; }
-      //  public bool is_favorite { get; set; }
+      
+        public bool is_favorite { get; set; }
 
     }
 }

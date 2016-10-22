@@ -33,6 +33,9 @@ namespace HotelAdvice
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder); 
+
+
             modelBuilder.Entity<tbl_City>()
                .HasMany(e => e.Hotels)
                .WithOptional(e => e.City)
@@ -98,8 +101,6 @@ namespace HotelAdvice
             .WithOptional(e => e.Hotel)
             .HasForeignKey(e => e.HotelId)
             .WillCascadeOnDelete();
-
-
 
             modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(l => l.UserId);
             modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id);

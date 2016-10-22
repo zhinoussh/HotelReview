@@ -7,13 +7,13 @@ namespace HotelAdvice.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class add_wishlist_applicationUser_relation : IMigrationMetadata
+    public sealed partial class add_relation_hotel_wihList : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(add_wishlist_applicationUser_relation));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(add_relation_hotel_wihList));
         
         string IMigrationMetadata.Id
         {
-            get { return "201610211854561_add_wishlist_applicationUser_relation"; }
+            get { return "201610211945510_add_relation_hotel_wihList"; }
         }
         
         string IMigrationMetadata.Source

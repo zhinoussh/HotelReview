@@ -29,21 +29,18 @@
         <li>
             @Html.ActionLink("Welcome " + ((ClaimsIdentity)User.Identity).FindFirst("FirstName").Value + "!", "Index", "Manage", new { Area="Account"}, htmlAttributes: new { title = "Manage" })
         </li>
-        
+        <li>
+             <a href='@Url.Action("WishList","Review")' title="Click to visit your wish list!" class="nopadding_left" ><i class="fa fa-heart"></i></a>
+        </li>
     </ul>
-    <div class="col-xs-12">
-        <div class="alert alert-success" role="alert" id="div_alert" >
-            <a href="#" id="close_alert" class="close">&times;</a>
-            <label id="alert_success" style="margin-right:5px"></label>
-        </div>
-    </div>
+   
     //}
 }
 else
 {
 
-    @*@Html.ActionLink("Log in", "Login", "Account"
-    , routeValues: new { @returnUrl = Url.Action(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString(), ViewContext.RouteData.Values["id"]) }, htmlAttributes: new { id = "loginLink" })*@
+        @*@Html.ActionLink("Log in", "Login", "Account"
+            , routeValues: new { @returnUrl = Url.Action(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString(), ViewContext.RouteData.Values["id"]) }, htmlAttributes: new { id = "loginLink" })*@
 
-    <a class="navbar-btn navbar-right btn btn-primary" onclick="show_login()"><i class="fa fa-lock"></i> Sign In</a>
-}
+        <a class="navbar-btn navbar-right btn btn-primary" onclick="show_login()"><i class="fa fa-lock"></i> Sign In</a>
+        }

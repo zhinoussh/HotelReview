@@ -30,6 +30,7 @@ namespace HotelAdvice
                       , "~/Scripts/Carousel.js"
                        , "~/Areas/WebSite/Scripts/homePage.js"
                        , "~/Scripts/bootstrap-slider.min.js"
+                       
                        ));
 
             bundles.Add(new ScriptBundle("~/bundles/StarRating").Include(
@@ -55,6 +56,7 @@ namespace HotelAdvice
                       , "~/Content/CitySidebar.css"
                       , "~/Content/awesome-bootstrap-checkbox.css"
                       , "~/Content/bootstrap-slider.min.css"
+                      , "~/Content/alert-with-arrow.css"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/AdminCss").Include(

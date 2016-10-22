@@ -501,19 +501,23 @@ namespace HotelAdvice.App_Code
 
         #region Home Page
 
-        public List<HotelSearchViewModel> Search_Hotels_in_city(int city_id)
+        public List<HotelSearchViewModel> Search_Hotels_in_city(int city_id,string userId)
         {
-            List<HotelSearchViewModel> lst_result = db.tbl_Hotel.Where(x => x.CityId == city_id).Select(x => new HotelSearchViewModel
-            {
-                HotelId = x.HotelId,
-                HotelName = x.HotelName,
-                Website = x.Website,
-                HotelStars = x.HotelStars,
-                Description = x.Description,
-                distance_citycenter=x.distance_citycenter,
-                num_reviews=999
-
-            }).ToList();
+            List<HotelSearchViewModel> lst_result = (from h in db.tbl_Hotel.Where(x => x.CityId == city_id)
+                                                     join w in db.tbl_Wish_List.Where(x => x.UserId == userId)
+                                                     on h.HotelId equals w.HotelId into WishList
+                                                    from ww in WishList.DefaultIfEmpty()
+                                                    select new HotelSearchViewModel
+                                                        {
+                                                            HotelId = h.HotelId,
+                                                            HotelName = h.HotelName,
+                                                            Website = h.Website,
+                                                            HotelStars = h.HotelStars,
+                                                            Description = h.Description,
+                                                            distance_citycenter=h.distance_citycenter,
+                                                            num_reviews=999,
+                                                            is_favorite=(ww==null?false:true)
+                                                        }).ToList();
 
             return lst_result;
         }
@@ -530,7 +534,11 @@ namespace HotelAdvice.App_Code
                return 1;
            }
            else
+           {
+               db.tbl_Wish_List.Remove(w);
+               db.SaveChanges();
                return 0;
+           }
             
         }
         #endregion Home Page

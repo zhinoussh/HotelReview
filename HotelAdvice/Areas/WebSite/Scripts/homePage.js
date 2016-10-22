@@ -69,7 +69,7 @@
         $('#myCarousel').carousel(id);
     });
 
-    //accordion
+    //change open and close accordion panel styles
     function toggleChevron(e) {
         
         $(e.target)
@@ -87,10 +87,17 @@
     $('#accordion').on('hidden.bs.collapse', toggleChevron);
     $('#accordion').on('shown.bs.collapse', toggleChevron);
 
+
+    //set alert user Action
+
     $("#close_alert").click(function () {
-        $("#div_alert").slideUp(500);
+        $("#div_alert").slideUp(600);
         return false;
     });
+
+   
+
+   
 });
 
 $(document).ajaxComplete(function () {
@@ -218,17 +225,38 @@ var SuccessRegister = function (result,e)
         $("#modal_container").html(result);
 }
 var SuccessAjax_AddFavorit = function (result) {
+    //replace partial view
+    if (result.partial)
+        $("#table_container").html(result.partial);
+
     //login required
     if (result.msg == "login_required") {
         show_login(window.location.href);
     }
-    else if (result.msg == "add_success")
-            ;
-    else if (result.msg == "already_exist")
-            ;
+    else if (result.msg=="add_favorite_success") {
+
+        $("#alert_user_action").html("Hotel added to your wish list");
+        $("#div_alert").removeClass("alert-danger").addClass("alert-success");
+        $("#icon_alert").removeClass("fa-times-circle").addClass("fa-check");
+    }
+    else if (result.msg == "favorite_already_exist") {
+        $("#alert_user_action").html("Hotel removed from your wish list");
+        $("#div_alert").removeClass("alert-success").addClass("alert-danger");
+        $("#icon_alert").removeClass("fa-check").addClass("fa-times-circle");
+    }
+    scroll_to_top();
+
+    $("#div_alert").slideDown(500);
+        
 }
+    
+
 
 var Success_paging_Results = function (result) {
+    scroll_to_top();
+}
+
+var scroll_to_top = function () {
     $('html, body').animate({ scrollTop: 0 }, 0);
 }
 

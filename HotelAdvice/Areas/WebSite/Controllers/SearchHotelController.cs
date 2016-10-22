@@ -6,6 +6,7 @@ using PagedList;
 using HotelAdvice.Areas.Admin.ViewModels;
 using HotelAdvice.Areas.WebSite.ViewModels;
 using Microsoft.AspNet.Identity;
+using HotelAdvice.Helper;
 
 
 namespace HotelAdvice.Areas.WebSite.Controllers
@@ -27,7 +28,7 @@ namespace HotelAdvice.Areas.WebSite.Controllers
                 vm.city_name = "Hotels in " + city_prop[0];
             
             //get hotel list in this city_id
-            List<HotelSearchViewModel> lst_hotels = db.Search_Hotels_in_city(city_id);
+            List<HotelSearchViewModel> lst_hotels = db.Search_Hotels_in_city(city_id,User.Identity.GetUserId());
 
             vm.paged_list_hotels = lst_hotels.ToPagedList(1, defaultPageSize);
            
@@ -38,12 +39,17 @@ namespace HotelAdvice.Areas.WebSite.Controllers
         [ActionName("HotelResults")]
         public PartialViewResult ShowSearchResult(int city_id,int ?page,string sort)
         {
-            int currentPageIndex  = page.HasValue ? page.Value : 1;
+            return PartialView("_PartialHotelListResults", SetPartialHotelResult(city_id, page, sort));
+        }
+
+        private IPagedList<HotelSearchViewModel> SetPartialHotelResult(int city_id, int? page, string sort)
+        {
+            int currentPageIndex = page.HasValue ? page.Value : 1;
             //get hotel list in this city_id
-            List<HotelSearchViewModel> lst_hotels = db.Search_Hotels_in_city(city_id);
+            List<HotelSearchViewModel> lst_hotels = db.Search_Hotels_in_city(city_id, User.Identity.GetUserId());
 
             //sort
-           switch (sort)
+            switch (sort)
             {
                 case "distance":
                     lst_hotels = lst_hotels.OrderBy(x => x.distance_citycenter).ToList();
@@ -65,7 +71,7 @@ namespace HotelAdvice.Areas.WebSite.Controllers
 
             //pagination
 
-           return PartialView("_PartialHotelListResults", lst_hotels.ToPagedList(currentPageIndex, defaultPageSize));
+            return  lst_hotels.ToPagedList(currentPageIndex, defaultPageSize);
         }
 
         [HttpGet]
@@ -83,34 +89,29 @@ namespace HotelAdvice.Areas.WebSite.Controllers
             return View("ShowSearchResult", result_vm);
         }
 
-        [HttpGet]
-        public ActionResult SearchHotels_byCity(int id)
-        {
-            //SearchResultViewModel vm = new SearchResultViewModel();
-            //vm.Advnaced_Search = Set_Advanced_Search();
-            //List<string> city_prop = db.get_city_byId(id);
-            //if (city_prop != null)
-            //    vm.city_search = "Hotels in " + city_prop[0];
-
-            //vm.lst_hotels = db.Search_Hotels_in_city(id);
-            //vm.paged_list_hotels = vm.lst_hotels.ToPagedList(1, defaultPageSize);
-            
-             return View("ShowSearchResult");
-        }
-
+      
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddToFavoite(int hotel_id)
+        public ActionResult AddToFavorite(int hotel_id, int city_id, int? page, string sort)
         {
             if (!User.Identity.IsAuthenticated)
             {
                 return Json(new { msg = "login_required" });
             }
-            int result=db.add_favorite_hotel(hotel_id,User.Identity.GetUserId());
-            if(result==1)
-                return Json(new {msg="add_success"});
-            else 
-                return Json(new { msg = "already_exist" });
+            else
+            {
+               
+                int result = db.add_favorite_hotel(hotel_id, User.Identity.GetUserId());
+
+                string partialview = RenderPartial.RenderViewToString(this.ControllerContext
+                    , "~/Areas/WebSite/views/SearchHotel/_PartialHotelListResults.cshtml"
+                    , SetPartialHotelResult(city_id, page, sort));
+
+                if (result == 1)
+                    return Json(new {  msg = "add_favorite_success", partial = partialview });
+                else
+                    return Json(new { msg = "favorite_already_exist", partial = partialview });
+            }
         }
 
         [HttpPost]

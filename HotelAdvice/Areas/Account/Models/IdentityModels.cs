@@ -42,15 +42,14 @@ namespace HotelAdvice.Areas.Account.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder); 
+
             modelBuilder.Entity<ApplicationUser>()
            .HasMany(e => e.WishList)
            .WithOptional(e => e.ApplicationUser)
            .HasForeignKey(e => e.UserId)
            .WillCascadeOnDelete();
 
-            modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(l => l.UserId);
-            modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id);
-            modelBuilder.Entity<IdentityUserRole>().HasKey(r => new { r.RoleId, r.UserId });
 
         }
         public static ApplicationDbContext Create()
