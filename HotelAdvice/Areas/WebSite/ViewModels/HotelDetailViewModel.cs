@@ -20,6 +20,8 @@ namespace HotelAdvice.Areas.WebSite.ViewModels
 
         public int review_num { get; set; }
 
+        public bool is_favorite { get; set; }
+
         public string HotelAddress { get; set; }
 
         public string Tel { get; set; }

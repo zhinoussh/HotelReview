@@ -11,17 +11,7 @@
 {
 
 
-    //using (Ajax.BeginForm("LogOff", "Account",null
-    //    , new AjaxOptions
-    //    {
-    //        HttpMethod = "Get"
-    //        ,
-    //        InsertionMode = InsertionMode.ReplaceWith
-    //        ,
-    //        OnSuccess = "SuccessLogOf"
-    //    }
-    //    , new { id = "logoutForm", @class = "navbar-right" }))
-    //{
+   
     <a class="navbar-right navbar-btn btn btn-warning " href='@Url.Action("LogOff", "Account", new { Area="Account"})'>
         <span class="glyphicon glyphicon-log-out"></span> Sign Out
     </a>
@@ -38,7 +28,6 @@
         </li>
     </ul>
    
-    //}
 }
 else
 {

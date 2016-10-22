@@ -19,395 +19,411 @@
 </div>
 <!-- end search bar -->
 
-<div class="col-xs-12 top-buffer20 nopadding">
-    <div class="col-sm-8 col-xs-6 nopadding">
-        <h4 style="font-weight:bold; margin:0">
-            @Html.DisplayFor(model => model.HotelName) Hotel - @Html.DisplayFor(model => model.CityName)
-        </h4>
-  
+<div id="detail_container">
+    <div class="col-xs-12 top-buffer20 nopadding">
+        <div class="col-sm-8 col-xs-6 nopadding">
+            <h4 style="font-weight:bold; margin:0">
+                @Html.DisplayFor(model => model.HotelName) Hotel - @Html.DisplayFor(model => model.CityName)
+            </h4>
+
+        </div>
+        <div class="col-sm-2 col-xs-3 text-right">
+            Rate by Guests
+        </div>
+        <div class="col-sm-2 col-xs-3 nopadding" style="margin-top:-1%">
+            @Html.TextBoxFor(model => model.GuestRating, new { @class = "GuestRating" })
+
+        </div>
     </div>
-    <div class="col-sm-2 col-xs-3 text-right">
-        Rate by Guests
-    </div>
-    <div class="col-sm-2 col-xs-3 nopadding" style="margin-top:-1%">
-        @Html.TextBoxFor(model => model.GuestRating, new { @class = "GuestRating" })
- 
-    </div>
-</div>
-<div class="col-xs-12 nopadding">
-    <div class="col-xs-9 nopadding">
-        @Html.TextBoxFor(model => model.HotelStars, new { @class = "HotelStars" })
-    </div>
-    <div class="col-xs-3  nopadding">
-        @Html.ActionLink(Model.review_num + " reviews", "HotelReviews", "SearchHotel"
+    <div class="col-xs-12 nopadding">
+        <div class="col-xs-9 nopadding">
+            @Html.TextBoxFor(model => model.HotelStars, new { @class = "HotelStars" })
+        </div>
+        <div class="col-xs-3  nopadding">
+            @Html.ActionLink(Model.review_num + " reviews", "HotelReviews", "SearchHotel"
             , new { Area = "WebSite", id = Model.HotelId }, new { target = "_blank" })
+        </div>
     </div>
-</div>
 
 
 
- <!--Photo Slider -->
-<div class="col-xs-12 well top-buffer10" >
-    <div class=" col-xs-12 nopadding" id="slider" >
-    <!-- Top part of the slider -->
-    <div class="row " >
-        <div class="col-xs-8 col-xs-offset-2" id="carousel-bounding-box" >
-            <div class="carousel slide" id="myCarousel">
-                <!-- Carousel items -->
-                <div class="carousel-inner">
+    <!--Photo Slider -->
+    <div class="col-xs-12 well top-buffer10">
+        <div class=" col-xs-12 nopadding" id="slider">
+            <!-- Top part of the slider -->
+            <div class="row ">
+                <div class="col-xs-8 col-xs-offset-2" id="carousel-bounding-box">
+                    <div class="carousel slide" id="myCarousel">
+                        <!-- Carousel items -->
+                        <div class="carousel-inner">
 
-                    @if (Model.photos.Count > 0)
+                            @if (Model.photos.Count > 0)
                     {
-                        <div class="active item" data-slide-number="0">
-                            <img src='@Url.Content("../../../Upload/"+Model.HotelName+"/" + Model.photos[0])'>
-                        </div>
+                                <div class="active item" data-slide-number="0">
+                                    <img src='@Url.Content("../../../Upload/"+Model.HotelName+"/" + Model.photos[0])'>
+                                </div>
                     }
-                    @for (int i = 1; i < Model.photos.Count; i++)
+                            @for (int i = 1; i < Model.photos.Count; i++)
                     {
-                        <div class="item" data-slide-number="@i">
-                            <img src='@Url.Content("../../../Upload/" + Model.HotelName + "/" + Model.photos[i])'>
-                        </div>
+                                <div class="item" data-slide-number="@i">
+                                    <img src='@Url.Content("../../../Upload/" + Model.HotelName + "/" + Model.photos[i])'>
+                                </div>
                     }
 
-                </div><!-- Carousel nav -->
-                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                </a>
-                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                </a>
+                        </div><!-- Carousel nav -->
+                        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        </a>
+                    </div>
+                </div>
+
+
             </div>
         </div>
 
-
-    </div>
-    </div>
-
-<div class="row hidden-xs" id="slider-thumbs">
-    <div class=" col-xs-12 top-buffer10">
-        <!-- Bottom switcher of slider -->
-        <ul class=" hide-bullets">
-            @for (int i = 1; i < Model.photos.Count; i++)
+        <div class="row hidden-xs" id="slider-thumbs">
+            <div class=" col-xs-12 top-buffer10">
+                <!-- Bottom switcher of slider -->
+                <ul class=" hide-bullets">
+                    @for (int i = 1; i < Model.photos.Count; i++)
             {
-              
-                <li class="col-xs-2">
-                    <a class="thumbnail" id="@String.Format("carousel-selector-{0}",@i)"><img src='@Url.Content("../../../Upload/" + Model.HotelName + "/" + Model.photos[i])'></a>
-                </li>
+
+                        <li class="col-xs-2">
+                            <a class="thumbnail" id="@String.Format("carousel-selector-{0}",@i)"><img src='@Url.Content("../../../Upload/" + Model.HotelName + "/" + Model.photos[i])'></a>
+                        </li>
             }
-           
-        </ul>
+
+                </ul>
+            </div>
+        </div>
     </div>
-    </div>
-</div>
 
-<div class="col-xs-12 top-buffer10 nopadding">
+    <div class="col-xs-12 top-buffer10 nopadding">
 
-    <!-- Accordion Hotel Details-->
-    <div class="col-xs-10  nopadding">
-        <div class="panel-group" id="accordion">
+        <!-- Accordion Hotel Details-->
+        <div class="col-xs-10  nopadding">
+            <div class="panel-group" id="accordion">
 
-            <!-- Panel General-->
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseGeneral">
-                            <i class="glyphicon glyphicon-info-sign"></i> General Description <i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseGeneral" class="panel-collapse collapse in">
-                    <div class="panel-body">
-                        <div class="col-xs-12 nopadding">
-                            <div class="col-sm-3 col-xs-6 nopadding">
-                                <b>Reception hours: 24 hours</b>
-                            </div>
-                            <div class="col-sm-3 col-xs-6 nopadding">
-                                <i class="glyphicon glyphicon-time"></i> Check-in Time: @Html.DisplayFor(model => model.checkin)
-                            </div>
-
-                            <div class="col-sm-3 col-xs-6 nopadding">
-                                <i class="glyphicon glyphicon-time"></i> Check-out Time:
-                                @Html.DisplayFor(model => model.checkout)
-                            </div>
-                        </div>
-                        <div class="col-xs-12 nopadding top-buffer10">
-                            @Html.DisplayFor(model => model.Description)
-                        </div>
+                <!-- Panel General-->
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseGeneral">
+                                <i class="glyphicon glyphicon-info-sign"></i> General Description <i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                            </a>
+                        </h4>
                     </div>
-                </div>
-            </div>
+                    <div id="collapseGeneral" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <div class="col-xs-12 nopadding">
+                                <div class="col-sm-3 col-xs-6 nopadding">
+                                    <b>Reception hours: 24 hours</b>
+                                </div>
+                                <div class="col-sm-3 col-xs-6 nopadding">
+                                    <i class="glyphicon glyphicon-time"></i> Check-in Time: @Html.DisplayFor(model => model.checkin)
+                                </div>
 
-            <!-- Panel Contact-->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseContact">
-                            <i class="glyphicon glyphicon-phone"></i> Contact Information <i class="indicator glyphicon glyphicon-chevron-up  pull-right"></i>
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseContact" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <div class="col-xs-12 nopadding">
-                            <div class="col-sm-3 col-xs-6 nopadding">
-                                <i class="glyphicon glyphicon-phone-alt"></i> Phone Number: @Html.DisplayFor(model => model.Tel)
+                                <div class="col-sm-3 col-xs-6 nopadding">
+                                    <i class="glyphicon glyphicon-time"></i> Check-out Time:
+                                    @Html.DisplayFor(model => model.checkout)
+                                </div>
                             </div>
-
-                            <div class="col-sm-3 col-xs-6 nopadding">
-                                <i class="glyphicon glyphicon-earphone"></i> Fax Number:
-                                @Html.DisplayFor(model => model.Fax)
-                            </div>
-                            <div class="col-sm-3 col-xs-6 nopadding">
-                                <i class="glyphicon glyphicon-envelope"></i> Email:
-                                @Html.DisplayFor(model => model.Email)
-                            </div>
-                            <div class="col-sm-3 col-xs-6 nopadding">
-                                <i class="glyphicon glyphicon-globe"></i> Web Site:
-                                <a href="http://@Model.Website" ta target="_blank"> @Model.Website</a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Panel Location-->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseLocation">
-                            <i class="glyphicon glyphicon-map-marker"></i> Location and Distances <i class="indicator glyphicon glyphicon-chevron-up  pull-right"></i>
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseLocation" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <div class="col-xs-12 nopadding">
-                            Address: @Html.DisplayFor(model => model.HotelAddress)
-                        </div>
-                        <div class="col-xs-12 nopadding top-buffer10">
-
-                            <div class="col-sm-3 col-xs-6 nopadding">
-                                <i class="glyphicon glyphicon-map-marker"></i> Distance from City Center:
-                                @Html.DisplayFor(model => model.distance_citycenter) km
-                            </div>
-
-                            <div class="col-sm-3 col-xs-6 nopadding">
-                                <i class="glyphicon glyphicon-plane"></i> Distance from Airport:
-                                @Html.DisplayFor(model => model.distance_airport) km
+                            <div class="col-xs-12 nopadding top-buffer10">
+                                @Html.DisplayFor(model => model.Description)
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Panel Rooms-->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseRoom">
-                            <i class="glyphicon glyphicon-bed"></i> Room Types <i class="indicator glyphicon glyphicon-chevron-up pull-right"></i>
-                        </a>
-                    </h4>
+                <!-- Panel Contact-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseContact">
+                                <i class="glyphicon glyphicon-phone"></i> Contact Information <i class="indicator glyphicon glyphicon-chevron-up  pull-right"></i>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseContact" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="col-xs-12 nopadding">
+                                <div class="col-sm-3 col-xs-6 nopadding">
+                                    <i class="glyphicon glyphicon-phone-alt"></i> Phone Number: @Html.DisplayFor(model => model.Tel)
+                                </div>
+
+                                <div class="col-sm-3 col-xs-6 nopadding">
+                                    <i class="glyphicon glyphicon-earphone"></i> Fax Number:
+                                    @Html.DisplayFor(model => model.Fax)
+                                </div>
+                                <div class="col-sm-3 col-xs-6 nopadding">
+                                    <i class="glyphicon glyphicon-envelope"></i> Email:
+                                    @Html.DisplayFor(model => model.Email)
+                                </div>
+                                <div class="col-sm-3 col-xs-6 nopadding">
+                                    <i class="glyphicon glyphicon-globe"></i> Web Site:
+                                    <a href="http://@Model.Website" ta target="_blank"> @Model.Website</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div id="collapseRoom" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <div class="col-xs-12 nopadding ">
 
-                            @if(Model.rooms!=null)
+                <!-- Panel Location-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseLocation">
+                                <i class="glyphicon glyphicon-map-marker"></i> Location and Distances <i class="indicator glyphicon glyphicon-chevron-up  pull-right"></i>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseLocation" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="col-xs-12 nopadding">
+                                Address: @Html.DisplayFor(model => model.HotelAddress)
+                            </div>
+                            <div class="col-xs-12 nopadding top-buffer10">
+
+                                <div class="col-sm-3 col-xs-6 nopadding">
+                                    <i class="glyphicon glyphicon-map-marker"></i> Distance from City Center:
+                                    @Html.DisplayFor(model => model.distance_citycenter) km
+                                </div>
+
+                                <div class="col-sm-3 col-xs-6 nopadding">
+                                    <i class="glyphicon glyphicon-plane"></i> Distance from Airport:
+                                    @Html.DisplayFor(model => model.distance_airport) km
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel Rooms-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseRoom">
+                                <i class="glyphicon glyphicon-bed"></i> Room Types <i class="indicator glyphicon glyphicon-chevron-up pull-right"></i>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseRoom" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="col-xs-12 nopadding ">
+
+                                @if(Model.rooms!=null)
                         {
                             foreach (var item in Model.rooms)
                             {
-                        <div class="col-xs-3 nopadding top-buffer10">
-                            <i class="fa fa-check-square-o"></i>  @item
-                        </div>
-                            }
-                        }
-                        else
-                        {
-                        <div class="col-xs-12 nopadding">
-                            Not Specified.
-                        </div>
-                       }
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-
-            <!-- Panel Restaurant-->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseRestaurant">
-                            <i class="glyphicon glyphicon-cutlery"></i> Restaurants <i class="indicator glyphicon glyphicon-chevron-up pull-right"></i>
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseRestaurant" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <div class="col-xs-12 nopadding ">
-                            @if (Model.restaurants != null)
-                        {
-                            foreach (var item in Model.restaurants)
-                            {
-                        <div class="col-xs-4 nopadding top-buffer10">
-                            <i class="fa fa-check-square-o"></i>  @item
-                        </div>
-                            }
-                        }
-                        else
-                        {
-                        <div class="col-xs-12 nopadding">
-                            Not Specified.
-                        </div>
-                        }
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-
-            <!-- Panel SightSeeing-->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseSightseeing">
-                            <i class="glyphicon glyphicon-tree-deciduous"></i> Nearby Sightseeing<i class="indicator glyphicon glyphicon-chevron-up pull-right"></i>
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseSightseeing" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <div class="col-xs-12 nopadding ">
-                            @if (Model.sightseeing != null)
-                        {
-                            foreach (var item in Model.sightseeing)
-                            {
-                        <div class="col-xs-4 nopadding top-buffer10">
-                            <i class="fa fa-check-square-o"></i>  @item
-                        </div>
-                            }
-                        }
-                        else
-                        {
-                        <div class="col-xs-12 nopadding">
-                            Not Specified.
-                        </div>
-                        }
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-
-            <!-- Panel Amenity-->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseAmenity">
-                            <i class="glyphicon glyphicon-lamp"></i> Hotel Amenities<i class="indicator glyphicon glyphicon-chevron-up pull-right"></i>
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseAmenity" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <div class="col-xs-12 nopadding ">
-                            @if (Model.amenities != null)
-                        {
-                            foreach (var item in Model.amenities)
-                            {
-
-                        <div class="col-xs-3 nopadding top-buffer10">
-                            @if(item.hotel_selected){
-                                    <i class="fa fa-check-square-o"></i>
-                                    }
-                                    else {
-                                    <i class="fa fa-ban"></i>
-                                    }
-                            @item.AmenityName
+                                <div class="col-xs-3 nopadding top-buffer10">
+                                    <i class="fa fa-check-square-o"></i>  @item
                                 </div>
                             }
                         }
                         else
                         {
-                        <div class="col-xs-12 nopadding">
-                            Not Specified.
+                                    <div class="col-xs-12 nopadding">
+                                        Not Specified.
+                                    </div>
+                       }
+                            </div>
                         </div>
-                        }
-                        </div>
+
+
                     </div>
+                </div>
+
+                <!-- Panel Restaurant-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseRestaurant">
+                                <i class="glyphicon glyphicon-cutlery"></i> Restaurants <i class="indicator glyphicon glyphicon-chevron-up pull-right"></i>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseRestaurant" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="col-xs-12 nopadding ">
+                                @if (Model.restaurants != null)
+                        {
+                            foreach (var item in Model.restaurants)
+                            {
+                                <div class="col-xs-4 nopadding top-buffer10">
+                                    <i class="fa fa-check-square-o"></i>  @item
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                                    <div class="col-xs-12 nopadding">
+                                        Not Specified.
+                                    </div>
+                        }
+                            </div>
+                        </div>
 
 
+                    </div>
+                </div>
+
+                <!-- Panel SightSeeing-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseSightseeing">
+                                <i class="glyphicon glyphicon-tree-deciduous"></i> Nearby Sightseeing<i class="indicator glyphicon glyphicon-chevron-up pull-right"></i>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseSightseeing" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="col-xs-12 nopadding ">
+                                @if (Model.sightseeing != null)
+                        {
+                            foreach (var item in Model.sightseeing)
+                            {
+                                <div class="col-xs-4 nopadding top-buffer10">
+                                    <i class="fa fa-check-square-o"></i>  @item
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                                    <div class="col-xs-12 nopadding">
+                                        Not Specified.
+                                    </div>
+                        }
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <!-- Panel Amenity-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseAmenity">
+                                <i class="glyphicon glyphicon-lamp"></i> Hotel Amenities<i class="indicator glyphicon glyphicon-chevron-up pull-right"></i>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseAmenity" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="col-xs-12 nopadding ">
+                                @if (Model.amenities != null)
+                        {
+                            foreach (var item in Model.amenities)
+                            {
+
+                                <div class="col-xs-3 nopadding top-buffer10">
+                                    @if(item.hotel_selected){
+                                        <i class="fa fa-check-square-o"></i>
+                                    }
+                                    else {
+                                        <i class="fa fa-ban"></i>
+                                    }
+                                    @item.AmenityName
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                                    <div class="col-xs-12 nopadding">
+                                        Not Specified.
+                                    </div>
+                        }
+                            </div>
+                        </div>
+
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- User Actions-->
-    <div class="col-xs-2 nopadding_right ">
-        <div class="col-xs-12 nopadding">
-            @using (Ajax.BeginForm("AddToFavoite", new { Area = "WebSite", hotel_id = Model.HotelId }, new AjaxOptions
+        <!-- User Actions-->
+        <div class="col-xs-2 nopadding_right ">
+            <div class="col-xs-12 nopadding">
+                @using (Ajax.BeginForm("AddToFavoite", new { Area = "WebSite", hotel_id = Model.HotelId }, new AjaxOptions
             {
             HttpMethod = "Post",
             OnSuccess = "SuccessAjax_AddFavorit"
             }))
             {
-            @Html.AntiForgeryToken()
+                    @Html.AntiForgeryToken()
 
-            <div class="col-xs-12 text-center">Click to add this hotel to your wish list</div>
+                    <div class="col-xs-12 text-center">Click to add this hotel to your wish list</div>
 
-            <div class="col-xs-12 nopadding top-buffer10">
-                <button class=" btn btn-danger btn-outline btn-responsive btn-block" type="submit">
-                    <i class="fa fa-heart fa-lg"></i> Like it!
-                </button>
-            </div>
+                    <div class="col-xs-12 nopadding top-buffer10">
+
+                        @using (Ajax.BeginForm("AddToFavorite_Detail", new { hotel_id = Model.HotelId }
+                           , new AjaxOptions
+                            {
+                                HttpMethod = "Post",
+                                OnSuccess = "SuccessAjax_AddFavorit",
+                                 InsertionMode=InsertionMode.Replace,
+                                 UpdateTargetId="detail_container"
+                            }))
+                {
+                            @Html.AntiForgeryToken()
+
+                            <button class="btn btn-danger btn-responsive btn-block @(!(Model.is_favorite)?"btn-outline":"") "
+                                    type="submit" title='@(Model.is_favorite ? "Remove from your wish list" : "Add to your wish list")'>
+                                <i class="fa fa-heart fa-lg"></i> Like it!
+                            </button>
+                }
+                    </div>
             }
 
-            <div class="col-xs-12 text-center top-buffer10 nopadding">
-                <div class="col-xs-12 box-warning">
-                    <b>Quick Rating!</b><br />
-                    <div class="col-xs-12 nopadding">
-                        @using (Ajax.BeginForm("RateHotel", new AjaxOptions{
+                <div class="col-xs-12 text-center top-buffer10 nopadding">
+                    <div class="col-xs-12 box-warning">
+                        <b>Quick Rating!</b><br />
+                        <div class="col-xs-12 nopadding">
+                            @using (Ajax.BeginForm("RateHotel", new AjaxOptions{
                             HttpMethod = "Post",
                             OnSuccess = "SuccessAjax_AddFavorit"
                             }))
                             {
-                            @Html.AntiForgeryToken()
+                                @Html.AntiForgeryToken()
 
-                        <div class="col-xs-12 nopadding">
-                            @Html.HiddenFor(model => model.HotelId, new { id = "hotel_id", Name = "hotel_id" })
-                            @Html.TextBoxFor(model => model.YourRating, new { @class = "YourRating", id = "your_rating", Name = "your_rating" })
-                        </div>   <div class="col-xs-12 nopadding top-buffer10">
-                            <button class=" btn btn-warning btn-responsive btn-block " type="submit">
-                                Send it!
-                            </button>
-                        </div>
+                                <div class="col-xs-12 nopadding">
+                                    @Html.HiddenFor(model => model.HotelId, new { id = "hotel_id", Name = "hotel_id" })
+                                    @Html.TextBoxFor(model => model.YourRating, new { @class = "YourRating", id = "your_rating", Name = "your_rating" })
+                                </div>   <div class="col-xs-12 nopadding top-buffer10">
+                                    <button class=" btn btn-warning btn-responsive btn-block " type="submit">
+                                        Send it!
+                                    </button>
+                                </div>
                         }
+                        </div>
                     </div>
                 </div>
-            </div>
-                    <div class="col-xs-12 text-center top-buffer10 nopadding">
-                        <div class="col-xs-12 box-primary">
-                            Read all reviews<br />
-                            @Html.ActionLink(Model.review_num + " reviews", "HotelReviews", "SearchHotel"
+                <div class="col-xs-12 text-center top-buffer10 nopadding">
+                    <div class="col-xs-12 box-primary">
+                        Read all reviews<br />
+                        @Html.ActionLink(Model.review_num + " reviews", "HotelReviews", "SearchHotel"
                             , new { Area = "WebSite", id = Model.HotelId }, new { target = "_blank" })
 
 
-                            <a role="button" class="btn btn-primary btn-responsive btn-block top-buffer20 "
-                               href="@Url.Action("AddReview", "SearchHotel", new { id = Model.HotelId, Area = "WebSite" })">
-                               Review <i class="glyphicon glyphicon-pencil"></i>
-                            </a>
-                        </div>
-
-
+                        <a role="button" class="btn btn-primary btn-responsive btn-block top-buffer20 "
+                           href="@Url.Action("AddReview", "SearchHotel", new { id = Model.HotelId, Area = "WebSite" })">
+                            Review <i class="glyphicon glyphicon-pencil"></i>
+                        </a>
                     </div>
 
 
                 </div>
 
+
             </div>
+
         </div>
+    </div>
+</div>

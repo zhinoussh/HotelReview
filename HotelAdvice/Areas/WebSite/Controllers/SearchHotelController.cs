@@ -114,6 +114,28 @@ namespace HotelAdvice.Areas.WebSite.Controllers
             }
         }
 
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddToFavorite_Detail(int hotel_id)
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Json(new { msg = "login_required" });
+            }
+            else
+            {
+
+                int result = db.add_favorite_hotel(hotel_id, User.Identity.GetUserId());
+
+                if (result == 1)
+                    return Json(new { msg = "add_favorite_success" });
+                else
+                    return Json(new { msg = "favorite_already_exist" });
+            }
+        }
+       
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult RateHotel(int hotel_id, int your_rating)
@@ -128,10 +150,11 @@ namespace HotelAdvice.Areas.WebSite.Controllers
 
         public ActionResult HotelDetails(int id)
         {
-            HotelDetailViewModel vm=db.get_hoteldetails(id);
+            HotelDetailViewModel vm=db.get_hoteldetails(id,User.Identity.GetUserId());
 
             return View(vm);
         }
+       
         private AdvancedSearchViewModel Set_Advanced_Search()
         {
             AdvancedSearchViewModel vm_search = new AdvancedSearchViewModel();

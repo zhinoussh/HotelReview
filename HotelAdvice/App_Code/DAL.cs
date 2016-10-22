@@ -284,10 +284,13 @@ namespace HotelAdvice.App_Code
             return hotel_prop;
         }
 
-        public HotelDetailViewModel get_hoteldetails(int id)
+        public HotelDetailViewModel get_hoteldetails(int id,string userId)
         {
             HotelDetailViewModel detail = (from h in db.tbl_Hotel.Where(x => x.HotelId == id)
                                            join c in db.tbl_city on h.CityId.Value equals (int?)c.CityId
+                                           join w in db.tbl_Wish_List.Where(x=>x.UserId==userId) 
+                                           on h.HotelId equals w.HotelId into Wishist
+                                           from ww in Wishist.DefaultIfEmpty()
                                            select new HotelDetailViewModel
                                            {
                                                HotelId=h.HotelId,
@@ -296,6 +299,7 @@ namespace HotelAdvice.App_Code
                                                CityName = c.CityName,
                                                GuestRating="4",
                                                review_num=200,
+                                               is_favorite=(ww==null?false:true),
                                                Description = h.Description,
                                                checkin = h.checkin,
                                                checkout = h.checkout,

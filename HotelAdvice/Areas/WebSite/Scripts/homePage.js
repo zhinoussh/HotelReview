@@ -228,6 +228,8 @@ var SuccessAjax_AddFavorit = function (result) {
     //replace partial view
     if (result.partial)
         $("#table_container").html(result.partial);
+ //   else
+
 
     //login required
     if (result.msg == "login_required") {
