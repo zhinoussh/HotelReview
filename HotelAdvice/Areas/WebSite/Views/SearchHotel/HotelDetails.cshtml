@@ -46,7 +46,8 @@
     </div>
 
 
-
+@if (Model.photos!=null && Model.photos.Count > 0)
+                    {
     <!--Photo Slider -->
     <div class="col-xs-12 well top-buffer10">
         <div class=" col-xs-12 nopadding" id="slider">
@@ -57,12 +58,11 @@
                         <!-- Carousel items -->
                         <div class="carousel-inner">
 
-                            @if (Model.photos.Count > 0)
-                    {
+                     
                                 <div class="active item" data-slide-number="0">
                                     <img src='@Url.Content("../../../Upload/"+Model.HotelName+"/" + Model.photos[0])'>
                                 </div>
-                    }
+                    
                             @for (int i = 1; i < Model.photos.Count; i++)
                     {
                                 <div class="item" data-slide-number="@i">
@@ -101,6 +101,15 @@
         </div>
     </div>
 
+                    }
+else
+{
+    <div class="col-xs-12" style="margin-top:2%">
+        <div class="well well-sm well_noResult">
+            No Photo is available.
+        </div>
+    </div>
+}
     <div class="col-xs-12 top-buffer10 nopadding">
 
         <!-- Accordion Hotel Details-->
@@ -351,13 +360,6 @@
         <!-- User Actions-->
         <div class="col-xs-2 nopadding_right ">
             <div class="col-xs-12 nopadding">
-                @using (Ajax.BeginForm("AddToFavoite", new { Area = "WebSite", hotel_id = Model.HotelId }, new AjaxOptions
-            {
-            HttpMethod = "Post",
-            OnSuccess = "SuccessAjax_AddFavorit"
-            }))
-            {
-                    @Html.AntiForgeryToken()
 
                     <div class="col-xs-12 text-center">Click to add this hotel to your wish list</div>
 
@@ -367,9 +369,7 @@
                            , new AjaxOptions
                             {
                                 HttpMethod = "Post",
-                                OnSuccess = "SuccessAjax_AddFavorit",
-                                 InsertionMode=InsertionMode.Replace,
-                                 UpdateTargetId="detail_container"
+                                OnSuccess = "SuccessAjax_AddFavorit"
                             }))
                 {
                             @Html.AntiForgeryToken()
@@ -380,7 +380,7 @@
                             </button>
                 }
                     </div>
-            }
+            
 
                 <div class="col-xs-12 text-center top-buffer10 nopadding">
                     <div class="col-xs-12 box-warning">
