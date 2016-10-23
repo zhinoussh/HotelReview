@@ -9,31 +9,36 @@
 
 @if (Request.IsAuthenticated)
 {
+        <div class="col-sm-12 pull-right top-buffer10">
 
+            <div class="col-sm-6 nopadding top-buffer10" style="width:auto;">
+                @Html.ActionLink("Welcome " + ((ClaimsIdentity)User.Identity).FindFirst("FirstName").Value + "!", "Index", "Manage", new { Area = "Account" }, htmlAttributes: new { title = "Manage", style = " color: #fff" })
+            </div>
+            <div class="col-sm-1 text-center top-buffer10">
+                @if (User.IsInRole("PublicUser"))
+                {
+                    <a href='@Url.Action("WishList","Review")' title="Click to visit your wish list!" class="nopadding_left" style=" color: #fff">
+                        <i class="fa fa-heart"></i>
+                    </a>
+                }
+            </div>
 
-   
-    <a class="navbar-right navbar-btn btn btn-warning " href='@Url.Action("LogOff", "Account", new { Area="Account"})'>
-        <span class="glyphicon glyphicon-log-out"></span> Sign Out
-    </a>
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Welcome " + ((ClaimsIdentity)User.Identity).FindFirst("FirstName").Value + "!", "Index", "Manage", new { Area="Account"}, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li>
-            @if(User.IsInRole("PublicUser"))
-            {
-              <a href='@Url.Action("WishList","Review")' title="Click to visit your wish list!" class="nopadding_left" >
-            <i class="fa fa-heart"></i></a>
-            }
-        </li>
-    </ul>
-   
+            <div class="col-sm-2 nopadding_right">
+
+                <a class=" btn btn-warning btn-responsive "  href='@Url.Action("LogOff", "Account", new { Area="Account"})'>
+                    <span class="glyphicon glyphicon-log-out"></span> Sign Out
+                </a>
+            </div>
+        </div>
 }
 else
 {
 
         @*@Html.ActionLink("Log in", "Login", "Account"
             , routeValues: new { @returnUrl = Url.Action(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString(), ViewContext.RouteData.Values["id"]) }, htmlAttributes: new { id = "loginLink" })*@
-
-        <a class="navbar-btn navbar-right btn btn-primary" onclick="show_login()"><i class="fa fa-lock"></i> Sign In</a>
+    <div class="col-sm-12 pull-right top-buffer10">
+        <div class="col-sm-2 nopadding_right">
+            <a class=" btn btn-info btn-responsive " onclick="show_login()"><i class="fa fa-lock"></i> Sign In</a>
+        </div>
+        </div>
         }

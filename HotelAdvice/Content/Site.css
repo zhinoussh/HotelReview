@@ -196,6 +196,7 @@ border-color:#0c8ecf;
 /* NavBar*/
 .navbar-inverse {
     background-color:#133d5f;
+    z-index:111;
 }
 .navbar-brand {
     margin:0;

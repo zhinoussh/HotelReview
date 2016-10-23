@@ -16,22 +16,21 @@ body{
   width:100%;
 }
 
-/*.alert:before {
+.alert-white:before {
     content:'';
-    position: fixed;
-    top: -15%;
-    left: 50%;
-    margin-left: -5%;
+    position: absolute;
+    top:-17%;
+    left: 45%;
     width: 0;
     height: 0;
     border-bottom: solid 10px #fff;
     border-left: solid 10px transparent;
     border-right: solid 10px transparent;
-    z-index:1;
+    z-index:999;
  
-}*/
+}
 .alert-white {
-    background-image: linear-gradient(to bottom, #fff, #f9f9f9);
+    background-image: linear-gradient(to bottom, #fff, #d8d8d8);
   border-top-color: #d8d8d8;
   border-bottom-color: #bdbdbd;
   border-left-color: #cacaca;
