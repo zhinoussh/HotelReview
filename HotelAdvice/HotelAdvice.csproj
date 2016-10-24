@@ -183,6 +183,7 @@
     <Compile Include="Areas\WebSite\Models\tbl_WishList.cs" />
     <Compile Include="Areas\WebSite\ViewModels\HotelDetailViewModel.cs" />
     <Compile Include="Areas\WebSite\ViewModels\HotelSearchViewModel.cs" />
+    <Compile Include="Areas\WebSite\ViewModels\SearchBarViewModel.cs" />
     <Compile Include="Areas\WebSite\ViewModels\SearchPageViewModel.cs" />
     <Content Include="App_Code\HttpParamActionAttribute .cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -338,6 +339,7 @@
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\WebSite\Views\web.config" />
     <Content Include="Areas\Account\Views\web.config" />
+    <Content Include="Areas\WebSite\Views\Shared\_PartialSearchBar.cshtml" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Scripts\fileinput.min.js" />
     <Content Include="Scripts\jquery-3.1.0.js" />

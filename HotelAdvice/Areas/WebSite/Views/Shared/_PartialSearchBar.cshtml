@@ -1,0 +1,17 @@
+﻿@model HotelAdvice.Areas.WebSite.ViewModels.SearchBarViewModel
+
+@{Layout = null;}
+
+
+<div id="searchbar" class="well">
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-xs-8 col-xs-offset-0 col-sm-9 col-sm-offset-1 nopadding_right">
+                @Html.TextBoxFor(model => model.Destination_Name, new { @class = "form-control", @placeholder = "Find Hotel, City or Destination...", id = "search_destination" })
+            </div>
+            <div class="col-xs-1 col-sm-2  nopadding_left">
+                <button type="submit" class="btn btn_search"><i class="glyphicon glyphicon-search"></i>&nbsp;Search</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,22 +1,13 @@
-﻿@model HotelAdvice.Areas.WebSite.ViewModels.HotelDetailViewModel
+﻿@using HotelAdvice.Areas.WebSite.ViewModels
+@model HotelDetailViewModel
 @{
     ViewBag.Title = "HotelDetails";
     Layout = "~/Areas/WebSite/Views/Shared/_Layout.cshtml";
 }
 
 <!-- search bar -->
-<div id="searchbar" class="well top-buffer100" >
-    <div class="form-horizontal">
-        <div class="form-group">
-            <div class="col-xs-9 col-xs-offset-0 col-sm-offset-1 nopadding_right">
-                @Html.TextBoxFor(model => model.Destination_Name, new { @class = "form-control focus", @placeholder = "Find Hotel, City or Destination...", id = "txt_dest_name" })
-            </div>
-            <div class="col-xs-2 nopadding_left">
-                <button type="submit" class="btn btn_search"><i class="glyphicon glyphicon-search"></i>&nbsp;Search</button>
-            </div>
-        </div>
-    </div>
-</div>
+@{Html.RenderPartial("_PartialSearchBar", new SearchBarViewModel());}
+
 <!-- end search bar -->
 
 <div id="detail_container">

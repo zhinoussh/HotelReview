@@ -9,8 +9,7 @@ namespace HotelAdvice.Areas.WebSite.ViewModels
 {
     public class HotelDetailViewModel
     {
-        public string Destination_Name { get; set; }
-
+        
         public int HotelId { get; set; }
         public string HotelName { get; set; }
 

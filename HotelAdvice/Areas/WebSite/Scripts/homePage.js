@@ -6,7 +6,7 @@
         min: 0, max: 5, value:[0,5],step:0.5, focus: true
     });
 
-    $("#txt_dest_name").autocomplete({
+    $("#search_destination").autocomplete({
         source: function (request, response) {
             var list_array = new Array();
             $.ajax({
