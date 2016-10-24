@@ -17,7 +17,7 @@
             <div class="col-sm-1 text-center top-buffer10">
                 @if (User.IsInRole("PublicUser"))
                 {
-                    <a href='@Url.Action("WishList","Review")' title="Click to visit your wish list!" class="nopadding_left" style=" color: #fff">
+                    <a href='@Url.Action("Index","User")' title="Click to visit your wish list!" class="nopadding_left" style=" color: #fff">
                         <i class="fa fa-heart"></i>
                     </a>
                 }

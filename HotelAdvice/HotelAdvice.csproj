@@ -175,6 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\DAL.cs" />
+    <Compile Include="Areas\WebSite\Controllers\UserController.cs" />
     <Compile Include="Areas\WebSite\Helper\RenderPartial.cs" />
     <Compile Include="Areas\Account\AccountAreaRegistration.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
@@ -198,6 +199,7 @@
     <Compile Include="Areas\Admin\Controllers\CityController.cs" />
     <Compile Include="Areas\WebSite\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\HotelController.cs" />
+    <Compile Include="Areas\WebSite\ViewModels\UserPageViewModel.cs" />
     <Compile Include="Controllers\HtmlHelpers.cs" />
     <Compile Include="Areas\Account\Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -251,6 +253,7 @@
     <Content Include="Content\sidebar.css" />
     <Content Include="Content\StarRating\star-rating.min.css" />
     <Content Include="Content\StarRating\theme.min.css" />
+    <Content Include="Content\tab_line.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -340,6 +343,9 @@
     <Content Include="Areas\WebSite\Views\web.config" />
     <Content Include="Areas\Account\Views\web.config" />
     <Content Include="Areas\WebSite\Views\Shared\_PartialSearchBar.cshtml" />
+    <Content Include="Areas\WebSite\Views\SearchHotel\_PartialSortSearchResult.cshtml" />
+    <Content Include="Areas\WebSite\Views\User\Index.cshtml" />
+    <Content Include="Areas\WebSite\Views\User\_PartialWishList.cshtml" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Scripts\fileinput.min.js" />
     <Content Include="Scripts\jquery-3.1.0.js" />

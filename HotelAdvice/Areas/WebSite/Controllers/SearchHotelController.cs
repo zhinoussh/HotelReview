@@ -89,65 +89,7 @@ namespace HotelAdvice.Areas.WebSite.Controllers
             return View("ShowSearchResult", result_vm);
         }
 
-      
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AddToFavorite(int hotel_id, int city_id, int? page, string sort)
-        {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return Json(new { msg = "login_required" });
-            }
-            else
-            {
-               
-                int result = db.add_favorite_hotel(hotel_id, User.Identity.GetUserId());
-
-                string partialview = RenderPartial.RenderViewToString(this.ControllerContext
-                    , "~/Areas/WebSite/views/SearchHotel/_PartialHotelListResults.cshtml"
-                    , SetPartialHotelResult(city_id, page, sort));
-
-                if (result == 1)
-                    return Json(new {  msg = "add_favorite_success", partial = partialview });
-                else
-                    return Json(new { msg = "favorite_already_exist", partial = partialview });
-            }
-        }
-
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AddToFavorite_Detail(int hotel_id)
-        {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return Json(new { msg = "login_required" });
-            }
-            else
-            {
-
-                int result = db.add_favorite_hotel(hotel_id, User.Identity.GetUserId());
-
-                if (result == 1)
-                    return Json(new { msg = "add_favorite_success" });
-                else
-                    return Json(new { msg = "favorite_already_exist" });
-            }
-        }
-       
-        
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult RateHotel(int hotel_id, int your_rating)
-        {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return Json(new { msg = "login_required" });
-
-            }
-            return Json(new { msg = "add_success" });
-        }
-
+     
         public ActionResult HotelDetails(int id)
         {
             HotelDetailViewModel vm=db.get_hoteldetails(id,User.Identity.GetUserId());

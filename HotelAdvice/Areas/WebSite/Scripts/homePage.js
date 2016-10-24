@@ -122,13 +122,13 @@ function Set_Rating_Plugins() {
 
     $('.GuestRating').rating({
         step: 0.5,
-        size: 'xs',
+        size: 's',
         displayOnly: true,
         hoverOnClear: false,
         theme: 'krajee-fa'
     , 'showClear': false
     , 'showCaption': false,
-        filledStar: '<i class="fa fa-check-circle"></i>',
+        filledStar: '<i class="fa fa-circle"></i>',
         emptyStar: '<i class="fa fa-circle-thin"></i>'
     });
 

@@ -20,12 +20,32 @@
 
 @*Results*@
 <div class=" col-xs-6 col-sm-9">
-    <div class="col-xs-12">
+    <div class="col-xs-12 nopadding">
         <h4>@Model.city_name</h4>
     </div>
+
+
+@if (Model.paged_list_hotels != null && Model.paged_list_hotels.Count > 0)
+{
+
+    <!--Sort Buttons-->
+    <div class="col-xs-12 nopadding">
+        @{Html.RenderPartial("_PartialSortSearchResult");}
+    </div>
+    <!--Sort Buttons-->
+
     <div id="table_container" class="col-xs-12 nopadding">
         @{Html.RenderPartial("_PartialHotelListResults", Model.paged_list_hotels);}
     </div>
+}    
+    else
+    {
+    <div class="col-xs-12" style="margin-top:2%">
+        <div class="well well-sm well_noResult">
+            No Results Found.
+        </div>
+    </div>
+    }
 </div>
 @*END Results*@
 

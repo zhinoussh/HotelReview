@@ -19,8 +19,8 @@ namespace HotelAdvice.Areas.WebSite.Controllers
             HomeViewModel vm = new HomeViewModel();
             vm.lst_city = db.get_cities().OrderBy(x=>x.cityName).ToList();
 
-            List<CityViewModel> search_city=vm.lst_city;
-            search_city.Add(new CityViewModel{cityID=0,cityName="Select City"});
+           // List<CityViewModel> search_city=vm.lst_city;
+           // search_city.Add(new CityViewModel{cityID=0,cityName="Select City"});
 
             //set advanced search view model
             vm.Advanced_Search = Set_Advanced_Search();
@@ -44,8 +44,12 @@ namespace HotelAdvice.Areas.WebSite.Controllers
         private AdvancedSearchViewModel Set_Advanced_Search()
         {
             AdvancedSearchViewModel vm_search = new AdvancedSearchViewModel();
-            vm_search.City_List = new SelectList(db.get_cities().OrderBy(x=>x.cityName).ToList(), "cityID", "cityName");
-            vm_search.selected_city = 0;
+           List<CityViewModel> lst_city=db.get_cities().OrderBy(x=>x.cityName).ToList();
+            List<CityViewModel> search_city = lst_city;
+            search_city.Add(new CityViewModel { cityID = 0, cityName = "Select City" });
+            vm_search.City_List = new SelectList(search_city, "cityID", "cityName");
+            vm_search.selected_city = 0;           
+
 
             List<KeyValuePair<int, string>> lst_locations = new List<KeyValuePair<int, string>>();
             lst_locations.Add(new KeyValuePair<int, string>(0, "Any Kilometer"));

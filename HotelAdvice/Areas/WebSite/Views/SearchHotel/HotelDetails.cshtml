@@ -6,7 +6,7 @@
 }
 
 <!-- search bar -->
-@{Html.RenderPartial("_PartialSearchBar", new SearchBarViewModel());}
+@*@{Html.RenderPartial("_PartialSearchBar", new SearchBarViewModel());}*@
 
 <!-- end search bar -->
 
@@ -21,7 +21,7 @@
         <div class="col-sm-2 col-xs-3 text-right">
             Rate by Guests
         </div>
-        <div class="col-sm-2 col-xs-3 nopadding" style="margin-top:-1%">
+        <div class="col-sm-2 col-xs-3 nopadding" >
             @Html.TextBoxFor(model => model.GuestRating, new { @class = "GuestRating" })
 
         </div>
@@ -104,7 +104,7 @@ else
     <div class="col-xs-12 top-buffer10 nopadding">
 
         <!-- Accordion Hotel Details-->
-        <div class="col-xs-10  nopadding">
+        <div class="col-sm-9 col-xs-7  nopadding">
             <div class="panel-group" id="accordion">
 
                 <!-- Panel General-->
@@ -119,14 +119,14 @@ else
                     <div id="collapseGeneral" class="panel-collapse collapse in">
                         <div class="panel-body">
                             <div class="col-xs-12 nopadding">
-                                <div class="col-sm-3 col-xs-6 nopadding">
+                                <div class="col-sm-3 col-xs-12 nopadding">
                                     <b>Reception hours: 24 hours</b>
                                 </div>
-                                <div class="col-sm-3 col-xs-6 nopadding">
+                                <div class="col-sm-3 col-xs-12 nopadding">
                                     <i class="glyphicon glyphicon-time"></i> Check-in Time: @Html.DisplayFor(model => model.checkin)
                                 </div>
 
-                                <div class="col-sm-3 col-xs-6 nopadding">
+                                <div class="col-sm-3 col-xs-12 nopadding">
                                     <i class="glyphicon glyphicon-time"></i> Check-out Time:
                                     @Html.DisplayFor(model => model.checkout)
                                 </div>
@@ -150,19 +150,19 @@ else
                     <div id="collapseContact" class="panel-collapse collapse">
                         <div class="panel-body">
                             <div class="col-xs-12 nopadding">
-                                <div class="col-sm-3 col-xs-6 nopadding">
+                                <div class="col-sm-6 col-xs-12 nopadding">
                                     <i class="glyphicon glyphicon-phone-alt"></i> Phone Number: @Html.DisplayFor(model => model.Tel)
                                 </div>
 
-                                <div class="col-sm-3 col-xs-6 nopadding">
+                                <div class="col-sm-6 col-xs-12 nopadding">
                                     <i class="glyphicon glyphicon-earphone"></i> Fax Number:
                                     @Html.DisplayFor(model => model.Fax)
                                 </div>
-                                <div class="col-sm-3 col-xs-6 nopadding">
+                                <div class="col-sm-6 col-xs-12 nopadding">
                                     <i class="glyphicon glyphicon-envelope"></i> Email:
                                     @Html.DisplayFor(model => model.Email)
                                 </div>
-                                <div class="col-sm-3 col-xs-6 nopadding">
+                                <div class="col-sm-6 col-xs-12 nopadding">
                                     <i class="glyphicon glyphicon-globe"></i> Web Site:
                                     <a href="http://@Model.Website" ta target="_blank"> @Model.Website</a>
                                 </div>
@@ -188,12 +188,12 @@ else
                             </div>
                             <div class="col-xs-12 nopadding top-buffer10">
 
-                                <div class="col-sm-3 col-xs-6 nopadding">
+                                <div class="col-sm-6 col-xs-12 nopadding">
                                     <i class="glyphicon glyphicon-map-marker"></i> Distance from City Center:
                                     @Html.DisplayFor(model => model.distance_citycenter) km
                                 </div>
 
-                                <div class="col-sm-3 col-xs-6 nopadding">
+                                <div class="col-sm-6 col-xs-12 nopadding">
                                     <i class="glyphicon glyphicon-plane"></i> Distance from Airport:
                                     @Html.DisplayFor(model => model.distance_airport) km
                                 </div>
@@ -215,21 +215,21 @@ else
                         <div class="panel-body">
                             <div class="col-xs-12 nopadding ">
 
-                                @if(Model.rooms!=null)
-                        {
-                            foreach (var item in Model.rooms)
-                            {
-                                <div class="col-xs-3 nopadding top-buffer10">
-                                    <i class="fa fa-check-square-o"></i>  @item
-                                </div>
-                            }
-                        }
-                        else
-                        {
+                                @if (Model.rooms != null)
+                                {
+                                    foreach (var item in Model.rooms)
+                                    {
+                                        <div class="col-sm-3 col-xs-6 nopadding top-buffer10">
+                                            <i class="fa fa-check-square-o"></i>  @item
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
                                     <div class="col-xs-12 nopadding">
                                         Not Specified.
                                     </div>
-                       }
+                                }
                             </div>
                         </div>
 
@@ -250,20 +250,20 @@ else
                         <div class="panel-body">
                             <div class="col-xs-12 nopadding ">
                                 @if (Model.restaurants != null)
-                        {
-                            foreach (var item in Model.restaurants)
-                            {
-                                <div class="col-xs-4 nopadding top-buffer10">
-                                    <i class="fa fa-check-square-o"></i>  @item
-                                </div>
-                            }
-                        }
-                        else
-                        {
+                                {
+                                    foreach (var item in Model.restaurants)
+                                    {
+                                        <div class="col-sm-4 col-xs-12 nopadding top-buffer10">
+                                            <i class="fa fa-check-square-o"></i>  @item
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
                                     <div class="col-xs-12 nopadding">
                                         Not Specified.
                                     </div>
-                        }
+                                }
                             </div>
                         </div>
 
@@ -284,20 +284,20 @@ else
                         <div class="panel-body">
                             <div class="col-xs-12 nopadding ">
                                 @if (Model.sightseeing != null)
-                        {
-                            foreach (var item in Model.sightseeing)
-                            {
-                                <div class="col-xs-4 nopadding top-buffer10">
-                                    <i class="fa fa-check-square-o"></i>  @item
-                                </div>
-                            }
-                        }
-                        else
-                        {
+                                {
+                                    foreach (var item in Model.sightseeing)
+                                    {
+                                        <div class="col-sm-4 col-xs-12 nopadding top-buffer10">
+                                            <i class="fa fa-check-square-o"></i>  @item
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
                                     <div class="col-xs-12 nopadding">
                                         Not Specified.
                                     </div>
-                        }
+                                }
                             </div>
                         </div>
 
@@ -318,27 +318,29 @@ else
                         <div class="panel-body">
                             <div class="col-xs-12 nopadding ">
                                 @if (Model.amenities != null)
-                        {
-                            foreach (var item in Model.amenities)
-                            {
+                                {
+                                    foreach (var item in Model.amenities)
+                                    {
 
-                                <div class="col-xs-3 nopadding top-buffer10">
-                                    @if(item.hotel_selected){
-                                        <i class="fa fa-check-square-o"></i>
+                                        <div class="col-sm-3 col-xs-6 nopadding top-buffer10">
+                                            @if (item.hotel_selected)
+                                            {
+                                                <i class="fa fa-check-square-o"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="fa fa-ban"></i>
+                                            }
+                                            @item.AmenityName
+                                        </div>
                                     }
-                                    else {
-                                        <i class="fa fa-ban"></i>
-                                    }
-                                    @item.AmenityName
-                                </div>
-                            }
-                        }
-                        else
-                        {
+                                }
+                                else
+                                {
                                     <div class="col-xs-12 nopadding">
                                         Not Specified.
                                     </div>
-                        }
+                                }
                             </div>
                         </div>
 
@@ -349,37 +351,38 @@ else
         </div>
 
         <!-- User Actions-->
-        <div class="col-xs-2 nopadding_right ">
-            <div class="col-xs-12 nopadding">
+        <div class="col-sm-3 col-xs-5 nopadding_right ">
+            <div class="col-xs-10 col-xs-offset-1 nopadding text-center">
 
-                    <div class="col-xs-12 text-center">Click to add this hotel to your wish list</div>
+                <div class="col-xs-12 ">Click to add this hotel to your wish list</div>
 
-                    <div class="col-xs-12 nopadding top-buffer10">
+                <div class="col-xs-12 nopadding top-buffer10">
 
-                        @using (Ajax.BeginForm("AddToFavorite_Detail", new { hotel_id = Model.HotelId }
+                    @using (Ajax.BeginForm("AddToFavorite_Detail", "User", new { hotel_id = Model.HotelId }
                            , new AjaxOptions
                             {
                                 HttpMethod = "Post",
                                 OnSuccess = "SuccessAjax_AddFavorit"
                             }))
-                {
-                            @Html.AntiForgeryToken()
+                    {
+                        @Html.AntiForgeryToken()
 
-                            <button class="btn btn-danger btn-responsive btn-block @(!(Model.is_favorite)?"btn-outline":"") "
-                                    type="submit" title='@(Model.is_favorite ? "Remove from your wish list" : "Add to your wish list")'>
-                                <i class="fa fa-heart fa-lg"></i> Like it!
-                            </button>
-                }
-                    </div>
-            
+                        <button class="btn btn-danger btn-responsive btn-block @(!(Model.is_favorite)?"btn-outline":"") "
+                                type="submit" title='@(Model.is_favorite ? "Remove from your wish list" : "Add to your wish list")'>
+                            <i class="fa fa-heart fa-lg"></i> Like it!
+                        </button>
+                    }
+                </div>
+
 
                 <div class="col-xs-12 text-center top-buffer10 nopadding">
                     <div class="col-xs-12 box-warning">
                         <b>Quick Rating!</b><br />
                         <div class="col-xs-12 nopadding">
-                            @using (Ajax.BeginForm("RateHotel", new AjaxOptions{
-                            HttpMethod = "Post",
-                            OnSuccess = "SuccessAjax_AddFavorit"
+                            @using (Ajax.BeginForm("RateHotel", new AjaxOptions
+                            {
+                                HttpMethod = "Post",
+                                OnSuccess = "SuccessAjax_AddFavorit"
                             }))
                             {
                                 @Html.AntiForgeryToken()
@@ -392,7 +395,7 @@ else
                                         Send it!
                                     </button>
                                 </div>
-                        }
+                            }
                         </div>
                     </div>
                 </div>

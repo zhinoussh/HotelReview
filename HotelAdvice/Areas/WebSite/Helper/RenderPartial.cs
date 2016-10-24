@@ -5,6 +5,7 @@ namespace HotelAdvice.Helper
 {
     public class RenderPartial
     {
+
         public static string RenderViewToString(ControllerContext context, string viewName, object model)
         {
             if (string.IsNullOrEmpty(viewName))
@@ -21,5 +22,7 @@ namespace HotelAdvice.Helper
                 return sw.GetStringBuilder().ToString();
             }
         }
+
+       
     }
 }

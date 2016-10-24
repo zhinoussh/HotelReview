@@ -6,14 +6,14 @@
     line-height: 1;
     border-radius:3px;
   }
-    h4,.panel-title,.form-control{
+    h4,.panel-title,.form-control,.dropdown-menu-sort{
     font-size:80% !important;
     }
     body {
     font-size:100%;
     }
-    .slider-review{
-     width:10px !important;
+    .well-sortResult,.HotelDescriotion{
+    padding:0 !important
     }
 }
 
@@ -222,7 +222,7 @@ margin-right:2px;
 .fa-star-sort {
 color:#111;
 }
-.fa-check-circle {
+.fa-circle {
     color:#0c8ecf;
     -webkit-text-stroke-color: #0c8ecf ;
 }
@@ -236,7 +236,15 @@ color:#0770a4
 color:#d70707
 }
 
-
+.fa-heart-red {
+    color: #d9534f !important;
+}
+.fa-star-blue{
+    color: #428bca !important;
+}
+.fa-pencil {
+    color: #5cb85c !important;
+}
 /***MODAL*****/
 .modal-header-login{
      height:40px;
@@ -330,42 +338,44 @@ cursor:pointer;
     color:#635629;
 }
 
-
-
 .btn-sort {
-    width:120px;
-    background-color:#e9e9e9;
+    /*width:120px;*/
+    background-color:#fdf7d9;
     color:#323232;
-    border-color:#323232;
+    border-color:#aa6b11;
 }
 .btn-sort:hover{
-    background-color:#dedede;
+    background-color:#fcf2c3;
 }
-.dropdown-menu-sort{
-padding:0;
-text-align:center;
-min-width:120px;
+.dropdown-menu-sort {
+    text-align:center;
+    width:100%;
 }
-
 
 .dropdown-menu-sort li a:hover {
-    background-color:#c6c2c2;
+    background-color:#fdf7d9;
+
 }
-.well-sortResult{
-    background-color:#454343 !important;
-    border:1px solid #1b1b1b;
-    height:60px;
-    color:#fff;
-    border-bottom-left-radius:0px;
-    border-top-left-radius:0px;
-    margin-left:-1px;
+.well-sortResult {
+    background-image: linear-gradient(to top right, #f6b54d, #f7d9a8);
+      /*background-image: linear-gradient(to top right, #f2bc15, #f7d9a8);*/
+    border: 1px solid #e7a132;
+    color: #fff;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    height:62px;
+    padding:15px 5px 5px 15px;
+
 }
 .well-sort-title {
-background-color:#585757;
-     color:#fff;
-    border-bottom-right-radius:0px;
-    border-top-right-radius:0px;
-    height:60px;
+    background-color: #f0ad4e;
+    border: 1px solid #e7a132;
+    color: #fff;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+    height:62px;
+    padding:17px 0 0 5px;
+    text-align:center;
 
 }
 .well-result {
@@ -375,7 +385,10 @@ overflow-x:hidden;
 }
 .well-result:hover{
 box-shadow:#c6c2c2 5px  5px 5px 0px;
-background-color:#fbf7eb;
+background-color:#fbf4eb;
+}
+.well-wishlist {
+height:300px;
 }
 .img_result {
 width:100%;
@@ -463,7 +476,9 @@ color:#f2bc15 !important;
 }
 /**************City SideBar*/
 .panel-city .panel-heading {
-      background-image: linear-gradient(to top right, #f2bc15, #f7d9a8);
+      /*background-image: linear-gradient(to top right, #f2bc15, #f7d9a8);*/
+    background-image: linear-gradient(to top right, #f6b54d, #f7d9a8);
+
 }
 .panel-city .panel-title {
       font-size:11pt;

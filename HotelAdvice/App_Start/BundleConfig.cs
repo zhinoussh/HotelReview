@@ -57,6 +57,7 @@ namespace HotelAdvice
                       , "~/Content/awesome-bootstrap-checkbox.css"
                       , "~/Content/bootstrap-slider.min.css"
                       , "~/Content/alert-with-arrow.css"
+                      , "~/Content/tab_line.css"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/AdminCss").Include(

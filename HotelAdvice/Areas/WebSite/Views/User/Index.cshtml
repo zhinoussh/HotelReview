@@ -1,0 +1,69 @@
+﻿@model HotelAdvice.Areas.WebSite.ViewModels.UserPageViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/WebSite/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 top-buffer20">
+            <div class="tabbable-panel">
+                <div class="tabbable-line">
+                    <ul class="nav nav-tabs ">
+                        <li class="active li-wishlist">
+                            <a href="#tab_wish_list" data-toggle="tab">
+                                <i class="fa fa-heart fa-lg fa-heart-red "></i>
+                                Your Wish List
+                            </a>
+                        </li>
+                        <li class="li-rating">
+                            <a href="#tab_rating" data-toggle="tab">
+                                <i class="fa fa-star fa-lg fa-star-blue "></i>
+                                Your Hotel Rating
+                            </a>
+                        </li>
+                        <li class="li-review">
+                            <a href="#tab_review" data-toggle="tab">
+                                <i class="fa fa-star fa-lg fa-pencil "></i>
+                                Your Hotel Reviews
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab_wish_list">
+                          
+                            @{Html.RenderPartial("_PartialWishList",Model.lst_wishList);}
+                        </div>
+                        <div class="tab-pane" id="tab_rating">
+                            <p>
+                                Howdy, I'm in Tab 2.
+                            </p>
+                            <p>
+                                Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.
+                            </p>
+                            <p>
+                                <a class="btn btn-warning" href="http://j.mp/metronictheme" target="_blank">
+                                    Click for more features...
+                                </a>
+                            </p>
+                        </div>
+                        <div class="tab-pane" id="tab_review">
+                            <p>
+                                Howdy, I'm in Tab 3.
+                            </p>
+                            <p>
+                                Duis autem vel eum iriure dolor in hendrerit in vulputate. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat
+                            </p>
+                            <p>
+                                <a class="btn btn-info" href="http://j.mp/metronictheme" target="_blank">
+                                    Learn more...
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+
