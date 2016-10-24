@@ -6,11 +6,14 @@
     line-height: 1;
     border-radius:3px;
   }
-    h4,h4.panel-title {
-    font-size:80%;
+    h4,.panel-title,.form-control{
+    font-size:80% !important;
     }
     body {
     font-size:100%;
+    }
+    .slider-review{
+     width:10px !important;
     }
 }
 
@@ -29,11 +32,7 @@ body {
     padding-bottom: 20px;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
+
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
@@ -270,6 +269,7 @@ color:#d70707
 font-size:90%;
 }
 
+
 /****************SEARCH****************/
 #searchbar {
     color: #6e97ab;
@@ -460,4 +460,43 @@ color:#f2bc15 !important;
     border:2px solid #f0ad4e; 
     border-radius:5px; 
     padding:20px 5px 20px 5px;
+}
+/**************City SideBar*/
+.panel-city .panel-heading {
+      background-image: linear-gradient(to top right, #f2bc15, #f7d9a8);
+}
+.panel-city .panel-title {
+      font-size:11pt;
+      font-weight:bold;
+      color:#fff;
+
+}
+.panel-city {
+    border-color:#f6b54d !important;
+}
+.panel-city .list-group-item {
+      background-color:#fdf7d9;
+    border-color: #fcdcb1;
+      
+}
+.panel-city .list-group-item:hover{
+     color: #000;
+      background-image:none;
+    background-color: #fcf2c3 !important ;
+    border-color: #f0ad4e;
+}
+.panel-city .list-group-item a
+{
+  text-decoration:none;
+  color:#b68c51;
+  font-weight:bold;
+}
+.badge-city {
+  padding:7px;
+  border-radius: 10em;
+  color:#fff;
+  background-color:#f0ad4e;
+  width:25px;
+  height:25px;
+  
 }

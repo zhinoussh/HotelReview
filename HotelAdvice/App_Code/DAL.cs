@@ -47,11 +47,11 @@ namespace HotelAdvice.App_Code
                 {
                     cityID = c.CityId,
                     cityName = c.CityName,
-                    cityAttractions = c.CityAttractions
+                    cityAttractions = c.CityAttractions,
+                    hotel_count = db.tbl_Hotel.Count(x => x.CityId == c.CityId)
                 }).ToList();
 
             return lst_city;
-            
         }
         public List<String> get_city_byId(int id)
         {

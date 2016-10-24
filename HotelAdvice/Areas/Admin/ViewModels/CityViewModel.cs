@@ -19,5 +19,8 @@ namespace HotelAdvice.Areas.Admin.ViewModels
 
         [StringLength(500, ErrorMessage = "max length has been exceeded.")]
         public string cityAttractions { get; set; }
+
+        public int hotel_count { get; set; }
+
     }
 }
