@@ -16,16 +16,21 @@ namespace HotelAdvice.Areas.WebSite.Controllers
     public class UserController : Controller
     {
         DAL db = new DAL();
-        const int defaultPageSize = 9;
+        const int defaultPageSize_userpage = 6;
+        const int defaultPageSize_searchpage = 3;
 
         [Authorize(Roles = "PublicUser")]
-        public ActionResult Index()
+        public ActionResult Index(int ?page)
         {
+            int currentPageIndex = page.HasValue ? page.Value : 1;
             UserPageViewModel vm = new UserPageViewModel();
 
-            vm.lst_wishList=(db.get_wishList(User.Identity.GetUserId())).ToPagedList<HotelSearchViewModel>(1,defaultPageSize);
+            vm.lst_wishList = (db.get_wishList(User.Identity.GetUserId())).ToPagedList<HotelSearchViewModel>(currentPageIndex, defaultPageSize_userpage);
 
-            return View(vm);
+            if (Request.IsAjaxRequest())
+                return PartialView("_PartialWishList", vm.lst_wishList);
+            else
+                return View(vm);
         }
 
         [HttpPost]
@@ -41,9 +46,10 @@ namespace HotelAdvice.Areas.WebSite.Controllers
 
                 int result = db.add_favorite_hotel(hotel_id, User.Identity.GetUserId());
 
-                string partialview = RenderPartial.RenderViewToString(this.ControllerContext
+                IPagedList<HotelSearchViewModel> model=SetPartialHotelResult(city_id, page, sort);
+                string partialview = RenderPartial.RenderRazorViewToString(this
                     , "~/Areas/WebSite/views/SearchHotel/_PartialHotelListResults.cshtml"
-                    , SetPartialHotelResult(city_id, page, sort));
+                    , model);
 
                 if (result == 1)
                     return Json(new { msg = "add_favorite_success", partial = partialview });
@@ -72,19 +78,21 @@ namespace HotelAdvice.Areas.WebSite.Controllers
             }
         }
 
-        
-         [HttpPost]
+
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteFavorite(int hotel_id, int? page)
         {
+            int currentPageIndex = page.HasValue ? page.Value : 1;
 
-                db.remove_favorite_hotel(hotel_id, User.Identity.GetUserId());
+            db.remove_favorite_hotel(hotel_id, User.Identity.GetUserId());
 
-                UserPageViewModel vm = new UserPageViewModel();
-                IPagedList lst_wishlist = db.get_wishList(User.Identity.GetUserId()).ToPagedList<HotelSearchViewModel>(1, defaultPageSize);
+            List<HotelSearchViewModel> lst_wishlist = db.get_wishList(User.Identity.GetUserId());
+            if (currentPageIndex>1 && lst_wishlist.Count() < currentPageIndex * defaultPageSize_userpage)
+                currentPageIndex = currentPageIndex - 1;
 
-                return PartialView("_PartialWishList", lst_wishlist);
-            
+            return PartialView("_PartialWishList", lst_wishlist.ToPagedList<HotelSearchViewModel>(currentPageIndex, defaultPageSize_userpage));
+
         }
 
         [HttpPost]
@@ -128,7 +136,7 @@ namespace HotelAdvice.Areas.WebSite.Controllers
 
             //pagination
 
-            return lst_hotels.ToPagedList(currentPageIndex, defaultPageSize);
+            return lst_hotels.ToPagedList(currentPageIndex, defaultPageSize_searchpage);
         }
 
 

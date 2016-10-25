@@ -251,7 +251,11 @@ var SuccessAjax_AddFavorit = function (result) {
         
 }
 
+var SuccessAjax_DeleteFavorit = function (result) {
+    //  Set_Rating_Plugins();
+    //location.reload();
 
+}
     
 
 

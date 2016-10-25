@@ -30,6 +30,7 @@
                             {
                                 HttpMethod = "Post",
                                 OnSuccess = "SuccessAjax_AddFavorit"
+                                
                             }))
                                 {
                                     @Html.AntiForgeryToken()
@@ -80,7 +81,7 @@
             {
 
                 <div class="col-xs-12 text-center">
-                    @Html.PagedListPager(Model, page => Url.Action("HotelResults"
+                    @Html.PagedListPager(Model, page => Url.Action("HotelResults","SearchHotel"
              , new RouteValueDictionary(){ {"page", page}, {"sort" ,Request["sort"] }
                ,{"city_id",Request["city_id"]}
              })
