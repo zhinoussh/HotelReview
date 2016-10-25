@@ -479,6 +479,9 @@ color:#f2bc15 !important;
     border-radius:5px; 
     padding:20px 5px 20px 5px;
 }
+#lbl_rating {
+    color:#d9534f
+}
 /**************City SideBar*/
 .panel-city .panel-heading {
       /*background-image: linear-gradient(to top right, #f2bc15, #f7d9a8);*/

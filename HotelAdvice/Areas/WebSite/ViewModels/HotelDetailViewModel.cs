@@ -14,7 +14,7 @@ namespace HotelAdvice.Areas.WebSite.ViewModels
         public string HotelName { get; set; }
 
         [Display(Name="Rate by Users")]
-        public string GuestRating { get; set; }
+        public float GuestRating { get; set; }
         public int YourRating { get; set; }
 
         public int review_num { get; set; }

@@ -19,6 +19,7 @@ namespace HotelAdvice.Areas.Admin.Models
             HotelSightSeeings = new HashSet<tbl_hotel_sightseeing>();
             HotelPhotos = new HashSet<tbl_Hotel_Photo>();
             WishList_Hotel = new HashSet<tbl_WishList>();
+            Rating_Hotel = new HashSet<tbl_rating>();
         }
 
         [Key]
@@ -63,6 +64,7 @@ namespace HotelAdvice.Areas.Admin.Models
         public virtual ICollection<tbl_hotel_sightseeing> HotelSightSeeings { get; set; }
         public virtual ICollection<tbl_Hotel_Photo> HotelPhotos { get; set; }
         public virtual ICollection<tbl_WishList> WishList_Hotel { get; set; }
+        public virtual ICollection<tbl_rating> Rating_Hotel { get; set; }
 
     }
 }

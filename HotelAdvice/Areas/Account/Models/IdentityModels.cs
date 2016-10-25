@@ -21,6 +21,7 @@ namespace HotelAdvice.Areas.Account.Models
         public string LastName { get; set; }
 
         public virtual ICollection<tbl_WishList> WishList { get; set; }
+        public virtual ICollection<tbl_rating> Rating { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -49,6 +50,12 @@ namespace HotelAdvice.Areas.Account.Models
            .WithOptional(e => e.ApplicationUser)
            .HasForeignKey(e => e.UserId)
            .WillCascadeOnDelete();
+
+            modelBuilder.Entity<ApplicationUser>()
+          .HasMany(e => e.Rating)
+          .WithOptional(e => e.ApplicationUser)
+          .HasForeignKey(e => e.UserId)
+          .WillCascadeOnDelete();
 
 
         }

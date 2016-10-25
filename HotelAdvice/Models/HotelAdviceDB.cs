@@ -24,6 +24,7 @@ namespace HotelAdvice
         public virtual DbSet<tbl_hotel_sightseeing> tbl_Hotel_Sightseeings { get; set; }
         public virtual DbSet<tbl_Hotel_Photo> tbl_Hotel_Photo { get; set; }
         public virtual DbSet<tbl_WishList> tbl_Wish_List { get; set; }
+        public virtual DbSet<tbl_rating> tbl_Rating { get; set; }
 
 
         public HotelAdviceDB()
@@ -101,6 +102,12 @@ namespace HotelAdvice
             .WithOptional(e => e.Hotel)
             .HasForeignKey(e => e.HotelId)
             .WillCascadeOnDelete();
+
+            modelBuilder.Entity<tbl_Hotel>()
+         .HasMany(e => e.Rating_Hotel)
+         .WithOptional(e => e.Hotel)
+         .HasForeignKey(e => e.HotelId)
+         .WillCascadeOnDelete();
 
             modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(l => l.UserId);
             modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id);

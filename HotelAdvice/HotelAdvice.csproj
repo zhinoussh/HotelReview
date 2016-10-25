@@ -181,6 +181,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\WebSite\HomePageAreaRegistration.cs" />
     <Compile Include="Areas\WebSite\Controllers\SearchHotelController.cs" />
+    <Compile Include="Areas\WebSite\Models\tbl_rating.cs" />
     <Compile Include="Areas\WebSite\Models\tbl_WishList.cs" />
     <Compile Include="Areas\WebSite\ViewModels\HotelDetailViewModel.cs" />
     <Compile Include="Areas\WebSite\ViewModels\HotelSearchViewModel.cs" />
@@ -204,6 +205,10 @@
     <Compile Include="Areas\Account\Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610251654301_add_tbl_rating.cs" />
+    <Compile Include="Migrations\201610251654301_add_tbl_rating.Designer.cs">
+      <DependentUpon>201610251654301_add_tbl_rating.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Config_ProjectDB.cs" />
@@ -253,7 +258,6 @@
     <Content Include="Content\sidebar.css" />
     <Content Include="Content\StarRating\star-rating.min.css" />
     <Content Include="Content\StarRating\theme.min.css" />
-    <Content Include="Content\style.css" />
     <Content Include="Content\tab_line.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -437,6 +441,11 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201610251654301_add_tbl_rating.resx">
+      <DependentUpon>201610251654301_add_tbl_rating.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

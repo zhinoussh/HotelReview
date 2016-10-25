@@ -104,7 +104,9 @@ namespace HotelAdvice.Areas.WebSite.Controllers
                 return Json(new { msg = "login_required" });
 
             }
-            return Json(new { msg = "add_success" });
+           db.rate_hotel(hotel_id, User.Identity.GetUserId(), your_rating);
+
+            return Json(new { msg = "rating_success" });
         }
 
         private IPagedList<HotelSearchViewModel> SetPartialHotelResult(int city_id, int? page, string sort)

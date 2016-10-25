@@ -290,14 +290,17 @@ namespace HotelAdvice.App_Code
                                            join c in db.tbl_city on h.CityId.Value equals (int?)c.CityId
                                            join w in db.tbl_Wish_List.Where(x=>x.UserId==userId) 
                                            on h.HotelId equals w.HotelId into Wishist
+                                           join r in db.tbl_Rating.Where(x=>x.UserId==userId) 
+                                           on h.HotelId equals r.HotelId into YourRating
                                            from ww in Wishist.DefaultIfEmpty()
+                                           from rr in YourRating.DefaultIfEmpty()
                                            select new HotelDetailViewModel
                                            {
                                                HotelId=h.HotelId,
                                                HotelName = h.HotelName,
                                                HotelStars = h.HotelStars,
                                                CityName = c.CityName,
-                                               GuestRating="4",
+                                               YourRating=(rr==null?0:rr.rating),
                                                review_num=200,
                                                is_favorite=(ww==null?false:true),
                                                Description = h.Description,
@@ -311,6 +314,11 @@ namespace HotelAdvice.App_Code
                                                distance_airport = h.distance_airport,
                                                distance_citycenter = h.distance_citycenter
                                            }).FirstOrDefault();
+
+
+            double rating_avg= db.tbl_Rating.Where(x => x.HotelId == id).Average(x => x.rating);
+
+            detail.GuestRating =(rating_avg==null?0:(float)rating_avg);
 
             detail.photos = db.tbl_Hotel_Photo.Where(x => x.HotelID == id).Select(x => x.photo_name).ToList<String>();
 
@@ -546,6 +554,26 @@ namespace HotelAdvice.App_Code
 
             return lst_result;
         }
+
+
+        public void rate_hotel(int hotel_id, string userId,int rating)
+        {
+            tbl_rating r = db.tbl_Rating.Where(x => x.HotelId == hotel_id && x.UserId == userId).FirstOrDefault();
+
+           if (r == null)
+           {
+               r = new tbl_rating() { UserId = userId, HotelId = hotel_id,rating=rating };
+               db.tbl_Rating.Add(r);
+               db.SaveChanges();
+           }
+           else
+           {
+               r.rating = rating;
+               db.SaveChanges();
+           }
+            
+        }
+
         #endregion UserPage
 
         #region Home Page
