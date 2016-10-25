@@ -521,6 +521,14 @@ namespace HotelAdvice.App_Code
             
         }
 
+        public void remove_favorite_hotel(int hotel_id, string userId)
+        {
+            tbl_WishList w = db.tbl_Wish_List.Where(x => x.HotelId == hotel_id && x.UserId == userId).FirstOrDefault();
+
+            db.tbl_Wish_List.Remove(w);
+            db.SaveChanges();
+        }
+
         public List<HotelSearchViewModel> get_wishList(string userId)
         {
             List<HotelSearchViewModel> lst_result = (from w in db.tbl_Wish_List.Where(x => x.UserId == userId)

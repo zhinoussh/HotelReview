@@ -11,19 +11,19 @@ using PagedList;
 
 namespace HotelAdvice.Areas.WebSite.Controllers
 {
-       
+
 
     public class UserController : Controller
     {
         DAL db = new DAL();
         const int defaultPageSize = 9;
 
-        // GET: WebSite/User
+        [Authorize(Roles = "PublicUser")]
         public ActionResult Index()
         {
             UserPageViewModel vm = new UserPageViewModel();
 
-            vm.lst_wishList=db.get_wishList(User.Identity.GetUserId()).ToPagedList<HotelSearchViewModel>(1,defaultPageSize);
+            vm.lst_wishList=(db.get_wishList(User.Identity.GetUserId())).ToPagedList<HotelSearchViewModel>(1,defaultPageSize);
 
             return View(vm);
         }
@@ -70,6 +70,21 @@ namespace HotelAdvice.Areas.WebSite.Controllers
                 else
                     return Json(new { msg = "favorite_already_exist" });
             }
+        }
+
+        
+         [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteFavorite(int hotel_id, int? page)
+        {
+
+                db.remove_favorite_hotel(hotel_id, User.Identity.GetUserId());
+
+                UserPageViewModel vm = new UserPageViewModel();
+                IPagedList lst_wishlist = db.get_wishList(User.Identity.GetUserId()).ToPagedList<HotelSearchViewModel>(1, defaultPageSize);
+
+                return PartialView("_PartialWishList", lst_wishlist);
+            
         }
 
         [HttpPost]

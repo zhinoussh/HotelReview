@@ -250,6 +250,8 @@ var SuccessAjax_AddFavorit = function (result) {
     }
         
 }
+
+
     
 
 

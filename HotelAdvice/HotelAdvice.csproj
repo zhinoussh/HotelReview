@@ -235,6 +235,7 @@
     <Content Include="Content\AdminStyle.css" />
     <Content Include="Content\alert-with-arrow.css" />
     <Content Include="Content\animate.css" />
+    <Content Include="Content\animate.min.css" />
     <Content Include="Content\awesome-bootstrap-checkbox.css" />
     <Content Include="Content\bootstrap-slider.min.css" />
     <Content Include="Content\bootstrap-social.css" />
@@ -253,6 +254,7 @@
     <Content Include="Content\sidebar.css" />
     <Content Include="Content\StarRating\star-rating.min.css" />
     <Content Include="Content\StarRating\theme.min.css" />
+    <Content Include="Content\style.css" />
     <Content Include="Content\tab_line.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />

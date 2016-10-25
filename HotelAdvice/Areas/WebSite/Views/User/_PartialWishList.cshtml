@@ -8,37 +8,39 @@
 
 @for (int i = 0; i < Model.Count; i++)
 {
-    <div class="col-sm-4 col-xs-12 top-buffer20">
+    <div class="col-sm-4 col-xs-12 top-buffer20 ">
 
         <div class="well well-wishlist">
 
             <div class="col-xs-12 nopadding">
                 <a href="/SearchHotel/HotelDetails/@Model[i].HotelId" target="_blank">
                     <img src="~/Upload/@Model[i].HotelName/main.jpg" alt="Responsive image" onerror='this.onerror=null;this.src="../../Images/empty.gif"'
-                         class="img_result img-responsive">
+                         class="img-wishlist img-responsive">
                 </a>
             </div>
             <div class="col-xs-12 nopadding">
-                <div class="col-sm-8 col-xs-12 nopadding">
-                    <h4 >
+                <div class="col-xs-8 nopadding">
+                    <h4>
                         @Html.ActionLink(Model[i].HotelName, "HotelDetails", "SearchHotel"
                                 , new { Area = "WebSite", id = Model[i].HotelId }, new { target = "_blank" })
                     </h4>
                     @Html.TextBox("txt_star_hotel", Model[i].HotelStars, new { @class = "HotelStars" })
                 </div>
-                <div class="col-sm-3 col-sm-offset-1 col-xs-8 col-xs-offset-3 nopadding">
-                    @using (Ajax.BeginForm("AddToFavorite", "User", new { hotel_id = Model[i].HotelId, sort = Request["sort"], page = Request["page"], city_id = Request["city_id"] }
+                <div class="col-xs-4 nopadding top-buffer10">
+                    @using (Ajax.BeginForm("DeleteFavorite", "User", new { hotel_id = Model[i].HotelId, page = Request["page"] }
                                     , new AjaxOptions
                             {
                                 HttpMethod = "Post",
-                                OnSuccess = "SuccessAjax_AddFavorit"
+                                OnSuccess = "SuccessAjax_DeleteFavorit",
+                                InsertionMode = InsertionMode.ReplaceWith,
+                                UpdateTargetId = "tab_wish_list"
                             }))
                     {
                         @Html.AntiForgeryToken()
 
-                        <button class="btn btn-danger @(!(Model[i].is_favorite)?"btn-outline":"") btn-responsive btn-block"
-                                type="submit" title='@(Model[i].is_favorite ? "Remove from your wish list" : "Add to your wish list")'>
-                            <i class="fa fa-heart fa-lg hidden-xs"></i> Like it!
+                        <button class="btn btn-warning btn-responsive btn-block"
+                                type="submit" title="Remove from your wish list">
+                            <i class="fa fa-thumbs-down fa-lg hidden-xs"></i> Dislike!
                         </button>
                     }
 
@@ -47,18 +49,16 @@
                 </div>
 
             </div>
-            <div class="col-xs-12">
+            <div class="col-xs-12 nopadding">
                 visit website <i class="glyphicon glyphicon-hand-right"></i>
                 <a href="http://@Model[i].Website" target="_blank">@Model[i].Website</a>
             </div>
-            <div class="col-xs-12 top-buffer10 text-justify HotelDescriotion">
-                @Model[i].Description
-            </div>
-            <div class="col-xs-12 nopadding top-buffer10">
-                <div class="col-sm-2 col-xs-12">
+
+            <div class="col-xs-12 nopadding top-buffer20">
+                <div class="col-xs-8 nopadding">
                     @Html.TextBox("txt_rate_hotel", Model[i].GuestRating, new { @class = "GuestRating" })
                 </div>
-                <div class="col-sm-3 col-sm-offset-7 col-xs-9 col-xs-offset-3 nopadding">
+                <div class="col-xs-4 nopadding">
                     <a role="button" class="btn btn-primary btn-responsive btn-block"
                        href="@Url.Action("AddReview", "SearchHotel", new { id = Model[i].HotelId, Area = "WebSite" })">
                         Review <i class="glyphicon glyphicon-pencil hidden-xs"></i>
@@ -66,9 +66,9 @@
                 </div>
             </div>
 
-            <div class="col-xs-12">
+            <div class="col-xs-12 nopadding">
                 @Html.ActionLink(Model[i].num_reviews + " reviews", "HotelReviews", "SearchHotel"
-                                , new { Area = "WebSite", id = Model[i].HotelId }, new { target = "_blank" })
+                    , new { Area = "WebSite", id = Model[i].HotelId }, new { target = "_blank" })
             </div>
 
         </div>

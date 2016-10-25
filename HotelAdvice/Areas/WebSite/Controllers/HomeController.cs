@@ -13,6 +13,11 @@ namespace HotelAdvice.Areas.WebSite.Controllers
     public class HomeController : Controller
     {
         DAL db = new DAL();
+
+        public ActionResult myView()
+        {
+            return View();
+        }
         public ActionResult Index(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;

@@ -47,10 +47,10 @@ namespace HotelAdvice
                        , "~/Scripts/bootstrap-sortable.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",                      
+                      "~/Content/bootstrap.css",
                       "~/Content/Site.css"
                       , "~/Content/font-awesome.min.css"
-                      , "~/Content/animate.css"
+                      , "~/Content/animate.min.css"
                       , "~/Content/bootstrap-social.css"
                       , "~/Content/themes/base/jquery-ui.css"
                       , "~/Content/CitySidebar.css"
