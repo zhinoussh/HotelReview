@@ -315,10 +315,12 @@ namespace HotelAdvice.App_Code
                                                distance_citycenter = h.distance_citycenter
                                            }).FirstOrDefault();
 
+            string rating_avg="0";
+            var query_rating=db.tbl_Rating.Where(x => x.HotelId == id);
+            if(query_rating.Any())
+                 rating_avg= query_rating.Average(x => x.rating).ToString();
 
-            double rating_avg= db.tbl_Rating.Where(x => x.HotelId == id).Average(x => x.rating);
-
-            detail.GuestRating =(rating_avg==null?0:(float)rating_avg);
+            detail.GuestRating = float.Parse(rating_avg);
 
             detail.photos = db.tbl_Hotel_Photo.Where(x => x.HotelID == id).Select(x => x.photo_name).ToList<String>();
 
@@ -583,7 +585,7 @@ namespace HotelAdvice.App_Code
             List<HotelSearchViewModel> lst_result = (from h in db.tbl_Hotel.Where(x => x.CityId == city_id)
                                                      join w in db.tbl_Wish_List.Where(x => x.UserId == userId)
                                                      on h.HotelId equals w.HotelId into WishList
-                                                    from ww in WishList.DefaultIfEmpty()
+                                                     from ww in WishList.DefaultIfEmpty()
                                                     select new HotelSearchViewModel
                                                         {
                                                             HotelId = h.HotelId,
@@ -593,9 +595,19 @@ namespace HotelAdvice.App_Code
                                                             Description = h.Description,
                                                             distance_citycenter=h.distance_citycenter,
                                                             num_reviews=999,
-                                                            GuestRating=3,
                                                             is_favorite=(ww==null?false:true)
                                                         }).ToList();
+
+            string rating_avg;
+            foreach (var item in lst_result)
+            {
+                rating_avg = "0";
+                var query_rating = db.tbl_Rating.Where(x => x.HotelId == item.HotelId);
+                if (query_rating.Any())
+                    rating_avg = query_rating.Average(x => x.rating).ToString();
+
+                item.GuestRating = float.Parse(rating_avg);
+            }
 
             return lst_result;
         }
