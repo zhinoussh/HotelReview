@@ -550,9 +550,10 @@ namespace HotelAdvice.App_Code
                                                          HotelName = h.HotelName,
                                                          Website = h.Website,
                                                          HotelStars = h.HotelStars,
-                                                         num_reviews = 999,
-                                                         GuestRating = 3
+                                                         num_reviews = 999
                                                      }).ToList();
+
+            lst_result = Set_Guest_Rating(lst_result);
 
             return lst_result;
         }
@@ -574,6 +575,28 @@ namespace HotelAdvice.App_Code
                db.SaveChanges();
            }
             
+        }
+
+        public List<HotelSearchViewModel> get_ratingList(string userId)
+        {
+            List<HotelSearchViewModel> lst_result = (from r in db.tbl_Rating.Where(x => x.UserId == userId)
+                                                     join h in db.tbl_Hotel
+                                                     on r.HotelId equals h.HotelId
+                                                     select new HotelSearchViewModel
+                                                     {
+                                                         HotelId = h.HotelId,
+                                                         HotelName = h.HotelName,
+                                                         Website = h.Website,
+                                                         HotelStars = h.HotelStars,
+                                                         num_reviews = 999,
+                                                         GuestRating = 3,
+                                                         YourRating=r.rating
+                                                     }).ToList();
+
+            lst_result = Set_Guest_Rating(lst_result);
+
+
+            return lst_result;
         }
 
         #endregion UserPage
@@ -598,8 +621,15 @@ namespace HotelAdvice.App_Code
                                                             is_favorite=(ww==null?false:true)
                                                         }).ToList();
 
+            lst_result=Set_Guest_Rating(lst_result);
+
+            return lst_result;
+        }
+
+        private List<HotelSearchViewModel> Set_Guest_Rating(List<HotelSearchViewModel> lst_hotels)
+        {
             string rating_avg;
-            foreach (var item in lst_result)
+            foreach (var item in lst_hotels)
             {
                 rating_avg = "0";
                 var query_rating = db.tbl_Rating.Where(x => x.HotelId == item.HotelId);
@@ -609,7 +639,7 @@ namespace HotelAdvice.App_Code
                 item.GuestRating = float.Parse(rating_avg);
             }
 
-            return lst_result;
+            return lst_hotels;
         }
 
         #endregion Home Page
