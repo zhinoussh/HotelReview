@@ -18,7 +18,7 @@
                         </li>
                         <li class="li-rating">
                             <a href="#tab_rating" data-toggle="tab">
-                                <i class="fa fa-star fa-lg fa-star-blue "></i>
+                                <i class="fa fa-star fa-lg fa-star-yellow "></i>
                                 Your Hotel Rating
                             </a>
                         </li>
@@ -34,18 +34,9 @@
 
                             @{Html.RenderPartial("_PartialWishList", Model.lst_wishList);}
                         </div>
-                        <div class="tab-pane" id="tab_rating">
-                            <p>
-                                Howdy, I'm in Tab 2.
-                            </p>
-                            <p>
-                                Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.
-                            </p>
-                            <p>
-                                <a class="btn btn-warning" href="http://j.mp/metronictheme" target="_blank">
-                                    Click for more features...
-                                </a>
-                            </p>
+                        <div class="tab-pane animated fadeInLeftBig" id="tab_rating">
+                            @{Html.RenderPartial("_PartialRatingList", Model.lst_rating);}
+
                         </div>
                         <div class="tab-pane" id="tab_review">
                             <p>

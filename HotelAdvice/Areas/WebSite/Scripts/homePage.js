@@ -99,6 +99,8 @@
     if (localStorage.getItem("msg")) {
         set_alert_user_action(localStorage.getItem("msg"));
         localStorage.clear();
+
+
     }
    
 });
@@ -141,6 +143,17 @@ function Set_Rating_Plugins() {
         clearButton: 'remove <i class="fa fa-eraser"></i>',
         filledStar: '<i class="fa fa-check-circle fa-yourrating"></i>',
         emptyStar: '<i class="fa fa-circle-thin fa-yourrating"></i>'
+    });
+
+    $('.YourRating-user').rating({
+        step: 1,
+        size: 'xs',
+        hoverOnClear: false,
+        theme: 'krajee-fa',
+        'showCaption': false,
+        clearButton: 'remove <i class="fa fa-eraser"></i>',
+        filledStar: '<i class="fa fa-check-circle fa-yourrating"></i>',
+         emptyStar: '<i class="fa fa-circle-thin fa-yourrating"></i>'
     });
 }
 
@@ -252,7 +265,26 @@ var SuccessAjax_AddFavorit = function (result) {
 }
 
 var SuccessAjax_AddRating = function (result) {
-    $("#lbl_rating").fadeIn(500);
+
+    if (result.msg) {
+        //login required
+        if (result.msg == "login_required") {
+            show_login(window.location.href);
+        }
+        else {
+            //replace partial view
+            if (result.partial) {
+                $("#tab_content_rating").html(result.partial);
+
+                set_alert_user_action(result.msg);
+            }
+            else {
+                localStorage.setItem("msg", result.msg);
+                location.reload();
+            }
+
+        }
+    }
 }
     
 
@@ -277,6 +309,12 @@ var set_alert_user_action = function (msg) {
         $("#alert_user_action").html("Hotel removed from your wish list");
         $("#div_alert").removeClass("alert-success").addClass("alert-danger");
         $("#icon_alert").removeClass("fa-check").addClass("fa-times-circle");
+    }
+    else if (msg == "rating_success") {
+
+        $("#alert_user_action").html("Thank you! Your rating saved.");
+        $("#div_alert").removeClass("alert-warning").addClass("alert-success");
+        $("#icon_alert").removeClass("fa-times-circle").addClass("fa-check");
     }
 
     scroll_to_top();

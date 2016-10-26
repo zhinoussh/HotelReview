@@ -239,11 +239,11 @@ color:#d70707
 .fa-heart-red {
     color: #d9534f !important;
 }
-.fa-star-blue{
-    color: #428bca !important;
+.fa-star-yellow{
+    color: #f6b54d !important;
 }
 .fa-pencil {
-    color: #5cb85c !important;
+    color: #117fdf !important;
 }
 /***MODAL*****/
 .modal-header-login{
@@ -390,6 +390,10 @@ background-color:#fbf4eb;
 .well-wishlist {
 height:380px;
 }
+
+.well-rating {
+height:420px;
+}
 .img_result {
 width:290px;
 height:180px;
@@ -467,6 +471,11 @@ margin-top:20px;
 .fa-yourrating {
 color:#f2bc15 !important;
 -webkit-text-stroke-color: #f2bc15 ;
+}
+
+.fa-yourrating-user{
+color:#0770a4 !important;
+-webkit-text-stroke-color: #0770a4 ;
 }
 
 .box-primary {

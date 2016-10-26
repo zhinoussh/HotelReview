@@ -16,19 +16,30 @@ namespace HotelAdvice.Areas.WebSite.Controllers
     public class UserController : Controller
     {
         DAL db = new DAL();
-        const int defaultPageSize_userpage = 6;
+        const int defaultPageSize_userpage = 3;
         const int defaultPageSize_searchpage = 3;
 
         [Authorize(Roles = "PublicUser")]
-        public ActionResult Index(int ?page)
+        public ActionResult Index(int ?page,string tab)
         {
             int currentPageIndex = page.HasValue ? page.Value : 1;
             UserPageViewModel vm = new UserPageViewModel();
 
             vm.lst_wishList = (db.get_wishList(User.Identity.GetUserId())).ToPagedList<HotelSearchViewModel>(currentPageIndex, defaultPageSize_userpage);
+            vm.lst_rating= (db.get_ratingList(User.Identity.GetUserId())).ToPagedList<HotelSearchViewModel>(currentPageIndex, defaultPageSize_userpage);
 
             if (Request.IsAjaxRequest())
-                return PartialView("_PartialWishList", vm.lst_wishList);
+            {
+                switch (tab)
+                {
+                    case "wishlist":
+                        return PartialView("_PartialWishList", vm.lst_wishList);
+                    case "rating":
+                        return PartialView("_PartialRatingList", vm.lst_rating);
+                    default:
+                        return PartialView("_PartialWishList", vm.lst_wishList);
+                }
+            }
             else
                 return View(vm);
         }
@@ -97,16 +108,28 @@ namespace HotelAdvice.Areas.WebSite.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult RateHotel(int hotel_id, int your_rating)
+        public ActionResult RateHotel(int hotel_id, int your_rating, int? page)
         {
             if (!User.Identity.IsAuthenticated)
             {
                 return Json(new { msg = "login_required" });
+            }
+
+            db.rate_hotel(hotel_id, User.Identity.GetUserId(), your_rating);
+
+            if (Request.IsAjaxRequest())
+            {
+                int currentPageIndex = page.HasValue ? page.Value : 1;
+                IPagedList<HotelSearchViewModel> model =  db.get_ratingList(User.Identity.GetUserId()).ToPagedList<HotelSearchViewModel>(currentPageIndex, defaultPageSize_userpage);
+               string partialview = RenderPartial.RenderRazorViewToString(this
+                    , "~/Areas/WebSite/views/User/_PartialRatingList.cshtml"
+                    , model);
+
+               return Json(new { msg = "rating_success",partial=partialview});
 
             }
-           db.rate_hotel(hotel_id, User.Identity.GetUserId(), your_rating);
-
-            return Json(new { msg = "rating_success" });
+            else
+                return Json(new { msg = "rating_success" });
         }
 
         private IPagedList<HotelSearchViewModel> SetPartialHotelResult(int city_id, int? page, string sort)

@@ -351,6 +351,7 @@
     <Content Include="Areas\WebSite\Views\SearchHotel\_PartialSortSearchResult.cshtml" />
     <Content Include="Areas\WebSite\Views\User\Index.cshtml" />
     <Content Include="Areas\WebSite\Views\User\_PartialWishList.cshtml" />
+    <Content Include="Areas\WebSite\Views\User\_PartialRatingList.cshtml" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Scripts\fileinput.min.js" />
     <Content Include="Scripts\jquery-3.1.0.js" />
