@@ -120,5 +120,5 @@ D:\Git_repos\HowtlReview\HotelAdvice\bin\Microsoft.Owin.Security.Twitter.xml
 D:\Git_repos\HowtlReview\HotelAdvice\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.dll
 D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.pdb
-D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.Migrations.add_tbl_rating.resources
+D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.Migrations.updateDBContext.resources
 D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.csproj.GenerateResource.Cache

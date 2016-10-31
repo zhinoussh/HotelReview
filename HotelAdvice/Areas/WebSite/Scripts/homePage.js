@@ -2,9 +2,8 @@
 
     Set_Rating_Plugins();
 
-    $("#slider_guest_review").bootstrapSlider({
-        min: 0, max: 5, value:[0,5],step:0.5, focus: true
-    });
+    Set_Score_Sliders();
+   
 
     $("#search_destination").autocomplete({
         source: function (request, response) {
@@ -157,6 +156,40 @@ function Set_Rating_Plugins() {
     });
 }
 
+function Set_Score_Sliders()
+{
+    $("#slider_guest_review").bootstrapSlider({
+        min: 0, max: 5, value: [0, 5], step: 0.5, focus: true
+    });
+
+    $(".slider_score").bootstrapSlider({
+        min: 0, max: 5, step: 0.1, focus: true, enabled: false
+    });
+
+    $("#slider_Cleanliness").on("slide", function (slideEvt) {
+        $("#slider_Cleanliness_value").text(slideEvt.value);
+    });
+
+    $("#slider_Comfort").on("slide", function (slideEvt) {
+        $("#slider_Comfort_value").text(slideEvt.value);
+    });
+
+    $("#slider_Location").on("slide", function (slideEvt) {
+        $("#slider_Location_value").text(slideEvt.value);
+    });
+
+    $("#slider_Facilities").on("slide", function (slideEvt) {
+        $("#slider_Facilities_value").text(slideEvt.value);
+    });
+
+    $("#slider_Staff").on("slide", function (slideEvt) {
+        $("#slider_Staff_value").text(slideEvt.value);
+    });
+
+    $("#slider_money").on("slide", function (slideEvt) {
+        $("#slider_money_value").text(slideEvt.value);
+    });
+}
 $(window).on('load', function () {
     var returnUrl = $("#hd_return_url").val();
     if (returnUrl != null && returnUrl != '')

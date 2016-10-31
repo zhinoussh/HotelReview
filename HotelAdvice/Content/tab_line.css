@@ -8,7 +8,8 @@ Licensed under MIT
 .tabbable-panel {
   /*border:1px solid #a6a6a6;*/
   padding: 10px;
-  background-color:#fff;
+  background-color:#406196;
+  border-radius:3px;
 
 }
 
@@ -25,7 +26,7 @@ Licensed under MIT
 .tabbable-line > .nav-tabs > li > a {
   border: 0;
   margin-right: 0;
-  color: #737373;
+  color: #fefefe;
   text-align:center
 }
 .tabbable-line > .nav-tabs > li > a > i {
@@ -35,21 +36,21 @@ Licensed under MIT
   border-bottom: 4px solid #fbcdcf;
 }*/
 .tabbable-line > .nav-tabs > li.open, .tabbable-line > .nav-tabs >.li-wishlist:hover {
-  border-bottom: 4px solid #fbcdcf;
+  border-bottom: 5px solid #fbcdcf;
 }
 
 .tabbable-line > .nav-tabs > li.open, .tabbable-line > .nav-tabs >.li-rating:hover {
-  border-bottom: 4px solid #fbd8a0;
+  border-bottom: 5px solid #fbd8a0;
 }
 
 .tabbable-line > .nav-tabs > li.open, .tabbable-line > .nav-tabs >.li-review:hover {
-  border-bottom: 4px solid #c2dcf4;
+  border-bottom: 5px solid #c2dcf4;
 }
 
 .tabbable-line > .nav-tabs > li.open > a, .tabbable-line > .nav-tabs > li:hover > a {
   border: 0;
   background: none !important;
-  color: #333333;
+  color: #eee;
 }
 .tabbable-line > .nav-tabs > li.open > a > i, .tabbable-line > .nav-tabs > li:hover > a > i {
   color: #a6a6a6;
@@ -80,6 +81,11 @@ Licensed under MIT
   border: 0;
   color: #333333;
 }
+.tabbable-line > .nav-tabs > li.active > a:hover {
+  border: 0;
+  color:  #333333;
+  background-color:#fff !important;
+}
 .tabbable-line > .nav-tabs > li.active > a > i {
   color: #404040;
 }
@@ -89,6 +95,7 @@ Licensed under MIT
   border: 0;
   border-top: 1px solid #eee;
   padding: 15px;
+
 }
 .portlet .tabbable-line > .tab-content {
   padding-bottom: 0;

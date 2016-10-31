@@ -1,0 +1,24 @@
+﻿@model HotelAdvice.Areas.WebSite.ViewModels.ReviewPageViewModel
+@{
+    ViewBag.Title = "Hotel Reviews";
+    Layout = "~/Areas/WebSite/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-xs-12">
+    @{Html.RenderPartial("_PartialHotelPropertiesReview", Model.hotel_properties);}
+</div>
+<div class="col-xs-12">
+
+    <div class="col-sm-3 col-xs-12 nopadding">
+        @{Html.RenderPartial("_PartialScoreReview", Model.hotel_scores);}
+    </div>
+    <div class="col-sm-7 col-xs-12">
+        <h4 style="font-weight:bold; margin:0" class="text-warning">
+            @Html.DisplayFor(model => model.hotel_properties.num_reviews) Reviews from our Community
+        </h4>
+    </div>
+    <div class="col-sm-2 col-xs-12">
+
+
+    </div>
+</div>

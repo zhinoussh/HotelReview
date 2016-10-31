@@ -6,7 +6,7 @@
     line-height: 1;
     border-radius:3px;
   }
-    h4,.panel-title,.form-control,.dropdown-menu-sort{
+    h4,.panel-title,.form-control,.dropdown-menu-sort,.text-small{
     font-size:80% !important;
     }
     body {
@@ -14,6 +14,10 @@
     }
     .well-sortResult,.HotelDescriotion{
     padding:0 !important
+    }
+    .img_result {
+        width:60px !important;
+        height:60px !important;
     }
 }
 
@@ -32,7 +36,10 @@ body {
     padding-bottom: 20px;
 }
 
-
+.user-content {
+    padding:0;
+    background-color:#eef1f8 !important;
+}
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
@@ -199,8 +206,15 @@ border-color:#0c8ecf;
 }
 .navbar-brand {
     margin:0;
-    padding:5px;
+    padding:0px 0px 0px 15px;
 }
+.navbar-brand h4 {
+    color:#ffc60b;
+    margin-top:10%;
+    font-size:18pt;
+    font-family:Adobe Heiti Std;
+
+    }
 .navbar-text,.navbar-text:hover {
 cursor:pointer;
     text-decoration:none;
@@ -209,7 +223,9 @@ cursor:pointer;
 height:55px;
 }
 /***ICONS*/
-
+.fa-blue {
+    color:#0770a4
+}
 .fa-lock {
 margin-left:10px;
 cursor:pointer;
@@ -243,7 +259,7 @@ color:#d70707
     color: #f6b54d !important;
 }
 .fa-pencil {
-    color: #117fdf !important;
+    color: #3999ed !important;
 }
 /***MODAL*****/
 .modal-header-login{
@@ -321,12 +337,22 @@ margin:10px 0 10px 0;
 
 .slider-track {
     background:#dff5f5 !important;
+
 }
 .slider-selection{
     background:#66cccc !important;
-
 }
 
+.slider_score {
+    float:right;
+}
+.slider-value-label {
+    font-size:14pt; 
+    font-weight:bold;
+    color:#022984;
+    margin-left:1%;
+    float:right
+}
 .checkbox:hover {
 background:#dedede;
 cursor:pointer;
@@ -337,6 +363,7 @@ cursor:pointer;
     border:1px solid #ac9f72;
     color:#635629;
 }
+
 
 .btn-sort {
     /*width:120px;*/
@@ -395,9 +422,26 @@ height:380px;
 height:420px;
 }
 .img_result {
-width:290px;
-height:180px;
+width:200px;
+height:160px;
 border-radius:3px;
+}
+.well-review {
+    background-color: #eef1f8 !important;
+    width: 100%;
+    float: right;
+    padding: 8px 5px 3px 8px;
+    margin-top: 20px;
+}
+.well-score {
+    background-color: #eef1f8 !important;
+    color: #022984 !important;
+    width: 100%;
+    float: right;
+}
+.img_review {
+width:170px;
+height:110px;
 }
 
 .img-wishlist {
@@ -529,6 +573,25 @@ color:#0770a4 !important;
   color:#fff;
   background-color:#f0ad4e;
   width:25px;
-  height:25px;
-  
+  height:25px;  
+}
+
+.badge-review {
+  padding:7px;
+  border-radius:5px 0px;
+  color:#fff;
+  background-color:#f6ce2e;
+  width:25px;
+  height:25px;  
+}
+
+.badge-total-score{
+  padding:10px;
+  margin:15px 0 5px 0;
+  border-radius:5px 0px;
+  color:#fff;
+  background-color:#f6ce2e;
+  width:75px;
+  height:75px;  
+  font-size:40pt;
 }

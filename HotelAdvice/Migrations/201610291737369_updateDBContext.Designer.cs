@@ -7,13 +7,13 @@ namespace HotelAdvice.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class add_tbl_rating : IMigrationMetadata
+    public sealed partial class updateDBContext : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(add_tbl_rating));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(updateDBContext));
         
         string IMigrationMetadata.Id
         {
-            get { return "201610251654301_add_tbl_rating"; }
+            get { return "201610291737369_updateDBContext"; }
         }
         
         string IMigrationMetadata.Source

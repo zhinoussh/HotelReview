@@ -44,6 +44,11 @@ namespace HotelAdvice.Areas.WebSite.Controllers
                 return View(vm);
         }
 
+        public ActionResult Reviews(int id)
+        {
+           ReviewPageViewModel vm= db.get_reviews(id);
+           return View(vm);
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddToFavorite(int hotel_id, int city_id, int? page, string sort)
@@ -88,7 +93,6 @@ namespace HotelAdvice.Areas.WebSite.Controllers
                     return Json(new { msg = "favorite_already_exist" });
             }
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]

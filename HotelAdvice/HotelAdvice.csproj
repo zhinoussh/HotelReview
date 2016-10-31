@@ -184,7 +184,11 @@
     <Compile Include="Areas\WebSite\Models\tbl_rating.cs" />
     <Compile Include="Areas\WebSite\Models\tbl_WishList.cs" />
     <Compile Include="Areas\WebSite\ViewModels\HotelDetailViewModel.cs" />
+    <Compile Include="Areas\WebSite\ViewModels\HotelReviewViewModel.cs" />
     <Compile Include="Areas\WebSite\ViewModels\HotelSearchViewModel.cs" />
+    <Compile Include="Areas\WebSite\ViewModels\ReviewPageViewModel.cs" />
+    <Compile Include="Areas\WebSite\ViewModels\ReviewViewModel.cs" />
+    <Compile Include="Areas\WebSite\ViewModels\ScoreViewModel.cs" />
     <Compile Include="Areas\WebSite\ViewModels\SearchBarViewModel.cs" />
     <Compile Include="Areas\WebSite\ViewModels\SearchPageViewModel.cs" />
     <Content Include="App_Code\HttpParamActionAttribute .cs" />
@@ -206,9 +210,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201610251654301_add_tbl_rating.cs" />
-    <Compile Include="Migrations\201610251654301_add_tbl_rating.Designer.cs">
-      <DependentUpon>201610251654301_add_tbl_rating.cs</DependentUpon>
+    <Compile Include="Migrations\201610291737369_updateDBContext.cs" />
+    <Compile Include="Migrations\201610291737369_updateDBContext.Designer.cs">
+      <DependentUpon>201610291737369_updateDBContext.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Config_ProjectDB.cs" />
@@ -352,6 +356,10 @@
     <Content Include="Areas\WebSite\Views\User\Index.cshtml" />
     <Content Include="Areas\WebSite\Views\User\_PartialWishList.cshtml" />
     <Content Include="Areas\WebSite\Views\User\_PartialRatingList.cshtml" />
+    <Content Include="Areas\WebSite\Views\User\_LayoutUser.cshtml" />
+    <Content Include="Areas\WebSite\Views\User\Reviews.cshtml" />
+    <Content Include="Areas\WebSite\Views\User\_PartialHotelPropertiesReview.cshtml" />
+    <Content Include="Areas\WebSite\Views\User\_PartialScoreReview.cshtml" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Scripts\fileinput.min.js" />
     <Content Include="Scripts\jquery-3.1.0.js" />
@@ -444,8 +452,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201610251654301_add_tbl_rating.resx">
-      <DependentUpon>201610251654301_add_tbl_rating.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201610291737369_updateDBContext.resx">
+      <DependentUpon>201610291737369_updateDBContext.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

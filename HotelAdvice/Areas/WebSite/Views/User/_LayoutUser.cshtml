@@ -11,41 +11,33 @@
 </head>
 <body>
 
-    <!-- Modal -->
-    <div class="modal fade" id="modal_login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document" style="width:400px">
-            <div class="modal-content" id="modal_container">
 
-            </div>
-         </div>
-    </div>
-     <!-- END MODAL-->
-
-    <div class="navbar navbar-inverse navbar-fixed-top" id="header" >
+    <div class="navbar navbar-inverse navbar-fixed-top" id="header">
         <div class="container-fluid">
-            <div class="navbar-header" >
+            <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="/Website/Home">
-                    <div class="col-sm-3"> <img alt="Brand" src="~/Images/logo1.png"></div> 
-                    <div class="col-sm-9 hidden-xs"><h4>Iran Hotel Review</h4></div></a>
+                    <div class="col-sm-3"> <img alt="Brand" src="~/Images/logo1.png"></div>
+                    <div class="col-sm-9 hidden-xs"><h4>Iran Hotel Review</h4></div>
+                </a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>@Html.Partial("_LoginPartial")</li>
                 </ul>
-               
+
             </div><!-- /.navbar-collapse -->
-             
-        
-           </div><!-- /.container -->
+
+
+        </div><!-- /.container -->
     </div>
 
     <!-- Alert User Action -->
-    <div class="col-sm-3 hidden-xs pull-right" >
+    <div class="col-sm-3 hidden-xs pull-right">
         <div class="alert alert-success alert-white rounded" id="div_alert" role="alert" style="display:none">
             <button type="button" id="close_alert" aria-hidden="true" class="close">×</button>
             <div class="icon">
@@ -55,24 +47,20 @@
         </div>
     </div>
     <!-- /Alert User Action -->
-    <input type="hidden" value="@ViewBag.ReturnUrl" id="hd_return_url" name="hd_return_url" />
 
-    <div class="container-fluid" >
-            <div class="col-xs-12 nopadding">
-                @RenderBody()
-            </div>
+    
+    <div class="container-fluid user-content" >
+        <div class="col-xs-12 nopadding">
+            @RenderBody()
+        </div>
     </div>
 
-    @*<footer class="col-sm-12">
-        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-    </footer>*@
-
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/jqueryval")
-        @Scripts.Render("~/bundles/modernizr")
-        @Scripts.Render("~/bundles/bootstrap")
-        @Scripts.Render("~/bundles/WebSite")
-        @Scripts.Render("~/bundles/StarRating")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/WebSite")
+    @Scripts.Render("~/bundles/StarRating")
 
     @RenderSection("scripts", required: false)
 </body>

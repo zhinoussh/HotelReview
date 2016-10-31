@@ -16,6 +16,23 @@ namespace HotelAdvice.Areas.WebSite.Models
 
         public int rating { get; set; }
 
+         [StringLength(200)]
+        public string title_review { get; set; }
+        
+        [StringLength(int.MaxValue)]
+        public string pros_review { get; set; }
+
+        [StringLength(int.MaxValue)]
+        public string cons_review { get; set; }
+
+        public int Cleanliness_rating { get; set; }
+        public int Comfort_rating { get; set; }
+        public int Location_rating { get; set; }
+        public int Facilities_rating { get; set; }
+        public int Staff_rating { get; set; }
+        public int Value_for_money_rating { get; set; }
+
+
         [ForeignKey("ApplicationUser")]
         public string UserId { get; set; }
 

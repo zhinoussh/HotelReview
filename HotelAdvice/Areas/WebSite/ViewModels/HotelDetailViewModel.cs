@@ -43,7 +43,6 @@ namespace HotelAdvice.Areas.WebSite.ViewModels
 
         public double? distance_airport { get; set; }
 
-
         public string CityName { get; set; }
 
         public List<String> restaurants { get; set; }

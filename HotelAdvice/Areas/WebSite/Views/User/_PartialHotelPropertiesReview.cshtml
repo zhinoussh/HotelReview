@@ -1,0 +1,78 @@
+﻿@model HotelAdvice.Areas.WebSite.ViewModels.HotelReviewViewModel
+@{
+    Layout = null;
+}
+
+<div class="well well-review" >
+
+    <div class="col-xs-2 nopadding">
+        <a href="/SearchHotel/HotelDetails/@Model.HotelId" target="_blank">
+            <img src="~/Upload/@Model.HotelName/main.jpg" alt="Responsive image" onerror='this.onerror = null; this.src = "../../../Images/empty.gif"'
+                 class="img_review img-responsive">
+        </a>
+    </div>
+    <div class="col-xs-7  nopadding">
+      
+        <div class="col-xs-12 nopadding">
+
+                <h4 style="font-weight:bold; margin:0">
+                    
+                    @Html.ActionLink("Reviews of " + Model.HotelName + " Hotel", "HotelDetails", "SearchHotel"
+                                , new { Area = "WebSite", id = Model.HotelId }, new { target = "_blank" })
+                </h4>
+
+                
+            </div>
+      
+        <div class="col-xs-12 nopadding ">
+            @Html.TextBoxFor(model => model.HotelStars, new { @class = "HotelStars" })
+        </div>
+
+            <div class="col-xs-12 nopadding top-buffer10">
+                <i class="fa fa-map-marker fa-lg fa-blue"></i> @Html.DisplayFor(model => model.Address) ,
+                 @Html.DisplayFor(model => model.CityName)
+            </div>
+            @if (!String.IsNullOrEmpty(Model.Tel))
+            { 
+            <div class="col-xs-12 nopadding top-buffer10">
+                <i class="fa fa-phone-square fa-lg fa-blue"></i> @Html.DisplayFor(model => model.Tel)
+            </div>
+            }
+
+
+        </div>
+    <div class="col-xs-3 nopadding">
+        <div class="col-xs-12">
+            <div class=" col-xs-6 ">
+                Rate by Guests
+            </div>
+            <div class="col-xs-6 nopadding">
+                @Html.TextBoxFor(model => model.GuestRating, new { @class = "GuestRating" })
+
+            </div>
+        </div>
+        <div class="col-xs-12 nopadding text-center top-buffer10">
+              <div class="badge badge-review"> #@Html.DisplayFor(model => model.rank_hotel)</div>
+                <b> of @Html.DisplayFor(model => model.hotel_count_city) hotels in @Html.DisplayFor(model => model.CityName)
+            </b>
+        </div>
+        @if (!String.IsNullOrEmpty(Model.Website))
+        {
+        <div class="col-xs-12  top-buffer10 text-center">
+            <i class="fa fa-internet-explorer fa-blue"></i>
+            <a href="http://@Model.Website" target="_blank">@Model.Website</a>
+        </div>
+        }
+        @if (!String.IsNullOrEmpty(Model.Email)) 
+        { 
+        <div class="col-xs-12 text-center top-buffer10">
+            <i class="fa fa-envelope fa-blue"></i>
+            @Html.DisplayFor(model => model.Email)
+        </div>
+        }
+     
+    </div>
+
+    </div>
+
+
