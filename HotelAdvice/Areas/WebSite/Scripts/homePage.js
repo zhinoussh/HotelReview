@@ -133,6 +133,18 @@ function Set_Rating_Plugins() {
         emptyStar: '<i class="fa fa-circle-thin"></i>'
     });
 
+    $('.GuestRating-compare').rating({
+        step: 0.5,
+        size: 's',
+        displayOnly: true,
+        hoverOnClear: false,
+        theme: 'krajee-fa'
+  , 'showClear': false
+  , 'showCaption': false,
+        filledStar: '<i class="fa fa-circle fa-circle-yellow"></i>',
+        emptyStar: '<i class="fa fa-circle-thin fa-circle-thin-yellow"></i>'
+    });
+
     $('.YourRating').rating({
         step: 1,
         size: 'xs',

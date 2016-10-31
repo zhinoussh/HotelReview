@@ -183,6 +183,7 @@
     <Compile Include="Areas\WebSite\Controllers\SearchHotelController.cs" />
     <Compile Include="Areas\WebSite\Models\tbl_rating.cs" />
     <Compile Include="Areas\WebSite\Models\tbl_WishList.cs" />
+    <Compile Include="Areas\WebSite\ViewModels\CompareViewModel.cs" />
     <Compile Include="Areas\WebSite\ViewModels\HotelDetailViewModel.cs" />
     <Compile Include="Areas\WebSite\ViewModels\HotelReviewViewModel.cs" />
     <Compile Include="Areas\WebSite\ViewModels\HotelSearchViewModel.cs" />
@@ -360,6 +361,7 @@
     <Content Include="Areas\WebSite\Views\User\Reviews.cshtml" />
     <Content Include="Areas\WebSite\Views\User\_PartialHotelPropertiesReview.cshtml" />
     <Content Include="Areas\WebSite\Views\User\_PartialScoreReview.cshtml" />
+    <Content Include="Areas\WebSite\Views\User\_PartialCompareReview.cshtml" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Scripts\fileinput.min.js" />
     <Content Include="Scripts\jquery-3.1.0.js" />

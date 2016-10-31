@@ -630,16 +630,7 @@ namespace HotelAdvice.App_Code
 
             detail.GuestRating = float.Parse(rating_avg);
 
-            detail.rank_hotel = (from r in db.tbl_Rating
-                     group r by r.HotelId into rate_g
-                     select new
-                     {
-                         avg_rate = rate_g.Average(x => x.rating),
-                         hotelId = rate_g.Key
-                     }).AsEnumerable().OrderByDescending(x => x.avg_rate)
-                        .Select((x, index) => new { rank = index + 1, hotelid = x.hotelId })
-                        .Where(x => x.hotelid==hotelId)
-                        .Select(x=>x.rank).FirstOrDefault();
+            detail.rank_hotel= get_rank_hotel(hotelId);
          
             result.hotel_properties = detail;
 
@@ -655,9 +646,53 @@ namespace HotelAdvice.App_Code
 
             result.hotel_scores = scores;
 
+            //***************Compare Hotel list***************/
+            result.lst_compare_hotels = get_compare_hotels_in_city(detail.CityId,hotelId);
+
             return result;
         }
 
+        private int get_rank_hotel(int hotelId)
+        {
+
+            var query = (from r in db.tbl_Rating
+                         group r by r.HotelId into rate_g
+                         select new
+                         {
+                             avg_rate = rate_g.Average(x => x.rating),
+                             hotelId = rate_g.Key
+                         }).AsEnumerable();
+
+            int rank = query.OrderByDescending(x => x.avg_rate)
+                   .Select((x, index) => new { rank = index + 1, hotelid = x.hotelId })
+                   .Where(x => x.hotelid == hotelId)
+                   .Select(x => x.rank).FirstOrDefault();
+
+            if (rank == 0)
+                rank = 1;
+
+            return rank;
+        }
+
+        private List<CompareViewModel> get_compare_hotels_in_city(int cityID, int hotelId)
+        {
+            List<CompareViewModel> lst_result = (from h in db.tbl_Hotel.Where(x => x.CityId == cityID && x.HotelId != hotelId)
+                                                     join r in db.tbl_Rating on h.HotelId equals r.HotelId into Rating
+                                                     from rr in Rating.DefaultIfEmpty()
+                                                     group rr by new { rr.HotelId, h.HotelName,h.HotelStars } into g
+                                                     select new CompareViewModel
+                                                     {
+                                                         HotelId = g.Key.HotelId.Value,
+                                                         HotelName = g.Key.HotelName,
+                                                         avg_total_rating = (float)g.Average(x => x.rating),
+                                                         avg_Location_rating = (float)g.Average(x => x.Location_rating),
+                                                         avg_Cleanliness_rating = (float)g.Average(x => x.Cleanliness_rating),
+                                                         avg_Value_for_money_rating = (float)g.Average(x => x.Value_for_money_rating),
+                                                     }).ToList();
+
+
+            return lst_result;
+        }
         
 
         #endregion UserPage

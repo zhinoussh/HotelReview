@@ -19,7 +19,7 @@ namespace HotelAdvice.Areas.WebSite.ViewModels
         [Display(Name = "Location")]
         public float avg_Location_rating { get; set; }
 
-        [Display(Name = "Facilities")]
+        [Display(Name = "Amenities")]
         public float avg_Facilities_rating { get; set; }
 
         [Display(Name = "Staff")]

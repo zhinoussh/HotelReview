@@ -1,4 +1,5 @@
-﻿@model HotelAdvice.Areas.WebSite.ViewModels.ReviewPageViewModel
+﻿@using HotelAdvice.Areas.WebSite.ViewModels;
+@model ReviewPageViewModel
 @{
     ViewBag.Title = "Hotel Reviews";
     Layout = "~/Areas/WebSite/Views/Shared/_Layout.cshtml";
@@ -12,13 +13,26 @@
     <div class="col-sm-3 col-xs-12 nopadding">
         @{Html.RenderPartial("_PartialScoreReview", Model.hotel_scores);}
     </div>
-    <div class="col-sm-7 col-xs-12">
-        <h4 style="font-weight:bold; margin:0" class="text-warning">
-            @Html.DisplayFor(model => model.hotel_properties.num_reviews) Reviews from our Community
-        </h4>
-    </div>
-    <div class="col-sm-2 col-xs-12">
+    <div class="col-sm-6 col-xs-12">
+        <div class="col-xs-9 ">
+            <h4 style="font-weight:bold; margin:0" class="text-warning">
+                @Html.DisplayFor(model => model.hotel_properties.num_reviews) Reviews from our Community
+            </h4>
+            </div>
+            <div class="col-xs-3 ">
+                <button class="btn btn-primary btn-responsive ">
+                    Write Your Review <i class="glyphicon glyphicon-pencil"></i>
+                </button>
+            </div>
+        </div>
+    <div class="col-sm-3 col-xs-12 nopadding_right">
 
+        <div class="col-xs-12 nopadding_right">
+
+            @{Html.RenderPartial("_PartialCompareReview", Model.lst_compare_hotels);}
+
+
+        </div>
 
     </div>
 </div>
