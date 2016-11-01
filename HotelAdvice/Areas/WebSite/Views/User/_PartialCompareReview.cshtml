@@ -3,14 +3,14 @@
 
 <div class="well well-compare">
 
-    <div class="col-xs-12 text-center label label-warning lable-compare">
+    <div class="col-xs-12 text-center label label-warning">
          Compare with Other Hotels in Isfahan
         
     </div>
     <div class="col-xs-12 text-center"><b>based on Guest Rating</b></div>
 
 
-    <div class="col-xs-12 top-buffer10 nopadding">
+    <div class="col-xs-12 nopadding">
 
         @foreach (var item in Model.OrderByDescending(x => x.avg_total_rating))
         {
@@ -30,7 +30,7 @@
 
     <div class="col-xs-12 text-center top-buffer20"><b>based on Hotel Location</b></div>
 
-    <div class="col-xs-12 top-buffer10 nopadding">
+    <div class="col-xs-12  nopadding">
 
         @foreach (var item in Model.OrderByDescending(x=>x.avg_Location_rating))
         {
@@ -50,7 +50,7 @@
 
     <div class="col-xs-12 text-center top-buffer20"><b>based on Clearliness</b></div>
 
-    <div class="col-xs-12 top-buffer10 nopadding">
+    <div class="col-xs-12 nopadding">
 
         @foreach (var item in Model.OrderByDescending(x => x.avg_Cleanliness_rating))
         {
@@ -70,7 +70,7 @@
 
     <div class="col-xs-12 text-center top-buffer20"><b>based on Value for Money</b></div>
 
-    <div class="col-xs-12 top-buffer10 nopadding">
+    <div class="col-xs-12 nopadding">
 
         @foreach (var item in Model.OrderByDescending(x => x.avg_Value_for_money_rating))
         {
@@ -87,6 +87,44 @@
         }
     </div>
 
+
+    <div class="col-xs-12 text-center top-buffer20"><b>based on Hotel Amenities</b></div>
+
+    <div class="col-xs-12  nopadding">
+
+        @foreach (var item in Model.OrderByDescending(x => x.avg_Facilities_rating))
+        {
+            <div class="col-xs-12 top-buffer10 nopadding_left">
+                <div class=" col-xs-7 nopadding_right">
+
+                    @Html.ActionLink(item.HotelName, "Reviews", new { id = item.HotelId }, new { target = "_blank", style = "color:#aa6b11" })
+                    (@item.avg_Facilities_rating)
+                </div>
+                <div class="col-xs-5 ">
+                    @Html.TextBox("txt_hotel_amenities_compare", item.avg_Facilities_rating, new { @class = "GuestRating-compare" })
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="col-xs-12 text-center top-buffer20"><b>based on Comfort</b></div>
+
+    <div class="col-xs-12 nopadding">
+
+        @foreach (var item in Model.OrderByDescending(x => x.avg_Comfort_rating))
+        {
+            <div class="col-xs-12 top-buffer10 nopadding_left">
+                <div class=" col-xs-7 nopadding_right">
+
+                    @Html.ActionLink(item.HotelName, "Reviews", new { id = item.HotelId }, new { target = "_blank", style = "color:#aa6b11" })
+                    (@item.avg_Comfort_rating)
+                </div>
+                <div class="col-xs-5 ">
+                    @Html.TextBox("txt_hotel_comfort_compare", item.avg_Comfort_rating, new { @class = "GuestRating-compare" })
+                </div>
+            </div>
+        }
+    </div>
 
 
     </div>

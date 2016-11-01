@@ -636,6 +636,7 @@ namespace HotelAdvice.App_Code
 
             //**********set scoreviewModel*************/
             ScoreViewModel scores = new ScoreViewModel();
+            scores.num_reviews = detail.num_reviews;
             scores.avg_total_rating = float.Parse(rating_avg);
             scores.avg_Cleanliness_rating = float.Parse("1.5");
             scores.avg_Comfort_rating = float.Parse("4.5");
@@ -679,7 +680,7 @@ namespace HotelAdvice.App_Code
             List<CompareViewModel> lst_result = (from h in db.tbl_Hotel.Where(x => x.CityId == cityID && x.HotelId != hotelId)
                                                      join r in db.tbl_Rating on h.HotelId equals r.HotelId into Rating
                                                      from rr in Rating.DefaultIfEmpty()
-                                                     group rr by new { rr.HotelId, h.HotelName,h.HotelStars } into g
+                                                     group rr by new { rr.HotelId, h.HotelName } into g
                                                      select new CompareViewModel
                                                      {
                                                          HotelId = g.Key.HotelId.Value,
@@ -688,6 +689,8 @@ namespace HotelAdvice.App_Code
                                                          avg_Location_rating = (float)g.Average(x => x.Location_rating),
                                                          avg_Cleanliness_rating = (float)g.Average(x => x.Cleanliness_rating),
                                                          avg_Value_for_money_rating = (float)g.Average(x => x.Value_for_money_rating),
+                                                         avg_Facilities_rating = (float)g.Average(x => x.Facilities_rating),
+                                                         avg_Comfort_rating = (float)g.Average(x => x.Comfort_rating)
                                                      }).ToList();
 
 

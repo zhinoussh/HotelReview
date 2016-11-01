@@ -19,5 +19,9 @@ namespace HotelAdvice.Areas.WebSite.ViewModels
         public float avg_Location_rating { get; set; }
 
         public float avg_Value_for_money_rating { get; set; }
+        public float avg_Facilities_rating { get; set; }
+        public float avg_Comfort_rating { get; set; }
+
+        
     }
 }

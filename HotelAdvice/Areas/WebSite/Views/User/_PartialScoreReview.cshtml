@@ -4,61 +4,70 @@
 }
 
 <div class="well well-score">
-    <div class="col-xs-12 text-center nopadding">
-        <strong>Total Score</strong> <br />based on Guest Rating
+
+    <div class="col-xs-12 text-center label label-score">
+        Review Score
     </div>
-        <div class="col-xs-12 text-center nopadding">
+    <div class="col-xs-12 text-center nopadding">
+        <strong>Overal Score</strong> <br />based on Guest Rating
+    </div>
+        <div class="col-xs-12 text-center nopadding ">
             <div class="badge badge-total-score">@Html.DisplayFor(model => model.avg_total_rating)</div>
         </div>
+
+    <div class="col-xs-12 text-center nopadding text-warning">
+        <b> Total Reviews: @Html.DisplayFor(model => model.num_reviews)</b>
+    </div>
+
         <div class="col-xs-12 text-center nopadding top-buffer20">
-            <strong>Review Score</strong> <br />based on Hotel Features
+            <strong>Score Breakdown</strong> <br />based on Hotel Features
         </div>
 
-    <div class="col-xs-12 top-buffer20">
-        @Html.LabelFor(model=>model.avg_Cleanliness_rating)
-    </div>
+        <div class="col-xs-12 top-buffer20">
+            @Html.LabelFor(model => model.avg_Cleanliness_rating)
+        </div>
         <div class=" col-xs-12 text-center nopadding ">
-        <input type="text" class="slider_score" data-slider-value="@Model.avg_Cleanliness_rating" id="slider_Cleanliness" />
+            <input type="text" class="slider_score" data-slider-value="@Model.avg_Cleanliness_rating" id="slider_Cleanliness" />
             <span id="slider_Cleanliness_value" class="slider-value-label">@Model.avg_Cleanliness_rating</span>
-    </div>
+        </div>
 
-    <div class="col-xs-12 top-buffer20">
-        @Html.LabelFor(model => model.avg_Comfort_rating)
-    </div>
-    <div class="col-xs-12 text-center nopadding ">
-        <input type="text" class="slider_score" data-slider-value="@Model.avg_Comfort_rating" id="slider_Comfort" />
-        <span id="slider_Comfort_value" class="slider-value-label">@Model.avg_Comfort_rating</span>
-    </div>
+        <div class="col-xs-12 top-buffer20">
+            @Html.LabelFor(model => model.avg_Comfort_rating)
+        </div>
+        <div class="col-xs-12 text-center nopadding ">
+            <input type="text" class="slider_score" data-slider-value="@Model.avg_Comfort_rating" id="slider_Comfort" />
+            <span id="slider_Comfort_value" class="slider-value-label">@Model.avg_Comfort_rating</span>
+        </div>
 
-    <div class="col-xs-12 top-buffer20">
-        @Html.LabelFor(model => model.avg_Location_rating)
-    </div>
-    <div class="col-xs-12 text-center nopadding ">
-        <input type="text" class="slider_score" data-slider-value="@Model.avg_Location_rating" id="slider_Location" />
-        <span id="slider_Location_value" class="slider-value-label">@Model.avg_Location_rating</span>
-    </div>
+        <div class="col-xs-12 top-buffer20">
+            @Html.LabelFor(model => model.avg_Location_rating)
+        </div>
+        <div class="col-xs-12 text-center nopadding ">
+            <input type="text" class="slider_score" data-slider-value="@Model.avg_Location_rating" id="slider_Location" />
+            <span id="slider_Location_value" class="slider-value-label">@Model.avg_Location_rating</span>
+        </div>
 
-    <div class="col-xs-12 top-buffer20">
-        @Html.LabelFor(model => model.avg_Facilities_rating)
-    </div>
-    <div class="col-xs-12 text-center nopadding ">
-        <input type="text" class="slider_score" data-slider-value="@Model.avg_Facilities_rating" id="slider_Facilities" />
-        <span id="slider_Facilities_value" class="slider-value-label">@Model.avg_Facilities_rating</span>
-    </div>
+        <div class="col-xs-12 top-buffer20">
+            @Html.LabelFor(model => model.avg_Facilities_rating)
+        </div>
+        <div class="col-xs-12 text-center nopadding ">
+            <input type="text" class="slider_score" data-slider-value="@Model.avg_Facilities_rating" id="slider_Facilities" />
+            <span id="slider_Facilities_value" class="slider-value-label">@Model.avg_Facilities_rating</span>
+        </div>
 
-    <div class="col-xs-12 top-buffer20">
-        @Html.LabelFor(model => model.avg_Staff_rating)
-    </div>
-    <div class="col-xs-12 text-center nopadding ">
-        <input type="text" class="slider_score" data-slider-value="@Model.avg_Staff_rating" id="slider_Staff" />
-        <span id="slider_Staff_value" class="slider-value-label">@Model.avg_Staff_rating</span>
-    </div>
+        <div class="col-xs-12 top-buffer20">
+            @Html.LabelFor(model => model.avg_Staff_rating)
+        </div>
+        <div class="col-xs-12 text-center nopadding ">
+            <input type="text" class="slider_score" data-slider-value="@Model.avg_Staff_rating" id="slider_Staff" />
+            <span id="slider_Staff_value" class="slider-value-label">@Model.avg_Staff_rating</span>
+        </div>
 
-    <div class="col-xs-12 top-buffer20">
-        @Html.LabelFor(model => model.avg_Value_for_money_rating)
-    </div>
-    <div class="col-xs-12 text-center nopadding ">
-        <input type="text" class="slider_score" data-slider-value="@Model.avg_Value_for_money_rating" id="slider_money" />
-        <span id="slider_money_value" class="slider-value-label">@Model.avg_Value_for_money_rating</span>
-    </div>
+        <div class="col-xs-12 top-buffer20">
+            @Html.LabelFor(model => model.avg_Value_for_money_rating)
+        </div>
+        <div class="col-xs-12 text-center nopadding ">
+            <input type="text" class="slider_score" data-slider-value="@Model.avg_Value_for_money_rating" id="slider_money" />
+            <span id="slider_money_value" class="slider-value-label">@Model.avg_Value_for_money_rating</span>
+        </div>
     </div>

@@ -156,15 +156,15 @@ function Set_Rating_Plugins() {
         emptyStar: '<i class="fa fa-circle-thin fa-yourrating"></i>'
     });
 
-    $('.YourRating-user').rating({
+    $('.YourRating-review').rating({
         step: 1,
         size: 'xs',
         hoverOnClear: false,
         theme: 'krajee-fa',
         'showCaption': false,
         clearButton: 'remove <i class="fa fa-eraser"></i>',
-        filledStar: '<i class="fa fa-check-circle fa-yourrating"></i>',
-         emptyStar: '<i class="fa fa-circle-thin fa-yourrating"></i>'
+        filledStar: '<i class="fa fa-check-circle fa-yourrating-review"></i>',
+        emptyStar: '<i class="fa fa-circle-thin fa-yourrating-review"></i>'
     });
 }
 

@@ -47,6 +47,7 @@ namespace HotelAdvice.Areas.WebSite.Controllers
         public ActionResult Reviews(int id)
         {
            ReviewPageViewModel vm= db.get_reviews(id);
+           vm.YourReview = new ReviewViewModel();
            return View(vm);
         }
         [HttpPost]

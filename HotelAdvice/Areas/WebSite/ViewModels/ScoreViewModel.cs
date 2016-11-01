@@ -8,6 +8,7 @@ namespace HotelAdvice.Areas.WebSite.ViewModels
 {
     public class ScoreViewModel
     {
+        public int num_reviews { get; set; }
         public float avg_total_rating { get; set; }
 
         [Display(Name = "Cleanliness")]

@@ -50,7 +50,7 @@
                                 <div class="col-xs-12 nopadding">
                                     @Html.HiddenFor(model => model[i].HotelId, new { id = "hotel_id", Name = "hotel_id" })
                                     @Html.Hidden("page",Request["page"])
-                                    @Html.TextBox("your_rating", Model[i].YourRating, new { @class = "YourRating-user" })
+                                    @Html.TextBox("your_rating", Model[i].YourRating, new { @class = "YourRating" })
 
                                 </div>
                                 <div class="col-xs-12 nopadding top-buffer10">
