@@ -98,7 +98,18 @@
         $("#review_alert").slideUp(500);
         return false;
     });
-   
+
+    
+    $("#btn_open_review").click(function () {
+        $("#pnl_write_review").slideDown(600);
+        return false;
+    });
+
+    $("#btn_close_review").click(function () {
+        $("#pnl_write_review").slideUp(500);
+        return false;
+    });
+
     if (localStorage.getItem("msg")) {
         set_alert_user_action(localStorage.getItem("msg"));
         localStorage.clear();
@@ -304,6 +315,7 @@ var SuccessRegister = function (result,e)
 }
 
 var Success_ADDReview = function (result) {
+    $("#pnl_write_review").slideUp(600);
     $("#review_alert").slideDown(500);
     scroll_to_top();
 
@@ -358,7 +370,7 @@ var SuccessAjax_AddRating = function (result) {
 
 
 var Success_paging_Results = function (result) {
-    scroll_to_top();
+   scroll_to_top();
 }
 
 var scroll_to_top = function () {
