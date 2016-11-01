@@ -211,9 +211,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201610291737369_updateDBContext.cs" />
-    <Compile Include="Migrations\201610291737369_updateDBContext.Designer.cs">
-      <DependentUpon>201610291737369_updateDBContext.cs</DependentUpon>
+    <Compile Include="Migrations\201611010530353_add_date_to_tblRating.cs" />
+    <Compile Include="Migrations\201611010530353_add_date_to_tblRating.Designer.cs">
+      <DependentUpon>201611010530353_add_date_to_tblRating.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Config_ProjectDB.cs" />
@@ -362,6 +362,7 @@
     <Content Include="Areas\WebSite\Views\User\_PartialHotelPropertiesReview.cshtml" />
     <Content Include="Areas\WebSite\Views\User\_PartialScoreReview.cshtml" />
     <Content Include="Areas\WebSite\Views\User\_PartialCompareReview.cshtml" />
+    <Content Include="Areas\WebSite\Views\User\_PartialReview.cshtml" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Scripts\fileinput.min.js" />
     <Content Include="Scripts\jquery-3.1.0.js" />
@@ -454,8 +455,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201610291737369_updateDBContext.resx">
-      <DependentUpon>201610291737369_updateDBContext.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611010530353_add_date_to_tblRating.resx">
+      <DependentUpon>201611010530353_add_date_to_tblRating.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

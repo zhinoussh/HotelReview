@@ -25,7 +25,7 @@ namespace HotelAdvice.Areas.WebSite.ViewModels
         [Display(Name = "Staff")]
         public float avg_Staff_rating { get; set; }
 
-        [Display(Name = "Value_for_money")]
+        [Display(Name = "Value for Money")]
         public float avg_Value_for_money_rating { get; set; }
 
     }

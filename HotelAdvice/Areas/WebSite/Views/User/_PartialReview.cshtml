@@ -1,0 +1,25 @@
+﻿@using HotelAdvice.Areas.WebSite.ViewModels;
+@model ReviewViewModel
+@{
+    Layout = null;
+}
+
+
+<div class="col-xs-12 nopadding">
+    <div class="panel panel-info collapse nopadding top-buffer20" id="pnl_write_review">
+
+        <div class="panel-heading">
+            <i class="fa fa-pencil"></i> Write your own review
+            <button type="button" data-toggle="collapse" data-target="#pnl_write_review" aria-hidden="true" class="close">×</button>
+
+        </div>
+        <div class="panel-body">
+            
+            <div class="col-xs-12">@Html.LabelFor(model=>model.reviewTitle)</div>
+            <div class="col-xs-12">
+                @Html.TextBoxFor(model => model.reviewTitle, new { @class="form-control"})
+            </div>
+
+            </div>
+    </div>
+</div>

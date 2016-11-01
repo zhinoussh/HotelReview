@@ -93,7 +93,7 @@
         $("#div_alert").slideUp(600);
         return false;
     });
-
+    
    
     if (localStorage.getItem("msg")) {
         set_alert_user_action(localStorage.getItem("msg"));

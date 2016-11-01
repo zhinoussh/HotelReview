@@ -24,6 +24,7 @@ namespace HotelAdvice.Areas.WebSite.Models
 
         [StringLength(int.MaxValue)]
         public string cons_review { get; set; }
+        public string review_date { get; set; }
 
         public int Cleanliness_rating { get; set; }
         public int Comfort_rating { get; set; }

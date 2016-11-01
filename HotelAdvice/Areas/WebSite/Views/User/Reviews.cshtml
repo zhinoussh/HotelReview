@@ -8,30 +8,29 @@
 <div class="col-xs-12">
     @{Html.RenderPartial("_PartialHotelPropertiesReview", Model.hotel_properties);}
 </div>
-<div class="col-xs-12">
+<div class="col-xs-12" >
 
     <div class="col-sm-3 col-xs-12 nopadding">
         @{Html.RenderPartial("_PartialScoreReview", Model.hotel_scores);}
     </div>
-    <div class="col-sm-6 col-xs-12">
-        <div class="col-xs-9 ">
-            <h4 style="font-weight:bold; margin:0" class="text-warning">
+    <div class="col-sm-6 col-xs-12 " >
+        <div class="col-xs-8">
+            <h4 style="font-weight:bold" class="text-primary">
                 @Html.DisplayFor(model => model.hotel_properties.num_reviews) Reviews from our Community
             </h4>
-            </div>
-            <div class="col-xs-3 ">
-                <button class="btn btn-primary btn-responsive ">
-                    Write Your Review <i class="glyphicon glyphicon-pencil"></i>
-                </button>
-            </div>
         </div>
-    <div class="col-sm-3 col-xs-12 nopadding_right">
+        <div class="col-xs-3 ">
+            <button class="btn btn-primary btn-responsive " data-toggle="collapse" data-target="#pnl_write_review">
+                Write Your Review <i class="glyphicon glyphicon-pencil"></i>
+            </button>
+
+        </div>
+        @{Html.RenderPartial("_PartialReview", Model.YourReview);}
+    </div>
+    <div class="col-sm-3 col-xs-12 nopadding">
 
         <div class="col-xs-12 nopadding_right">
-
             @{Html.RenderPartial("_PartialCompareReview", Model.lst_compare_hotels);}
-
-
         </div>
 
     </div>
