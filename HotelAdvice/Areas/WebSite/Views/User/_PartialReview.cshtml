@@ -4,17 +4,28 @@
     Layout = null;
 }
 
+
+<div class="col-xs-12 nopadding top-buffer20">
+    <div class="alert alert-success" role="alert" id="review_alert" style="display:none;">
+        <a href="#" id="close_alert_review" class="close">&times;</a>
+        Thank you! Your review saved successfully.
+    </div>
+</div>
+
 @using (Ajax.BeginForm("Add_Review", "User", new AjaxOptions { 
     HttpMethod="Post",
     InsertionMode=InsertionMode.Replace,
     UpdateTargetId="div_add_review",
-    OnSuccess="Success_ADD_Review"
+    OnSuccess="Success_ADDReview"
 })) { 
+    @Html.AntiForgeryToken()
 <div class="col-xs-12 nopadding">
-    <div class="panel panel-info nopadding top-buffer20 collapse" id="pnl_write_review">
+ 
+
+    <div class="panel panel-info nopadding  collapse" id="pnl_write_review">
 
         <div class="panel-heading">
-            <i class="fa fa-pencil-square-o fa-blue fa-lg"></i> Write your own review
+            <i class="fa fa-pencil-square-o fa-blue fa-lg"></i> Write or Edit Your Review
             <button type="button" data-toggle="collapse" data-target="#pnl_write_review" aria-hidden="true" class="close">×</button>
         </div>
         <div class="panel-body nopadding_left">
@@ -22,6 +33,9 @@
             <div class="col-xs-12">
                 <div class=" col-xs-12 text-primary">@Html.LabelFor(model => model.reviewTitle)</div>
                 <div class="col-xs-12">
+                    @Html.HiddenFor(model => model.RateId)
+                    @Html.HiddenFor(model => model.UserId)
+                    @Html.HiddenFor(model=>model.HotelId)
                     @Html.TextBoxFor(model => model.reviewTitle, new { @class = "form-control", placeholder = "Review Title..." })
                 </div>
             </div>

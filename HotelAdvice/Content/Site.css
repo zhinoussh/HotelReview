@@ -250,10 +250,17 @@ color:#111;
     -webkit-text-stroke-color: #0c8ecf ;
 }
 .fa-circle-thin {
-color:#0c8ecf
+    color: #0c8ecf;
 }
 .fa-circle-thin-yellow {
-color:#f6c12e   
+    color: #f6c12e;
+}
+.fa-circle-thin-red {
+    color: #ac895a;
+}
+.fa-circle-red {
+    color: #ac895a;
+    -webkit-text-stroke-color: #ac895a !important;
 }
 .fa-circle-yellow {
      color:#f6c12e;
@@ -462,6 +469,7 @@ border-radius:3px;
     float: right;
     padding: 5px 8px 15px 8px;
     color: #aa6b11 !important;
+    min-height:980px;
 }
 .img_review {
 width:170px;

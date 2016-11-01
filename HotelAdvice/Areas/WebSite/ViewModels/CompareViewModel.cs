@@ -22,6 +22,8 @@ namespace HotelAdvice.Areas.WebSite.ViewModels
         public float avg_Facilities_rating { get; set; }
         public float avg_Comfort_rating { get; set; }
 
+        public bool compared_hotel { get; set; }
+
         
     }
 }

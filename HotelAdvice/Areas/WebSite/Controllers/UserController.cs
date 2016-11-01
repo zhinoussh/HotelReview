@@ -18,7 +18,7 @@ namespace HotelAdvice.Areas.WebSite.Controllers
         DAL db = new DAL();
         const int defaultPageSize_userpage = 3;
         const int defaultPageSize_searchpage = 3;
-
+        
         [Authorize(Roles = "PublicUser")]
         public ActionResult Index(int ?page,string tab)
         {
@@ -44,12 +44,37 @@ namespace HotelAdvice.Areas.WebSite.Controllers
                 return View(vm);
         }
 
+
         public ActionResult Reviews(int id)
         {
-           ReviewPageViewModel vm= db.get_reviews(id);
-           vm.YourReview = new ReviewViewModel();
-           return View(vm);
+            ReviewPageViewModel vm = db.get_reviews(id);
+
+
+            ReviewViewModel your_review =db.get_previous_review(id, User.Identity.GetUserId());
+              
+            //this is new review
+            if (your_review == null)
+            {
+                your_review = new ReviewViewModel();
+                your_review.RateId = 0;
+                your_review.HotelId = id;
+                your_review.UserId = User.Identity.GetUserId();
+            }
+            vm.YourReview = your_review;
+
+            return View(vm);
         }
+        
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add_Review(ReviewViewModel vm)
+        {
+            db.add_review(vm);
+            return Json(new {msg="success_add_review"});
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddToFavorite(int hotel_id, int city_id, int? page, string sort)

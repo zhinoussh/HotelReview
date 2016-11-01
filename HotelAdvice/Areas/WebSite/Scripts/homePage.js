@@ -94,6 +94,10 @@
         return false;
     });
     
+    $("#close_alert_review").click(function () {
+        $("#review_alert").slideUp(500);
+        return false;
+    });
    
     if (localStorage.getItem("msg")) {
         set_alert_user_action(localStorage.getItem("msg"));
@@ -139,12 +143,25 @@ function Set_Rating_Plugins() {
         displayOnly: true,
         hoverOnClear: false,
         theme: 'krajee-fa'
-  , 'showClear': false
-  , 'showCaption': false,
+      , 'showClear': false
+      , 'showCaption': false,
         filledStar: '<i class="fa fa-circle fa-circle-yellow"></i>',
         emptyStar: '<i class="fa fa-circle-thin fa-circle-thin-yellow"></i>'
     });
 
+    
+
+    $('.GuestRating-compared-hotel').rating({
+        step: 0.5,
+        size: 's',
+        displayOnly: true,
+        hoverOnClear: false,
+        theme: 'krajee-fa'
+         , 'showClear': false
+         , 'showCaption': false,
+        filledStar: '<i class="fa fa-circle fa-circle-red"></i>',
+        emptyStar: '<i class="fa fa-circle-thin fa-circle-thin-red"></i>'
+    });
     $('.YourRating').rating({
         step: 1,
         size: 'xs',
@@ -284,6 +301,12 @@ var SuccessRegister = function (result,e)
     }
     else
         $("#modal_container").html(result);
+}
+
+var Success_ADDReview = function (result) {
+    $("#review_alert").slideDown(500);
+    scroll_to_top();
+
 }
 var SuccessAjax_AddFavorit = function (result) {
     

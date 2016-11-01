@@ -13,6 +13,22 @@ namespace HotelAdvice.App_Code
 
         HotelAdviceDB db=new HotelAdviceDB();
 
+        private string get_today()
+        {
+            DateTime now = DateTime.Now;
+            System.Globalization.PersianCalendar pc = new System.Globalization.PersianCalendar();
+            string month = get_2digit_format(pc.GetMonth(now) + "");
+            string day = get_2digit_format(pc.GetDayOfMonth(now) + "");
+
+            return pc.GetYear(now) + "/" + month + "/" + day;
+        }
+
+        private string get_2digit_format(string d)
+        {
+            if (d.Length == 1)
+                d = "0" + d;
+            return d;
+        }
         #region City
 
         public void add_city(int id, string name,string attractions)
@@ -531,6 +547,7 @@ namespace HotelAdvice.App_Code
             
         }
 
+       
         public void remove_favorite_hotel(int hotel_id, string userId)
         {
             tbl_WishList w = db.tbl_Wish_List.Where(x => x.HotelId == hotel_id && x.UserId == userId).FirstOrDefault();
@@ -599,7 +616,71 @@ namespace HotelAdvice.App_Code
             return lst_result;
         }
 
+        public ReviewViewModel get_previous_review(int hotelId, string userId)
+        {
+            ReviewViewModel review = (from r in db.tbl_Rating.Where(x => x.HotelId == hotelId && x.UserId == userId)
+                                select new ReviewViewModel { 
+                                    RateId=r.ratingId,
+                                    reviewDate=r.review_date,
+                                    HotelId=hotelId,
+                                    UserId=userId,
+                                    reviewTitle=r.title_review,
+                                    reviewPros=r.pros_review,
+                                    reviewCons=r.cons_review,
+                                    total_rating=r.rating,
+                                    Cleanliness_rating=r.Cleanliness_rating,
+                                    Comfort_rating=r.Comfort_rating,
+                                    Location_rating=r.Location_rating,
+                                    Staff_rating=r.Staff_rating,
+                                    Value_for_money_rating=r.Value_for_money_rating,
+                                    Facilities_rating=r.Facilities_rating
+                                }).FirstOrDefault();
 
+            return review;
+        }
+        public void add_review(ReviewViewModel review)
+        {
+            if (review.RateId == 0)
+            {
+                tbl_rating r = new tbl_rating();
+
+                r.HotelId = review.HotelId;
+                r.UserId = review.UserId;
+                r.title_review = review.reviewTitle;
+                r.pros_review = review.reviewPros;
+                r.cons_review = review.reviewCons;
+
+                r.review_date = get_today();
+                r.rating = review.total_rating;
+                r.Cleanliness_rating = review.Cleanliness_rating;
+                r.Comfort_rating = review.Comfort_rating;
+                r.Location_rating = review.Location_rating;
+                r.Staff_rating = review.Staff_rating;
+                r.Value_for_money_rating = review.Value_for_money_rating;
+                r.Facilities_rating = review.Facilities_rating;
+
+                db.tbl_Rating.Add(r);
+            }
+            else
+            {
+                tbl_rating r = db.tbl_Rating.Find(review.RateId);
+                r.title_review = review.reviewTitle;
+                r.pros_review = review.reviewPros;
+                r.cons_review = review.reviewCons;
+
+                r.review_date = get_today();
+                r.rating = review.total_rating;
+                r.Cleanliness_rating = review.Cleanliness_rating;
+                r.Comfort_rating = review.Comfort_rating;
+                r.Location_rating = review.Location_rating;
+                r.Staff_rating = review.Staff_rating;
+                r.Value_for_money_rating = review.Value_for_money_rating;
+                r.Facilities_rating = review.Facilities_rating;
+            }
+            db.SaveChanges();
+        }
+
+        
         public ReviewPageViewModel get_reviews(int hotelId)
         {
             ReviewPageViewModel result = new ReviewPageViewModel();
@@ -677,7 +758,7 @@ namespace HotelAdvice.App_Code
 
         private List<CompareViewModel> get_compare_hotels_in_city(int cityID, int hotelId)
         {
-            List<CompareViewModel> lst_result = (from h in db.tbl_Hotel.Where(x => x.CityId == cityID && x.HotelId != hotelId)
+            List<CompareViewModel> lst_result = (from h in db.tbl_Hotel.Where(x => x.CityId == cityID)
                                                      join r in db.tbl_Rating on h.HotelId equals r.HotelId into Rating
                                                      from rr in Rating.DefaultIfEmpty()
                                                      group rr by new { rr.HotelId, h.HotelName } into g
@@ -690,7 +771,8 @@ namespace HotelAdvice.App_Code
                                                          avg_Cleanliness_rating = (float)g.Average(x => x.Cleanliness_rating),
                                                          avg_Value_for_money_rating = (float)g.Average(x => x.Value_for_money_rating),
                                                          avg_Facilities_rating = (float)g.Average(x => x.Facilities_rating),
-                                                         avg_Comfort_rating = (float)g.Average(x => x.Comfort_rating)
+                                                         avg_Comfort_rating = (float)g.Average(x => x.Comfort_rating),
+                                                         compared_hotel = (g.Key.HotelId.Value == hotelId ? true : false)
                                                      }).ToList();
 
 
@@ -742,7 +824,6 @@ namespace HotelAdvice.App_Code
         }
 
         #endregion Home Page
-
 
     }
 }

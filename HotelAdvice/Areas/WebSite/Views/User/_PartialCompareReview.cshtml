@@ -22,7 +22,7 @@
 
                 </div>
                 <div class="col-xs-5 ">
-                    @Html.TextBox("txt_guest_rating_compare", item.avg_total_rating, new { @class = "GuestRating-compare" })
+                    @Html.TextBox("txt_guest_rating_compare", item.avg_total_rating, new { @class = (item.compared_hotel ? "GuestRating-compared-hotel" : "GuestRating-compare") })
                 </div>
             </div>
         }
@@ -42,7 +42,7 @@
 
                 </div>
                 <div class="col-xs-5 ">
-                    @Html.TextBox("txt_hotel_location_compare", item.avg_Location_rating, new { @class = "GuestRating-compare" })
+                    @Html.TextBox("txt_hotel_location_compare", item.avg_Location_rating, new { @class=(item.compared_hotel ? "GuestRating-compared-hotel" : "GuestRating-compare") })
                 </div>
             </div>
         }
@@ -62,7 +62,7 @@
 
                 </div>
                 <div class="col-xs-5 ">
-                    @Html.TextBox("txt_hotel_cleanliness_compare", item.avg_Cleanliness_rating, new { @class = "GuestRating-compare" })
+                    @Html.TextBox("txt_hotel_cleanliness_compare", item.avg_Cleanliness_rating, new { @class=(item.compared_hotel ? "GuestRating-compared-hotel" : "GuestRating-compare") })
                 </div>
             </div>
         }
@@ -81,7 +81,7 @@
                     (@item.avg_Value_for_money_rating)
                 </div>
                 <div class="col-xs-5 ">
-                    @Html.TextBox("txt_hotel_Value_for_money_compare", item.avg_Value_for_money_rating, new { @class = "GuestRating-compare" })
+                    @Html.TextBox("txt_hotel_Value_for_money_compare", item.avg_Value_for_money_rating, new { @class=(item.compared_hotel ? "GuestRating-compared-hotel" : "GuestRating-compare") })
                 </div>
             </div>
         }
@@ -101,13 +101,13 @@
                     (@item.avg_Facilities_rating)
                 </div>
                 <div class="col-xs-5 ">
-                    @Html.TextBox("txt_hotel_amenities_compare", item.avg_Facilities_rating, new { @class = "GuestRating-compare" })
+                    @Html.TextBox("txt_hotel_amenities_compare", item.avg_Facilities_rating, new { @class=(item.compared_hotel ? "GuestRating-compared-hotel" : "GuestRating-compare") })
                 </div>
             </div>
         }
     </div>
 
-    <div class="col-xs-12 text-center top-buffer20"><b>based on Comfort</b></div>
+    @*<div class="col-xs-12 text-center top-buffer20"><b>based on Comfort</b></div>
 
     <div class="col-xs-12 nopadding">
 
@@ -120,11 +120,11 @@
                     (@item.avg_Comfort_rating)
                 </div>
                 <div class="col-xs-5 ">
-                    @Html.TextBox("txt_hotel_comfort_compare", item.avg_Comfort_rating, new { @class = "GuestRating-compare" })
+                    @Html.TextBox("txt_hotel_comfort_compare", item.avg_Comfort_rating, new { @class=(item.compared_hotel ? "GuestRating-compared-hotel" : "GuestRating-compare") })
                 </div>
             </div>
         }
-    </div>
+    </div>*@
 
 
     </div>
