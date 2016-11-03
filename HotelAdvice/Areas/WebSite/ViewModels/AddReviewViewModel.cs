@@ -6,7 +6,7 @@ using System.Web;
 
 namespace HotelAdvice.Areas.WebSite.ViewModels
 {
-    public class ReviewViewModel
+    public class AddReviewViewModel
     {
         public int RateId { get; set; }
         public int HotelId { get; set; }

@@ -615,10 +615,10 @@ namespace HotelAdvice.App_Code
             return lst_result;
         }
 
-        public ReviewViewModel get_previous_review(int hotelId, string userId)
+        public AddReviewViewModel get_previous_review(int hotelId, string userId)
         {
-            ReviewViewModel review = (from r in db.tbl_Rating.Where(x => x.HotelId == hotelId && x.UserId == userId)
-                                select new ReviewViewModel { 
+            AddReviewViewModel review = (from r in db.tbl_Rating.Where(x => x.HotelId == hotelId && x.UserId == userId)
+                                select new AddReviewViewModel { 
                                     RateId=r.ratingId,
                                     reviewDate=r.review_date,
                                     HotelId=hotelId,
@@ -638,7 +638,7 @@ namespace HotelAdvice.App_Code
             return review;
         }
     
-        public void add_review(ReviewViewModel review)
+        public void add_review(AddReviewViewModel review)
         {
             if (review.RateId == 0)
             {

@@ -9,9 +9,9 @@ namespace HotelAdvice.Areas.WebSite.ViewModels
     {
         public HotelReviewViewModel hotel_properties { get; set; }
         public ScoreViewModel hotel_scores { get; set; }
-        public List<ReviewViewModel> lst_reviews { get; set; }
+        public List<AddReviewViewModel> lst_reviews { get; set; }
 
-        public ReviewViewModel YourReview { get; set; }
+        public AddReviewViewModel YourReview { get; set; }
         public List<CompareViewModel> lst_compare_hotels { get; set; }
     }
 }

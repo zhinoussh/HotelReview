@@ -315,11 +315,25 @@ var SuccessRegister = function (result,e)
 }
 
 var Success_ADDReview = function (result) {
-    $("#pnl_write_review").slideUp(600);
-    $("#review_alert").slideDown(500);
-    scroll_to_top();
+    
+
+
+    if (result.msg) {
+        //login required
+        if (result.msg == "login_required") {
+            show_login(window.location.href);
+        }
+        else {
+            //replace partial view
+                $("#table_review").html(result.partial);
+                $("#pnl_write_review").slideUp(600);
+                $("#review_alert").slideDown(500);
+                scroll_to_top();
+        }
+    }
 
 }
+
 var SuccessAjax_AddFavorit = function (result) {
     
     if (result.msg) {
@@ -366,8 +380,6 @@ var SuccessAjax_AddRating = function (result) {
         }
     }
 }
-    
-
 
 var Success_paging_Results = function (result) {
    scroll_to_top();

@@ -188,7 +188,7 @@
     <Compile Include="Areas\WebSite\ViewModels\HotelReviewViewModel.cs" />
     <Compile Include="Areas\WebSite\ViewModels\HotelSearchViewModel.cs" />
     <Compile Include="Areas\WebSite\ViewModels\ReviewPageViewModel.cs" />
-    <Compile Include="Areas\WebSite\ViewModels\ReviewViewModel.cs" />
+    <Compile Include="Areas\WebSite\ViewModels\AddReviewViewModel.cs" />
     <Compile Include="Areas\WebSite\ViewModels\ScoreViewModel.cs" />
     <Compile Include="Areas\WebSite\ViewModels\SearchBarViewModel.cs" />
     <Compile Include="Areas\WebSite\ViewModels\SearchPageViewModel.cs" />
@@ -362,7 +362,9 @@
     <Content Include="Areas\WebSite\Views\User\_PartialHotelPropertiesReview.cshtml" />
     <Content Include="Areas\WebSite\Views\User\_PartialScoreReview.cshtml" />
     <Content Include="Areas\WebSite\Views\User\_PartialCompareReview.cshtml" />
-    <Content Include="Areas\WebSite\Views\User\_PartialReview.cshtml" />
+    <Content Include="Areas\WebSite\Views\User\_PartialAddReview.cshtml" />
+    <Content Include="Areas\WebSite\Views\User\_PartialHotelReviewList.cshtml" />
+    <Content Include="Areas\WebSite\Views\User\_PartialYourReviewList.cshtml" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Scripts\fileinput.min.js" />
     <Content Include="Scripts\jquery-3.1.0.js" />
