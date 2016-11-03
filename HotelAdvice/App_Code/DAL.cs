@@ -317,7 +317,7 @@ namespace HotelAdvice.App_Code
                                                HotelStars = h.HotelStars,
                                                CityName = c.CityName,
                                                YourRating=(rr==null?0:rr.rating),
-                                               review_num=200,
+                                               review_num = db.tbl_Rating.Count(x => x.HotelId == h.HotelId),
                                                is_favorite=(ww==null?false:true),
                                                Description = h.Description,
                                                checkin = h.checkin,
@@ -567,10 +567,10 @@ namespace HotelAdvice.App_Code
                                                          HotelName = h.HotelName,
                                                          Website = h.Website,
                                                          HotelStars = h.HotelStars,
-                                                         num_reviews = 999
+                                                         num_reviews = db.tbl_Rating.Count(x => x.HotelId == h.HotelId),
+                                                         GuestRating = db.tbl_Rating.Where(x => x.HotelId == h.HotelId).Average(x => (float?)x.rating) ?? 0
                                                      }).ToList();
 
-            lst_result = Set_Guest_Rating(lst_result);
 
             return lst_result;
         }
@@ -605,12 +605,11 @@ namespace HotelAdvice.App_Code
                                                          HotelName = h.HotelName,
                                                          Website = h.Website,
                                                          HotelStars = h.HotelStars,
-                                                         num_reviews = 999,
-                                                         GuestRating = 3,
-                                                         YourRating=r.rating
+                                                         num_reviews = db.tbl_Rating.Count(x => x.HotelId == h.HotelId),
+                                                         YourRating=r.rating,
+                                                         GuestRating = db.tbl_Rating.Where(x => x.HotelId == h.HotelId).Average(x => (float?)x.rating) ?? 0
                                                      }).ToList();
 
-            lst_result = Set_Guest_Rating(lst_result);
 
 
             return lst_result;
@@ -638,6 +637,7 @@ namespace HotelAdvice.App_Code
 
             return review;
         }
+    
         public void add_review(ReviewViewModel review)
         {
             if (review.RateId == 0)
@@ -686,7 +686,7 @@ namespace HotelAdvice.App_Code
             ReviewPageViewModel result = new ReviewPageViewModel();
 
             HotelReviewViewModel detail = (from h in db.tbl_Hotel.Where(x => x.HotelId == hotelId)
-                                           join c in db.tbl_city on h.CityId.Value equals (int?)c.CityId
+                                           join c in db.tbl_city on h.CityId.Value equals c.CityId
                                            select new HotelReviewViewModel
                                            {
                                                HotelId=h.HotelId,
@@ -695,21 +695,14 @@ namespace HotelAdvice.App_Code
                                                Address = h.HotelAddress,
                                                CityId=c.CityId,
                                                CityName=c.CityName,
-                                               num_reviews=200,
+                                               num_reviews=db.tbl_Rating.Count(x=>x.HotelId==hotelId),
                                                Website = h.Website,
                                                Email = h.Email,
                                                Tel=h.Tel,
-                                               hotel_count_city = db.tbl_Hotel.Count(m => m.CityId == c.CityId)
+                                               hotel_count_city = db.tbl_Hotel.Count(m => m.CityId == c.CityId),
+                                               GuestRating = db.tbl_Rating.Where(x => x.HotelId == h.HotelId).Average(x => (float?)x.rating) ?? 0
                                            }).FirstOrDefault();
 
-
-
-            string rating_avg="0";
-            var query_rating = db.tbl_Rating.Where(x => x.HotelId == hotelId);
-            if(query_rating.Any())
-                 rating_avg= query_rating.Average(x => x.rating).ToString();
-
-            detail.GuestRating = float.Parse(rating_avg);
 
             detail.rank_hotel= get_rank_hotel(hotelId);
          
@@ -718,13 +711,13 @@ namespace HotelAdvice.App_Code
             //**********set scoreviewModel*************/
             ScoreViewModel scores = new ScoreViewModel();
             scores.num_reviews = detail.num_reviews;
-            scores.avg_total_rating = float.Parse(rating_avg);
-            scores.avg_Cleanliness_rating = float.Parse("1.5");
-            scores.avg_Comfort_rating = float.Parse("4.5");
-            scores.avg_Facilities_rating = float.Parse("5");
-            scores.avg_Location_rating = float.Parse("5");
-            scores.avg_Staff_rating = float.Parse("3.5");
-            scores.avg_Value_for_money_rating= float.Parse("2.5");
+            scores.avg_total_rating = detail.GuestRating;
+            scores.avg_Cleanliness_rating = db.tbl_Rating.Where(x => x.HotelId == hotelId).Average(x => (float?)x.Cleanliness_rating) ?? 0;
+            scores.avg_Comfort_rating = db.tbl_Rating.Where(x => x.HotelId == hotelId).Average(x => (float?)x.Comfort_rating) ?? 0;
+            scores.avg_Facilities_rating = db.tbl_Rating.Where(x => x.HotelId == hotelId).Average(x => (float?)x.Facilities_rating) ?? 0;
+            scores.avg_Location_rating = db.tbl_Rating.Where(x => x.HotelId == hotelId).Average(x => (float?)x.Location_rating) ?? 0;
+            scores.avg_Staff_rating = db.tbl_Rating.Where(x => x.HotelId == hotelId).Average(x => (float?)x.Staff_rating) ?? 0;
+            scores.avg_Value_for_money_rating = db.tbl_Rating.Where(x => x.HotelId == hotelId).Average(x => (float?)x.Value_for_money_rating) ?? 0;
 
             result.hotel_scores = scores;
 
@@ -744,7 +737,7 @@ namespace HotelAdvice.App_Code
                              avg_rate = rate_g.Average(x => x.rating),
                              hotelId = rate_g.Key
                          }).AsEnumerable();
-
+            
             int rank = query.OrderByDescending(x => x.avg_rate)
                    .Select((x, index) => new { rank = index + 1, hotelid = x.hotelId })
                    .Where(x => x.hotelid == hotelId)
@@ -761,18 +754,18 @@ namespace HotelAdvice.App_Code
             List<CompareViewModel> lst_result = (from h in db.tbl_Hotel.Where(x => x.CityId == cityID)
                                                      join r in db.tbl_Rating on h.HotelId equals r.HotelId into Rating
                                                      from rr in Rating.DefaultIfEmpty()
-                                                     group rr by new { rr.HotelId, h.HotelName } into g
+                                                     group rr by new { h.HotelId, h.HotelName } into g
                                                      select new CompareViewModel
                                                      {
-                                                         HotelId = g.Key.HotelId.Value,
+                                                         HotelId = g.Key.HotelId,
                                                          HotelName = g.Key.HotelName,
-                                                         avg_total_rating = (float)g.Average(x => x.rating),
-                                                         avg_Location_rating = (float)g.Average(x => x.Location_rating),
-                                                         avg_Cleanliness_rating = (float)g.Average(x => x.Cleanliness_rating),
-                                                         avg_Value_for_money_rating = (float)g.Average(x => x.Value_for_money_rating),
-                                                         avg_Facilities_rating = (float)g.Average(x => x.Facilities_rating),
-                                                         avg_Comfort_rating = (float)g.Average(x => x.Comfort_rating),
-                                                         compared_hotel = (g.Key.HotelId.Value == hotelId ? true : false)
+                                                         avg_total_rating = (float?)g.Average(x => x.rating)??0,
+                                                         avg_Location_rating = (float?)g.Average(x => x.Location_rating) ?? 0,
+                                                         avg_Cleanliness_rating = (float?)g.Average(x => x.Cleanliness_rating) ?? 0,
+                                                         avg_Value_for_money_rating = (float?)g.Average(x => x.Value_for_money_rating) ?? 0,
+                                                         avg_Facilities_rating = (float?)g.Average(x => x.Facilities_rating) ?? 0,
+                                                         avg_Comfort_rating = (float?)g.Average(x => x.Comfort_rating) ?? 0,
+                                                         compared_hotel = (g.Key.HotelId == hotelId ? true : false)
                                                      }).ToList();
 
 
@@ -798,31 +791,16 @@ namespace HotelAdvice.App_Code
                                                             HotelStars = h.HotelStars,
                                                             Description = h.Description,
                                                             distance_citycenter=h.distance_citycenter,
-                                                            num_reviews=999,
-                                                            is_favorite=(ww==null?false:true)
+                                                            num_reviews = db.tbl_Rating.Count(x => x.HotelId == h.HotelId),
+                                                            is_favorite=(ww==null?false:true),
+                                                            GuestRating = db.tbl_Rating.Where(x => x.HotelId == h.HotelId).Average(x => (float?)x.rating) ?? 0
                                                         }).ToList();
 
-            lst_result=Set_Guest_Rating(lst_result);
 
             return lst_result;
         }
 
-        private List<HotelSearchViewModel> Set_Guest_Rating(List<HotelSearchViewModel> lst_hotels)
-        {
-            string rating_avg;
-            foreach (var item in lst_hotels)
-            {
-                rating_avg = "0";
-                var query_rating = db.tbl_Rating.Where(x => x.HotelId == item.HotelId);
-                if (query_rating.Any())
-                    rating_avg = query_rating.Average(x => x.rating).ToString();
-
-                item.GuestRating = float.Parse(rating_avg);
-            }
-
-            return lst_hotels;
-        }
-
+     
         #endregion Home Page
 
     }
