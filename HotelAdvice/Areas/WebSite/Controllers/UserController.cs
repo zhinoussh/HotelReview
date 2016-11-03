@@ -50,12 +50,12 @@ namespace HotelAdvice.Areas.WebSite.Controllers
             ReviewPageViewModel vm = db.get_reviews(id);
 
 
-            ReviewViewModel your_review =db.get_previous_review(id, User.Identity.GetUserId());
+            AddReviewViewModel your_review =db.get_previous_review(id, User.Identity.GetUserId());
               
             //this is new review
             if (your_review == null)
             {
-                your_review = new ReviewViewModel();
+                your_review = new AddReviewViewModel();
                 your_review.RateId = 0;
                 your_review.HotelId = id;
                 your_review.UserId = User.Identity.GetUserId();
@@ -68,10 +68,17 @@ namespace HotelAdvice.Areas.WebSite.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add_Review(ReviewViewModel vm)
+        public ActionResult Add_Review(AddReviewViewModel vm)
         {
-            db.add_review(vm);
-            return Json(new {msg="success_add_review"});
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Json(new { msg = "login_required" });
+            }
+            else
+            {
+                db.add_review(vm);
+                return Json(new { msg = "success_add_review" });
+            }
         }
 
 
