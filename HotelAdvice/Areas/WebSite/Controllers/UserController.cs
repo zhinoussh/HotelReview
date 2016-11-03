@@ -46,7 +46,7 @@ namespace HotelAdvice.Areas.WebSite.Controllers
         }
 
 
-        public ActionResult Reviews(int id)
+        public ActionResult Reviews(int id,int ?page)
         {
             ReviewPageViewModel vm = db.get_review_page(id);
 
@@ -62,8 +62,10 @@ namespace HotelAdvice.Areas.WebSite.Controllers
             }
             vm.YourReview = your_review;
 
+            int current_page_index = page.HasValue ? page.Value : 1;
+
              ApplicationUserManager userMgr = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
-             vm.lst_reviews = db.get_reviews_for_hotel(id, userMgr).ToPagedList(1,defaultPageSize_searchpage);
+             vm.lst_reviews = db.get_reviews_for_hotel(id, userMgr).ToPagedList(current_page_index, defaultPageSize_searchpage);
 
             return View(vm);
         }

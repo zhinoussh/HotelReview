@@ -10,6 +10,7 @@ namespace HotelAdvice.Areas.WebSite.ViewModels
         public string UserId { get; set; }
         public string UserFullName { get; set; }
 
+        public int review_num { get; set; }
         public string reviewTitle { get; set; }
 
         public string reviewPros { get; set; }

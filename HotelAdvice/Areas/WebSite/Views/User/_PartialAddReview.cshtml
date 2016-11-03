@@ -14,8 +14,6 @@
 
 @using (Ajax.BeginForm("Add_Review", "User", new AjaxOptions { 
     HttpMethod="Post",
-    InsertionMode=InsertionMode.Replace,
-    UpdateTargetId="div_add_review",
     OnSuccess="Success_ADDReview"
 })) { 
     @Html.AntiForgeryToken()

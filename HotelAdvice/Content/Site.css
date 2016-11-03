@@ -431,7 +431,7 @@ height:215px;
 overflow-y:auto;
 overflow-x:hidden;
 }
-.well-result:hover{
+.well-result:hover,.well-reviewList:hover{
 box-shadow:#c6c2c2 5px  5px 5px 0px;
 background-color:#fbf4eb;
 }
@@ -451,9 +451,14 @@ border-radius:3px;
     background-color: #eef1f8 !important;
     width: 100%;
     float: right;
-    padding: 8px 5px 3px 8px;
-    margin-top: 20px;
-
+    padding:8px 5px 3px 8px;
+    margin-top:20px;
+}
+.well-reviewList {
+background-color: #eef1f8 !important;
+    width: 100%;
+    float: right;
+    padding:0px 0px 15px 0px;
 }
 .well-score {
     background-color: #eef1f8 !important;
@@ -635,6 +640,14 @@ color:#0770a4 !important;
 }
 .label-score {
     background-color:#022984
+}
+
+.label-review {
+    background-color:#022984;
+    padding-left:10px !important;
+    margin:0;
+    border-radius:0;
+    text-align:left
 }
 .form-control{
     min-width:100% !important;
