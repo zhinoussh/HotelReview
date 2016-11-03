@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
 using HotelAdvice.Helper;
 using HotelAdvice.App_Code;
@@ -47,8 +48,7 @@ namespace HotelAdvice.Areas.WebSite.Controllers
 
         public ActionResult Reviews(int id)
         {
-            ReviewPageViewModel vm = db.get_reviews(id);
-
+            ReviewPageViewModel vm = db.get_review_page(id);
 
             AddReviewViewModel your_review =db.get_previous_review(id, User.Identity.GetUserId());
               
@@ -61,6 +61,9 @@ namespace HotelAdvice.Areas.WebSite.Controllers
                 your_review.UserId = User.Identity.GetUserId();
             }
             vm.YourReview = your_review;
+
+             ApplicationUserManager userMgr = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+             vm.lst_reviews = db.get_reviews_for_hotel(id, userMgr).ToPagedList(1,defaultPageSize_searchpage);
 
             return View(vm);
         }

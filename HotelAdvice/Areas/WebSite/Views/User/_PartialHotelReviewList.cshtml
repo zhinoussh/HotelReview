@@ -1,7 +1,7 @@
 ﻿@using HotelAdvice.Areas.WebSite.ViewModels;
 @using PagedList;
 @using PagedList.Mvc;
-@model  IPagedList<AddReviewViewModel>
+@model  IPagedList<ReviewListViewModel>
 @{
     Layout = null;
 }
@@ -11,7 +11,7 @@
     @foreach (var item in Model)
     {
         <div class="col-sx-2 nopadding">
-           
+           @item.UserFullName
         </div>
     }
 </div>

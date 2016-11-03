@@ -187,6 +187,7 @@
     <Compile Include="Areas\WebSite\ViewModels\HotelDetailViewModel.cs" />
     <Compile Include="Areas\WebSite\ViewModels\HotelReviewViewModel.cs" />
     <Compile Include="Areas\WebSite\ViewModels\HotelSearchViewModel.cs" />
+    <Compile Include="Areas\WebSite\ViewModels\ReviewListViewModel.cs" />
     <Compile Include="Areas\WebSite\ViewModels\ReviewPageViewModel.cs" />
     <Compile Include="Areas\WebSite\ViewModels\AddReviewViewModel.cs" />
     <Compile Include="Areas\WebSite\ViewModels\ScoreViewModel.cs" />

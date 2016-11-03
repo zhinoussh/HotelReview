@@ -5,6 +5,8 @@ using HotelAdvice.Areas.Admin.ViewModels;
 using HotelAdvice.Areas.WebSite.ViewModels;
 using HotelAdvice.Areas.Admin.Models;
 using HotelAdvice.Areas.WebSite.Models;
+using Microsoft.AspNet.Identity;
+
 
 namespace HotelAdvice.App_Code
 {
@@ -680,8 +682,7 @@ namespace HotelAdvice.App_Code
             db.SaveChanges();
         }
 
-        
-        public ReviewPageViewModel get_reviews(int hotelId)
+        public ReviewPageViewModel get_review_page(int hotelId)
         {
             ReviewPageViewModel result = new ReviewPageViewModel();
 
@@ -727,6 +728,27 @@ namespace HotelAdvice.App_Code
             return result;
         }
 
+        public List<ReviewListViewModel> get_reviews_for_hotel(int hotelId,ApplicationUserManager userMgr)
+        {
+           
+            List<ReviewListViewModel> lst_result = (from r in db.tbl_Rating.Where(x => x.HotelId == hotelId)
+                                                    select new ReviewListViewModel
+                                                    {
+                                                        reviewTitle = r.title_review,
+                                                        reviewCons = r.cons_review,
+                                                        reviewPros = r.pros_review,
+                                                        reviewDate = r.review_date,
+                                                        overal_rating=r.rating,
+                                                        UserId=r.UserId
+                                                    }).ToList();
+
+            foreach (var item in lst_result)
+            {
+                item.UserFullName = userMgr.Users.Where(x => x.Id == item.UserId).Select(x => x.FirstName).FirstOrDefault();
+            }
+            
+            return lst_result;
+        }
         private int get_rank_hotel(int hotelId)
         {
 
