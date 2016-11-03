@@ -19,6 +19,7 @@ namespace HotelAdvice.Areas.WebSite.Controllers
         DAL db = new DAL();
         const int defaultPageSize_userpage = 3;
         const int defaultPageSize_searchpage = 3;
+        const int defaultPageSize_reviewpage = 5;
         
         [Authorize(Roles = "PublicUser")]
         public ActionResult Index(int ?page,string tab)
@@ -65,9 +66,12 @@ namespace HotelAdvice.Areas.WebSite.Controllers
             int current_page_index = page.HasValue ? page.Value : 1;
 
              ApplicationUserManager userMgr = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
-             vm.lst_reviews = db.get_reviews_for_hotel(id, userMgr).ToPagedList(current_page_index, defaultPageSize_searchpage);
+             vm.lst_reviews = db.get_reviews_for_hotel(id, userMgr).ToPagedList(current_page_index, defaultPageSize_reviewpage);
 
-            return View(vm);
+             if (Request.IsAjaxRequest())
+                 return PartialView("_PartialHotelReviewList", vm.lst_reviews);
+             else
+                 return View(vm);
         }
         
         
