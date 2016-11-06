@@ -13,7 +13,12 @@ namespace HotelAdvice.Areas.Admin.Controllers
     public class CityController : Controller
     {
         private const int defaultPageSize = 10;
-        DAL db = new DAL();
+        IDataRepository db;
+
+        public CityController(IDataRepository repo)
+        {
+            db = repo;
+        }
 
         // GET: City
         public ActionResult Index(int? page, string filter = null)

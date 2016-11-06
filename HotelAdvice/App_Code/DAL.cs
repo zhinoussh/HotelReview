@@ -10,12 +10,14 @@ using Microsoft.AspNet.Identity;
 
 namespace HotelAdvice.App_Code
 {
-    public class DAL
+    public class DAL:IDataRepository
     {
 
         HotelAdviceDB db=new HotelAdviceDB();
 
-        private string get_today()
+        #region dateTime
+     
+        public string get_today()
         {
            string month = get_2digit_format(DateTime.Now.Month + "");
             string day = get_2digit_format(DateTime.Now.Day + "");
@@ -23,13 +25,15 @@ namespace HotelAdvice.App_Code
             return DateTime.Now.Year + "/" + month + "/" + day;
         }
 
-        private string get_2digit_format(string d)
+        public string get_2digit_format(string d)
         {
             if (d.Length == 1)
                 d = "0" + d;
             return d;
         }
-    
+
+        #endregion dateTime
+
         #region City
 
         public void add_city(int id, string name,string attractions)
@@ -133,7 +137,7 @@ namespace HotelAdvice.App_Code
 
         }
 
-        private void Save_Restaurants(string restaurants, int HotelId)
+        public void Save_Restaurants(string restaurants, int HotelId)
         {
             //Edit
             if (HotelId != 0)
@@ -167,7 +171,7 @@ namespace HotelAdvice.App_Code
             }
         }
 
-        private void Save_Rooms(string rooms, int HotelId)
+        public void Save_Rooms(string rooms, int HotelId)
         {
             //Edit
             if (HotelId != 0)
@@ -201,7 +205,7 @@ namespace HotelAdvice.App_Code
             }
         }
 
-        private void Save_Amenities(List<AmenityViewModel> amenities, int HotelId)
+        public void Save_Amenities(List<AmenityViewModel> amenities, int HotelId)
         {
             //Edit
             if (HotelId != 0)
@@ -226,7 +230,7 @@ namespace HotelAdvice.App_Code
 
         }
 
-        private void Save_Sighseeings(string sightseeing, int HotelId)
+        public void Save_Sighseeings(string sightseeing, int HotelId)
         {
             //Edit
             if (HotelId != 0)
@@ -786,8 +790,8 @@ namespace HotelAdvice.App_Code
             
             return lst_result;
         }
-       
-        private int get_rank_hotel(int hotelId)
+
+        public int get_rank_hotel(int hotelId)
         {
 
             var query = (from r in db.tbl_Rating
@@ -809,7 +813,7 @@ namespace HotelAdvice.App_Code
             return rank;
         }
 
-        private List<CompareViewModel> get_compare_hotels_in_city(int cityID, int hotelId)
+        public List<CompareViewModel> get_compare_hotels_in_city(int cityID, int hotelId)
         {
             List<CompareViewModel> lst_result = (from h in db.tbl_Hotel.Where(x => x.CityId == cityID)
                                                      join r in db.tbl_Rating on h.HotelId equals r.HotelId into Rating
