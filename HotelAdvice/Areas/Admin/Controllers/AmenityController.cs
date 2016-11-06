@@ -17,8 +17,13 @@ namespace HotelAdvice.Areas.Admin.Controllers
     [Authorize(Roles = "Administrator")]
     public class AmenityController : Controller
     {
-        DAL db = new DAL();
+        IDataRepository db;
         private const int defaultPageSize = 10;
+
+        public AmenityController(IDataRepository repo)
+        {
+            db = repo;
+        }
 
         // GET: Amenity
         public ActionResult Index(int?page,string filter=null)

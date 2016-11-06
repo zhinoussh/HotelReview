@@ -15,7 +15,13 @@ namespace HotelAdvice.Areas.Admin.Controllers
     public class HotelController : Controller
     {
         private const int defaultPageSize = 10;
-        DAL db = new DAL();
+       
+         IDataRepository db;
+
+         public HotelController(IDataRepository repo)
+        {
+            db = repo;
+        }
 
         #region Hotel
 
