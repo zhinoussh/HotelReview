@@ -19,7 +19,7 @@ namespace HotelAdvice.Areas.WebSite.Controllers
         DAL db = new DAL();
         const int defaultPageSize_userpage = 3;
         const int defaultPageSize_searchpage = 3;
-        const int defaultPageSize_reviewpage = 5;
+        const int defaultPageSize_reviewpage = 4;
         
         [Authorize(Roles = "PublicUser")]
         public ActionResult Index(int ?page,string tab)
@@ -28,7 +28,8 @@ namespace HotelAdvice.Areas.WebSite.Controllers
             UserPageViewModel vm = new UserPageViewModel();
 
             vm.lst_wishList = (db.get_wishList(User.Identity.GetUserId())).ToPagedList<HotelSearchViewModel>(currentPageIndex, defaultPageSize_userpage);
-            vm.lst_rating= (db.get_ratingList(User.Identity.GetUserId())).ToPagedList<HotelSearchViewModel>(currentPageIndex, defaultPageSize_userpage);
+            vm.lst_rating = (db.get_ratingList(User.Identity.GetUserId())).ToPagedList<HotelSearchViewModel>(currentPageIndex, defaultPageSize_userpage);
+            vm.lst_reviews = (db.get_reviewList(User.Identity.GetUserId())).ToPagedList<HotelSearchViewModel>(currentPageIndex, defaultPageSize_userpage);
 
             if (Request.IsAjaxRequest())
             {
@@ -38,6 +39,8 @@ namespace HotelAdvice.Areas.WebSite.Controllers
                         return PartialView("_PartialWishList", vm.lst_wishList);
                     case "rating":
                         return PartialView("_PartialRatingList", vm.lst_rating);
+                    case "review":
+                        return PartialView("_PartialYourReviewList", vm.lst_reviews);
                     default:
                         return PartialView("_PartialWishList", vm.lst_wishList);
                 }
@@ -86,10 +89,62 @@ namespace HotelAdvice.Areas.WebSite.Controllers
             else
             {
                 db.add_review(vm);
-                return Json(new { msg = "success_add_review" });
+
+                if (vm.fromProfilePage)
+                {
+                    IPagedList<HotelSearchViewModel> model = db.get_reviewList(User.Identity.GetUserId()).ToPagedList<HotelSearchViewModel>(vm.currentPageIndex, defaultPageSize_userpage);
+                    string partialview = RenderPartial.RenderRazorViewToString(this
+                         , "~/Areas/WebSite/views/User/_PartialYourReviewList.cshtml"
+                         , model);
+
+                    return Json(new { msg = "success_edit_review", partial = partialview });
+
+                }
+                else
+                    return Json(new { msg = "success_add_review" });
             }
         }
 
+
+        [HttpGet]
+        public ActionResult EditReview(int id,int?page)
+        {
+
+           AddReviewViewModel vm= db.get_previous_review(id, User.Identity.GetUserId());
+           vm.fromProfilePage = true;
+           vm.currentPageIndex = page.HasValue ? page.Value : 1;
+
+           return PartialView("_PartialAddReview", vm);
+        }
+    
+        [HttpGet]
+        public ActionResult DeleteReview(int id, int? page)
+        {
+            DeleteReviewViewModel vm=new DeleteReviewViewModel();
+
+            vm.hotelId = id;
+            vm.currentPageIndex = page.HasValue ? page.Value : 1;
+            vm.HotelName = db.get_hotel_byId(id).HotelName;
+            vm.UserId = User.Identity.GetUserId();
+
+            return PartialView("_PartialDeleteReview",vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteReview(DeleteReviewViewModel vm)
+        {
+
+            db.delete_review(vm.hotelId,vm.UserId);
+            int currentPageIndex = vm.currentPageIndex;
+
+            List<HotelSearchViewModel> lst_reviews = db.get_reviewList(User.Identity.GetUserId());
+            if (currentPageIndex > 1 && lst_reviews.Count() < currentPageIndex * defaultPageSize_userpage)
+                currentPageIndex = currentPageIndex - 1;
+
+            return PartialView("_PartialYourReviewList", lst_reviews.ToPagedList<HotelSearchViewModel>(currentPageIndex, defaultPageSize_userpage));
+
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]

@@ -4,10 +4,10 @@
     Layout = "~/Areas/WebSite/Views/User/_LayoutUser.cshtml";
 }
 
-<div class="container" >
+<div class="container">
     <div class="row">
         <div class="col-xs-12 top-buffer20">
-            <div class="tabbable-panel" >
+            <div class="tabbable-panel">
                 <div class="tabbable-line">
                     <ul class="nav nav-tabs ">
                         <li class="active li-wishlist">
@@ -36,20 +36,9 @@
                         </div>
                         <div class="tab-pane animated fadeInLeftBig" id="tab_rating">
                             @{Html.RenderPartial("_PartialRatingList", Model.lst_rating);}
-
                         </div>
-                        <div class="tab-pane" id="tab_review">
-                            <p>
-                                Howdy, I'm in Tab 3.
-                            </p>
-                            <p>
-                                Duis autem vel eum iriure dolor in hendrerit in vulputate. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat
-                            </p>
-                            <p>
-                                <a class="btn btn-info" href="http://j.mp/metronictheme" target="_blank">
-                                    Learn more...
-                                </a>
-                            </p>
+                        <div class="tab-pane animated fadeInRightBig" id="tab_review">
+                            @{Html.RenderPartial("_PartialYourReviewList", Model.lst_reviews);}
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -57,5 +46,28 @@
             </div>
         </div>
     </div>
-        </div>
+</div>
 
+<!-- Modal Edit Review-->
+<div class="modal fade " tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true" id="modal_review_main">
+    <div class="modal-dialog">
+        <div class="modal-content modal-content-review">
+
+            <div class="modal-header modal-header-review">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">
+                    <span class="glyphicon glyphicon-pencil"></span> Edit Your Review
+                </h4>
+            </div>
+            <div class="modal-body" id="modal_review">
+
+
+            </div><div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<!-- END Modal Edit Review-->
+
+<!-- Modal Delete Review-->
+<div id="DeleteModalReview"></div>
+<!-- END Modal Delete Review-->

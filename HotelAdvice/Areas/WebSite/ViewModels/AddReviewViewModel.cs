@@ -44,5 +44,9 @@ namespace HotelAdvice.Areas.WebSite.ViewModels
         [Display(Name = "Value for Money")]
         public int Value_for_money_rating { get; set; }
 
+        public bool fromProfilePage { get; set; }
+
+        public int currentPageIndex { get; set; }
+
     }
 }

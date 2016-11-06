@@ -20,20 +20,28 @@
                                  class="img-wishlist img-responsive">
                         </a>
                     </div>
-                    <div class="col-xs-12 nopadding">
+                    <div class="col-xs-12 col-sm-8 nopadding">
                         <h4>
                             @Html.ActionLink(Model[i].HotelName, "HotelDetails", "SearchHotel"
                                 , new { Area = "WebSite", id = Model[i].HotelId }, new { target = "_blank" })
                         </h4>
+
+
+                    </div>
+                    <div class="col-xs-12 col-sm-4 nopadding top-buffer10">
+                        @Html.TextBox("txt_guest_rating", Model[i].GuestRating, new { @class = "GuestRating" })
+                    </div>
+
+                    <div class="col-xs-12 col-sm-8 nopadding">
                         @Html.TextBox("txt_star_hotel", Model[i].HotelStars, new { @class = "HotelStars" })
-
-
+                    </div>
+                    <div class="col-sm-4 nopadding text-small hidden-xs">
+                        overal rating: @Model[i].GuestRating
                     </div>
                     <div class="col-xs-12 nopadding">
                         visit website <i class="glyphicon glyphicon-hand-right"></i>
                         <a href="http://@Model[i].Website" target="_blank">@Model[i].Website</a>
                     </div>
-
                         <div class="col-xs-4 nopadding">
                             Your Rating:
                         </div>
@@ -53,11 +61,11 @@
                                     @Html.TextBox("your_rating", Model[i].YourRating, new { @class = "YourRating" })
 
                                 </div>
-                                <div class="col-xs-12 nopadding top-buffer10">
-                                    <button class=" btn btn-warning btn-responsive btn-block " type="submit">
-                                        Send it!
-                                    </button>
-                                </div>
+    <div class="col-sm-8 col-sm-offset-2 col-xs-4 col-xs-offset-4 nopadding top-buffer10">
+        <button class=" btn btn-warning btn-responsive btn-block " type="submit">
+            Send it!
+        </button>
+    </div>
                             }
                         </div>
                     </div>

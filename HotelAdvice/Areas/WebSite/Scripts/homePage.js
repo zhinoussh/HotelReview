@@ -102,17 +102,21 @@
     
     $("#btn_open_review").click(function () {
         $("#pnl_write_review").slideDown(600);
+        $("#table_review").fadeOut(500);
+        
         return false;
     });
 
     $("#btn_close_review").click(function () {
         $("#pnl_write_review").slideUp(500);
+        $("#table_review").fadeIn(500);
+
         return false;
     });
 
     if (localStorage.getItem("msg")) {
         if (localStorage.getItem("msg") == "success_add_review") {
-            $("#table_review").html(result.partial);
+            $("#table_review").fadeIn(500);
             $("#pnl_write_review").slideUp(600);
             $("#review_alert").slideDown(500);
             scroll_to_top();
@@ -124,6 +128,29 @@
     }
    
 });
+
+//$("#btn_edit_review").on('click', showModalReview);
+$(document).on("click", "#btn_edit_review", showEditModalReview);
+$(document).on("click", "#btn_delete_review", showDeleteModalReview);
+
+function showEditModalReview() {
+    var url = $(this).data('url');
+
+    $.get(url, function (data) {
+
+        $("#modal_review").html(data).find("#pnl_write_review").fadeIn(100);
+        $("#modal_review_main").modal('show');
+        //reparseform();
+    });
+}
+
+function showDeleteModalReview() {
+    var url = $(this).data('url');
+
+    $.get(url, function (data) {
+        $("#DeleteModalReview").html(data).find(".modal_main").modal('show');
+    });
+}
 
 $(document).ajaxComplete(function () {
 
@@ -327,15 +354,29 @@ var Success_ADDReview = function (result) {
         if (result.msg == "login_required") {
             show_login(window.location.href);
         }
+
         else {
-            localStorage.setItem("msg", result.msg);
-            location.reload();
+            //replace partial view
+            if (result.partial) {
+                $("#tab_content_review").html(result.partial);
+                set_alert_user_action(result.msg);
+                $("#modal_review_main").modal('hide');
+            }
+            else {
+                localStorage.setItem("msg", result.msg);
+                location.reload();
+            }
              
         }
     }
 
 }
 
+var Success_DeleteReview = function (result) {
+    set_alert_user_action("success_delete_review");
+    $("#DeleteModalReview").find(".modal_main").modal('hide');
+
+}
 var SuccessAjax_AddFavorit = function (result) {
     
     if (result.msg) {
@@ -347,7 +388,6 @@ var SuccessAjax_AddFavorit = function (result) {
             //replace partial view
             if (result.partial) {
                 $("#table_container").html(result.partial);
-
                 set_alert_user_action(result.msg);
             }
             else {
@@ -395,19 +435,31 @@ var set_alert_user_action = function (msg) {
     if (msg == "add_favorite_success") {
 
         $("#alert_user_action").html("Hotel added to your wish list");
-        $("#div_alert").removeClass("alert-danger").addClass("alert-success");
+        $("#div_alert").removeClass("alert-danger").removeClass("alert-warning").addClass("alert-success");
         $("#icon_alert").removeClass("fa-times-circle").addClass("fa-check");
     }
     else if (msg == "favorite_already_exist") {
 
         $("#alert_user_action").html("Hotel removed from your wish list");
-        $("#div_alert").removeClass("alert-success").addClass("alert-danger");
+        $("#div_alert").removeClass("alert-success").removeClass("alert-warning").addClass("alert-danger");
         $("#icon_alert").removeClass("fa-check").addClass("fa-times-circle");
     }
     else if (msg == "rating_success") {
 
         $("#alert_user_action").html("Thank you! Your rating saved.");
-        $("#div_alert").removeClass("alert-warning").addClass("alert-success");
+        $("#div_alert").removeClass("alert-success").removeClass("alert-danger").addClass("alert-warning");
+        $("#icon_alert").removeClass("fa-times-circle").addClass("fa-check");
+    }
+    else if (msg == "success_edit_review") {
+
+        $("#alert_user_action").html("Thank you! Your review saved.");
+        $("#div_alert").removeClass("alert-danger").removeClass("alert-warning").addClass("alert-success");
+        $("#icon_alert").removeClass("fa-times-circle").addClass("fa-check");
+    } 
+    else if (msg == "success_delete_review") {
+
+        $("#alert_user_action").html("Your review removed.");
+        $("#div_alert").removeClass("alert-success").removeClass("alert-warning").addClass("alert-danger");
         $("#icon_alert").removeClass("fa-times-circle").addClass("fa-check");
     }
 

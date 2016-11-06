@@ -12,7 +12,14 @@
         <div class="col-sm-12 pull-right top-buffer10">
 
             <div class="col-sm-6 nopadding top-buffer10" style="width:auto;">
-                @Html.ActionLink("Welcome " + ((ClaimsIdentity)User.Identity).FindFirst("FirstName").Value + "!", "Index", "User", new { Area = "User" }, htmlAttributes: new { title = "Profile", style = " color: #fff" })
+                @if (User.IsInRole("PublicUser"))
+                {
+                @Html.ActionLink("Welcome " + ((ClaimsIdentity)User.Identity).FindFirst("FirstName").Value + "!", "Index", "User", new { Area = "Website" }, htmlAttributes: new { title = "Profile", style = " color: #fff" })
+                }
+                else
+                {
+                    @Html.ActionLink("Welcome " + ((ClaimsIdentity)User.Identity).FindFirst("FirstName").Value + "!", "Index", "Hotel", new { Area = "Admin" }, htmlAttributes: new { title = "Dashboard", style = " color: #fff" })
+                }
             </div>
             <div class="col-sm-1 text-center top-buffer10">
                 @if (User.IsInRole("PublicUser"))
@@ -21,6 +28,7 @@
                         <i class="fa fa-heart"></i>
                     </a>
                 }
+               
             </div>
 
             <div class="col-sm-2 nopadding_right">

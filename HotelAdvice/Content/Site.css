@@ -159,6 +159,10 @@ textarea {
 }
 
 /*Buttons*/
+.btn-default {
+background-color:#eee;
+width:100px;
+}
 .btn-outline {
     background-color: transparent;
     color: inherit;
@@ -283,6 +287,24 @@ color:#d70707
     color: #3999ed !important;
 }
 /***MODAL*****/
+.modal-header-danger{
+     height:40px;
+	color:	#fff;
+    padding:8px;
+    border-bottom:1px solid #eee;
+    background-color:#d9534f;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;
+}
+
+#modal_delete_image {
+	margin-top:100px;
+}
+
 .modal-header-login{
      height:40px;
 	color:#6e97ab;
@@ -302,6 +324,26 @@ color:#d70707
   border-radius: 4px;
 }
 
+.modal-header-review {
+     height:40px;
+	color:#eef1f8;
+    padding:8px;
+    border-bottom:1px solid #eee;
+    background-color: #428bca;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;
+}
+.modal-content-review {
+    border:0;
+}
+#modal_review {
+    height:500px;
+    overflow-y:auto;
+}
 /****FORms****/
 .form-horizontal .control-label {
     font-size:10pt;
@@ -459,6 +501,9 @@ background-color: #eef1f8 !important;
     width: 100%;
     float: right;
     padding:0px 0px 15px 0px;
+    height:200px;
+    overflow-x:hidden;
+    overflow-y:auto;
 }
 .well-score {
     background-color: #eef1f8 !important;
@@ -630,7 +675,7 @@ color:#0770a4 !important;
   background-color:#f6ce2e;
   width:70px;
   height:65px;  
-  font-size:32pt;
+  font-size:28pt;
 }
 
 .label {
@@ -643,11 +688,23 @@ color:#0770a4 !important;
 }
 
 .label-review {
-    background-color:#022984;
+    background-color:#0770a4;
     padding-left:10px !important;
     margin:0;
     border-radius:0;
-    text-align:left
+    text-align:left;
+    
+}
+.well-reviewList::before {
+    border-top: 15px solid transparent;
+    border-right: 15px solid #0770a4;
+    border-bottom:15px solid transparent;
+    content:'';
+    height: 0;
+    position: absolute;
+    width: 0;
+    left:-15px;
+    top:5px;
 }
 .form-control{
     min-width:100% !important;

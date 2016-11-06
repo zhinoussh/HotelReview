@@ -27,7 +27,6 @@ body{
     border-left: solid 10px transparent;
     border-right: solid 10px transparent;
     z-index:999;
- 
 }
 .alert-white {
     background-image: linear-gradient(to bottom, #fff, #d8d8d8);
