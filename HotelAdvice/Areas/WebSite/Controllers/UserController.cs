@@ -13,14 +13,21 @@ using PagedList;
 namespace HotelAdvice.Areas.WebSite.Controllers
 {
 
-
     public class UserController : Controller
     {
-        DAL db = new DAL();
+      
         const int defaultPageSize_userpage = 3;
         const int defaultPageSize_searchpage = 3;
         const int defaultPageSize_reviewpage = 4;
         
+        IDataRepository db;
+
+        public UserController(IDataRepository repo)
+        {
+            db = repo;
+        }
+
+
         [Authorize(Roles = "PublicUser")]
         public ActionResult Index(int ?page,string tab)
         {

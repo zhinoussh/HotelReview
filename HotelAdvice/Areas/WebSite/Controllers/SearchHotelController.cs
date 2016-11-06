@@ -13,8 +13,15 @@ namespace HotelAdvice.Areas.WebSite.Controllers
 {
     public class SearchHotelController : Controller
     {
-        DAL db = new DAL();
+        
         const int defaultPageSize = 3;
+
+        IDataRepository db;
+
+        public SearchHotelController(IDataRepository repo)
+        {
+            db = repo;
+        }
 
         [HttpGet]
         public ActionResult ShowSearchResult(int city_id)

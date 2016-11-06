@@ -12,7 +12,12 @@ namespace HotelAdvice.Areas.WebSite.Controllers
 {
     public class HomeController : Controller
     {
-        DAL db = new DAL();
+        IDataRepository db;
+
+        public HomeController(IDataRepository repo)
+        {
+            db = repo;
+        }
 
         public ActionResult myView()
         {
