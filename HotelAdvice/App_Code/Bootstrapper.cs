@@ -23,7 +23,7 @@ namespace HotelAdvice.App_Code
   
             // register all your components with the container here  
             //This is the important line to edit  
-            container.RegisterType<IDataRepository, DAL>();   
+            container.RegisterType<IDataRepository, DAL>(new ContainerControlledLifetimeManager());   
   
             RegisterTypes(container);  
             return container;  
