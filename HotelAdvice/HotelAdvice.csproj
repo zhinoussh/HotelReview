@@ -233,9 +233,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201611010530353_add_date_to_tblRating.cs" />
-    <Compile Include="Migrations\201611010530353_add_date_to_tblRating.Designer.cs">
-      <DependentUpon>201611010530353_add_date_to_tblRating.cs</DependentUpon>
+    <Compile Include="Migrations\201611121547446_alter_tbl_city.cs" />
+    <Compile Include="Migrations\201611121547446_alter_tbl_city.Designer.cs">
+      <DependentUpon>201611121547446_alter_tbl_city.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Config_ProjectDB.cs" />
@@ -480,8 +480,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201611010530353_add_date_to_tblRating.resx">
-      <DependentUpon>201611010530353_add_date_to_tblRating.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611121547446_alter_tbl_city.resx">
+      <DependentUpon>201611121547446_alter_tbl_city.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
