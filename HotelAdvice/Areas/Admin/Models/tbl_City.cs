@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HotelAdvice.Areas.Admin.Models
 {
@@ -19,7 +20,7 @@ namespace HotelAdvice.Areas.Admin.Models
         [StringLength(100)]
         public string CityName { get; set; }
 
-        [StringLength(1000)]
+        [Column(TypeName="varchar(MAX)")]
         public string CityAttractions { get; set; }
 
         public virtual ICollection<tbl_Hotel> Hotels { get; set; }
