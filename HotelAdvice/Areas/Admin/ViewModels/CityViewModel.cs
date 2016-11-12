@@ -17,7 +17,7 @@ namespace HotelAdvice.Areas.Admin.ViewModels
         [Required(ErrorMessage = "This field is required.")]
         public string cityName { get; set; }
 
-        [StringLength(500, ErrorMessage = "max length has been exceeded.")]
+        
         public string cityAttractions { get; set; }
 
         public int hotel_count { get; set; }
