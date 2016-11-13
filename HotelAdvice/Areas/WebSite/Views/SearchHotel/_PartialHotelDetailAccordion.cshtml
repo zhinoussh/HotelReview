@@ -1,9 +1,10 @@
 ﻿@using HotelAdvice.Areas.WebSite.ViewModels
 @model HotelDetailAccordionViewModel
 
-{@Layout=null;}
+@{Layout=null;}
 
-<div class="col-sm-9 col-xs-7  nopadding">
+
+<div class="col-xs-12 nopadding">
     <div class="panel-group" id="accordion">
 
         <!-- Panel General-->
@@ -96,6 +97,28 @@
                             <i class="glyphicon glyphicon-plane"></i> Distance from Airport:
                             @Html.DisplayFor(model => model.distance_airport) km
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel city decription-->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseCity">
+                        <i class="glyphicon glyphicon-map-marker"></i> Tourist Attraction of City <i class="indicator glyphicon glyphicon-chevron-up  pull-right"></i>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseCity" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="col-xs-12 nopadding">
+                        <strong> @Html.DisplayFor(model => model.CityName)</strong>
+                    </div>
+                    <div class="col-xs-12 nopadding top-buffer10 text-justify">
+
+                        @Html.DisplayFor(model => model.CityDescription)
                     </div>
                 </div>
             </div>

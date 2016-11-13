@@ -9,6 +9,10 @@ namespace HotelAdvice.Areas.WebSite.ViewModels
     public class HotelDetailAccordionViewModel
     {
 
+        public string CityName { get; set; }
+
+        public string CityDescription { get; set; }
+
         public string HotelAddress { get; set; }
 
         public string Tel { get; set; }

@@ -42,77 +42,79 @@
     <div class="col-xs-12 top-buffer10 nopadding">
 
         <!-- Accordion Hotel Details-->
-        @{Html.RenderPartial("_PartialHotelDetailPhoto", Model);}      
-        <!-- END Accordion Hotel Details-->
+        <div class="col-sm-9 col-xs-7 nopadding top-buffer20">
+            @{Html.RenderPartial("_PartialHotelDetailAccordion", Model.accordion_detail);}
+        </div>
+       <!-- END Accordion Hotel Details-->
 
-        <!-- User Actions-->
-        <div class="col-sm-3 col-xs-5 nopadding_right ">
-            <div class="col-xs-10 col-xs-offset-1 nopadding text-center">
+            <!-- User Actions-->
+            <div class="col-sm-3 col-xs-5 nopadding_right ">
+                <div class="col-xs-10 col-xs-offset-1 nopadding text-center">
 
-                <div class="col-xs-12 ">add this hotel to your wish list</div>
+                    <div class="col-xs-12 ">add this hotel to your wish list</div>
 
-                <div class="col-xs-12 nopadding top-buffer10">
+                    <div class="col-xs-12 nopadding top-buffer10">
 
-                    @using (Ajax.BeginForm("AddToFavorite_Detail", "User", new { hotel_id = Model.HotelId }
+                        @using (Ajax.BeginForm("AddToFavorite_Detail", "User", new { hotel_id = Model.HotelId }
                            , new AjaxOptions
                             {
                                 HttpMethod = "Post",
                                 OnSuccess = "SuccessAjax_AddFavorit"
                             }))
                     {
-                        @Html.AntiForgeryToken()
+                    @Html.AntiForgeryToken()
 
-                        <button class="btn btn-danger btn-responsive btn-block @(!(Model.is_favorite)?"btn-outline":"") "
-                                type="submit" title='@(Model.is_favorite ? "Remove from your wish list" : "Add to your wish list")'>
-                            <i class="fa fa-heart fa-lg"></i> Like it!
-                        </button>
+                    <button class="btn btn-danger btn-responsive btn-block @(!(Model.is_favorite)?"btn-outline":"") "
+                            type="submit" title='@(Model.is_favorite ? "Remove from your wish list" : "Add to your wish list")'>
+                        <i class="fa fa-heart fa-lg"></i> Like it!
+                    </button>
                     }
-                </div>
+                    </div>
 
 
-                <div class="col-xs-12 text-center top-buffer10 nopadding">
-                    <div class="col-xs-12 box-warning">
-                       <b>Quick Rating!</b><br />
-                       <div class="col-xs-12 nopadding">
-                            @using (Ajax.BeginForm("RateHotel","User", new AjaxOptions
+                    <div class="col-xs-12 text-center top-buffer10 nopadding">
+                        <div class="col-xs-12 box-warning">
+                            <b>Quick Rating!</b><br />
+                            <div class="col-xs-12 nopadding">
+                                @using (Ajax.BeginForm("RateHotel","User", new AjaxOptions
                             {
                                 HttpMethod = "Post",
                                 OnSuccess = "SuccessAjax_AddRating"
                             }))
                             {
-                                @Html.AntiForgeryToken()
+                        @Html.AntiForgeryToken()
 
-                                <div class="col-xs-12 nopadding">
-                                    @Html.HiddenFor(model => model.HotelId, new { id = "hotel_id", Name = "hotel_id" })
-                                    @Html.TextBoxFor(model => model.YourRating, new { @class = "YourRating", id = "your_rating", Name = "your_rating" })
-                                </div>   <div class="col-xs-12 nopadding top-buffer10">
-                                    <button class=" btn btn-warning btn-responsive btn-block " type="submit">
-                                        Send it!
-                                    </button>
-                                </div>
+                        <div class="col-xs-12 nopadding">
+                            @Html.HiddenFor(model => model.HotelId, new { id = "hotel_id", Name = "hotel_id" })
+                            @Html.TextBoxFor(model => model.YourRating, new { @class = "YourRating", id = "your_rating", Name = "your_rating" })
+                        </div>   <div class="col-xs-12 nopadding top-buffer10">
+                            <button class=" btn btn-warning btn-responsive btn-block " type="submit">
+                                Send it!
+                            </button>
+                        </div>
                             }
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xs-12 text-center top-buffer10 nopadding">
-                    <div class="col-xs-12 box-primary">
-                        Read all reviews<br />
-                        @Html.ActionLink(Model.review_num + " reviews", "Reviews", "User"
+                    <div class="col-xs-12 text-center top-buffer10 nopadding">
+                        <div class="col-xs-12 box-primary">
+                            Read all reviews<br />
+                            @Html.ActionLink(Model.review_num + " reviews", "Reviews", "User"
                             , new { Area = "WebSite", id = Model.HotelId }, new { target = "_blank" })
 
 
-                        <a role="button" class="btn btn-primary btn-responsive btn-block top-buffer20 "
-                           href="@Url.Action("Reviews", "User", new { id = Model.HotelId, Area = "WebSite" })">
-                            Review <i class="glyphicon glyphicon-pencil"></i>
-                        </a>
+                            <a role="button" class="btn btn-primary btn-responsive btn-block top-buffer20 "
+                               href="@Url.Action("Reviews", "User", new { id = Model.HotelId, Area = "WebSite" })">
+                                Review <i class="glyphicon glyphicon-pencil"></i>
+                            </a>
+                        </div>
+
+
                     </div>
 
 
                 </div>
 
-
             </div>
-
         </div>
-    </div>
 </div>

@@ -326,6 +326,8 @@ namespace HotelAdvice.App_Code
                                                is_favorite = (ww == null ? false : true),
                                                accordion_detail = new HotelDetailAccordionViewModel()
                                                {
+                                                   CityName=c.CityName,
+                                                   CityDescription=c.CityAttractions,
                                                    Description = h.Description,
                                                    checkin = h.checkin,
                                                    checkout = h.checkout,
