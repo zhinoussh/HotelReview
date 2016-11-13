@@ -1,11 +1,12 @@
 ﻿@using HotelAdvice.Areas.WebSite.ViewModels
 @model HotelPhotoAlbumViewModel
 
+{@Layout=null;}
 
 @if (Model.photos != null && Model.photos.Count > 0)
 {
     <!--Photo Slider -->
-    <div class="col-xs-12 well top-buffer10">
+    <div class="well">
         <div class=" col-xs-12 nopadding" id="slider">
             <!-- Top part of the slider -->
             <div class="row ">

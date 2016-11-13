@@ -205,6 +205,7 @@
     <Compile Include="Areas\WebSite\Models\tbl_WishList.cs" />
     <Compile Include="Areas\WebSite\ViewModels\CompareViewModel.cs" />
     <Compile Include="Areas\WebSite\ViewModels\DeleteReviewViewModel.cs" />
+    <Compile Include="Areas\WebSite\ViewModels\HotelDetailAccordionViewModel.cs" />
     <Compile Include="Areas\WebSite\ViewModels\HotelDetailViewModel.cs" />
     <Compile Include="Areas\WebSite\ViewModels\HotelPhotoAlbumViewModel.cs" />
     <Compile Include="Areas\WebSite\ViewModels\HotelReviewViewModel.cs" />
@@ -386,6 +387,7 @@
     <Content Include="Areas\WebSite\Views\User\_PartialYourReviewList.cshtml" />
     <Content Include="Areas\WebSite\Views\User\_PartialDeleteReview.cshtml" />
     <Content Include="Areas\WebSite\Views\SearchHotel\_PartialHotelDetailPhoto.cshtml" />
+    <Content Include="Areas\WebSite\Views\SearchHotel\_PartialHotelDetailAccordion.cshtml" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Scripts\fileinput.min.js" />
     <Content Include="Scripts\jquery-3.1.0.js" />

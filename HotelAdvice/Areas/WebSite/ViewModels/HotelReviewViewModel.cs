@@ -22,7 +22,6 @@ namespace HotelAdvice.Areas.WebSite.ViewModels
         public string Tel { get; set; }
 
         public float GuestRating { get; set; }
-        public int num_reviews { get; set; }
         public int rank_hotel { get; set; }
     }
 }

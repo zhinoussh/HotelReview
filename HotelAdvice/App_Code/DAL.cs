@@ -309,31 +309,34 @@ namespace HotelAdvice.App_Code
         {
             HotelDetailViewModel detail = (from h in db.tbl_Hotel.Where(x => x.HotelId == id)
                                            join c in db.tbl_city on h.CityId.Value equals (int?)c.CityId
-                                           join w in db.tbl_Wish_List.Where(x=>x.UserId==userId) 
+                                           join w in db.tbl_Wish_List.Where(x => x.UserId == userId)
                                            on h.HotelId equals w.HotelId into Wishist
-                                           join r in db.tbl_Rating.Where(x=>x.UserId==userId) 
+                                           join r in db.tbl_Rating.Where(x => x.UserId == userId)
                                            on h.HotelId equals r.HotelId into YourRating
                                            from ww in Wishist.DefaultIfEmpty()
                                            from rr in YourRating.DefaultIfEmpty()
                                            select new HotelDetailViewModel
                                            {
-                                               HotelId=h.HotelId,
+                                               HotelId = h.HotelId,
                                                HotelName = h.HotelName,
                                                HotelStars = h.HotelStars,
                                                CityName = c.CityName,
-                                               YourRating=(rr==null?0:rr.rating),
+                                               YourRating = (rr == null ? 0 : rr.rating),
                                                review_num = db.tbl_Rating.Count(x => x.HotelId == h.HotelId),
-                                               is_favorite=(ww==null?false:true),
-                                               Description = h.Description,
-                                               checkin = h.checkin,
-                                               checkout = h.checkout,
-                                               Tel = h.Tel,
-                                               Fax = h.Fax,
-                                               Website = h.Website,
-                                               Email = h.Email,
-                                               HotelAddress = h.HotelAddress,
-                                               distance_airport = h.distance_airport,
-                                               distance_citycenter = h.distance_citycenter
+                                               is_favorite = (ww == null ? false : true),
+                                               accordion_detail = new HotelDetailAccordionViewModel()
+                                               {
+                                                   Description = h.Description,
+                                                   checkin = h.checkin,
+                                                   checkout = h.checkout,
+                                                   Tel = h.Tel,
+                                                   Fax = h.Fax,
+                                                   Website = h.Website,
+                                                   Email = h.Email,
+                                                   HotelAddress = h.HotelAddress,
+                                                   distance_airport = h.distance_airport,
+                                                   distance_citycenter = h.distance_citycenter
+                                               }
                                            }).FirstOrDefault();
 
             string rating_avg="0";
@@ -347,19 +350,19 @@ namespace HotelAdvice.App_Code
 
             detail.photos = new HotelPhotoAlbumViewModel { HotelName=detail.HotelName,photos=photo_list};
 
-            detail.rooms  = (from r in db.tbl_Hotel_Rooms.Where(x => x.HotelID == id)
+            detail.accordion_detail.rooms = (from r in db.tbl_Hotel_Rooms.Where(x => x.HotelID == id)
                                      join t in db.tbl_Room_Type on r.RoomTypeID equals t.RoomTypeID
                                      select t.Room_Type).ToList();
 
-            detail.restaurants = (from r in db.tbl_Hotel_Restaurants.Where(x => x.HotelID == id)
+            detail.accordion_detail.restaurants = (from r in db.tbl_Hotel_Restaurants.Where(x => x.HotelID == id)
                             join t in db.tbl_Restaurant on r.RestaurantID equals t.RestaurantID
                             select t.RestaurantName).ToList();
 
-            detail.sightseeing = (from r in db.tbl_Hotel_Sightseeings.Where(x => x.HotelID == id)
+            detail.accordion_detail.sightseeing = (from r in db.tbl_Hotel_Sightseeings.Where(x => x.HotelID == id)
                                   join t in db.tbl_Sightseeing on r.SightseeingID equals t.SightseeingID
                                   select t.Sightseeing_Type).ToList();
 
-            detail.amenities = get_hotel_amenities(id);
+            detail.accordion_detail.amenities = get_hotel_amenities(id);
 
             return detail;
             
@@ -738,7 +741,6 @@ namespace HotelAdvice.App_Code
                                                Address = h.HotelAddress,
                                                CityId=c.CityId,
                                                CityName=c.CityName,
-                                               num_reviews=db.tbl_Rating.Count(x=>x.HotelId==hotelId),
                                                Website = h.Website,
                                                Email = h.Email,
                                                Tel=h.Tel,
@@ -753,7 +755,7 @@ namespace HotelAdvice.App_Code
 
             //**********set scoreviewModel*************/
             ScoreViewModel scores = new ScoreViewModel();
-            scores.num_reviews = detail.num_reviews;
+            scores.num_reviews = db.tbl_Rating.Count(x=>x.HotelId==hotelId);
             scores.avg_total_rating = detail.GuestRating;
             scores.avg_Cleanliness_rating = (float)Math.Round(db.tbl_Rating.Where(x => x.HotelId == hotelId).Average(x => (float?)x.Cleanliness_rating) ?? 0, 1);
             scores.avg_Comfort_rating = (float)Math.Round(db.tbl_Rating.Where(x => x.HotelId == hotelId).Average(x => (float?)x.Comfort_rating) ?? 0,1);

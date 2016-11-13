@@ -9,7 +9,6 @@ namespace HotelAdvice.Areas.WebSite.ViewModels
 {
     public class HotelDetailViewModel
     {
-        
         public int HotelId { get; set; }
         public string HotelName { get; set; }
 
@@ -21,36 +20,12 @@ namespace HotelAdvice.Areas.WebSite.ViewModels
 
         public bool is_favorite { get; set; }
 
-        public string HotelAddress { get; set; }
-
-        public string Tel { get; set; }
-
-        public string Fax { get; set; }
-
-        public string Email { get; set; }
-
-        public string Website { get; set; }
         public int HotelStars { get; set; }
-
-
-        public string Description { get; set; }
-
-        public string checkin { get; set; }
-
-        public string checkout { get; set; }
-
-        public double? distance_citycenter { get; set; }
-
-        public double? distance_airport { get; set; }
 
         public string CityName { get; set; }
 
-        public List<String> restaurants { get; set; }
-
-        public List<String> rooms { get; set; }
-
-        public List<AmenityViewModel> amenities { get; set; }
-        public List<String> sightseeing { get; set; }
+        public HotelDetailAccordionViewModel accordion_detail { get; set; }
+     
         public HotelPhotoAlbumViewModel photos { get; set; }
 
     }
