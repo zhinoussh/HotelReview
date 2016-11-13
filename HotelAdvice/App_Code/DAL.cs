@@ -746,6 +746,7 @@ namespace HotelAdvice.App_Code
                                                Website = h.Website,
                                                Email = h.Email,
                                                Tel=h.Tel,
+                                               num_reviews=db.tbl_Rating.Count(x=>x.HotelId==hotelId),
                                                hotel_count_city = db.tbl_Hotel.Count(m => m.CityId == c.CityId),
                                                GuestRating = (float)Math.Round(db.tbl_Rating.Where(x => x.HotelId == h.HotelId).Average(x => (float?)x.rating) ?? 0, 1)
                                            }).FirstOrDefault();
@@ -757,7 +758,7 @@ namespace HotelAdvice.App_Code
 
             //**********set scoreviewModel*************/
             ScoreViewModel scores = new ScoreViewModel();
-            scores.num_reviews = db.tbl_Rating.Count(x=>x.HotelId==hotelId);
+            scores.num_reviews = detail.num_reviews;
             scores.avg_total_rating = detail.GuestRating;
             scores.avg_Cleanliness_rating = (float)Math.Round(db.tbl_Rating.Where(x => x.HotelId == hotelId).Average(x => (float?)x.Cleanliness_rating) ?? 0, 1);
             scores.avg_Comfort_rating = (float)Math.Round(db.tbl_Rating.Where(x => x.HotelId == hotelId).Average(x => (float?)x.Comfort_rating) ?? 0,1);

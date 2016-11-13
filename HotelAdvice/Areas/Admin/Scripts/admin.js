@@ -120,7 +120,7 @@ function SetUp_AddHotel() {
         allowedFileExtensions: ["jpg", "png", "gif"],
         browseOnZoneClick: true,
         showZoom: false
-        , deleteUrl: '/Admin/Hotel/DeleteImage/',
+        , deleteUrl: 'http://Admin/Hotel/DeleteMainImage/'
 
     });
 

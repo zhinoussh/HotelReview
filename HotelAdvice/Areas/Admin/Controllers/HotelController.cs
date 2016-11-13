@@ -95,8 +95,6 @@ namespace HotelAdvice.Areas.Admin.Controllers
                     vm.rooms = string.Join(",", lst_room.Select(x => x.Room_Type));
                 }
 
-                //add amenities
-               
 
                 //add sightseeings
                 List<tbl_sightseeing> lst_sightseeing = db.get_hotel_sightseeings(HotelId);
@@ -114,7 +112,6 @@ namespace HotelAdvice.Areas.Admin.Controllers
             return PartialView("_PartialAddHotel", vm);
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult ADD_New_Hotel(HotelViewModel Hotel)
@@ -124,17 +121,38 @@ namespace HotelAdvice.Areas.Admin.Controllers
                 Hotel.distance_citycenter = Hotel.distance_citycenter!=null ?Hotel.distance_citycenter : 0;
                 Hotel.distance_airport = Hotel.distance_airport!=null ? Hotel.distance_airport : 0;
 
+                string original_hotel_name ="";
+                if(Hotel.HotelId!=0)
+                    original_hotel_name = db.get_hotel_byId(Hotel.HotelId).HotelName;
+
+                //save hotel
                 db.add_hotel(Hotel);
 
+                //set a folder for hotel
+                string hotel_dir = Server.MapPath(@"~\Upload\" + Hotel.HotelName);
+                if (Hotel.HotelId == 0)
+                {
+                    if (!Directory.Exists(hotel_dir))
+                        Directory.CreateDirectory(hotel_dir);
+                }
+                //this is edit
+                else
+                {
+                    if (original_hotel_name.ToLower() != Hotel.HotelName.ToLower())
+                    {
+                        string pre_hotel_dir = Server.MapPath(@"~\Upload\" + original_hotel_name);
+                        Directory.Move(pre_hotel_dir, hotel_dir);
+                    }
+                }
+
+                //save image
                 if (Hotel.PhotoFile != null)
                 {
                     HttpPostedFileBase file = Hotel.PhotoFile;
-                    string hotel_dir = Server.MapPath(@"~\Upload\" + Hotel.HotelName);
-                    if (!Directory.Exists(hotel_dir))
-                        Directory.CreateDirectory(hotel_dir);
                     var filename = file.FileName;
                     file.SaveAs(hotel_dir + "\\main.jpg");
                 }
+
                 return Json(new { msg = "The Hotel inserted successfully.", ctrl = "/Admin/Hotel", cur_pg = Hotel.CurrentPage, filter = Hotel.CurrentFilter + "" });
             }
             else
@@ -183,6 +201,13 @@ namespace HotelAdvice.Areas.Admin.Controllers
             vm.HotelId = id;
 
             return View(vm);
+        }
+      
+        [HttpPost]
+        public ActionResult DeleteMainImage(HotelImagesViewModel vm, int hotel_ID)
+        {
+            
+            return Json(new { msg = "images were uploaded successfully!" });
         }
 
 
