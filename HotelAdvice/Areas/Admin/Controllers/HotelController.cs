@@ -182,13 +182,16 @@ namespace HotelAdvice.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete_Hotel(HotelViewModel Hotel)
         {
-            string hotel_dir = Server.MapPath(@"~\Upload\" + Hotel.HotelName);
+            string hotelName = db.get_hotel_byId(Hotel.HotelId).HotelName;
+            if (!String.IsNullOrEmpty(hotelName))
+            {
+                string hotel_dir = Server.MapPath(@"~\Upload\" + hotelName);
 
-            db.delete_hotel(Hotel.HotelId);
+                db.delete_hotel(Hotel.HotelId);
 
-            if(Directory.Exists(hotel_dir))
-                Directory.Delete(hotel_dir,true);
-
+                if (Directory.Exists(hotel_dir))
+                    Directory.Delete(hotel_dir, true);
+            }
             return Json(new { msg = "Row is deleted successfully!", ctrl = "/Admin/Hotel", cur_pg = Hotel.CurrentPage, filter = Hotel.CurrentFilter + "" });
         }
 
