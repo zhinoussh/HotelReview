@@ -33,70 +33,9 @@
     </div>
 
 
-@if (Model.photos!=null && Model.photos.Count > 0)
-                    {
-    <!--Photo Slider -->
-    <div class="col-xs-12 well top-buffer10">
-        <div class=" col-xs-12 nopadding" id="slider">
-            <!-- Top part of the slider -->
-            <div class="row ">
-                <div class="col-xs-8 col-xs-offset-2" id="carousel-bounding-box">
-                    <div class="carousel slide" id="myCarousel">
-                        <!-- Carousel items -->
-                        <div class="carousel-inner">
-
-                     
-                                <div class="active item" data-slide-number="0">
-                                    <img src='@Url.Content("../../../Upload/"+Model.HotelName+"/" + Model.photos[0])'>
-                                </div>
-                    
-                            @for (int i = 1; i < Model.photos.Count; i++)
-                    {
-                                <div class="item" data-slide-number="@i">
-                                    <img src='@Url.Content("../../../Upload/" + Model.HotelName + "/" + Model.photos[i])'>
-                                </div>
-                    }
-
-                        </div><!-- Carousel nav -->
-                        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                            <span class="glyphicon glyphicon-chevron-left"></span>
-                        </a>
-                        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                            <span class="glyphicon glyphicon-chevron-right"></span>
-                        </a>
-                    </div>
-                </div>
+    @{Html.RenderPartial("_PartialHotelDetailPhoto", Model.photos);}
 
 
-            </div>
-        </div>
-
-        <div class="row hidden-xs" id="slider-thumbs">
-            <div class=" col-xs-12 top-buffer10">
-                <!-- Bottom switcher of slider -->
-                <ul class=" hide-bullets">
-                    @for (int i = 1; i < Model.photos.Count; i++)
-            {
-
-                        <li class="col-xs-2">
-                            <a class="thumbnail" id="@String.Format("carousel-selector-{0}",@i)"><img src='@Url.Content("../../../Upload/" + Model.HotelName + "/" + Model.photos[i])'></a>
-                        </li>
-            }
-
-                </ul>
-            </div>
-        </div>
-    </div>
-
-                    }
-else
-{
-    <div class="col-xs-12 top-buffer20 nopadding_left" >
-        <div class="well well-sm well_noResult">
-            No Photo is available.
-        </div>
-    </div>
-}
     <div class="col-xs-12 top-buffer10 nopadding">
 
         <!-- Accordion Hotel Details-->

@@ -51,7 +51,7 @@ namespace HotelAdvice.Areas.WebSite.ViewModels
 
         public List<AmenityViewModel> amenities { get; set; }
         public List<String> sightseeing { get; set; }
-        public List<String> photos { get; set; }
+        public HotelPhotoAlbumViewModel photos { get; set; }
 
     }
 }

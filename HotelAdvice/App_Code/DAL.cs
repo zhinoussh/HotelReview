@@ -343,7 +343,9 @@ namespace HotelAdvice.App_Code
 
             detail.GuestRating = float.Parse(rating_avg);
 
-            detail.photos = db.tbl_Hotel_Photo.Where(x => x.HotelID == id).Select(x => x.photo_name).ToList<String>();
+            List<string> photo_list = db.tbl_Hotel_Photo.Where(x => x.HotelID == id).Select(x => x.photo_name).ToList<String>();
+
+            detail.photos = new HotelPhotoAlbumViewModel { HotelName=detail.HotelName,photos=photo_list};
 
             detail.rooms  = (from r in db.tbl_Hotel_Rooms.Where(x => x.HotelID == id)
                                      join t in db.tbl_Room_Type on r.RoomTypeID equals t.RoomTypeID
