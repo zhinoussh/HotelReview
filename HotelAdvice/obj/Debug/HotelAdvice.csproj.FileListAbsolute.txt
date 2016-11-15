@@ -131,4 +131,3 @@ D:\Git_repos\HowtlReview\HotelAdvice\bin\Microsoft.Practices.Unity.xml
 D:\Git_repos\HowtlReview\HotelAdvice\bin\Microsoft.Practices.Unity.Configuration.xml
 D:\Git_repos\HowtlReview\HotelAdvice\bin\Microsoft.Practices.Unity.Mvc.xml
 D:\Git_repos\HowtlReview\HotelAdvice\bin\Microsoft.Practices.Unity.RegistrationByConvention.xml
-D:\Git_repos\HowtlReview\HotelAdvice\obj\Debug\HotelAdvice.csprojResolveAssemblyReference.cache

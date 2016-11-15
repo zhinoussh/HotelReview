@@ -19,10 +19,7 @@ namespace HotelAdvice.Areas.WebSite.Controllers
             db = repo;
         }
 
-        public ActionResult myView()
-        {
-            return View();
-        }
+    
         public ActionResult Index(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;

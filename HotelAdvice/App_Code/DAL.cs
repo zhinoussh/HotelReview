@@ -848,9 +848,39 @@ namespace HotelAdvice.App_Code
 
         #region Home Page
 
-        public List<HotelSearchViewModel> Search_Hotels_in_city(int city_id,string userId)
+        public List<HotelSearchViewModel> Search_Hotels_in_city(int city_id, string userId)
         {
             List<HotelSearchViewModel> lst_result = (from h in db.tbl_Hotel.Where(x => x.CityId == city_id)
+                                                     join w in db.tbl_Wish_List.Where(x => x.UserId == userId)
+                                                     on h.HotelId equals w.HotelId into WishList
+                                                     from ww in WishList.DefaultIfEmpty()
+                                                     select new HotelSearchViewModel
+                                                     {
+                                                         HotelId = h.HotelId,
+                                                         HotelName = h.HotelName,
+                                                         Website = h.Website,
+                                                         HotelStars = h.HotelStars,
+                                                         Description = h.Description,
+                                                         distance_citycenter = h.distance_citycenter,
+                                                         num_reviews = db.tbl_Rating.Count(x => x.HotelId == h.HotelId),
+                                                         is_favorite = (ww == null ? false : true),
+                                                         GuestRating = db.tbl_Rating.Where(x => x.HotelId == h.HotelId).Average(x => (float?)x.rating) ?? 0
+                                                     }).ToList();
+
+
+            return lst_result;
+        }
+
+        public List<HotelSearchViewModel> Advanced_Search(AdvancedSearchViewModel vm, string userId)
+        {
+            List<HotelSearchViewModel> lst_result = (from h in db.tbl_Hotel.Where
+                                                         (
+                                                            x => (vm.selected_city==0 || x.CityId == vm.selected_city)
+                                                         && (String.IsNullOrEmpty(vm.Hotel_Name) || x.HotelName.Contains(vm.Hotel_Name))
+                                                         && (String.IsNullOrEmpty(vm.hotel_stars) || vm.hotel_stars.Contains(x.HotelStars + ""))
+                                                         && x.distance_airport <= vm.distance_airport
+                                                         && x.distance_citycenter <= vm.distance_city_center
+                                                         )
                                                      join w in db.tbl_Wish_List.Where(x => x.UserId == userId)
                                                      on h.HotelId equals w.HotelId into WishList
                                                      from ww in WishList.DefaultIfEmpty()
@@ -865,7 +895,9 @@ namespace HotelAdvice.App_Code
                                                             num_reviews = db.tbl_Rating.Count(x => x.HotelId == h.HotelId),
                                                             is_favorite=(ww==null?false:true),
                                                             GuestRating = db.tbl_Rating.Where(x => x.HotelId == h.HotelId).Average(x => (float?)x.rating) ?? 0
-                                                        }).ToList();
+                                                        })
+                                                        .Where(x=>x.GuestRating>= vm.Min_Guest_Rating && x.GuestRating<=vm.Max_Guest_Rating)
+                                                        .ToList();
 
 
             return lst_result;

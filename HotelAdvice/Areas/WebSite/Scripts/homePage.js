@@ -153,7 +153,6 @@ function showDeleteModalReview() {
 }
 
 $(document).ajaxComplete(function () {
-
     Set_Rating_Plugins();
 });
 
@@ -427,6 +426,23 @@ var Success_paging_Results = function (result) {
    scroll_to_top();
 }
 
+var SccessAjax_AdvancedSearch = function (result) {
+    var hotelName = result.searchriteria.Hotel_Name;
+    var city = result.searchriteria.selected_city;
+    var Star1 = result.searchriteria.Star1;
+    var Star2 = result.searchriteria.Star2;
+    var Star3 = result.searchriteria.Star3;
+    var Star4 = result.searchriteria.Star4;
+    var Star5 = result.searchriteria.Star5;
+    var score = result.searchriteria.Guest_Rating;
+    var center = result.searchriteria.distance_city_center;
+    var airport = result.searchriteria.distance_airport;
+ 
+    var search_url = "/Website/SearchHotel/ShowSearchResult?HoteName=" + hotelName + "&cityId=" + city + "&score=" + score + "&center=" + center + "&airport=" + airport
+        + "&Star1=" + Star1 + "&Star2=" + Star2 + "&Star3=" + Star3 + "&Star4=" + Star4 + "&Star5=" + Star5 ;
+    location.href = search_url;
+
+}
 var scroll_to_top = function () {
     $('html, body').animate({ scrollTop: 0 }, 600);
 }

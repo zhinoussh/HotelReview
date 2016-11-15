@@ -20,6 +20,8 @@ namespace HotelAdvice.Areas.WebSite.ViewModels
 
         [Display(Name = "Guest Rating")]
         public string Guest_Rating { get; set; }
+        public float Min_Guest_Rating { get; set; }
+        public float Max_Guest_Rating { get; set; }
 
         [Display(Name = "Amenities")]
         public List<AmenityViewModel> lst_amenity { get; set; }
@@ -42,5 +44,6 @@ namespace HotelAdvice.Areas.WebSite.ViewModels
         public bool Star3 { get; set; }
         public bool Star4 { get; set; }
         public bool Star5 { get; set; }
+        public string hotel_stars { get; set; }
     }
 }

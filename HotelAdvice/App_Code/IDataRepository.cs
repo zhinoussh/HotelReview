@@ -114,6 +114,7 @@ namespace HotelAdvice.App_Code
 
         List<HotelSearchViewModel> Search_Hotels_in_city(int city_id, string userId);
 
+        List<HotelSearchViewModel> Advanced_Search(AdvancedSearchViewModel vm, string userId);
 
         #endregion Home Page
     }

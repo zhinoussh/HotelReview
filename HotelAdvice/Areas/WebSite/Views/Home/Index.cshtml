@@ -96,7 +96,7 @@
             {
                 <li class="list-group-item text-center">
                     <span class="badge badge-city pull-left hidden-xs">@item.hotel_count</span>
-                        @Html.ActionLink(item.cityName, "ShowSearchResult", "SearchHotel", new { city_id = @item.cityID }, null)
+                        @Html.ActionLink(item.cityName, "ShowSearchResult", "SearchHotel", new { cityId = @item.cityID,citySearch=true }, null)
                 </li>
             }
         </ul>

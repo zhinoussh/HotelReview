@@ -3,12 +3,10 @@
     Layout=null;
 }
 
-@using(Ajax.BeginForm("Advanced_Search", "SearchHotel", null, new AjaxOptions
+@using (Ajax.BeginForm("Advanced_Search", "SearchHotel", null, new AjaxOptions
     {
-        HttpMethod = "Get",
-        OnSuccess = "Success_Advanced_Search"
-        ,
-        InsertionMode = InsertionMode.ReplaceWith
+        HttpMethod = "Get"
+        ,OnSuccess="SccessAjax_AdvancedSearch"
     }))
 {
 <div class="well advanced_search col-xs-12">
@@ -27,7 +25,7 @@
 
     <div class="checkbox checkbox-info">
         @Html.HiddenFor(model => model.Star5, new { id = "hd_star5" })
-        <input type="checkbox" id="checkbox_star5" onchange="checkbox_Checked('5')">
+        <input type="checkbox" id="checkbox_star5" onchange="checkbox_Checked('5')" checked="@Model.Star5">
         <label for="checkbox_star5">
             <i class="fa fa-star fa-star-search fa-lg"></i><i class="fa fa-star fa-star-search fa-lg"></i><i class="fa fa-star fa-star-search fa-lg"></i><i class="fa fa-star fa-star-search fa-lg"></i><i class="fa fa-star fa-star-search fa-lg"></i>
         </label>
@@ -35,7 +33,7 @@
 
     <div class="checkbox checkbox-info">
         @Html.HiddenFor(model => model.Star4, new { id = "hd_star4" })
-        <input type="checkbox" id="checkbox_star4" onchange="checkbox_Checked('4')">
+        <input type="checkbox" id="checkbox_star4" onchange="checkbox_Checked('4')" checked="@Model.Star4">
         <label for="checkbox_star4">
             <i class="fa fa-star fa-star-search fa-lg"></i><i class="fa fa-star fa-star-search fa-lg"></i><i class="fa fa-star fa-star-search fa-lg"></i><i class="fa fa-star fa-star-search fa-lg"></i>
         </label>
@@ -44,14 +42,14 @@
 
     <div class="checkbox checkbox-info">
         @Html.HiddenFor(model => model.Star3, new { id = "hd_star3" })
-        <input type="checkbox" id="checkbox_star3" onchange="checkbox_Checked('3')">
+        <input type="checkbox" id="checkbox_star3" onchange="checkbox_Checked('3')" checked="@Model.Star3">
         <label for="checkbox_star3">
             <i class="fa fa-star fa-star-search fa-lg"></i><i class="fa fa-star fa-star-search fa-lg"></i><i class="fa fa-star fa-star-search fa-lg"></i>
         </label>
     </div>
     <div class="checkbox checkbox-info">
         @Html.HiddenFor(model => model.Star2, new { id = "hd_star2" })
-        <input type="checkbox" id="checkbox_star2" onchange="checkbox_Checked('2')">
+        <input type="checkbox" id="checkbox_star2" onchange="checkbox_Checked('2')" checked="@Model.Star2">
         <label for="checkbox_star2">
             <i class="fa fa-star fa-star-search fa-lg"></i><i class="fa fa-star fa-star-search fa-lg"></i>
         </label>
@@ -59,7 +57,7 @@
 
     <div class="checkbox checkbox-info">
         @Html.HiddenFor(model => model.Star1, new { id = "hd_star1" })
-        <input type="checkbox" id="checkbox_star1" onchange='checkbox_Checked("1")'>
+        <input type="checkbox" id="checkbox_star1" onchange="checkbox_Checked('1')" checked="@Model.Star1">
         <label for="checkbox_star1">
             <i class="fa fa-star fa-star-search fa-lg"></i>
         </label>
@@ -121,8 +119,8 @@
     </div>
 
     <div class="col-xs-12 top-buffer20">
-        <button class="btn btn-primary btn-block btn-responsive" type="submit"> 
+        <button class="btn btn-primary btn-block btn-responsive" type="submit">
         <span class="glyphicon glyphicon-search"></span> Search Hotels</button>
     </div>
 </div> @*END of WELL*@
-}
+ } 

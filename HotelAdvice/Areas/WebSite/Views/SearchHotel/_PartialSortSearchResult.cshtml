@@ -13,19 +13,47 @@
 
         <div class="col-sm-4 col-xs-12 " >
 
-            @Ajax.ActionLink("Distance", "HotelResults", new { Area = "WebSite", sort = "distance", page = Request["page"], city_id = Request["city_id"] }
+            @Ajax.ActionLink("Distance", "HotelResults", new
+       {
+           Area = "WebSite",
+           sort = "distance",
+           page = Request["page"],
+           cityId = Request["cityId"],
+           HotelName = Request["HotelName"],
+           center = Request["center"],
+           airport = Request["airport"],
+           Star1 = Request["Star1"],
+           Star2 = Request["Star2"],
+           Star3 = Request["Star3"],
+           Star4 = Request["Star4"],
+           Star5 = Request["Star5"]
+       }
             , new AjaxOptions
             {
                 HttpMethod = "GET",
                 UpdateTargetId = "table_container",
                 InsertionMode = InsertionMode.Replace
-            }, new { @class = "btn btn-sort btn-responsive btn-block", title = "Hotels located closest to Downtown",style="max-width:100%" })
+            }, new { @class = "btn btn-sort btn-responsive btn-block", title = "Hotels located closest to Downtown", style = "max-width:100%" })
 
         </div>
 
         <div class="col-sm-4 col-xs-12 ">
 
-            @Ajax.ActionLink("Guest Rating", "HotelResults", new { Area = "WebSite", sort = "rating", page = Request["page"], city_id = Request["city_id"] }
+            @Ajax.ActionLink("Guest Rating", "HotelResults", new
+       {
+           Area = "WebSite",
+           sort = "rating",
+           page = Request["page"],
+           cityId = Request["cityId"],
+           HotelName = Request["HotelName"],
+           center = Request["center"],
+           airport = Request["airport"],
+           Star1 = Request["Star1"],
+           Star2 = Request["Star2"],
+           Star3 = Request["Star3"],
+           Star4 = Request["Star4"],
+           Star5 = Request["Star5"]
+       }
             , new AjaxOptions
             {
                 HttpMethod = "GET",
@@ -41,7 +69,21 @@
            
             <ul class="dropdown-menu dropdown-menu-sort" role="menu">
                 <li>
-                        @Ajax.ActionLink("5 to 1 Stars", "HotelResults", new { Area = "WebSite", sort = "5to1", page = Request["page"], city_id = Request["city_id"] }
+                        @Ajax.ActionLink("5 to 1 Stars", "HotelResults", new
+                   {
+                       Area = "WebSite",
+                       sort = "5to1",
+                       page = Request["page"],
+                       cityId = Request["cityId"],
+                       HotelName = Request["HotelName"],
+                       center = Request["center"],
+                       airport = Request["airport"],
+                       Star1 = Request["Star1"],
+                       Star2 = Request["Star2"],
+                       Star3 = Request["Star3"],
+                       Star4 = Request["Star4"],
+                       Star5 = Request["Star5"]
+                   }
                     , new AjaxOptions
                     {
                         HttpMethod = "GET",
@@ -51,7 +93,21 @@
                 </li>
                 <li>
 
-                    @Ajax.ActionLink("1 to 5 Stars", "HotelResults", new { Area = "WebSite", sort = "1to5", page = Request["page"], city_id = Request["city_id"] }
+                    @Ajax.ActionLink("1 to 5 Stars", "HotelResults", new
+               {
+                   Area = "WebSite",
+                   sort = "1to5",
+                   page = Request["page"],
+                   cityId = Request["cityId"],
+                   HotelName = Request["HotelName"],
+                   center = Request["center"],
+                   airport = Request["airport"],
+                   Star1 = Request["Star1"],
+                   Star2 = Request["Star2"],
+                   Star3 = Request["Star3"],
+                   Star4 = Request["Star4"],
+                   Star5 = Request["Star5"]
+               }
                     , new AjaxOptions
                     {
                         HttpMethod = "GET",
