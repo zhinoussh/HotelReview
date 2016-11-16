@@ -191,9 +191,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\Bootstrapper.cs" />
-    <Compile Include="App_Code\DAL.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="DataAccessLayer\DataRepository.cs" />
     <Compile Include="App_Code\DateTimeClass.cs" />
-    <Compile Include="App_Code\IDataRepository.cs" />
+    <Compile Include="DataAccessLayer\IDataRepository.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Areas\WebSite\Controllers\UserController.cs" />
@@ -233,6 +234,8 @@
     <Compile Include="Areas\WebSite\ViewModels\UserPageViewModel.cs" />
     <Compile Include="Controllers\HtmlHelpers.cs" />
     <Compile Include="Areas\Account\Controllers\ManageController.cs" />
+    <Compile Include="DataAccessLayer\IServiceLayer.cs" />
+    <Compile Include="DataAccessLayer\ServiceLayer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

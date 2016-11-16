@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using HotelAdvice.Models;
 using HotelAdvice.Areas.WebSite.ViewModels;
 using HotelAdvice.Areas.Admin.ViewModels;
-using HotelAdvice.App_Code;
+using HotelAdvice.DataAccessLayer;
+using HotelAdvice.Controllers;
 
 namespace HotelAdvice.Areas.WebSite.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        IDataRepository db;
 
-        public HomeController(IDataRepository repo)
+        public HomeController(IServiceLayer service)
+            : base(service)
         {
-            db = repo;
         }
 
     
@@ -24,7 +21,7 @@ namespace HotelAdvice.Areas.WebSite.Controllers
         {
             ViewBag.ReturnUrl = returnUrl;
             HomeViewModel vm = new HomeViewModel();
-            vm.lst_city = db.get_cities().OrderBy(x=>x.cityName).ToList();
+            vm.lst_city = DataService.get_cities().OrderBy(x=>x.cityName).ToList();
 
            // List<CityViewModel> search_city=vm.lst_city;
            // search_city.Add(new CityViewModel{cityID=0,cityName="Select City"});
@@ -40,7 +37,7 @@ namespace HotelAdvice.Areas.WebSite.Controllers
         [HttpPost]
         public JsonResult SearchList(string Prefix)
         {
-            List<CityViewModel> cityList = db.get_cities();
+            List<CityViewModel> cityList = DataService.get_cities();
 
             var result = cityList.Where(x => x.cityName.ToLower().Contains(Prefix.ToLower()))
                 .Select(x => new { CName=x.cityName,CID=x.cityID}).ToList();
@@ -51,7 +48,7 @@ namespace HotelAdvice.Areas.WebSite.Controllers
         private AdvancedSearchViewModel Set_Advanced_Search()
         {
             AdvancedSearchViewModel vm_search = new AdvancedSearchViewModel();
-           List<CityViewModel> lst_city=db.get_cities().OrderBy(x=>x.cityName).ToList();
+           List<CityViewModel> lst_city=DataService.get_cities().OrderBy(x=>x.cityName).ToList();
             List<CityViewModel> search_city = lst_city;
             search_city.Add(new CityViewModel { cityID = 0, cityName = "Select City" });
             vm_search.City_List = new SelectList(search_city, "cityID", "cityName");
@@ -71,7 +68,7 @@ namespace HotelAdvice.Areas.WebSite.Controllers
             vm_search.distance_city_center = 0;
             vm_search.distance_airport = 0;
 
-            vm_search.lst_amenity = db.get_Amenities();
+            vm_search.lst_amenity = DataService.get_Amenities();
 
             return vm_search;
         }

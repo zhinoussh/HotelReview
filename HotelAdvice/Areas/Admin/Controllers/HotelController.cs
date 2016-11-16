@@ -8,56 +8,33 @@ using HotelAdvice.Areas.Admin.ViewModels;
 using HotelAdvice.Areas.Admin.Models;
 using PagedList;
 using System.IO;
+using HotelAdvice.Controllers;
+using HotelAdvice.DataAccessLayer;
 
 namespace HotelAdvice.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Administrator")]
-    public class HotelController : Controller
+    public class HotelController : BaseController
     {
-        private const int defaultPageSize = 10;
-       
-         IDataRepository db;
-
-         public HotelController(IDataRepository repo)
+        
+        public HotelController(IServiceLayer service)
+            : base(service)
         {
-            db = repo;
+
         }
 
         #region Hotel
 
         // GET: Hotel
-        public ActionResult Index(int? page,string filter=null)
+        public ActionResult Index(int? page, string filter = null)
         {
-
             ViewBag.filter = filter;
-            int currentPageIndex = page.HasValue ? page.Value : 1;
-            List<HotelViewModel> lst_hotels = db.get_hotels();
-            if (!String.IsNullOrEmpty(filter))
-            {
-                filter= filter.ToLower();
-                lst_hotels = lst_hotels.Where(x =>
-                                          (x.HotelName.ToLower().Contains(filter))
-                                          ||
-                                          (x.CityName.ToLower().Contains(filter))
-                                          ||
-                                          (!String.IsNullOrEmpty(x.Description) && x.Description.ToLower().Contains(filter))).ToList();
-            }
 
-            //sort and set row number
-            lst_hotels = lst_hotels.OrderBy(x => x.HotelName).Select((x, index) => new HotelViewModel
-            {
-                    RowNum=index+1,
-                    HotelId = x.HotelId,
-                    HotelName = x.HotelName,
-                    CityName = x.CityName,
-                    HotelStars = x.HotelStars
-                }).ToList();
-
-           IPagedList paged_list = lst_hotels.ToPagedList(currentPageIndex, defaultPageSize);
+            IPagedList paged_list_hotels = DataService.Get_HotelList(page, filter);
 
             return Request.IsAjaxRequest()
-                ? (ActionResult)PartialView("_PartialHotelList", paged_list)
-                : View(paged_list);
+                ? (ActionResult)PartialView("_PartialHotelList", paged_list_hotels)
+                : View(paged_list_hotels);
         }
 
         [HttpGet]
@@ -67,13 +44,13 @@ namespace HotelAdvice.Areas.Admin.Controllers
             int HotelId = Int32.Parse(id == null ? "0" : id + "");
             vm.HotelId = HotelId;
 
-            List<CityViewModel> cities = db.get_cities();
+            List<CityViewModel> cities = DataService.get_cities();
             vm.CityId = cities.First().cityID;
             vm.imgPath = "/images/empty.gif?" + DateTime.Now.ToString("ddMMyyyyhhmmsstt") ;
             //this is edit
             if (HotelId != 0)
             {
-                vm = db.get_hotel_byId(HotelId);
+                vm = DataService.get_hotel_byId(HotelId);
                
                 string path= "/Upload/" + vm.HotelName + "/main.jpg";
                 if (System.IO.File.Exists(Server.MapPath(@path)))
@@ -82,14 +59,14 @@ namespace HotelAdvice.Areas.Admin.Controllers
                     vm.imgPath = "/images/empty.gif?"+ DateTime.Now.ToString("ddMMyyyyhhmmsstt");  
 
                 //add restaurants
-                List<tbl_Restuarant> lst_rest=db.get_hotel_restaurants(HotelId);
+                List<tbl_Restuarant> lst_rest=DataService.get_hotel_restaurants(HotelId);
                 if (lst_rest.Count > 0)
                 {
                     vm.restaurants = string.Join(",", lst_rest.Select(x=>x.RestaurantName));
                 }
 
                 //add rooms
-                List<tbl_room_type> lst_room = db.get_hotel_rooms(HotelId);
+                List<tbl_room_type> lst_room = DataService.get_hotel_rooms(HotelId);
                 if (lst_room.Count > 0)
                 {
                     vm.rooms = string.Join(",", lst_room.Select(x => x.Room_Type));
@@ -97,7 +74,7 @@ namespace HotelAdvice.Areas.Admin.Controllers
 
 
                 //add sightseeings
-                List<tbl_sightseeing> lst_sightseeing = db.get_hotel_sightseeings(HotelId);
+                List<tbl_sightseeing> lst_sightseeing = DataService.get_hotel_sightseeings(HotelId);
                 if (lst_sightseeing.Count > 0)
                 {
                     vm.sightseeing = string.Join(",", lst_sightseeing.Select(x => x.Sightseeing_Type));
@@ -107,7 +84,7 @@ namespace HotelAdvice.Areas.Admin.Controllers
             vm.CurrentPage = page.HasValue ? page.Value : 1;
             vm.CurrentFilter = !String.IsNullOrEmpty(filter) ? filter.ToString() : "";
             vm.lst_city = new SelectList(cities, "cityID", "cityName");
-            vm.amenities = db.get_hotel_amenities(HotelId);
+            vm.amenities = DataService.get_hotel_amenities(HotelId);
 
             return PartialView("_PartialAddHotel", vm);
         }
@@ -123,10 +100,10 @@ namespace HotelAdvice.Areas.Admin.Controllers
 
                 string original_hotel_name ="";
                 if(Hotel.HotelId!=0)
-                    original_hotel_name = db.get_hotel_byId(Hotel.HotelId).HotelName;
+                    original_hotel_name = DataService.get_hotel_byId(Hotel.HotelId).HotelName;
 
                 //save hotel
-                db.add_hotel(Hotel);
+                DataService.add_hotel(Hotel);
 
                 //set a folder for hotel
                 string hotel_dir = Server.MapPath(@"~\Upload\" + Hotel.HotelName);
@@ -163,7 +140,7 @@ namespace HotelAdvice.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult HotelDescription(int id)
         {
-            HotelViewModel  vm = db.get_hotel_byId(id);
+            HotelViewModel  vm = DataService.get_hotel_byId(id);
             return PartialView("_PartialDescription", vm);
         }
 
@@ -182,12 +159,12 @@ namespace HotelAdvice.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete_Hotel(HotelViewModel Hotel)
         {
-            string hotelName = db.get_hotel_byId(Hotel.HotelId).HotelName;
+            string hotelName = DataService.get_hotel_byId(Hotel.HotelId).HotelName;
             if (!String.IsNullOrEmpty(hotelName))
             {
                 string hotel_dir = Server.MapPath(@"~\Upload\" + hotelName);
 
-                db.delete_hotel(Hotel.HotelId);
+                DataService.delete_hotel(Hotel.HotelId);
 
                 if (Directory.Exists(hotel_dir))
                     Directory.Delete(hotel_dir, true);
@@ -203,7 +180,7 @@ namespace HotelAdvice.Areas.Admin.Controllers
         public ActionResult HotelImage(int id)
         {
             HotelImagesViewModel vm = new HotelImagesViewModel();
-            vm.HotelName=db.get_hotel_byId(id).HotelName;
+            vm.HotelName=DataService.get_hotel_byId(id).HotelName;
             string hotel_dir = Server.MapPath(@"~\Upload\" + vm.HotelName);
             if(Directory.Exists(hotel_dir))
                 vm.uploaded_images = Directory.GetFiles(hotel_dir).Select(x => Path.GetFileName(x)).Where(x=>x!="main.jpg").ToArray();
@@ -227,7 +204,7 @@ namespace HotelAdvice.Areas.Admin.Controllers
 
             if (item != null && hotel_ID != 0)
             {
-                string file_name = db.save_hotel_image(hotel_ID);
+                string file_name = DataService.save_hotel_image(hotel_ID);
                 if (!String.IsNullOrEmpty(file_name))
                 {
                     string hotel_name = file_name.Substring(0, file_name.LastIndexOf('_'));
@@ -257,7 +234,7 @@ namespace HotelAdvice.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete_HotelPhoto(HotelImagesViewModel photo)
         {
-            db.delete_hotel_image(photo.PhotoName);
+            DataService.delete_hotel_image(photo.PhotoName);
             string file_path = Server.MapPath(@"\Upload\" + photo.PhotoName.Substring(0, photo.PhotoName.LastIndexOf('_')) + "\\" + photo.PhotoName);
             if (System.IO.File.Exists(file_path))
                 System.IO.File.Delete(file_path);
@@ -279,7 +256,7 @@ namespace HotelAdvice.Areas.Admin.Controllers
         [HttpPost]
         public JsonResult Get_Restaurants(string Prefix)
         {
-            List<tbl_Restuarant> restList = db.get_restaurants();
+            List<tbl_Restuarant> restList = DataService.get_restaurants();
 
             var result = restList.Where(x => x.RestaurantName.ToLower().Contains(Prefix.ToLower()))
                 .Select(x => new { RestName = x.RestaurantName }).ToList();
@@ -290,7 +267,7 @@ namespace HotelAdvice.Areas.Admin.Controllers
         [HttpPost]
          public JsonResult Get_Rooms(string Prefix)
          {
-             List<tbl_room_type> RoomList = db.get_roomTypes();
+             List<tbl_room_type> RoomList = DataService.get_roomTypes();
 
              var result = RoomList.Where(x => x.Room_Type.ToLower().Contains(Prefix.ToLower()))
                  .Select(x => new { RoomType = x.Room_Type }).ToList();
@@ -302,7 +279,7 @@ namespace HotelAdvice.Areas.Admin.Controllers
          [HttpPost]
          public JsonResult Get_SightSeeing(string Prefix)
          {
-             List<tbl_sightseeing> SightList = db.get_Sightseeing();
+             List<tbl_sightseeing> SightList = DataService.get_Sightseeing();
 
              var result = SightList.Where(x => x.Sightseeing_Type.ToLower().Contains(Prefix.ToLower()))
                  .Select(x => new { SightSeeing = x.Sightseeing_Type }).ToList();
