@@ -15,24 +15,6 @@ namespace HotelAdvice.App_Code
 
         HotelAdviceDB db=new HotelAdviceDB();
 
-        #region dateTime
-     
-        public string get_today()
-        {
-           string month = get_2digit_format(DateTime.Now.Month + "");
-            string day = get_2digit_format(DateTime.Now.Day + "");
-
-            return DateTime.Now.Year + "/" + month + "/" + day;
-        }
-
-        public string get_2digit_format(string d)
-        {
-            if (d.Length == 1)
-                d = "0" + d;
-            return d;
-        }
-
-        #endregion dateTime
 
         #region City
 
@@ -699,7 +681,7 @@ namespace HotelAdvice.App_Code
                 r.pros_review = review.reviewPros;
                 r.cons_review = review.reviewCons;
 
-                r.review_date = get_today();
+                r.review_date = DateTimeClass.getToday();
                 r.rating = review.total_rating;
                 r.Cleanliness_rating = review.Cleanliness_rating;
                 r.Comfort_rating = review.Comfort_rating;
@@ -717,7 +699,7 @@ namespace HotelAdvice.App_Code
                 r.pros_review = review.reviewPros;
                 r.cons_review = review.reviewCons;
 
-                r.review_date = get_today();
+                r.review_date = DateTimeClass.getToday();
                 r.rating = review.total_rating;
                 r.Cleanliness_rating = review.Cleanliness_rating;
                 r.Comfort_rating = review.Comfort_rating;

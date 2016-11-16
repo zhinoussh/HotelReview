@@ -12,14 +12,6 @@ namespace HotelAdvice.App_Code
     public interface IDataRepository
     {
 
-        #region dateTime
-      
-        string get_today();
-
-        string get_2digit_format(string d);
-
-        #endregion  dateTime
-       
         #region City
 
         void add_city(int id, string name, string attractions);        

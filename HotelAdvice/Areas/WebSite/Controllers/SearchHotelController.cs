@@ -122,7 +122,7 @@ namespace HotelAdvice.Areas.WebSite.Controllers
             vm.Star2 = Star2.HasValue ? Star2.Value : false;
             vm.Star3 = Star3.HasValue ? Star3.Value : false;
             vm.Star4 = Star4.HasValue ? Star4.Value : false;
-            vm.Star5 = Star5.HasValue ? Star5.Value : false;
+            vm.Star5 = Star5.HasValue ? Star5.Value : false; 
 
 
             if (!String.IsNullOrEmpty(score))

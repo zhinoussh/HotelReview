@@ -192,6 +192,7 @@
   <ItemGroup>
     <Compile Include="App_Code\Bootstrapper.cs" />
     <Compile Include="App_Code\DAL.cs" />
+    <Compile Include="App_Code\DateTimeClass.cs" />
     <Compile Include="App_Code\IDataRepository.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
