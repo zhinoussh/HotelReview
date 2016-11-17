@@ -479,7 +479,17 @@ namespace HotelAdvice.DataAccessLayer
                                           .OrderBy(x => x.Sightseeing_Type).ToList();
             return lst_sightseeing;
         }
-        
+
+        public string get_hotel_name_by_photo(string photo_name) {
+
+            string hotel_name = (from h in _dbContext.tbl_Hotel
+                                join p in _dbContext.tbl_Hotel_Photo on h.HotelId equals p.HotelID
+                                where p.photo_name == photo_name
+                                select h.HotelName).FirstOrDefault();
+
+            return hotel_name;
+        }
+
         public string save_hotel_image(int hotel_id)
         {
             string file_name="";

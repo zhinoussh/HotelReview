@@ -236,6 +236,7 @@
     <Compile Include="Areas\Account\Controllers\ManageController.cs" />
     <Compile Include="DataAccessLayer\IServiceLayer.cs" />
     <Compile Include="DataAccessLayer\ServiceLayer.cs" />
+    <Compile Include="Filters\ModelValidatorAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -465,7 +466,7 @@
     <Content Include="Areas\Admin\Views\Hotel\_PartialDeleteHotel.cshtml" />
     <Content Include="Areas\Admin\Views\Hotel\_PartialDeletePhoto.cshtml" />
     <Content Include="Areas\Admin\Views\Hotel\_PartialShowImage.cshtml" />
-    <Content Include="Areas\Admin\Views\Hotel\HotelImage.cshtml" />
+    <Content Include="Areas\Admin\Views\Hotel\HotelImages.cshtml" />
     <Content Include="Areas\Admin\Views\Amenity\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Amenity\_PartialAmenityList.cshtml" />
     <Content Include="Areas\Admin\Views\Amenity\_PartialDeleteAmenity.cshtml" />

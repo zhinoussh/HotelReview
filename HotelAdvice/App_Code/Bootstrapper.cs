@@ -25,6 +25,7 @@ namespace HotelAdvice.App_Code
             // register all your components with the container here  
             //This is the important line to edit  
             container.RegisterType<IServiceLayer, ServiceLayer>(new ContainerControlledLifetimeManager());
+            //container.RegisterType<IDataRepository, DataRepository>(new ContainerControlledLifetimeManager());
   
             RegisterTypes(container);  
             return container;  

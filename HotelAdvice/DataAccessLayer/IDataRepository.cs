@@ -63,9 +63,9 @@ namespace HotelAdvice.DataAccessLayer
 
         List<tbl_sightseeing> get_hotel_sightseeings(int hotelID);
 
+        string get_hotel_name_by_photo(string photo_name);
+
         string save_hotel_image(int hotel_id);
-
-
 
         void delete_hotel_image(string photo_name);
 

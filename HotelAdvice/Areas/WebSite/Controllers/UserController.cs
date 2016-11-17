@@ -9,6 +9,7 @@ using HotelAdvice.Helper;
 using HotelAdvice.App_Code;
 using HotelAdvice.Areas.WebSite.ViewModels;
 using PagedList;
+using HotelAdvice.DataAccessLayer;
 
 namespace HotelAdvice.Areas.WebSite.Controllers
 {

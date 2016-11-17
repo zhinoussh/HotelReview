@@ -8,6 +8,7 @@ using HotelAdvice.Areas.WebSite.ViewModels;
 using Microsoft.AspNet.Identity;
 using HotelAdvice.Helper;
 using System;
+using HotelAdvice.DataAccessLayer;
 
 
 namespace HotelAdvice.Areas.WebSite.Controllers
