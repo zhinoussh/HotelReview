@@ -25,17 +25,32 @@
                                 @Html.TextBox("txt_star_hotel", Model[i].HotelStars, new { @class = "HotelStars" })
                             </div>
                             <div class="col-xs-2 col-xs-offset-4 nopadding">
-                                @using (Ajax.BeginForm("AddToFavorite","User", new { hotel_id = Model[i].HotelId, sort = Request["sort"], page = Request["page"], city_id = Request["city_id"] }
+                                @using (Ajax.BeginForm("AddToFavorite", "User"
+                                    , new { 
+                                        hotel_id = Model[i].HotelId,
+                                        sort = Request["sort"],
+                                        page = Request["page"],
+                                        city_id = Request["cityId"],
+                                        score = Request["score"],
+                                        HotelName = Request["HotelName"],
+                                        center = Request["center"],
+                                        airport = Request["airport"],
+                                        Star1 = Request["Star1"],
+                                        Star2 = Request["Star2"],
+                                        Star3 = Request["Star3"],
+                                        Star4 = Request["Star4"],
+                                        Star5 = Request["Star5"]
+                                    }
                                     , new AjaxOptions
                             {
                                 HttpMethod = "Post",
                                 OnSuccess = "SuccessAjax_AddFavorit"
-                                
+
                             }))
                                 {
                                     @Html.AntiForgeryToken()
 
-                            <button class="btn btn-danger @(!(Model[i].is_favorite)?"btn-outline":"") btn-responsive"
+                            <button class="btn btn-danger @(!(Model[i].is_favorite) ? "btn-outline" : "") btn-responsive"
                                     type="submit" title='@(Model[i].is_favorite ? "Remove from your wish list" : "Add to your wish list")'>
                                 <i class="fa fa-heart fa-lg hidden-xs"></i> Like it!
                             </button>

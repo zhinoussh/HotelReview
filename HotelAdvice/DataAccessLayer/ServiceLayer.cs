@@ -538,7 +538,8 @@ namespace HotelAdvice.DataAccessLayer
         }
 
 
-        public string[] Post_AddToFavorite(string user_id, Controller ctrl, int hotel_id, int city_id, int? page, string sort)
+        public string[] Post_AddToFavorite(string user_id, Controller ctrl, int hotel_id, int? city_id, int? page, string sort, string HotelName, int? center, int? airport, string score
+                                            , bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star5)
         {
             int result = DataLayer.add_favorite_hotel(hotel_id,user_id);
          
@@ -548,7 +549,7 @@ namespace HotelAdvice.DataAccessLayer
             else
                 msg = "favorite_already_exist";
 
-            IPagedList<HotelSearchViewModel> model =Get_PartialHotelResults(user_id,city_id, page, sort,"",null,null,"",null,null,null,null,null);
+            IPagedList<HotelSearchViewModel> model =Get_PartialHotelResults(user_id,city_id, page, sort,HotelName,center,airport,score,Star1,Star2,Star3,Star4,Star5);
             string partialview_hotels = RenderPartial.RenderRazorViewToString(ctrl
                 , "~/Areas/WebSite/views/SearchHotel/_PartialHotelListResults.cshtml"
                 , model);
@@ -607,6 +608,7 @@ namespace HotelAdvice.DataAccessLayer
                 if (city_prop != null)
                     vm.city_name = "Hotels in " + city_prop[0];
 
+                vm.Advnaced_Search.selected_city = cityId.Value;
                 //get hotel list in this city_id
                 List<HotelSearchViewModel> lst_hotels = DataLayer.Search_Hotels_in_city(cityId.Value, user_id);
 

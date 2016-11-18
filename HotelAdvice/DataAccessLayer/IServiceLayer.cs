@@ -87,7 +87,8 @@ namespace HotelAdvice.DataAccessLayer
 
         /******************************Favorite Hotel PART*******************************/
 
-        string[] Post_AddToFavorite(string user_id,Controller ctrl,int hotel_id, int city_id, int? page, string sort);
+        string[] Post_AddToFavorite(string user_id, Controller ctrl, int hotel_id, int? city_id, int? page, string sort, string HotelName, int? center, int? airport, string score
+                                            , bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star5);
 
         string Post_AddToFavorite_Detail(string user_id,int hotel_id);
 
