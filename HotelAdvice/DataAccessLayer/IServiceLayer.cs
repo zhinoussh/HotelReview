@@ -56,5 +56,17 @@ namespace HotelAdvice.DataAccessLayer
 
         #endregion City
 
+
+        #region Amenity
+        IPagedList<AmenityViewModel> Get_AmenityList(int? page, string filter);
+
+        void Post_AddNewAmenity(string amenity_name, string amenity_id, int? page);
+
+        AmenityViewModel Get_DeleteAmenity(int amenity_id, int? page, string filter);
+
+        void Post_DeleteAmenity(AmenityViewModel amenity);
+
+        #endregion Amenity
+
     }
 }

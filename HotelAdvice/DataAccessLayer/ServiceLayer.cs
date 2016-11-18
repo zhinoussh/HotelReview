@@ -371,5 +371,58 @@ namespace HotelAdvice.DataAccessLayer
         }
 
         #endregion City
+
+        #region Amenity
+
+        public IPagedList<AmenityViewModel> Get_AmenityList(int? page, string filter)
+        {
+            int currentPageIndex = page.HasValue ? page.Value : 1;
+
+            List<AmenityViewModel> lst_amenity = DataLayer.get_Amenities();
+        
+
+            if (!String.IsNullOrEmpty(filter) && filter != "null")
+            {
+
+                filter = filter.ToLower();
+                lst_amenity = lst_amenity.Where(x => x.AmenityName.ToLower().Contains(filter)).ToList();
+            }
+
+            lst_amenity = lst_amenity.OrderBy(x => x.AmenityName).Select((x, index) => new AmenityViewModel
+            {
+                RowNum = index + 1,
+                AmenityName = x.AmenityName,
+                AmenityID = x.AmenityID
+            }).ToList();
+
+            IPagedList<AmenityViewModel> paged_list = lst_amenity.ToPagedList(currentPageIndex, pageSize);
+
+            return paged_list;
+        }
+
+        public void Post_AddNewAmenity(string amenity_name, string amenity_id, int? page)
+        {
+            int id = String.IsNullOrEmpty(amenity_id) ? 0 : Int32.Parse(amenity_id.ToString());
+            DataLayer.add_amenity(id, amenity_name);          
+            
+        }
+
+        public AmenityViewModel Get_DeleteAmenity(int amenity_id, int? page, string filter)
+        {
+            AmenityViewModel vm = new AmenityViewModel();
+            vm.AmenityID = amenity_id;
+            vm.CurrentFilter = String.IsNullOrEmpty(filter) ? "" : filter.ToString();
+            vm.CurrentPage = page.HasValue ? page.Value : 1;
+
+            return vm;
+        }
+
+        public void Post_DeleteAmenity(AmenityViewModel amenity)
+        {
+            DataLayer.delete_Amenity(amenity.AmenityID);
+        }
+
+        #endregion Amenity
+
     }
 }
