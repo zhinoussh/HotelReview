@@ -1,43 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity.Owin;
+﻿using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using HotelAdvice.Helper;
-using HotelAdvice.App_Code;
 using HotelAdvice.Areas.WebSite.ViewModels;
 using PagedList;
 using HotelAdvice.DataAccessLayer;
+using HotelAdvice.Controllers;
+using HotelAdvice.Filters;
 
 namespace HotelAdvice.Areas.WebSite.Controllers
 {
 
-    public class UserController : Controller
+    public class UserController : BaseController
     {
       
-        const int defaultPageSize_userpage = 3;
-        const int defaultPageSize_searchpage = 3;
-        const int defaultPageSize_reviewpage = 4;
-        
-        IDataRepository db;
-
-        public UserController(IDataRepository repo)
+        public UserController(IServiceLayer service)
+            : base(service)
         {
-            db = repo;
         }
-
 
         [Authorize(Roles = "PublicUser")]
         public ActionResult Index(int ?page,string tab)
         {
-            int currentPageIndex = page.HasValue ? page.Value : 1;
-            UserPageViewModel vm = new UserPageViewModel();
-
-            vm.lst_wishList = (db.get_wishList(User.Identity.GetUserId())).ToPagedList<HotelSearchViewModel>(currentPageIndex, defaultPageSize_userpage);
-            vm.lst_rating = (db.get_ratingList(User.Identity.GetUserId())).ToPagedList<HotelSearchViewModel>(currentPageIndex, defaultPageSize_userpage);
-            vm.lst_reviews = (db.get_reviewList(User.Identity.GetUserId())).ToPagedList<HotelSearchViewModel>(currentPageIndex, defaultPageSize_userpage);
+            UserPageViewModel vm = DataService.Get_UserProfilePage(User.Identity.GetUserId(), page, tab);
 
             if (Request.IsAjaxRequest())
             {
@@ -57,27 +40,9 @@ namespace HotelAdvice.Areas.WebSite.Controllers
                 return View(vm);
         }
 
-
         public ActionResult Reviews(int id,int ?page)
         {
-            ReviewPageViewModel vm = db.get_review_page(id);
-
-            AddReviewViewModel your_review =db.get_previous_review(id, User.Identity.GetUserId());
-              
-            //this is new review
-            if (your_review == null)
-            {
-                your_review = new AddReviewViewModel();
-                your_review.RateId = 0;
-                your_review.HotelId = id;
-                your_review.UserId = User.Identity.GetUserId();
-            }
-            vm.YourReview = your_review;
-
-            int current_page_index = page.HasValue ? page.Value : 1;
-
-             ApplicationUserManager userMgr = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
-             vm.lst_reviews = db.get_reviews_for_hotel(id, userMgr).ToPagedList(current_page_index, defaultPageSize_reviewpage);
+            ReviewPageViewModel vm = DataService.Get_ReviewPage(User.Identity.GetUserId(),this, id, page);
 
              if (Request.IsAjaxRequest())
                  return PartialView("_PartialHotelReviewList", vm.lst_reviews);
@@ -85,9 +50,9 @@ namespace HotelAdvice.Areas.WebSite.Controllers
                  return View(vm);
         }
         
-        
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ModelValidator]
         public ActionResult Add_Review(AddReviewViewModel vm)
         {
             if (!User.Identity.IsAuthenticated)
@@ -96,16 +61,13 @@ namespace HotelAdvice.Areas.WebSite.Controllers
             }
             else
             {
-                db.add_review(vm);
-
+                DataService.Post_AddNewReview(vm);
+                
                 if (vm.fromProfilePage)
                 {
-                    IPagedList<HotelSearchViewModel> model = db.get_reviewList(User.Identity.GetUserId()).ToPagedList<HotelSearchViewModel>(vm.currentPageIndex, defaultPageSize_userpage);
-                    string partialview = RenderPartial.RenderRazorViewToString(this
-                         , "~/Areas/WebSite/views/User/_PartialYourReviewList.cshtml"
-                         , model);
+                    string PartialReview = DataService.Get_PartialReviewList(vm,User.Identity.GetUserId(), this);
 
-                    return Json(new { msg = "success_edit_review", partial = partialview });
+                    return Json(new { msg = "success_edit_review", partial = PartialReview });
 
                 }
                 else
@@ -113,14 +75,10 @@ namespace HotelAdvice.Areas.WebSite.Controllers
             }
         }
 
-
         [HttpGet]
         public ActionResult EditReview(int id,int?page)
         {
-
-           AddReviewViewModel vm= db.get_previous_review(id, User.Identity.GetUserId());
-           vm.fromProfilePage = true;
-           vm.currentPageIndex = page.HasValue ? page.Value : 1;
+            AddReviewViewModel vm = DataService.Get_EditReview(User.Identity.GetUserId(), id, page);
 
            return PartialView("_PartialAddReview", vm);
         }
@@ -128,13 +86,7 @@ namespace HotelAdvice.Areas.WebSite.Controllers
         [HttpGet]
         public ActionResult DeleteReview(int id, int? page)
         {
-            DeleteReviewViewModel vm=new DeleteReviewViewModel();
-
-            vm.hotelId = id;
-            vm.currentPageIndex = page.HasValue ? page.Value : 1;
-            vm.HotelName = db.get_hotel_byId(id).HotelName;
-            vm.UserId = User.Identity.GetUserId();
-
+            DeleteReviewViewModel vm = DataService.Get_DeleteReview(User.Identity.GetUserId(),id,page);
             return PartialView("_PartialDeleteReview",vm);
         }
 
@@ -142,16 +94,9 @@ namespace HotelAdvice.Areas.WebSite.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteReview(DeleteReviewViewModel vm)
         {
+            IPagedList paged_list_reviews = DataService.Post_DeleteReview(vm, User.Identity.GetUserId());
 
-            db.delete_review(vm.hotelId,vm.UserId);
-            int currentPageIndex = vm.currentPageIndex;
-
-            List<HotelSearchViewModel> lst_reviews = db.get_reviewList(User.Identity.GetUserId());
-            if (currentPageIndex > 1 && lst_reviews.Count() < currentPageIndex * defaultPageSize_userpage)
-                currentPageIndex = currentPageIndex - 1;
-
-            return PartialView("_PartialYourReviewList", lst_reviews.ToPagedList<HotelSearchViewModel>(currentPageIndex, defaultPageSize_userpage));
-
+            return PartialView("_PartialYourReviewList", paged_list_reviews);
         }
 
         [HttpPost]
@@ -164,18 +109,9 @@ namespace HotelAdvice.Areas.WebSite.Controllers
             }
             else
             {
-
-                int result = db.add_favorite_hotel(hotel_id, User.Identity.GetUserId());
-
-                IPagedList<HotelSearchViewModel> model=SetPartialHotelResult(city_id, page, sort);
-                string partialview = RenderPartial.RenderRazorViewToString(this
-                    , "~/Areas/WebSite/views/SearchHotel/_PartialHotelListResults.cshtml"
-                    , model);
-
-                if (result == 1)
-                    return Json(new { msg = "add_favorite_success", partial = partialview });
-                else
-                    return Json(new { msg = "favorite_already_exist", partial = partialview });
+                string[] result = DataService.Post_AddToFavorite(User.Identity.GetUserId(), this, hotel_id, city_id, page, sort);
+             
+                return Json(new { msg = result[0], partial = result[1] });
             }
         }
 
@@ -189,13 +125,9 @@ namespace HotelAdvice.Areas.WebSite.Controllers
             }
             else
             {
+                string result = DataService.Post_AddToFavorite_Detail(User.Identity.GetUserId(), hotel_id);
 
-                int result = db.add_favorite_hotel(hotel_id, User.Identity.GetUserId());
-
-                if (result == 1)
-                    return Json(new { msg = "add_favorite_success" });
-                else
-                    return Json(new { msg = "favorite_already_exist" });
+                return Json(new { msg = result });
             }
         }
 
@@ -203,16 +135,9 @@ namespace HotelAdvice.Areas.WebSite.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteFavorite(int hotel_id, int? page)
         {
-            int currentPageIndex = page.HasValue ? page.Value : 1;
+            IPagedList paged_list_wishlist =DataService.Post_DeleteFavorite(User.Identity.GetUserId(), hotel_id, page);
 
-            db.remove_favorite_hotel(hotel_id, User.Identity.GetUserId());
-
-            List<HotelSearchViewModel> lst_wishlist = db.get_wishList(User.Identity.GetUserId());
-            if (currentPageIndex>1 && lst_wishlist.Count() < currentPageIndex * defaultPageSize_userpage)
-                currentPageIndex = currentPageIndex - 1;
-
-            return PartialView("_PartialWishList", lst_wishlist.ToPagedList<HotelSearchViewModel>(currentPageIndex, defaultPageSize_userpage));
-
+            return PartialView("_PartialWishList",paged_list_wishlist);
         }
 
         [HttpPost]
@@ -224,54 +149,18 @@ namespace HotelAdvice.Areas.WebSite.Controllers
                 return Json(new { msg = "login_required" });
             }
 
-            db.rate_hotel(hotel_id, User.Identity.GetUserId(), your_rating);
+            DataService.Post_RateHotel(User.Identity.GetUserId(),your_rating,hotel_id);
 
             if (Request.IsAjaxRequest())
             {
-                int currentPageIndex = page.HasValue ? page.Value : 1;
-                IPagedList<HotelSearchViewModel> model =  db.get_ratingList(User.Identity.GetUserId()).ToPagedList<HotelSearchViewModel>(currentPageIndex, defaultPageSize_userpage);
-               string partialview = RenderPartial.RenderRazorViewToString(this
-                    , "~/Areas/WebSite/views/User/_PartialRatingList.cshtml"
-                    , model);
-
-               return Json(new { msg = "rating_success",partial=partialview});
-
+                string partialview_rating = DataService.Get_PartialRatingList(this, User.Identity.GetUserId(), page);
+                return Json(new { msg = "rating_success", partial = partialview_rating });
             }
             else
                 return Json(new { msg = "rating_success" });
         }
 
-        private IPagedList<HotelSearchViewModel> SetPartialHotelResult(int city_id, int? page, string sort)
-        {
-            int currentPageIndex = page.HasValue ? page.Value : 1;
-            //get hotel list in this city_id
-            List<HotelSearchViewModel> lst_hotels = db.Search_Hotels_in_city(city_id, User.Identity.GetUserId());
-
-            //sort
-            switch (sort)
-            {
-                case "distance":
-                    lst_hotels = lst_hotels.OrderBy(x => x.distance_citycenter).ToList();
-                    break;
-
-                case "rating":
-                    lst_hotels = lst_hotels.OrderByDescending(x => x.GuestRating).ToList();
-                    break;
-                case "5to1":
-                    lst_hotels = lst_hotels.OrderByDescending(x => x.HotelStars).ToList();
-                    break;
-                case "1to5":
-                    lst_hotels = lst_hotels.OrderBy(x => x.HotelStars).ToList();
-                    break;
-                default:
-                    break;
-
-            }
-
-            //pagination
-
-            return lst_hotels.ToPagedList(currentPageIndex, defaultPageSize_searchpage);
-        }
+        
 
 
     }

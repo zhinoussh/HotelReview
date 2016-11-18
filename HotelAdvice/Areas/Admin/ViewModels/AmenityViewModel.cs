@@ -14,7 +14,8 @@ namespace HotelAdvice.Areas.Admin.ViewModels
         public int RowNum { get; set; }
         public int AmenityID { get; set; }
 
-        [StringLength(50)]
+        [StringLength(50, ErrorMessage = "max length has been exceeded.")]
+        [Required(ErrorMessage = "This field is required.")]
         public String AmenityName { get; set; }
 
         public bool hotel_selected { get; set; }

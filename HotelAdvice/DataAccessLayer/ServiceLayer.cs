@@ -9,6 +9,8 @@ using HotelAdvice.Areas.Admin.Models;
 using System.Web.Mvc;
 using System.IO;
 using HotelAdvice.Areas.WebSite.ViewModels;
+using Microsoft.AspNet.Identity.Owin;
+using HotelAdvice.Helper;
 
 
 namespace HotelAdvice.DataAccessLayer
@@ -17,6 +19,9 @@ namespace HotelAdvice.DataAccessLayer
     {
         private IDataRepository _dataLayer;
         const int pageSize = 10;
+        const int defaultPageSize_userpage = 3;
+        const int defaultPageSize_searchpage = 3;
+        const int defaultPageSize_reviewpage = 4;
 
         public IDataRepository DataLayer
         {
@@ -60,7 +65,7 @@ namespace HotelAdvice.DataAccessLayer
 
 
             List<KeyValuePair<int, string>> lst_locations = new List<KeyValuePair<int, string>>();
-            lst_locations.Add(new KeyValuePair<int, string>(0, "Any Kilometer"));
+            lst_locations.Add(new KeyValuePair<int, string>(1000, "Any Kilometer"));
             lst_locations.Add(new KeyValuePair<int, string>(1, "less than 1 km"));
             lst_locations.Add(new KeyValuePair<int, string>(2, "less than 2 km"));
             lst_locations.Add(new KeyValuePair<int, string>(3, "less than 3 km"));
@@ -69,8 +74,8 @@ namespace HotelAdvice.DataAccessLayer
             lst_locations.Add(new KeyValuePair<int, string>(10, "less than 10 km"));
             lst_locations.Add(new KeyValuePair<int, string>(20, "less than 20 km"));
             vm_search.Location = new SelectList(lst_locations, "Key", "Value");
-            vm_search.distance_city_center = 0;
-            vm_search.distance_airport = 0;
+            vm_search.distance_city_center = 1000;
+            vm_search.distance_airport = 1000;
 
             vm_search.lst_amenity = DataLayer.get_Amenities();
 
@@ -423,6 +428,324 @@ namespace HotelAdvice.DataAccessLayer
         }
 
         #endregion Amenity
+
+
+        #region UserPage
+
+        public UserPageViewModel Get_UserProfilePage(string user_id, int? page, string tab)
+        {
+            int currentPageIndex = page.HasValue ? page.Value : 1;
+            UserPageViewModel vm = new UserPageViewModel();
+
+            vm.lst_wishList = (DataLayer.get_wishList(user_id)).ToPagedList<HotelSearchViewModel>(currentPageIndex, defaultPageSize_userpage);
+            vm.lst_rating = (DataLayer.get_ratingList(user_id)).ToPagedList<HotelSearchViewModel>(currentPageIndex, defaultPageSize_userpage);
+            vm.lst_reviews = (DataLayer.get_reviewList(user_id)).ToPagedList<HotelSearchViewModel>(currentPageIndex, defaultPageSize_userpage);
+
+            return vm;
+        }
+
+        public ReviewPageViewModel Get_ReviewPage(string user_id, Controller ctrl, int hotel_id, int? page)
+        {
+            ReviewPageViewModel vm = DataLayer.get_review_page(hotel_id);
+
+            AddReviewViewModel your_review = DataLayer.get_previous_review(hotel_id, user_id);
+
+            //this is new review
+            if (your_review == null)
+            {
+                your_review = new AddReviewViewModel();
+                your_review.RateId = 0;
+                your_review.HotelId = hotel_id;
+                your_review.UserId = user_id;
+            }
+            vm.YourReview = your_review;
+
+            int current_page_index = page.HasValue ? page.Value : 1;
+
+            ApplicationUserManager userMgr = ctrl.Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            vm.lst_reviews = DataLayer.get_reviews_for_hotel(hotel_id, userMgr).ToPagedList(current_page_index, defaultPageSize_reviewpage);
+
+            return vm;
+        }
+
+        public void Post_AddNewReview(AddReviewViewModel review)
+        {
+            DataLayer.add_review(review);
+        }
+
+        public string Get_PartialReviewList(AddReviewViewModel review, string user_id, Controller ctrl)
+        {
+            IPagedList<HotelSearchViewModel> model = DataLayer.get_reviewList(user_id).ToPagedList<HotelSearchViewModel>(review.currentPageIndex, defaultPageSize_userpage);
+            string partialview = RenderPartial.RenderRazorViewToString(ctrl
+                 , "~/Areas/WebSite/views/User/_PartialYourReviewList.cshtml"
+                 , model);
+
+            return partialview;
+
+        }
+
+        public AddReviewViewModel Get_EditReview(string user_id, int hotel_id, int? page)
+        {
+            AddReviewViewModel vm = DataLayer.get_previous_review(hotel_id, user_id);
+            vm.fromProfilePage = true;
+            vm.currentPageIndex = page.HasValue ? page.Value : 1;
+
+            return vm;
+
+        }
+
+        public DeleteReviewViewModel Get_DeleteReview(string user_id, int hotel_id, int? page)
+        {
+            DeleteReviewViewModel vm = new DeleteReviewViewModel();
+
+            vm.hotelId = hotel_id;
+            vm.currentPageIndex = page.HasValue ? page.Value : 1;
+            vm.HotelName = DataLayer.get_hotel_byId(hotel_id).HotelName;
+            vm.UserId = user_id;
+
+            return vm;
+        }
+
+        public IPagedList<HotelSearchViewModel> Post_DeleteReview(DeleteReviewViewModel review, string user_id)
+        {
+            DataLayer.delete_review(review.hotelId, review.UserId);
+            int currentPageIndex = review.currentPageIndex;
+
+            List<HotelSearchViewModel> lst_reviews = DataLayer.get_reviewList(user_id);
+            if (currentPageIndex > 1 && lst_reviews.Count() < currentPageIndex * defaultPageSize_userpage)
+                currentPageIndex = currentPageIndex - 1;
+
+            IPagedList<HotelSearchViewModel> paged_list = lst_reviews.ToPagedList(currentPageIndex, defaultPageSize_userpage);
+
+            return paged_list;
+            
+        }
+
+        public void Post_RateHotel(string user_id, int your_rating,int hotel_id)
+        {
+            DataLayer.rate_hotel(hotel_id, user_id, your_rating);
+        }
+
+        public string Get_PartialRatingList(Controller ctrl,string user_id, int? page)
+        {
+            int currentPageIndex = page.HasValue ? page.Value : 1;
+            IPagedList<HotelSearchViewModel> model = DataLayer.get_ratingList(user_id).ToPagedList<HotelSearchViewModel>(currentPageIndex, defaultPageSize_userpage);
+            string partialview_rating = RenderPartial.RenderRazorViewToString(ctrl
+                 , "~/Areas/WebSite/views/User/_PartialRatingList.cshtml"
+                 , model);
+
+            return partialview_rating;
+        }
+
+
+        public string[] Post_AddToFavorite(string user_id, Controller ctrl, int hotel_id, int city_id, int? page, string sort)
+        {
+            int result = DataLayer.add_favorite_hotel(hotel_id,user_id);
+         
+            string msg="";
+            if (result == 1)
+                msg = "add_favorite_success";
+            else
+                msg = "favorite_already_exist";
+
+            IPagedList<HotelSearchViewModel> model =Get_PartialHotelResults(user_id,city_id, page, sort,"",null,null,"",null,null,null,null,null);
+            string partialview_hotels = RenderPartial.RenderRazorViewToString(ctrl
+                , "~/Areas/WebSite/views/SearchHotel/_PartialHotelListResults.cshtml"
+                , model);
+
+            return new string[] { msg, partialview_hotels };
+
+        }
+
+        public string Post_AddToFavorite_Detail(string user_id, int hotel_id)
+        {
+            int result = DataLayer.add_favorite_hotel(hotel_id, user_id);
+
+            string msg = "";
+            if (result == 1)
+                msg = "add_favorite_success";
+            else
+                msg = "favorite_already_exist";
+
+            return msg;
+
+        }
+
+        public IPagedList<HotelSearchViewModel> Post_DeleteFavorite(string user_id, int hotel_id, int? page)
+        {
+            int currentPageIndex = page.HasValue ? page.Value : 1;
+
+            DataLayer.remove_favorite_hotel(hotel_id, user_id);
+
+            List<HotelSearchViewModel> lst_wishlist = DataLayer.get_wishList(user_id);
+            if (currentPageIndex > 1 && lst_wishlist.Count() < currentPageIndex * defaultPageSize_userpage)
+                currentPageIndex = currentPageIndex - 1;
+
+            IPagedList<HotelSearchViewModel> wish_list = lst_wishlist.ToPagedList(currentPageIndex, defaultPageSize_userpage);
+            
+            return wish_list;
+        }
+
+        #endregion UserPage
+
+        #region SearchPage
+
+        public HotelDetailViewModel Get_HotelDetails(string user_id, int hotel_id)
+        {
+            HotelDetailViewModel vm = DataLayer.get_hoteldetails(hotel_id, user_id);
+            return vm;
+        }
+
+        public SearchPageViewModel Get_SearchResults(string user_id, bool? citySearch, string HotelName, int? cityId, int? center, int? airport, string score, bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star5)
+        {
+            SearchPageViewModel vm = new SearchPageViewModel();
+            vm.Advnaced_Search = Set_Advanced_Search();
+
+            if (citySearch.HasValue && citySearch.Value == true)
+            {
+                List<string> city_prop = DataLayer.get_city_byId(cityId.Value);
+                if (city_prop != null)
+                    vm.city_name = "Hotels in " + city_prop[0];
+
+                //get hotel list in this city_id
+                List<HotelSearchViewModel> lst_hotels = DataLayer.Search_Hotels_in_city(cityId.Value, user_id);
+
+                vm.paged_list_hotels = lst_hotels.ToPagedList(1, defaultPageSize_searchpage);
+            }
+            else
+            {
+                //set advanced search
+                vm.Advnaced_Search.Hotel_Name = HotelName;
+                vm.Advnaced_Search.selected_city = cityId.HasValue ? cityId.Value : 0;
+                vm.Advnaced_Search.distance_airport = airport.HasValue ? airport.Value : 1000;
+                vm.Advnaced_Search.distance_city_center = center.HasValue ? center.Value : 1000;
+                vm.Advnaced_Search.Guest_Rating = score;
+                vm.Advnaced_Search.Star1 = Star1.Value;
+                vm.Advnaced_Search.Star2 = Star2.Value;
+                vm.Advnaced_Search.Star3 = Star3.Value;
+                vm.Advnaced_Search.Star4 = Star4.Value;
+                vm.Advnaced_Search.Star5 = Star5.Value;
+
+                //this is advanced search
+                vm.city_name = "Matching results for your search....";
+
+                //set advanced search
+                if (score.Length > 0)
+                {
+                    string[] temp = score.Split(new char[] { ',' });
+                    vm.Advnaced_Search.Min_Guest_Rating = float.Parse(temp[0]);
+                    vm.Advnaced_Search.Max_Guest_Rating = float.Parse(temp[1]);
+                }
+
+                string stars = "";
+                if (Star1 == true)
+                    stars += "1,";
+
+                if (Star2 == true)
+                    stars += "2,";
+
+                if (Star3 == true)
+                    stars += "3,";
+
+                if (Star4 == true)
+                    stars += "4,";
+
+                if (Star5 == true)
+                    stars += "5,";
+
+                if (stars.Length > 0)
+                    stars = stars.Remove(stars.Length - 1, 1);
+
+                vm.Advnaced_Search.hotel_stars = stars;
+
+                //get hotel list by these criterias
+                List<HotelSearchViewModel> lst_hotels = DataLayer.Advanced_Search(vm.Advnaced_Search, user_id);
+
+                vm.paged_list_hotels = lst_hotels.ToPagedList(1, defaultPageSize_searchpage);
+
+            }
+
+            return vm;
+        }
+
+        public IPagedList<HotelSearchViewModel> Get_PartialHotelResults(string user_id, int? cityId, int? page, string sort, string HotelName, int? center, int? airport, string score, bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star5)
+        {
+            //get hotel list in this city_id
+            AdvancedSearchViewModel vm = new AdvancedSearchViewModel();
+            vm.Hotel_Name = HotelName;
+            vm.selected_city = cityId.HasValue ? cityId.Value : 0;
+            vm.distance_airport = airport.HasValue ? airport.Value : 1000;
+            vm.distance_city_center = center.HasValue ? center.Value : 1000;
+            vm.Guest_Rating = score;
+            vm.Star1 = Star1.HasValue ? Star1.Value : false;
+            vm.Star2 = Star2.HasValue ? Star2.Value : false;
+            vm.Star3 = Star3.HasValue ? Star3.Value : false;
+            vm.Star4 = Star4.HasValue ? Star4.Value : false;
+            vm.Star5 = Star5.HasValue ? Star5.Value : false;
+
+
+            if (!String.IsNullOrEmpty(score))
+            {
+                string[] temp = score.Split(new char[] { ',' });
+                vm.Min_Guest_Rating = float.Parse(temp[0]);
+                vm.Max_Guest_Rating = float.Parse(temp[1]);
+            }
+            else
+            {
+                vm.Min_Guest_Rating = 0;
+                vm.Max_Guest_Rating = 5;
+            }
+
+            string stars = "";
+            if (Star1 == true)
+                stars += "1,";
+
+            if (Star2 == true)
+                stars += "2,";
+
+            if (Star3 == true)
+                stars += "3,";
+
+            if (Star4 == true)
+                stars += "4,";
+
+            if (Star5 == true)
+                stars += "5,";
+
+            if (stars.Length > 0)
+                stars = stars.Remove(stars.Length - 1, 1);
+
+            vm.hotel_stars = stars;
+
+            List<HotelSearchViewModel> lst_hotels = DataLayer.Advanced_Search(vm, user_id);
+
+            //sort
+            switch (sort)
+            {
+                case "distance":
+                    lst_hotels = lst_hotels.OrderBy(x => x.distance_citycenter).ToList();
+                    break;
+
+                case "rating":
+                    lst_hotels = lst_hotels.OrderByDescending(x => x.GuestRating).ToList();
+                    break;
+                case "5to1":
+                    lst_hotels = lst_hotels.OrderByDescending(x => x.HotelStars).ToList();
+                    break;
+                case "1to5":
+                    lst_hotels = lst_hotels.OrderBy(x => x.HotelStars).ToList();
+                    break;
+                default:
+                    break;
+
+            }
+
+            //pagination
+            int currentPageIndex = page.HasValue ? page.Value : 1;
+            return lst_hotels.ToPagedList(currentPageIndex, defaultPageSize_searchpage);
+        }
+
+        #endregion SearchPage
 
     }
 }

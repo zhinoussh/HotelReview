@@ -1,17 +1,12 @@
-﻿using HotelAdvice.App_Code;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using HotelAdvice.Areas.Admin.ViewModels;
 using HotelAdvice.Areas.Admin.Models;
 using PagedList;
-using System.IO;
 using HotelAdvice.Controllers;
 using HotelAdvice.DataAccessLayer;
 using HotelAdvice.Filters;
-using HotelAdvice.Helper;
 
 namespace HotelAdvice.Areas.Admin.Controllers
 {

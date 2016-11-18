@@ -6,6 +6,7 @@ using HotelAdvice.Areas.Admin.ViewModels;
 using PagedList;
 using HotelAdvice.DataAccessLayer;
 using HotelAdvice.Controllers;
+using HotelAdvice.Filters;
 
 
 namespace HotelAdvice.Areas.Admin.Controllers
@@ -34,6 +35,7 @@ namespace HotelAdvice.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ModelValidator]
         public ActionResult ADD_New_Amenity(string amenity_name, string amenity_id,int?page)
         {
 
