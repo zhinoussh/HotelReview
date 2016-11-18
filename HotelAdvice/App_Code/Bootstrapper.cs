@@ -1,4 +1,5 @@
 ﻿using HotelAdvice.Areas.Account.Controllers;
+using HotelAdvice.DataAccessLayer;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Mvc;
 using System;
@@ -23,7 +24,8 @@ namespace HotelAdvice.App_Code
   
             // register all your components with the container here  
             //This is the important line to edit  
-            container.RegisterType<IDataRepository, DAL>(new ContainerControlledLifetimeManager());   
+            container.RegisterType<IServiceLayer, ServiceLayer>(new ContainerControlledLifetimeManager());
+            //container.RegisterType<IDataRepository, DataRepository>(new ContainerControlledLifetimeManager());
   
             RegisterTypes(container);  
             return container;  

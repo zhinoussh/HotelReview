@@ -13,6 +13,7 @@ namespace HotelAdvice.Areas.WebSite.ViewModels
         public string UserId { get; set; }
 
         [Display(Name = "Review Title")]
+        [Required(ErrorMessage = "This field is required.")]
         public string reviewTitle { get; set; }
        
         [Display(Name = "Positive Aspects")]

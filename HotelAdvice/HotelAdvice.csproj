@@ -191,9 +191,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\Bootstrapper.cs" />
-    <Compile Include="App_Code\DAL.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="DataAccessLayer\DataRepository.cs" />
     <Compile Include="App_Code\DateTimeClass.cs" />
-    <Compile Include="App_Code\IDataRepository.cs" />
+    <Compile Include="DataAccessLayer\IDataRepository.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Areas\WebSite\Controllers\UserController.cs" />
@@ -233,12 +234,15 @@
     <Compile Include="Areas\WebSite\ViewModels\UserPageViewModel.cs" />
     <Compile Include="Controllers\HtmlHelpers.cs" />
     <Compile Include="Areas\Account\Controllers\ManageController.cs" />
+    <Compile Include="DataAccessLayer\IServiceLayer.cs" />
+    <Compile Include="DataAccessLayer\ServiceLayer.cs" />
+    <Compile Include="Filters\ModelValidatorAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Config_ProjectDB.cs" />
-    <Compile Include="Models\HotelAdviceDB.cs" />
+    <Compile Include="DataAccessLayer\HotelAdviceDB.cs" />
     <Compile Include="Areas\Admin\Models\tbl_amenity.cs" />
     <Compile Include="Areas\Admin\Models\tbl_City.cs" />
     <Compile Include="Areas\Admin\Models\tbl_Hotel.cs" />
@@ -462,7 +466,7 @@
     <Content Include="Areas\Admin\Views\Hotel\_PartialDeleteHotel.cshtml" />
     <Content Include="Areas\Admin\Views\Hotel\_PartialDeletePhoto.cshtml" />
     <Content Include="Areas\Admin\Views\Hotel\_PartialShowImage.cshtml" />
-    <Content Include="Areas\Admin\Views\Hotel\HotelImage.cshtml" />
+    <Content Include="Areas\Admin\Views\Hotel\HotelImages.cshtml" />
     <Content Include="Areas\Admin\Views\Amenity\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Amenity\_PartialAmenityList.cshtml" />
     <Content Include="Areas\Admin\Views\Amenity\_PartialDeleteAmenity.cshtml" />
@@ -473,6 +477,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
     <Folder Include="Upload\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>

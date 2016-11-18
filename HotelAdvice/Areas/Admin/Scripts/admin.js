@@ -77,12 +77,13 @@ var reparseform = function () {
 };
 
 var Success_AjaxReturn = function (result) {
-    
     if (result.msg) {
+
         localStorage.setItem("msg", result.msg);
         // location.reload();
-        location.href =result.ctrl+ "/Index?page=" + result.cur_pg + "&filter=" + result.filter;
+        location.href = result.ctrl + "/Index?page=" + result.cur_pg + "&filter=" + result.filter;
     }
+
     
 }
 
@@ -252,25 +253,32 @@ function Set_Sightseeing_tag() {
     });
 }
 
+function addRequestVerificationToken(data) {
+    data.__RequestVerificationToken = $('input[name=__RequestVerificationToken]').val();
+    return data;
+};
+
 function add_hotel_click()
 {
-    var formData = new FormData($('#frm_add_hotel')[0]);
+    if ($("#frm_add_hotel").valid()) {
+        var formData = new FormData($('#frm_add_hotel')[0]);
+        var action = $("#frm_add_hotel").attr("action");
 
-     var action = $("#frm_add_hotel").attr("action");
-     $.ajax({
-         type: "POST",
-         url: action,
-         data: formData,
-         dataType: "json", 
-         contentType: false,
-         processData: false,
-         success: function (data) {
-             Success_AjaxReturn(data);
-         },
-         error: function (jqXHR, textStatus, errorThrown) {
-             //do your own thing
-             alert("fail");
-         }
-     });
+        $.ajax({
+            type: "POST",
+            url: action,
+            data: addRequestVerificationToken(formData),
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                Success_AjaxReturn(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                //do your own thing
+                alert(errorThrown);
+            }
+        });
+    }
+            
 }
 

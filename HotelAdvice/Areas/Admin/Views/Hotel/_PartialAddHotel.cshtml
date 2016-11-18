@@ -27,6 +27,7 @@
                         <span class="glyphicon glyphicon-pencil"></span> Hotel Features @if(!String.IsNullOrEmpty(@Model.HotelName)) { @("- "+Model.HotelName)}
                     </h4>
                 </div>
+
                 <div class="modal-body">
                     <div class="row-fluid">
                         <div class="tabbable">
@@ -49,7 +50,7 @@
                                             </div>
                                             <div class="form-group">
                                                 @Html.DropDownListFor(model => model.CityId, new SelectList(Model.lst_city, "Value", "Text")
-                                , new { @class = "dropdown", id = "dropdown_city" })
+                                                 , new { @class = "dropdown", id = "dropdown_city" })
                                             </div>
                                             <div class="form-group">
 
@@ -174,7 +175,6 @@
                                         </div>
                                     </div>
                                     <div class="row top-buffer20">
-
                                         <div class="col-sm-12 ">
                                             @Html.TextAreaFor(model => model.HotelAddress, new { @placeholder = "Address", @class = "form-control", style = "min-height:100px" })
                                             @Html.ValidationMessageFor(m => m.HotelAddress, "", new { @class = "text-danger" })
