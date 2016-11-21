@@ -31,8 +31,8 @@ namespace HotelAdvice.Controllers
                );
 
             CityController ctrl = new CityController(repo.Object);
-            MakeRequest.MakeNormalRequest(ctrl);  
-
+            ctrl.MakeNormalRequest();    
+            
             //Act
             var result = (ViewResult)ctrl.Index(1, "");
             IPagedList<CityViewModel> model = (IPagedList<CityViewModel>)result.Model;
@@ -58,8 +58,7 @@ namespace HotelAdvice.Controllers
                 );
 
             CityController ctrl = new CityController(repo.Object);
-            MakeRequest.MakeAjaxRequest(ctrl);
-            
+            ctrl.MakeAjaxRequest();
 
             //Act
             var result = (PartialViewResult)ctrl.Index(1, "");
