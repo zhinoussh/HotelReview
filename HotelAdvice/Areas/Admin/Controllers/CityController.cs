@@ -10,8 +10,6 @@ namespace HotelAdvice.Areas.Admin.Controllers
     [Authorize(Roles = "Administrator")]
     public class CityController : BaseController
     {
-        private const int defaultPageSize = 10;
-        IDataRepository db;
 
         public CityController(IServiceLayer service)
             : base(service)
@@ -21,13 +19,16 @@ namespace HotelAdvice.Areas.Admin.Controllers
 
         public ActionResult Index(int? page, string filter = null)
         {
-            ViewBag.filter = filter;
+           ViewBag.filter = filter;
             
-          IPagedList  paged_list_city = DataService.Get_CityList(page, filter);
+           IPagedList  paged_list_city = DataService.Get_CityList(page, filter);
 
-           return Request.IsAjaxRequest()
-               ? (ActionResult)PartialView("_PartialCityList", paged_list_city)
-               : View(paged_list_city);
+          
+           if (Request.IsAjaxRequest())
+               return (ActionResult)PartialView("_PartialCityList", paged_list_city);
+           else
+               return View(paged_list_city); 
+
         }
 
         [HttpGet]
