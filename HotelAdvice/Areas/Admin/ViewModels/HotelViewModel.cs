@@ -61,7 +61,7 @@ namespace HotelAdvice.Areas.Admin.ViewModels
 
         public String rooms { get; set; }
 
-        public List<AmenityViewModel> amenities { get; set; }
+        public List<HotelAmenityViewModel> amenities { get; set; }
         public String sightseeing { get; set; }
         
         public HttpPostedFileBase PhotoFile { get; set; }

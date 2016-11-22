@@ -24,7 +24,7 @@ namespace HotelAdvice.Areas.WebSite.ViewModels
         public float Max_Guest_Rating { get; set; }
 
         [Display(Name = "Amenities")]
-        public List<AmenityViewModel> lst_amenity { get; set; }
+        public List<HotelAmenityViewModel> lst_amenity { get; set; }
 
         public SelectList Location { get; set; }
 

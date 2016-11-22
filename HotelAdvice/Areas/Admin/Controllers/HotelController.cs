@@ -7,6 +7,7 @@ using PagedList;
 using HotelAdvice.Controllers;
 using HotelAdvice.DataAccessLayer;
 using HotelAdvice.Filters;
+using System;
 
 namespace HotelAdvice.Areas.Admin.Controllers
 {
@@ -54,6 +55,8 @@ namespace HotelAdvice.Areas.Admin.Controllers
             //}
             //else
             //{
+            //    String messages = String.Join(Environment.NewLine, ModelState.Values.SelectMany(v => v.Errors)
+            //                                                .Select(v => v.ErrorMessage + " " + v.Exception));
             //    List<CityViewModel> cities = DataService.DataLayer.get_cities();
             //    Hotel.lst_city = new SelectList(cities, "cityID", "cityName");
             //    return PartialView("_PartialAddHotel", Hotel);

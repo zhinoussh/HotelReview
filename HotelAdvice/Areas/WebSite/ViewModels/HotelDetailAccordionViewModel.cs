@@ -36,7 +36,7 @@ namespace HotelAdvice.Areas.WebSite.ViewModels
 
         public List<String> rooms { get; set; }
 
-        public List<AmenityViewModel> amenities { get; set; }
+        public List<HotelAmenityViewModel> amenities { get; set; }
         public List<String> sightseeing { get; set; }
     }
 }

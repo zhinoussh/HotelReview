@@ -18,7 +18,6 @@ namespace HotelAdvice.Areas.Admin.ViewModels
         [Required(ErrorMessage = "This field is required.")]
         public String AmenityName { get; set; }
 
-        public bool hotel_selected { get; set; }
 
     }
 }
