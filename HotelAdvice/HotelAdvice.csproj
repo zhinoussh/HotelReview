@@ -191,6 +191,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\Bootstrapper.cs" />
+    <Compile Include="Areas\Admin\ViewModels\HotelAmenityViewModel.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="DataAccessLayer\DataRepository.cs" />
     <Compile Include="App_Code\DateTimeClass.cs" />
@@ -240,6 +241,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HtmlExtensions\HtmlImage.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Config_ProjectDB.cs" />
     <Compile Include="DataAccessLayer\HotelAdviceDB.cs" />

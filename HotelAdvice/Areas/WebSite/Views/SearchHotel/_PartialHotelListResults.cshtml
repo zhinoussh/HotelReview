@@ -10,10 +10,8 @@
                 <div class="well well-result">
 
                     <div class="col-xs-3 nopadding" >
-                        <a href="/SearchHotel/HotelDetails/@Model[i].HotelId" target="_blank">
-                            <img src="~/Upload/@Model[i].HotelName/main.jpg" alt="Responsive image" onerror='this.onerror=null;this.src="../../Images/empty.gif"'
-                                 class="img_result img-responsive">
-                        </a>
+                        @Html.ImageLink("HotelDetails", "SearchHotel", String.Concat("/Upload/", @Model[i].HotelName, "/main.jpg")
+                        , "img_result img-responsive", new { id = @Model[i].HotelId })
                     </div>
                     <div class="col-xs-9 nopadding">
                         <div class="col-xs-12 nopadding">

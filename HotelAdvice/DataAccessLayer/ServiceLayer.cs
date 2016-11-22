@@ -77,7 +77,7 @@ namespace HotelAdvice.DataAccessLayer
             vm_search.distance_city_center = 1000;
             vm_search.distance_airport = 1000;
 
-            vm_search.lst_amenity = DataLayer.get_Amenities();
+            vm_search.lst_amenity = DataLayer.get_Amenities_For_search();
 
             return vm_search;
         }

@@ -31,7 +31,7 @@ namespace HotelAdvice.DataAccessLayer
 
         void Save_Rooms(string rooms, int HotelId);
 
-        void Save_Amenities(List<AmenityViewModel> amenities, int HotelId);
+        void Save_Amenities(List<HotelAmenityViewModel> amenities, int HotelId);
 
         void Save_Sighseeings(string sightseeing, int HotelId);
 
@@ -51,13 +51,14 @@ namespace HotelAdvice.DataAccessLayer
         List<tbl_room_type> get_hotel_rooms(int hotelID);
 
         List<AmenityViewModel> get_Amenities();
+        List<HotelAmenityViewModel> get_Amenities_For_search();
 
 
         void delete_Amenity(int id);
 
         void add_amenity(int id, string amenity_name);
 
-        List<AmenityViewModel> get_hotel_amenities(int hotelID);
+        List<HotelAmenityViewModel> get_hotel_amenities(int hotelID);
 
         List<tbl_sightseeing> get_Sightseeing();
 

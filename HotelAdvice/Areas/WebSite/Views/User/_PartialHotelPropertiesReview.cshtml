@@ -6,10 +6,8 @@
 <div class="well well-review" >
 
     <div class="col-xs-2 nopadding">
-        <a href="/SearchHotel/HotelDetails/@Model.HotelId" target="_blank">
-            <img src="~/Upload/@Model.HotelName/main.jpg" alt="Responsive image" onerror='this.onerror = null; this.src = "../../../Images/empty.gif"'
-                 class="img_review img-responsive">
-        </a>
+        @Html.ImageLink("HotelDetails", "SearchHotel", String.Concat("/Upload/", @Model[i].HotelName, "/main.jpg")
+                        , "img_result img-responsive", new { id = @Model[i].HotelId })
     </div>
     <div class="col-xs-7  nopadding">
       

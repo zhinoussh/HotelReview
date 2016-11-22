@@ -15,8 +15,6 @@
                     <div class="carousel slide" id="myCarousel">
                         <!-- Carousel items -->
                         <div class="carousel-inner">
-
-
                             <div class="active item" data-slide-number="0">
                                 <img src='@Url.Content("../../../Upload/" + Model.HotelName + "/" + Model.photos[0])'>
                             </div>
@@ -48,9 +46,9 @@
                 <ul class=" hide-bullets">
                     @for (int i = 1; i < Model.photos.Count; i++)
                     {
-
                         <li class="col-xs-2">
-                            <a class="thumbnail" id="@String.Format("carousel-selector-{0}",@i)"><img src='@Url.Content("../../../Upload/" + Model.HotelName + "/" + Model.photos[i])'></a>
+                            <a class="thumbnail" id="@String.Format("carousel-selector-{0}",@i)">
+                            <img src='@Url.Content("../../../Upload/" + Model.HotelName + "/" + Model.photos[i])'></a>
                         </li>
                     }
 

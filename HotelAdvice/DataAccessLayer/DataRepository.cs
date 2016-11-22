@@ -191,7 +191,7 @@ namespace HotelAdvice.DataAccessLayer
             }
         }
 
-        public void Save_Amenities(List<AmenityViewModel> amenities, int HotelId)
+        public void Save_Amenities(List<HotelAmenityViewModel> amenities, int HotelId)
         {
             //Edit
             if (HotelId != 0)
@@ -200,7 +200,7 @@ namespace HotelAdvice.DataAccessLayer
                 _dbContext.SaveChanges();
             }
 
-            foreach (AmenityViewModel item in amenities)
+            foreach (HotelAmenityViewModel item in amenities)
             {
                 if (item.hotel_selected == true)
                 {
@@ -415,6 +415,22 @@ namespace HotelAdvice.DataAccessLayer
         }
 
 
+
+        public List<HotelAmenityViewModel> get_Amenities_For_search()
+        {
+            List<HotelAmenityViewModel> lst_amenity = _dbContext.tbl_Amenity
+                .Select(r => new HotelAmenityViewModel
+            { 
+                AmenityID=r.AmenityID,
+                AmenityName=r.AmenityName,
+                hotel_selected=false
+            }).ToList();
+
+            return lst_amenity;
+
+        }
+
+
         public void delete_Amenity(int id)
         {
            tbl_amenity a= _dbContext.tbl_Amenity.Find(id);
@@ -447,14 +463,15 @@ namespace HotelAdvice.DataAccessLayer
             _dbContext.SaveChanges();
         }
        
-        public List<AmenityViewModel> get_hotel_amenities(int hotelID)
+        public List<HotelAmenityViewModel> get_hotel_amenities(int hotelID)
         {
-            List<AmenityViewModel> lst_amenities = (from a in _dbContext.tbl_Amenity
+            List<HotelAmenityViewModel> lst_amenities = (from a in _dbContext.tbl_Amenity
                                                     join h in _dbContext.tbl_Hotel_Amenities.Where(x => x.HotelID == hotelID) 
                                                     on a.AmenityID equals h.AmenityID
                                                     into Hotel_Amenity
                                                     from x in Hotel_Amenity.DefaultIfEmpty()
-                                                    select new AmenityViewModel { 
+                                                         select new HotelAmenityViewModel
+                                                         { 
                                                         AmenityID=a.AmenityID,
                                                         AmenityName=a.AmenityName,
                                                         hotel_selected=(x==null? false :true)

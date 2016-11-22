@@ -15,10 +15,8 @@
                 <div class="well well-rating">
 
                     <div class="col-xs-12 nopadding">
-                        <a href="/SearchHotel/HotelDetails/@Model[i].HotelId" target="_blank">
-                            <img src="~/Upload/@Model[i].HotelName/main.jpg" alt="Responsive image" onerror='this.onerror=null;this.src="../../Images/empty.gif"'
-                                 class="img-wishlist img-responsive">
-                        </a>
+                        @Html.ImageLink("HotelDetails", "SearchHotel", String.Concat("/Upload/", @Model[i].HotelName, "/main.jpg")
+                         , "img-wishlist img-responsive", new { id = @Model[i].HotelId })
                     </div>
                     <div class="col-xs-12 col-sm-8 nopadding">
                         <h4>
