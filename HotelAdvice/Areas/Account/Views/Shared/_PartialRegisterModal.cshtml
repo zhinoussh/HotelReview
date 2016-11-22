@@ -57,7 +57,8 @@
                 <div class="row">
 
                     <div class="col-sm-offset-2 col-sm-8">
-                        <input type="submit" class="btn btn-info" value="Register" style="width:100%" />
+                        @Html.BootstrapButton("Register", "btn-info", "", HtmlCommon.ButtonType.submit,
+                         new { style = "width:100%" })
                     </div>
                 </div>
             </div>
@@ -65,18 +66,10 @@
 <div class="modal-footer">
 
     <div class="col-sm-12">
-        <button class="btn btn-social btn-facebook  col-sm-8 col-sm-offset-2">
-            <i class="fa fa-facebook" aria-hidden="true"></i>
-            Sign in with Facebook
-        </button>
+        @Html.BootstrapButton("<i class='fa fa-facebook'></i> Sign in with Facebook", "btn-social btn-facebook  col-sm-8 col-sm-offset-2")
     </div>
     <div class="col-sm-12" style="margin-top:2%">
-
-        <button class="btn btn-social btn-google col-sm-8 col-sm-offset-2">
-            <i class="fa fa-google" aria-hidden="true"></i>
-            Sign in with Google
-        </button>
-
+        @Html.BootstrapButton("<i class='fa fa-google'></i> Sign in with Google", "btn-social btn-google  col-sm-8 col-sm-offset-2")
     </div>
 
 

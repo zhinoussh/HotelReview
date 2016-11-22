@@ -37,10 +37,10 @@
                             {
                                 @Html.AntiForgeryToken()
 
-                                <button class="btn btn-danger btn-responsive btn-block"
-                                        type="submit" title="Remove from your wish list">
-                                    <i class="fa fa-thumbs-down fa-lg hidden-xs"></i> Dislike!
-                                </button>
+                                
+                                @Html.BootstrapButton("<i class='fa fa-thumbs-down fa-lg hidden-xs'></i> Dislike!"
+                                    ,"btn-danger btn-responsive btn-block","", HtmlCommon.ButtonType.submit
+                                    , new { title = "Remove from your wish list" })
                             }
 
 

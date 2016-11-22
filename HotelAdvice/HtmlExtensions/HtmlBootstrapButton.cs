@@ -8,31 +8,26 @@ namespace HotelAdvice
 {
     public static class HtmlBootstrapButton
     {
-        public static MvcHtmlString BootstrapButton(this HtmlHelper htmlHelper, string innerHtml, string htmlAttributes = null)
+        public static MvcHtmlString BootstrapButton(this HtmlHelper htmlHelper, string innerHtml, object htmlAttributes = null)
         {
-            return BootstrapButton(htmlHelper, innerHtml, null, null, HtmlCommon.ButtonType.button, null, htmlAttributes);
+            return BootstrapButton(htmlHelper, innerHtml, null, null, HtmlCommon.ButtonType.button, htmlAttributes);
         }
 
         public static MvcHtmlString BootstrapButton(this HtmlHelper htmlHelper, string innerHtml, string cssClass
-            , string htmlAttributes = null)
+            , object htmlAttributes = null)
         {
-            return BootstrapButton(htmlHelper, innerHtml, cssClass, null, HtmlCommon.ButtonType.button, null, htmlAttributes);
+            return BootstrapButton(htmlHelper, innerHtml, cssClass, null, HtmlCommon.ButtonType.button, htmlAttributes);
         }
 
         public static MvcHtmlString BootstrapButton(this HtmlHelper htmlHelper, string innerHtml, string cssClass
-            , string name, string htmlAttributes = null)
+            , string name, object htmlAttributes = null)
         {
-            return BootstrapButton(htmlHelper, innerHtml, cssClass,name, HtmlCommon.ButtonType.button, null, htmlAttributes);
+            return BootstrapButton(htmlHelper, innerHtml, cssClass,name, HtmlCommon.ButtonType.button, htmlAttributes);
         }
         
-        public static MvcHtmlString BootstrapButton(this HtmlHelper htmlHelper, string innerHtml, string cssClass
-           , string name, HtmlCommon.ButtonType buttonType, string htmlAttributes = null)
-        {
-            return BootstrapButton(htmlHelper, innerHtml, cssClass, name, buttonType, null, htmlAttributes);
-        }
 
         public static MvcHtmlString BootstrapButton(this HtmlHelper htmlHelper, string innerHtml, string cssClass
-            ,string name,HtmlCommon.ButtonType buttonType,string title ,string htmlAttributes=null)
+            ,string name,HtmlCommon.ButtonType buttonType,object htmlAttributes=null)
         {
             TagBuilder tb = new TagBuilder("button");
 
@@ -65,9 +60,6 @@ namespace HotelAdvice
                     tb.MergeAttribute("type", "reset");
                     break;
             }
-
-            if (!string.IsNullOrEmpty(title))
-                tb.MergeAttribute("title", title);
 
             tb.MergeAttributes(HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
 

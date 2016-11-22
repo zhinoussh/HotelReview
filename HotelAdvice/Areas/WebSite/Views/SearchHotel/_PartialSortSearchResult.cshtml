@@ -65,8 +65,9 @@
 
 
         <div class="col-sm-4 col-xs-12">
-            <button type="button" class="btn btn-sort btn-responsive dropdown-toggle btn-block" data-toggle="dropdown">Stars</button>
-           
+            @Html.BootstrapButton("Stars", "btn-sort btn-responsive dropdown-toggle btn-block", ""
+           , new {  data_toggle="dropdown"})
+
             <ul class="dropdown-menu dropdown-menu-sort" role="menu">
                 <li>
                         @Ajax.ActionLink("5 to 1 Stars", "HotelResults", new

@@ -29,6 +29,7 @@
                                         sort = Request["sort"],
                                         page = Request["page"],
                                         cityId = Request["cityId"],
+                                        citySearch = Request["citySearch"],
                                         score = Request["score"],
                                         HotelName = Request["HotelName"],
                                         center = Request["center"],
@@ -48,12 +49,10 @@
                                 {
                                     @Html.AntiForgeryToken()
 
-                            <button class="btn btn-danger @(!(Model[i].is_favorite) ? "btn-outline" : "") btn-responsive"
-                                    type="submit" title='@(Model[i].is_favorite ? "Remove from your wish list" : "Add to your wish list")'>
-                                <i class="fa fa-heart fa-lg hidden-xs"></i> Like it!
-                            </button>
-                                    
-                                    @Html.boot
+                                    @Html.BootstrapButton("<i class='fa fa-heart fa-lg hidden-xs'></i> Like it!"
+                                         , String.Concat("btn-danger btn-responsive ", !Model[i].is_favorite ? "btn-outline" : "")
+                                         , "", HtmlCommon.ButtonType.submit
+                                         , new { title = Model[i].is_favorite ? "Remove from your wish list" : "Add to your wish list" })
                                 }
 
 

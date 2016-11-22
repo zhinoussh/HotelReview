@@ -64,10 +64,11 @@
                     {
                     @Html.AntiForgeryToken()
 
-                    <button class="btn btn-danger btn-responsive btn-block @(!(Model.is_favorite)?"btn-outline":"") "
-                            type="submit" title='@(Model.is_favorite ? "Remove from your wish list" : "Add to your wish list")'>
-                        <i class="fa fa-heart fa-lg"></i> Like it!
-                    </button>
+
+                            @Html.BootstrapButton("<i class='fa fa-heart fa-lg'></i> Like it!"
+                            , String.Concat("btn-danger btn-responsive btn-block ", !Model.is_favorite ? "btn-outline" : ""), "", HtmlCommon.ButtonType.submit
+                            , new { title = Model.is_favorite ? "Remove from your wish list" : "Add to your wish list" })
+
                     }
                     </div>
 
@@ -87,10 +88,10 @@
                         <div class="col-xs-12 nopadding">
                             @Html.HiddenFor(model => model.HotelId, new { id = "hotel_id", Name = "hotel_id" })
                             @Html.TextBoxFor(model => model.YourRating, new { @class = "YourRating", id = "your_rating", Name = "your_rating" })
-                        </div>   <div class="col-xs-12 nopadding top-buffer10">
-                            <button class=" btn btn-warning btn-responsive btn-block " type="submit">
-                                Send it!
-                            </button>
+                        </div>   
+                         <div class="col-xs-12 nopadding top-buffer10">
+
+                            @Html.BootstrapButton(" Send it!", "btn-warning btn-responsive btn-block", "", HtmlCommon.ButtonType.submit)
                         </div>
                             }
                             </div>

@@ -6,10 +6,10 @@
 <div class="well well-review" >
 
     <div class="col-xs-2 nopadding">
-        @Html.ImageLink("HotelDetails", "SearchHotel", String.Concat("/Upload/", @Model[i].HotelName, "/main.jpg")
-                        , "img_result img-responsive", new { id = @Model[i].HotelId })
+        @Html.ImageLink("HotelDetails", "SearchHotel", String.Concat("/Upload/", Model.HotelName, "/main.jpg")
+                        , "img_result img-responsive", new { id = Model.HotelId })
     </div>
-    <div class="col-xs-7  nopadding">
+    <div class="col-xs-7  top-buffer10">
       
         <div class="col-xs-12 nopadding">
 
@@ -40,8 +40,8 @@
 
         </div>
     <div class="col-xs-3 nopadding">
-        <div class="col-xs-12">
-            <div class=" col-xs-6 ">
+        <div class="col-xs-12 top-buffer10 ">
+            <div class=" col-xs-6">
                 Rate by Guests
             </div>
             <div class="col-xs-6 nopadding">

@@ -42,17 +42,17 @@
                     </div>
 
                     <div class="col-sm-6 col-xs-12 top-buffer10 nopadding_left ">
-                        <button class="btn btn-primary btn-responsive btn-block" id="btn_edit_review" data-url='/User/EditReview/@Model[i].HotelId?page=@Request["page"]'>
-                            <i class="glyphicon glyphicon-pencil hidden-xs"></i> Edit Review
-                        </button>
+                        @Html.BootstrapButton("<i class='glyphicon glyphicon-pencil hidden-xs'></i> Edit Review"
+                      , "btn-primary btn-responsive btn-block", "btn_edit_review",
+                      new { data_url=String.Concat(new string[]{"/User/EditReview/",Model[i].HotelId+"","?page=",Request["page"]})})
+
                     </div>
 
                     <div class="col-sm-6 col-xs-12 top-buffer10 nopadding_right ">
 
-                                <button class=" btn btn-danger btn-responsive btn-block " id="btn_delete_review"
-                                        data-url="/User/DeleteReview/@Model[i].HotelId?page=@Request["page"]">
-                                    <i class="glyphicon glyphicon-trash hidden-xs"></i> Delete Review
-                                </button>
+                        @Html.BootstrapButton("<i class='glyphicon glyphicon-trash hidden-xs'></i> Delete Review"
+                                            , "btn-danger btn-responsive btn-block", "btn_delete_review",
+                                 new { data_url = String.Concat(new string[] { "/User/DeleteReview/", Model[i].HotelId + "", "?page=", Request["page"] }) })
                         
                     </div>
                 </div>
