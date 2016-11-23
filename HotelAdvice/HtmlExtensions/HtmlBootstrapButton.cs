@@ -10,24 +10,30 @@ namespace HotelAdvice
     {
         public static MvcHtmlString BootstrapButton(this HtmlHelper htmlHelper, string innerHtml, object htmlAttributes = null)
         {
-            return BootstrapButton(htmlHelper, innerHtml, null, null, HtmlCommon.ButtonType.button, htmlAttributes);
+            return BootstrapButton(htmlHelper, innerHtml, null, htmlAttributes);
         }
 
         public static MvcHtmlString BootstrapButton(this HtmlHelper htmlHelper, string innerHtml, string cssClass
-            , object htmlAttributes = null)
+        , object htmlAttributes = null)
         {
-            return BootstrapButton(htmlHelper, innerHtml, cssClass, null, HtmlCommon.ButtonType.button, htmlAttributes);
+            return BootstrapButton(htmlHelper, innerHtml, cssClass, null, htmlAttributes);
         }
 
         public static MvcHtmlString BootstrapButton(this HtmlHelper htmlHelper, string innerHtml, string cssClass
-            , string name, object htmlAttributes = null)
+           , string name, object htmlAttributes = null)
         {
-            return BootstrapButton(htmlHelper, innerHtml, cssClass,name, HtmlCommon.ButtonType.button, htmlAttributes);
+            return BootstrapButton(htmlHelper, innerHtml, cssClass, name, HtmlCommon.ButtonType.button, htmlAttributes);
+        }
+
+        public static MvcHtmlString BootstrapButton(this HtmlHelper htmlHelper, string innerHtml, string cssClass
+            , string name, HtmlCommon.ButtonType buttonType, object htmlAttributes = null)
+        {
+            return BootstrapButton(htmlHelper, innerHtml, cssClass, name, buttonType, null, htmlAttributes);
         }
         
 
         public static MvcHtmlString BootstrapButton(this HtmlHelper htmlHelper, string innerHtml, string cssClass
-            ,string name,HtmlCommon.ButtonType buttonType,object htmlAttributes=null)
+          , string name, HtmlCommon.ButtonType buttonType,string title, object htmlAttributes = null)
         {
             TagBuilder tb = new TagBuilder("button");
 
@@ -49,7 +55,7 @@ namespace HotelAdvice
             HtmlCommon.AddIdName(tb, name, "");
 
             switch (buttonType)
-            {   
+            {
                 case HtmlCommon.ButtonType.button:
                     tb.MergeAttribute("type", "button");
                     break;
@@ -60,6 +66,9 @@ namespace HotelAdvice
                     tb.MergeAttribute("type", "reset");
                     break;
             }
+
+            if(!string.IsNullOrEmpty(title))
+                tb.MergeAttribute("title", title);
 
             tb.MergeAttributes(HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
 
