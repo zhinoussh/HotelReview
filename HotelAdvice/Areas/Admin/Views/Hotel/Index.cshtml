@@ -27,15 +27,16 @@
             <input type="text" id="filter" name="filter" class="form-control" placeholder="Filter hotels..." value="@ViewBag.filter" />
 
             <span class="input-group-btn">
-                <button class="btn btn-primary btn-responsive" type="submit"><span class="glyphicon glyphicon-search"></span> Search</button>
+                @Html.BootstrapButton("<span class='glyphicon glyphicon-search'></span> Search", "btn-primary btn-responsive"
+                    , "", HtmlCommon.ButtonType.submit)
             </span>
         </div>
     </div>
 }
 <div class="col-xs-2 col-sm-offset-5 col-xs-offset-1  text-right">
-    <button type="button" class="btn btn-success" id="btn_add_new" data-url="/Admin/Hotel/ADD_New_Hotel">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add New
-    </button>
+ 
+    @Html.BootstrapButton("<span class='glyphicon glyphicon-plus'></span> Add New", "btn-success "
+                          , "btn_add_new", HtmlCommon.ButtonType.button, new { data_url = "/Admin/Hotel/ADD_New_Hotel" })
 </div>
 
     <div id="table_container" class="col-xs-12 top-buffer20" >

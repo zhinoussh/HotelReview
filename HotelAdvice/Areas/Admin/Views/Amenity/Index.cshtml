@@ -39,7 +39,8 @@
                 <input type="text" id="amenity_name" name="amenity_name" class="form-control" placeholder="Amenity Name" />
 
                 <span class="input-group-btn">
-                    <button class="btn btn-success" type="submit" style="width:90px" ><span class="glyphicon glyphicon-plus"></span> Add</button>
+                    @Html.BootstrapButton("<span class='glyphicon glyphicon-plus'></span> Add", "btn-success "
+                    , "", HtmlCommon.ButtonType.submit, new { style = "width:90px" })
                 </span>
             </div>
         </div>
@@ -58,7 +59,8 @@
                 <input type="text" id="filter" name="filter" class="form-control" placeholder="Filter Amenities..." value="@ViewBag.filter" />
 
                 <span class="input-group-btn">
-                    <button class="btn btn-primary btn-responsive" type="submit" ><span class="glyphicon glyphicon-search"></span> Search</button>
+                    @Html.BootstrapButton("<span class='glyphicon glyphicon-search'></span> Search", "btn-primary btn-responsive"
+                    , "", HtmlCommon.ButtonType.submit)
                 </span>
             </div>
         </div>

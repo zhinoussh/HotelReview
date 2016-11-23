@@ -10,7 +10,7 @@
                 @Html.TextBoxFor(model => model.Destination_Name, new { @class = "form-control", @placeholder = "Find Hotel, City or Destination...", id = "search_destination" })
             </div>
             <div class="col-xs-1 col-sm-2  nopadding_left">
-                <button type="submit" class="btn btn_search"><i class="glyphicon glyphicon-search"></i>&nbsp;Search</button>
+                @Html.BootstrapButton("<i class='glyphicon glyphicon-search'></i>&nbsp;Search", "btn_search", "", HtmlCommon.ButtonType.submit)
             </div>
         </div>
     </div>
