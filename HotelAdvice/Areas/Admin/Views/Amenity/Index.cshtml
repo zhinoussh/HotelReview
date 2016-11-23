@@ -57,7 +57,7 @@
         <div class="col-xs-12  top-buffer20">
             <div class="input-group">
                 <input type="text" id="filter" name="filter" class="form-control" placeholder="Filter Amenities..." value="@ViewBag.filter" />
-
+                @Html.BootstrapTextBoxFor(null)
                 <span class="input-group-btn">
                     @Html.BootstrapButton("<span class='glyphicon glyphicon-search'></span> Search", "btn-primary btn-responsive"
                     , "", HtmlCommon.ButtonType.submit)
