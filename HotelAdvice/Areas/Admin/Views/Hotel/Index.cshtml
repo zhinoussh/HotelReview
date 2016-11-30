@@ -24,8 +24,8 @@
 
     <div class="col-sm-5 col-xs-7">
         <div class="input-group">
-            <input type="text" id="filter" name="filter" class="form-control" placeholder="Filter hotels..." value="@ViewBag.filter" />
-
+            @Html.BootstrapTextBox("filter", (string)ViewBag.filter, "Search Hotels...", "Search Hotels")
+            
             <span class="input-group-btn">
                 @Html.BootstrapButton("<span class='glyphicon glyphicon-search'></span> Search", "btn-primary btn-responsive"
                     , "", HtmlCommon.ButtonType.submit)

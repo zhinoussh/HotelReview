@@ -28,7 +28,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        @Html.TextBoxFor(model => model.cityName, new { @placeholder = "City Name", @class = "form-control" })
+                        @Html.BootstrapTextBoxFor(model => model.cityName, "", "City Name", "City Name")
                         @Html.ValidationMessageFor(m => m.cityName, "", new { @class = "text-danger" })
                     </div>
 

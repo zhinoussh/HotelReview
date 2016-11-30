@@ -20,7 +20,7 @@
                 @Html.HiddenFor(model => model.RateId)
                 @Html.HiddenFor(model => model.UserId)
                 @Html.HiddenFor(model=>model.HotelId)
-                @Html.TextBoxFor(model => model.reviewTitle, new { @class = "form-control", placeholder = "Review Title..." })
+                @Html.BootstrapTextBoxFor(model => model.reviewTitle, "", "Review Title...", "Review Title")
             </div>
         </div>
 
@@ -42,7 +42,7 @@
                 How do you overally rate this hotel?
             </div>
             <div class=" col-xs-12  text-center">
-                @Html.TextBoxFor(model => model.total_rating, new { @class = "YourRating-review" })
+                @Html.BootstrapTextBoxFor(model => model.total_rating, "","YourRating-review")
             </div>
         </div>
         <div class="col-xs-12 top-buffer10">
@@ -55,34 +55,34 @@
 
             <div class=" col-xs-4 top-buffer10 col-xs-offset-1">@Html.LabelFor(model => model.Cleanliness_rating, new { @class = "text-primary" })</div>
             <div class=" col-xs-7">
-                @Html.TextBoxFor(model => model.Cleanliness_rating, new { @class = "YourRating-review" })
+                @Html.BootstrapTextBoxFor(model => model.Cleanliness_rating, "", "YourRating-review")
             </div>
 
 
             <div class=" col-xs-4 top-buffer10 col-xs-offset-1">@Html.LabelFor(model => model.Comfort_rating, new { @class = "text-primary" })</div>
             <div class=" col-xs-7">
-                @Html.TextBoxFor(model => model.Comfort_rating, new { @class = "YourRating-review" })
+                @Html.BootstrapTextBoxFor(model => model.Comfort_rating, "", "YourRating-review")
             </div>
 
             <div class=" col-xs-4 top-buffer10 col-xs-offset-1">@Html.LabelFor(model => model.Location_rating, new { @class = "text-primary" })</div>
             <div class=" col-xs-7">
-                @Html.TextBoxFor(model => model.Location_rating, new { @class = "YourRating-review" })
+                @Html.BootstrapTextBoxFor(model => model.Location_rating, "", "YourRating-review")
             </div>
 
             <div class=" col-xs-4 top-buffer10 col-xs-offset-1">@Html.LabelFor(model => model.Facilities_rating, new { @class = "text-primary" })</div>
 
             <div class=" col-xs-7">
-                @Html.TextBoxFor(model => model.Facilities_rating, new { @class = "YourRating-review" })
+                @Html.BootstrapTextBoxFor(model => model.Facilities_rating, "", "YourRating-review")
             </div>
 
             <div class=" col-xs-4 top-buffer10 col-xs-offset-1">@Html.LabelFor(model => model.Staff_rating, new { @class = "text-primary" })</div>
             <div class=" col-xs-7">
-                @Html.TextBoxFor(model => model.Staff_rating, new { @class = "YourRating-review" })
+                @Html.BootstrapTextBoxFor(model => model.Staff_rating, "", "YourRating-review")
             </div>
 
             <div class=" col-xs-4 top-buffer10 col-xs-offset-1">@Html.LabelFor(model => model.Value_for_money_rating, new { @class = "text-primary" })</div>
             <div class=" col-xs-7">
-                @Html.TextBoxFor(model => model.Value_for_money_rating, new { @class = "YourRating-review" })
+                @Html.BootstrapTextBoxFor(model => model.Value_for_money_rating, "", "YourRating-review")
             </div>
 
         </div>

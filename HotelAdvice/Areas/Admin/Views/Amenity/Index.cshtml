@@ -36,7 +36,7 @@
             <input type="hidden" id="amenity_id" name="amenity_id" />
 
             <div class="input-group">
-                <input type="text" id="amenity_name" name="amenity_name" class="form-control" placeholder="Amenity Name" />
+                @Html.BootstrapTextBox("amenity_name", "", "Amenity Name", "Amenity Name")
 
                 <span class="input-group-btn">
                     @Html.BootstrapButton("<span class='glyphicon glyphicon-plus'></span> Add", "btn-success "
@@ -56,9 +56,9 @@
 
         <div class="col-xs-12  top-buffer20">
             <div class="input-group">
-                <input type="text" id="filter" name="filter" class="form-control" placeholder="Filter Amenities..." value="@ViewBag.filter" />
-                
-                <span class="input-group-btn">
+                @Html.BootstrapTextBox("filter",(string) ViewBag.filter, "Search Amenities...", "Search Amenities")
+               
+                 <span class="input-group-btn">
                     @Html.BootstrapButton("<span class='glyphicon glyphicon-search'></span> Search", "btn-primary btn-responsive"
                     , "", HtmlCommon.ButtonType.submit)
                 </span>

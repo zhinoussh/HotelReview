@@ -13,7 +13,7 @@
 
     <div class="col-xs-12 nopadding">
         @Html.LabelFor(model => model.Hotel_Name)
-        @Html.TextBoxFor(model => model.Hotel_Name, new { @placeholder = "Hotel Name", @class = "form-control" })
+        @Html.BootstrapTextBoxFor(model => model.Hotel_Name, "", "Hotel Name", "Hotel Name")
     </div>
     <div class="col-xs-12 nopadding top-buffer10">
         @Html.DropDownListFor(model => model.selected_city, new SelectList(Model.City_List, "Value", "Text"), new { @class = "form-control" })
@@ -23,45 +23,25 @@
     <div class="divider_search col-xs-12"></div>
     @Html.LabelFor(model => model.Star1)
 
-    <div class="checkbox checkbox-info">
-        @Html.HiddenFor(model => model.Star5, new { id = "hd_star5" })
-        <input type="checkbox" id="checkbox_star5" onchange="checkbox_Checked('5')" checked="@Model.Star5">
-        <label for="checkbox_star5">
-            <i class="fa fa-star fa-star-search fa-lg"></i><i class="fa fa-star fa-star-search fa-lg"></i><i class="fa fa-star fa-star-search fa-lg"></i><i class="fa fa-star fa-star-search fa-lg"></i><i class="fa fa-star fa-star-search fa-lg"></i>
-        </label>
-    </div>
+    @Html.AwesomeCheckBoxFor(model => model.Star5, "checkbox_star5"
+                    , "<i class='fa fa-star fa-star-search fa-lg'></i><i class='fa fa-star fa-star-search fa-lg'></i><i class='fa fa-star fa-star-search fa-lg'></i><i class='fa fa-star fa-star-search fa-lg'></i><i class='fa fa-star fa-star-search fa-lg'></i>"
+    , "checkbox-info")
 
-    <div class="checkbox checkbox-info">
-        @Html.HiddenFor(model => model.Star4, new { id = "hd_star4" })
-        <input type="checkbox" id="checkbox_star4" onchange="checkbox_Checked('4')" checked="@Model.Star4">
-        <label for="checkbox_star4">
-            <i class="fa fa-star fa-star-search fa-lg"></i><i class="fa fa-star fa-star-search fa-lg"></i><i class="fa fa-star fa-star-search fa-lg"></i><i class="fa fa-star fa-star-search fa-lg"></i>
-        </label>
-    </div>
+    @Html.AwesomeCheckBoxFor(model => model.Star4, "checkbox_star4"
+                    , "<i class='fa fa-star fa-star-search fa-lg'></i><i class='fa fa-star fa-star-search fa-lg'></i><i class='fa fa-star fa-star-search fa-lg'></i><i class='fa fa-star fa-star-search fa-lg'></i>"
+    , "checkbox-info")
 
+    @Html.AwesomeCheckBoxFor(model => model.Star3, "checkbox_star3"
+                    , "<i class='fa fa-star fa-star-search fa-lg'></i><i class='fa fa-star fa-star-search fa-lg'></i><i class='fa fa-star fa-star-search fa-lg'></i>"
+    , "checkbox-info")
 
-    <div class="checkbox checkbox-info">
-        @Html.HiddenFor(model => model.Star3, new { id = "hd_star3" })
-        <input type="checkbox" id="checkbox_star3" onchange="checkbox_Checked('3')" checked="@Model.Star3">
-        <label for="checkbox_star3">
-            <i class="fa fa-star fa-star-search fa-lg"></i><i class="fa fa-star fa-star-search fa-lg"></i><i class="fa fa-star fa-star-search fa-lg"></i>
-        </label>
-    </div>
-    <div class="checkbox checkbox-info">
-        @Html.HiddenFor(model => model.Star2, new { id = "hd_star2" })
-        <input type="checkbox" id="checkbox_star2" onchange="checkbox_Checked('2')" checked="@Model.Star2">
-        <label for="checkbox_star2">
-            <i class="fa fa-star fa-star-search fa-lg"></i><i class="fa fa-star fa-star-search fa-lg"></i>
-        </label>
-    </div>
+    @Html.AwesomeCheckBoxFor(model => model.Star2, "checkbox_star2"
+                    , "<i class='fa fa-star fa-star-search fa-lg'></i><i class='fa fa-star fa-star-search fa-lg'></i>"
+    , "checkbox-info")
 
-    <div class="checkbox checkbox-info">
-        @Html.HiddenFor(model => model.Star1, new { id = "hd_star1" })
-        <input type="checkbox" id="checkbox_star1" onchange="checkbox_Checked('1')" checked="@Model.Star1">
-        <label for="checkbox_star1">
-            <i class="fa fa-star fa-star-search fa-lg"></i>
-        </label>
-    </div>
+     @Html.AwesomeCheckBoxFor(model => model.Star1, "checkbox_star1"
+     , "<i class='fa fa-star fa-star-search fa-lg'></i>"
+     , "checkbox-info")
 
     <div class="divider_search col-xs-12"></div>
 
@@ -101,9 +81,8 @@
         @Html.LabelFor(model => model.lst_amenity)
     </div>
     <div class="col-xs-12 nopadding">
-        @for (int i = 0; i < Model.lst_amenity.Count; i++)
+        @*@for (int i = 0; i < Model.lst_amenity.Count; i++)
         {
-
             <div class="col-xs-6 nopadding" style="height:30px">
                 <div class="checkbox checkbox-info">
                     @Html.HiddenFor(model => model.lst_amenity[i].AmenityID)
@@ -113,8 +92,12 @@
                         @Html.DisplayFor(model => model.lst_amenity[i].AmenityName)
                     </label>
                 </div>
+
+                
             </div>
-        }
+        }*@
+
+        @Html.AwesomeCheckboxGroupFor("lst_amenity", Model.lst_amenity, "checkbox-info")
 
     </div>
 

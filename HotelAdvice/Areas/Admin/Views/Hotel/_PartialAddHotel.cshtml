@@ -45,7 +45,7 @@
 
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                @Html.TextBoxFor(model => model.HotelName, new { @placeholder = "Hotel Name", @class = "form-control" })
+                                                @Html.BootstrapTextBoxFor(model => model.HotelName, "", "Hotel Name", "Hotel Name")
                                                 @Html.ValidationMessageFor(m => m.HotelName, "", new { @class = "text-danger" })
                                             </div>
                                             <div class="form-group">
@@ -57,14 +57,14 @@
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="glyphicon glyphicon-star"></i> Star Rating</span>
                                                     <div class="form-control">
-                                                        @Html.TextBoxFor(model => model.HotelStars, new { @class = "HotelStars"})
+                                                        @Html.BootstrapTextBoxFor(model => model.HotelStars, "", "HotelStars")
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="input-group">
                                                     <span class="input-group-addon" style="width:110px"><i class=" glyphicon glyphicon-time"></i> Check In</span>
-                                                    @Html.TextBoxFor(model => model.checkin, new { @class = "form-control", id = "checkin" })
+                                                    @Html.BootstrapTextBoxFor(model => model.checkin, "checkin")
                                                 </div>
                                                 @Html.ValidationMessageFor(m => m.checkin, "", new { @class = "text-danger" })
                                             </div>
@@ -72,7 +72,7 @@
                                             <div class="form-group">
                                                 <div class="input-group">
                                                     <span class="input-group-addon" style="width:110px"><i class=" glyphicon glyphicon-time"></i> Check Out</span>
-                                                    @Html.TextBoxFor(model => model.checkout, new { @class = "form-control", id = "checkout" })
+                                                    @Html.BootstrapTextBoxFor(model => model.checkout, "checkout")
                                                 </div>
                                                 @Html.ValidationMessageFor(m => m.checkout, "", new { @class = "text-danger" })
                                             </div>
@@ -104,7 +104,7 @@
                                         <div class="col-sm-6">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-                                                @Html.TextBoxFor(model => model.Tel, new { @class = "form-control", @placeholder = "Telephone Number"})
+                                                @Html.BootstrapTextBoxFor(model => model.Tel, "", "Telephone Number", "Telephone Number")
                                             </div>
                                             @Html.ValidationMessageFor(m => m.Tel, "", new { @class = "text-danger" })
                                         </div>
@@ -112,7 +112,7 @@
                                         <div class="col-sm-6">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                                                @Html.TextBoxFor(model => model.Fax, new { @class = "form-control", @placeholder = "Fax Number" })
+                                                @Html.BootstrapTextBoxFor(model => model.Fax, "", "Fax Number", "Fax Number")
                                             </div>
                                             @Html.ValidationMessageFor(m => m.Fax, "", new { @class = "text-danger" })
                                         </div>
@@ -122,7 +122,7 @@
                                         <div class="col-sm-6">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
-                                                @Html.TextBoxFor(model => model.Website, new { @class = "form-control", @placeholder = "Web Site" })
+                                                @Html.BootstrapTextBoxFor(model => model.Website, "", "Website", "Website")
                                             </div>
                                             @Html.ValidationMessageFor(m => m.Website, "", new { @class = "text-danger" })
                                         </div>
@@ -130,7 +130,7 @@
                                         <div class="col-sm-6">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @placeholder = "Email" })
+                                                @Html.BootstrapTextBoxFor(model => model.Email, "", "Email", "Email")
                                             </div>
                                             @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                                         </div>
@@ -147,7 +147,7 @@
 
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="glyphicon glyphicon-plane"></i></span>
-                                                    @Html.TextBoxFor(model => model.distance_airport, new { @class = "form-control", @placeholder = "Distance from Airport" })
+                                                    @Html.BootstrapTextBoxFor(model => model.distance_airport, "", "Distance from Airport", "Distance from Airport")
                                                 </div>
                                             </div>
                                             <div class="col-sm-1 nopadding" style="margin-top:2%">
@@ -162,7 +162,7 @@
 
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
-                                                    @Html.TextBoxFor(model => model.distance_citycenter, new { @class = "form-control", @placeholder = "Distance from City Center" })
+                                                    @Html.BootstrapTextBoxFor(model => model.distance_citycenter, "", "Distance from City Center", "Distance from City Center")
                                                 </div>
                                             </div>
                                             <div class="col-sm-1 nopadding" style="margin-top:2%">
@@ -189,12 +189,7 @@
                                         <div class="col-sm-12">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-cutlery"></i></span>
-                                                @Html.TextBoxFor(model => model.restaurants, new
-                                           {
-                                               id = "txt_restaurant",
-                                               @class = "form-control",
-                                               @placeholder = "Enter Restaurants..."
-                                              })
+                                                @Html.BootstrapTextBoxFor(model => model.restaurants, "txt_restaurant", "Enter Restaurants...", "Restaurants")
                                             </div>
 
                                         </div>
@@ -202,12 +197,7 @@
                                         <div class="col-sm-12 top-buffer20">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-bed"></i></span>
-                                                @Html.TextBoxFor(model => model.rooms, new
-                                           {
-                                               id = "txt_room",
-                                               @class = "form-control",
-                                               @placeholder = "Enter Room Types..."
-                                           })
+                                                @Html.BootstrapTextBoxFor(model => model.rooms, "txt_room", "Enter Room Types...", "Rooms")
                                             </div>
 
                                         </div>
@@ -243,12 +233,7 @@
                                         <div class="col-sm-12 top-buffer20">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-eye-open"></i></span>
-                                                @Html.TextBoxFor(model => model.sightseeing, new
-                                           {
-                                               id = "txt_sightseeing",
-                                               @class = "form-control",
-                                               @placeholder = "Enter Sightseeing..."
-                                           })
+                                                @Html.BootstrapTextBoxFor(model => model.sightseeing, "txt_sightseeing", "Enter Sightseeing...", "Sightseeings")
                                             </div>
 
                                         </div>
