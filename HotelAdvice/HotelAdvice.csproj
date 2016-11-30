@@ -245,7 +245,6 @@
     <Compile Include="HtmlExtensions\HtmlCommon.cs" />
     <Compile Include="HtmlExtensions\HtmlImage.cs" />
     <Compile Include="HtmlExtensions\HtmlTextBox.cs" />
-    <Compile Include="HtmlExtensions\RouteValuedictionary.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Config_ProjectDB.cs" />
     <Compile Include="DataAccessLayer\HotelAdviceDB.cs" />
