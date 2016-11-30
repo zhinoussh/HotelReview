@@ -241,7 +241,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HtmlExtensions\HtmCheckBoxGroup.cs" />
     <Compile Include="HtmlExtensions\HtmlBootstrapButton.cs" />
+    <Compile Include="HtmlExtensions\HtmlCheckBox.cs" />
     <Compile Include="HtmlExtensions\HtmlCommon.cs" />
     <Compile Include="HtmlExtensions\HtmlImage.cs" />
     <Compile Include="HtmlExtensions\HtmlTextBox.cs" />

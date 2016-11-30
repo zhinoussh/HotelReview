@@ -709,3 +709,9 @@ color:#0770a4 !important;
 .form-control{
     min-width:100% !important;
 }
+
+.checkbox_in_list{
+    float:right;
+    width:50%;
+    height:30px;
+}
