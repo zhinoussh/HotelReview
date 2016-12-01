@@ -14,7 +14,7 @@ namespace HotelAdvice
     public static class HtmCheckBoxGroup
     {
         public static MvcHtmlString AwesomeCheckboxGroupFor(this HtmlHelper htmlHelper,
-            string name,List<HotelAmenityViewModel> lst_checkbox, string checkboxCss, Object htmlAttributes = null)
+            string name,List<HotelAmenityViewModel> lst_checkbox, string checkboxCss,string containerCss, Object htmlAttributes = null)
         {
 
             StringBuilder sb = new StringBuilder();
@@ -34,16 +34,13 @@ namespace HotelAdvice
                 hd_id_amenity = name + "[" + i + "].AmenityID";
                 hd_selected = name + "[" + i + "].hotel_selected";
 
-                sb.Append("<div class='checkbox_in_list'>");
+                sb.Append("<div class='"+containerCss+"'>");
                 sb.Append("<div class='" + checkboxCss + "'>");
                 sb.Append("<input type='hidden' name='" + hd_id_amenity + "' value='" + lst_checkbox[i].AmenityID + "' />");
                 
                 rvd = new RouteValueDictionary();
                 HtmlCommon.AddIdName(rvd, hd_selected, chk_id);
                 sb.Append(InputExtensions.CheckBox(htmlHelper, hd_selected,rvd));
-                //   sb.Append("<input type='hidden' name='" + hd_selected + "' value='" + chk_status + "' />");
-                //   sb.Append("<input type='checkbox'  id='" + chk_id +  "' name='" + hd_selected + "' value='true' checked  />");
-               
                 sb.Append("<label for='" + chk_id + "' class='text-small'>");
                 sb.Append(lst_checkbox[i].AmenityName);
                 sb.Append("</label>");

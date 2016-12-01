@@ -710,8 +710,8 @@ color:#0770a4 !important;
     min-width:100% !important;
 }
 
-.checkbox_in_list{
-    float:right;
+.checkbox_advance_search{
+    float:left;
     width:50%;
     height:30px;
 }

@@ -210,23 +210,7 @@
                                     <div class="row top-buffer20">
 
                                         <div class="col-sm-12">
-                                            @*@for (int i = 0; i < Model.amenities.Count;i++ )
-                                        {
-                                                <div class="col-sm-3 nopadding">
-
-                                                    <div class="col-sm-1 nopadding" style="width:20px">
-                                                        @Html.CheckBoxFor(model=>model.amenities[i].hotel_selected)
-
-                                                        @Html.HiddenFor(model=>model.amenities[i].AmenityID)
-                                                    </div>
-                                                    <div class="col-sm-10 text-small nopadding ">
-                                                        @Html.DisplayFor(model=>model.amenities[i].AmenityName)
-                                                    </div>
-                                                </div>
-
-                                        }*@
-                                            @Html.AwesomeCheckboxGroupFor("amenities", Model.amenities, "checkbox-info")
-
+                                            @Html.AwesomeCheckboxGroupFor("amenities", Model.amenities, "checkbox-info", "checkbox_add_hotel")
                                         </div>
 
                                         <div class="divider_search"></div>

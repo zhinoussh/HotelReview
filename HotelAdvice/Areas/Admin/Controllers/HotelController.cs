@@ -21,7 +21,7 @@ namespace HotelAdvice.Areas.Admin.Controllers
 
         }
 
-        #region Hotel
+         #region Hotel
 
         // GET: Hotel
         public ActionResult Index(int? page, string filter = null)

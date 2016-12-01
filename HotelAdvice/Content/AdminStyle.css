@@ -31,6 +31,7 @@
 
 a{text-decoration: none !important}
 
+
 .text-danger {
 font-size:9pt;
 }
@@ -220,5 +221,9 @@ background-color:#d2e9ef;
 color:#05576c;
 }
 
-
+.checkbox_add_hotel{
+    float:left;
+    width:25%;
+    height:25px;
+}
 
