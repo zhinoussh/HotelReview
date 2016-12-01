@@ -24,23 +24,22 @@ namespace HotelAdvice
                 checkboxCss = "checkbox " + checkboxCss;
             else
                 checkboxCss = "checkbox";
-            string chk_id, chk_status, hd_id_amenity, hd_selected;
+            string chk_id, name_amenity_id, name_checkbox;
 
             // Add checkboxes
             for (int i = 0; i < lst_checkbox.Count; i++)
             {
                 chk_id = "chk_amenity" + lst_checkbox[i].AmenityID;
-                chk_status = lst_checkbox[i].hotel_selected == true ? "true" : "false";
-                hd_id_amenity = name + "[" + i + "].AmenityID";
-                hd_selected = name + "[" + i + "].hotel_selected";
+                name_amenity_id = name + "[" + i + "].AmenityID";
+                name_checkbox = name + "[" + i + "].hotel_selected";
 
                 sb.Append("<div class='"+containerCss+"'>");
                 sb.Append("<div class='" + checkboxCss + "'>");
-                sb.Append("<input type='hidden' name='" + hd_id_amenity + "' value='" + lst_checkbox[i].AmenityID + "' />");
+                sb.Append("<input type='hidden' name='" + name_amenity_id + "' value='" + lst_checkbox[i].AmenityID + "' />");
                 
                 rvd = new RouteValueDictionary();
-                HtmlCommon.AddIdName(rvd, hd_selected, chk_id);
-                sb.Append(InputExtensions.CheckBox(htmlHelper, hd_selected,rvd));
+                HtmlCommon.AddIdName(rvd, name_checkbox, chk_id);
+                sb.Append(InputExtensions.CheckBox(htmlHelper, name_checkbox, lst_checkbox[i].hotel_selected, rvd));
                 sb.Append("<label for='" + chk_id + "' class='text-small'>");
                 sb.Append(lst_checkbox[i].AmenityName);
                 sb.Append("</label>");
