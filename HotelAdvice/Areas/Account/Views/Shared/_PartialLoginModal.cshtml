@@ -41,7 +41,8 @@
             <div class="form-group col-sm-12">
                 <div class="input-group ">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email",id="txt_username" })
+                    @*@Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email",id="txt_username" })*@
+                    @Html.BootstrapTextBoxFor(m => m.Email, "txt_username", "Email", "Enter your Email")
                 </div>
                 @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
             </div>

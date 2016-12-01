@@ -95,7 +95,7 @@ namespace HotelAdvice
             if (!string.IsNullOrEmpty(title))
                 rvd.Add("title", title);
 
-            if (string.IsNullOrEmpty(placeHolder))
+            if (string.IsNullOrEmpty(cssClass))
                 cssClass = "form-control";
             else
                 cssClass = "fomr-control " + cssClass;
