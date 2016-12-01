@@ -48,20 +48,8 @@ namespace HotelAdvice.Areas.Admin.Controllers
         [ModelValidator]
         public ActionResult ADD_New_Hotel(HotelViewModel Hotel)
         {
-            //if (ModelState.IsValid)
-            //{
                 DataService.Post_AddNewHotel(Hotel, this);
                 return Json(new { msg = "The Hotel inserted successfully.", ctrl = "/Admin/Hotel", cur_pg = Hotel.CurrentPage, filter = Hotel.CurrentFilter + "" });
-            //}
-            //else
-            //{
-            //    String messages = String.Join(Environment.NewLine, ModelState.Values.SelectMany(v => v.Errors)
-            //                                                .Select(v => v.ErrorMessage + " " + v.Exception));
-            //    List<CityViewModel> cities = DataService.DataLayer.get_cities();
-            //    Hotel.lst_city = new SelectList(cities, "cityID", "cityName");
-            //    return PartialView("_PartialAddHotel", Hotel);
-            //}
-
         }
 
         [HttpGet]

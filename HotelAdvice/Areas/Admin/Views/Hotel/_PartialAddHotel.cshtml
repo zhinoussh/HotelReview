@@ -210,7 +210,7 @@
                                     <div class="row top-buffer20">
 
                                         <div class="col-sm-12">
-                                            @for (int i = 0; i < Model.amenities.Count;i++ )
+                                            @*@for (int i = 0; i < Model.amenities.Count;i++ )
                                         {
                                                 <div class="col-sm-3 nopadding">
 
@@ -224,7 +224,8 @@
                                                     </div>
                                                 </div>
 
-                                        }
+                                        }*@
+                                            @Html.AwesomeCheckboxGroupFor("amenities", Model.amenities, "checkbox-info")
 
                                         </div>
 
