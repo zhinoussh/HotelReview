@@ -108,17 +108,25 @@ namespace HotelAdvice.DataAccessLayer
                 new_obj.distance_citycenter = (float)hotel.distance_citycenter;
             }
 
-            //this is insert
-            if (hotel.HotelId == 0)
-                _dbContext.tbl_Hotel.Add(new_obj);
-            
-            _dbContext.SaveChanges();
+             int hotel_id = hotel.HotelId;
 
+            //this is insert
+            if (hotel_id== 0)
+            {
+                _dbContext.tbl_Hotel.Add(new_obj);
+                _dbContext.SaveChanges();
+                hotel_id=new_obj.HotelId;
+            }
+            else
+            {
+                _dbContext.SaveChanges();
+            }
+           
             //Save Restaurants,Rooms           
-            Save_Restaurants(hotel.restaurants, hotel.HotelId);
-            Save_Rooms(hotel.rooms, hotel.HotelId);
-            Save_Amenities(hotel.amenities, hotel.HotelId);
-            Save_Sighseeings(hotel.sightseeing, hotel.HotelId);
+            Save_Restaurants(hotel.restaurants, hotel_id);
+            Save_Rooms(hotel.rooms, hotel_id);
+            Save_Amenities(hotel.amenities, hotel_id);
+            Save_Sighseeings(hotel.sightseeing, hotel_id);
             
 
         }
@@ -418,13 +426,14 @@ namespace HotelAdvice.DataAccessLayer
 
         public List<HotelAmenityViewModel> get_Amenities_For_search()
         {
-            List<HotelAmenityViewModel> lst_amenity = _dbContext.tbl_Amenity
-                .Select(r => new HotelAmenityViewModel
-            { 
-                AmenityID=r.AmenityID,
-                AmenityName=r.AmenityName,
-                hotel_selected=false
-            }).ToList();
+            List<HotelAmenityViewModel> lst_amenity =
+                (from a in _dbContext.tbl_Amenity
+                 select new HotelAmenityViewModel
+                  {
+                      AmenityID = a.AmenityID,
+                      AmenityName = a.AmenityName,
+                      hotel_selected = false
+                  }).ToList();
 
             return lst_amenity;
 
