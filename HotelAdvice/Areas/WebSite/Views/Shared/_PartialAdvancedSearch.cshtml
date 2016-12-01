@@ -81,28 +81,10 @@
         @Html.LabelFor(model => model.lst_amenity)
     </div>
     <div class="col-xs-12 nopadding">
-        @*@for (int i = 0; i < Model.lst_amenity.Count; i++)
-        {
-            <div class="col-xs-6 nopadding" style="height:30px">
-                <div class="checkbox checkbox-info">
-                    @Html.HiddenFor(model => model.lst_amenity[i].AmenityID)
-                    @Html.HiddenFor(model => model.lst_amenity[i].hotel_selected, new { id = "hd_amenity" + Model.lst_amenity[i].AmenityID })
-                    <input type="checkbox" id="chk_amenity@(Model.lst_amenity[i].AmenityID)" onchange="chk_amenity_changed(@(Model.lst_amenity[i].AmenityID))">
-                    <label for="chk_amenity@(Model.lst_amenity[i].AmenityID)" class="text-small">
-                        @Html.DisplayFor(model => model.lst_amenity[i].AmenityName)
-                    </label>
-                </div>
-
-                
-            </div>
-        }*@
-
-        @Html.AwesomeCheckboxGroupFor("lst_amenity", Model.lst_amenity, "checkbox-info")
-
+         @Html.AwesomeCheckboxGroupFor("lst_amenity", Model.lst_amenity, "checkbox-info")
     </div>
 
-    <div class="col-xs-12 top-buffer20">
-       
+    <div class="col-xs-12 top-buffer20">       
         @Html.BootstrapButton("<span class='glyphicon glyphicon-search'></span> Search Hotels", "btn-primary btn-responsive btn-block", "", HtmlCommon.ButtonType.submit)
     </div>
 </div> @*END of WELL*@

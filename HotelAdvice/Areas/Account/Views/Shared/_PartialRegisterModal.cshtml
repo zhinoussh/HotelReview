@@ -31,17 +31,17 @@
                 @Html.ValidationSummary("", new { @class = "text-danger" })
                 <div class="form-group col-sm-12" style="margin-bottom:0">
                     <div class="form-group col-sm-6" style="padding-left:0;">
-                        @Html.TextBoxFor(m => m.fname, new { @class = "form-control", @placeholder = "First Name" })
+                        @Html.BootstrapTextBoxFor(m => m.fname,"", "First Name", "Enter First Name")
                     </div>
 
                     <div class="form-group col-sm-6" style="padding-right:0;">
-                        @Html.TextBoxFor(m => m.lname, new { @class = "form-control", @placeholder = "Larst Name" })
+                        @Html.BootstrapTextBoxFor(m => m.lname,"", "Larst Name", "Enter Larst Name")
                     </div>
                     @Html.ValidationMessageFor(m => m.lname, "", new { @class = "text-danger" })
                     @Html.ValidationMessageFor(m => m.fname, "", new { @class = "text-danger" })
                 </div>
             <div class="form-group col-sm-12">
-                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email", style = "max-width:100%" })
+                @Html.BootstrapTextBoxFor(m => m.Email, "", "Email", "Enter Email")
                 @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
             </div>
 
