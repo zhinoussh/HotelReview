@@ -45,23 +45,63 @@ namespace HotelAdvice.DataAccessLayer
             HomeViewModel vm = new HomeViewModel();
             vm.lst_city = DataLayer.get_cities().OrderBy(x => x.cityName).ToList();
 
-            // List<CityViewModel> search_city=vm.lst_city;
-            // search_city.Add(new CityViewModel{cityID=0,cityName="Select City"});
-
             //set advanced search view model
-            vm.Advanced_Search = Set_Advanced_Search("");
+            vm.Advanced_Search = Set_Advanced_Search_Fields("", null, null, null, "", null, null, null, null, null, "");
 
             return vm;
         }
 
-        public AdvancedSearchViewModel Set_Advanced_Search(string selected_amenities)
+        public AdvancedSearchViewModel Set_Advanced_Search_Fields(string HotelName, int? cityId
+            , int? center, int? airport, string score, bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star5, string selected_amenities)
         {
             AdvancedSearchViewModel vm_search = new AdvancedSearchViewModel();
+
             List<CityViewModel> lst_city = DataLayer.get_cities().OrderBy(x => x.cityName).ToList();
             List<CityViewModel> search_city = lst_city;
             search_city.Add(new CityViewModel { cityID = 0, cityName = "Select City" });
             vm_search.City_List = new SelectList(search_city, "cityID", "cityName");
-            vm_search.selected_city = 0;
+            vm_search.selected_city = cityId.HasValue ? cityId.Value : 0;
+
+            vm_search.Hotel_Name = HotelName;
+            vm_search.Guest_Rating = score;
+            vm_search.Star1 = Star1.HasValue ? Star1.Value : false;
+            vm_search.Star2 = Star2.HasValue ? Star2.Value : false;
+            vm_search.Star3 = Star3.HasValue ? Star3.Value : false;
+            vm_search.Star4 = Star4.HasValue ? Star4.Value : false;
+            vm_search.Star5 = Star5.HasValue ? Star5.Value : false;
+
+            if (!String.IsNullOrEmpty(score))
+            {
+                string[] temp = score.Split(new char[] { ',' });
+                vm_search.Min_Guest_Rating = float.Parse(temp[0]);
+                vm_search.Max_Guest_Rating = float.Parse(temp[1]);
+            }
+            else
+            {
+                vm_search.Min_Guest_Rating = 0;
+                vm_search.Max_Guest_Rating = 5;
+            }
+
+            string stars = "";
+            if (Star1 == true)
+                stars += "1,";
+
+            if (Star2 == true)
+                stars += "2,";
+
+            if (Star3 == true)
+                stars += "3,";
+
+            if (Star4 == true)
+                stars += "4,";
+
+            if (Star5 == true)
+                stars += "5,";
+
+            if (stars.Length > 0)
+                stars = stars.Remove(stars.Length - 1, 1);
+
+            vm_search.hotel_stars = stars;
 
 
             List<KeyValuePair<int, string>> lst_locations = new List<KeyValuePair<int, string>>();
@@ -74,8 +114,9 @@ namespace HotelAdvice.DataAccessLayer
             lst_locations.Add(new KeyValuePair<int, string>(10,"less than 10 km"));
             lst_locations.Add(new KeyValuePair<int, string>(20,"less than 20 km"));
             vm_search.Location = new SelectList(lst_locations, "Key", "Value");
-            vm_search.distance_city_center = 1000;
-            vm_search.distance_airport = 1000;
+            vm_search.distance_airport = airport.HasValue ? airport.Value : 1000;
+            vm_search.distance_city_center = center.HasValue ? center.Value : 1000;
+            
 
             vm_search.lst_amenity = DataLayer.get_Amenities_For_search(selected_amenities);
 
@@ -601,7 +642,8 @@ namespace HotelAdvice.DataAccessLayer
             , int? center, int? airport, string score, bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star5, string amenity)
         {
             SearchPageViewModel vm = new SearchPageViewModel();
-            vm.Advnaced_Search = Set_Advanced_Search(amenity);
+           
+            vm.Advnaced_Search = Set_Advanced_Search_Fields(HotelName,cityId,center,airport,score,Star1, Star2, Star3, Star4,Star5, amenity);
 
             if (citySearch.HasValue && citySearch.Value == true)
             {
@@ -609,7 +651,6 @@ namespace HotelAdvice.DataAccessLayer
                 if (city_prop != null)
                     vm.city_name = "Hotels in " + city_prop[0];
 
-                vm.Advnaced_Search.selected_city = cityId.Value;
                 //get hotel list in this city_id
                 List<HotelSearchViewModel> lst_hotels = DataLayer.Search_Hotels_in_city(cityId.Value, user_id);
 
@@ -617,50 +658,10 @@ namespace HotelAdvice.DataAccessLayer
             }
             else
             {
-                //set advanced search
-                vm.Advnaced_Search.Hotel_Name = HotelName;
-                vm.Advnaced_Search.selected_city = cityId.HasValue ? cityId.Value : 0;
-                vm.Advnaced_Search.distance_airport = airport.HasValue ? airport.Value : 1000;
-                vm.Advnaced_Search.distance_city_center = center.HasValue ? center.Value : 1000;
-                vm.Advnaced_Search.Guest_Rating = score;
-                vm.Advnaced_Search.Star1 = Star1.Value;
-                vm.Advnaced_Search.Star2 = Star2.Value;
-                vm.Advnaced_Search.Star3 = Star3.Value;
-                vm.Advnaced_Search.Star4 = Star4.Value;
-                vm.Advnaced_Search.Star5 = Star5.Value;
-
+                
                 //this is advanced search
                 vm.city_name = "Matching results for your search....";
-
-                //set advanced search
-                if (score.Length > 0)
-                {
-                    string[] temp = score.Split(new char[] { ',' });
-                    vm.Advnaced_Search.Min_Guest_Rating = float.Parse(temp[0]);
-                    vm.Advnaced_Search.Max_Guest_Rating = float.Parse(temp[1]);
-                }
-
-                string stars = "";
-                if (Star1 == true)
-                    stars += "1,";
-
-                if (Star2 == true)
-                    stars += "2,";
-
-                if (Star3 == true)
-                    stars += "3,";
-
-                if (Star4 == true)
-                    stars += "4,";
-
-                if (Star5 == true)
-                    stars += "5,";
-
-                if (stars.Length > 0)
-                    stars = stars.Remove(stars.Length - 1, 1);
-
-                vm.Advnaced_Search.hotel_stars = stars;
-
+              
                 //get hotel list by these criterias
                 List<HotelSearchViewModel> lst_hotels = DataLayer.Advanced_Search(vm.Advnaced_Search, user_id);
 
@@ -674,52 +675,8 @@ namespace HotelAdvice.DataAccessLayer
         public IPagedList<HotelSearchViewModel> Get_PartialHotelResults(string user_id, int? cityId, int? page, string sort, string HotelName, int? center
             , int? airport, string score, bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star5, string amenity)
         {
-            AdvancedSearchViewModel vm = new AdvancedSearchViewModel();
-            vm.Hotel_Name = HotelName;
-            vm.selected_city = cityId.HasValue ? cityId.Value : 0;
-            vm.distance_airport = airport.HasValue ? airport.Value : 1000;
-            vm.distance_city_center = center.HasValue ? center.Value : 1000;
-            vm.Guest_Rating = score;
-            vm.Star1 = Star1.HasValue ? Star1.Value : false;
-            vm.Star2 = Star2.HasValue ? Star2.Value : false;
-            vm.Star3 = Star3.HasValue ? Star3.Value : false;
-            vm.Star4 = Star4.HasValue ? Star4.Value : false;
-            vm.Star5 = Star5.HasValue ? Star5.Value : false;
-
-
-            if (!String.IsNullOrEmpty(score))
-            {
-                string[] temp = score.Split(new char[] { ',' });
-                vm.Min_Guest_Rating = float.Parse(temp[0]);
-                vm.Max_Guest_Rating = float.Parse(temp[1]);
-            }
-            else
-            {
-                vm.Min_Guest_Rating = 0;
-                vm.Max_Guest_Rating = 5;
-            }
-
-            string stars = "";
-            if (Star1 == true)
-                stars += "1,";
-
-            if (Star2 == true)
-                stars += "2,";
-
-            if (Star3 == true)
-                stars += "3,";
-
-            if (Star4 == true)
-                stars += "4,";
-
-            if (Star5 == true)
-                stars += "5,";
-
-            if (stars.Length > 0)
-                stars = stars.Remove(stars.Length - 1, 1);
-
-            vm.hotel_stars = stars;
-
+            AdvancedSearchViewModel vm = Set_Advanced_Search_Fields(HotelName, cityId, center, airport, score, Star1, Star2, Star3, Star4, Star5, amenity);
+            
             List<HotelSearchViewModel> lst_hotels = DataLayer.Advanced_Search(vm, user_id);
 
             //sort

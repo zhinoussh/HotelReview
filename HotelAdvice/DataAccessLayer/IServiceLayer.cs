@@ -13,7 +13,8 @@ namespace HotelAdvice.DataAccessLayer
         #region HomePage
 
         HomeViewModel Get_HomePage();
-        AdvancedSearchViewModel Set_Advanced_Search(string selected_amenities);
+        AdvancedSearchViewModel Set_Advanced_Search_Fields(string HotelName, int? cityId
+            , int? center, int? airport, string score, bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star5, string selected_amenities);
 
         #endregion HomePage
 
