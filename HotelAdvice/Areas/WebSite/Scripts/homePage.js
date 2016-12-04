@@ -412,8 +412,8 @@ var Success_paging_Results = function (result) {
    scroll_to_top();
 }
 
-var SccessAjax_AdvancedSearch = function (result) {
-    var hotelName = result.searchriteria.Hotel_Name;
+var SuccessAjax_AdvancedSearch = function (result) {
+    var hotelName = result.searchriteria.Hotel_Name == null ? '' : result.searchriteria.Hotel_Name;
     var city = result.searchriteria.selected_city;
     var Star1 = result.searchriteria.Star1;
     var Star2 = result.searchriteria.Star2;
