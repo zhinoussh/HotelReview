@@ -424,7 +424,7 @@ namespace HotelAdvice.DataAccessLayer
 
 
 
-        public List<HotelAmenityViewModel> get_Amenities_For_search()
+        public List<HotelAmenityViewModel> get_Amenities_For_search(string selected_amenities)
         {
             List<HotelAmenityViewModel> lst_amenity =
                 (from a in _dbContext.tbl_Amenity
@@ -432,7 +432,7 @@ namespace HotelAdvice.DataAccessLayer
                   {
                       AmenityID = a.AmenityID,
                       AmenityName = a.AmenityName,
-                      hotel_selected = false
+                      hotel_selected =(selected_amenities.Contains(a.AmenityID+"")?true: false)
                   }).ToList();
 
             return lst_amenity;
@@ -895,30 +895,40 @@ namespace HotelAdvice.DataAccessLayer
 
         public List<HotelSearchViewModel> Advanced_Search(AdvancedSearchViewModel vm, string userId)
         {
+
+            List<int> searched_amenities = new List<int>();
+            foreach (var item in vm.lst_amenity)
+            {
+                if (item.hotel_selected)
+                    searched_amenities.Add(item.AmenityID);
+            }
+
             List<HotelSearchViewModel> lst_result = (from h in _dbContext.tbl_Hotel.Where
                                                          (
-                                                            x => (vm.selected_city==0 || x.CityId == vm.selected_city)
+                                                            x => (vm.selected_city == 0 || x.CityId == vm.selected_city)
                                                          && (String.IsNullOrEmpty(vm.Hotel_Name) || x.HotelName.Contains(vm.Hotel_Name))
                                                          && (String.IsNullOrEmpty(vm.hotel_stars) || vm.hotel_stars.Contains(x.HotelStars + ""))
                                                          && x.distance_airport <= vm.distance_airport
                                                          && x.distance_citycenter <= vm.distance_city_center
+                                                         && searched_amenities.All(sm=>x.HotelAmenities.Any(am => am.AmenityID.Value == sm))
                                                          )
                                                      join w in _dbContext.tbl_Wish_List.Where(x => x.UserId == userId)
                                                      on h.HotelId equals w.HotelId into WishList
                                                      from ww in WishList.DefaultIfEmpty()
-                                                    select new HotelSearchViewModel
-                                                        {
-                                                            HotelId = h.HotelId,
-                                                            HotelName = h.HotelName,
-                                                            Website = h.Website,
-                                                            HotelStars = h.HotelStars,
-                                                            Description = h.Description,
-                                                            distance_citycenter=h.distance_citycenter,
-                                                            num_reviews = _dbContext.tbl_Rating.Count(x => x.HotelId == h.HotelId),
-                                                            is_favorite=(ww==null?false:true),
-                                                            GuestRating = _dbContext.tbl_Rating.Where(x => x.HotelId == h.HotelId).Average(x => (float?)x.rating) ?? 0
-                                                        })
-                                                        .Where(x=>x.GuestRating>= vm.Min_Guest_Rating && x.GuestRating<=vm.Max_Guest_Rating)
+                                                     select new HotelSearchViewModel
+                                                     {
+                                                         HotelId = h.HotelId,
+                                                         HotelName = h.HotelName,
+                                                         Website = h.Website,
+                                                         HotelStars = h.HotelStars,
+                                                         Description = h.Description,
+                                                         distance_citycenter = h.distance_citycenter,
+                                                         num_reviews = _dbContext.tbl_Rating.Count(x => x.HotelId == h.HotelId),
+                                                         is_favorite = (ww == null ? false : true),
+                                                         GuestRating = _dbContext.tbl_Rating.Where(x => x.HotelId == h.HotelId).Average(x => (float?)x.rating) ?? 0
+
+                                                     })
+                                                        .Where(x => x.GuestRating >= vm.Min_Guest_Rating && x.GuestRating <= vm.Max_Guest_Rating)
                                                         .ToList();
 
 

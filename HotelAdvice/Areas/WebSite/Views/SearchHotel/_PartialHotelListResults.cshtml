@@ -38,7 +38,8 @@
                                         Star2 = Request["Star2"],
                                         Star3 = Request["Star3"],
                                         Star4 = Request["Star4"],
-                                        Star5 = Request["Star5"]
+                                        Star5 = Request["Star5"],
+                                        amenity = Request["amenity"]
                                     }
                                     , new AjaxOptions
                             {
@@ -96,7 +97,7 @@
              , new RouteValueDictionary(){ 
              {"page", page}, {"sort" ,Request["sort"] },{"cityId",Request["cityId"]},{"HotelName",Request["HotelName"]}
              ,{"center",Request["center"]}, {"airport" ,Request["airport"] },{"Star1",Request["Star1"]},{"Star2",Request["Star2"]}
-             ,{"Star3",Request["Star3"]},{"Star4",Request["Star4"]},{"Star5",Request["Star5"]}
+             ,{"Star3",Request["Star3"]},{"Star4",Request["Star4"]},{"Star5",Request["Star5"]},{"amenity",Request["amenity"]}
              })
                , PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
                 new PagedListRenderOptions

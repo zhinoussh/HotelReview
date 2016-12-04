@@ -275,20 +275,6 @@ function Close_LoginAlert() {
     $('#login-alert').fadeOut(500);
 }
 
-function checkbox_Checked(n)
-{
-    if ($("#checkbox_star"+n).is(":checked"))
-        $("#hd_star" + n).val('True');
-    else
-        $("#hd_star" + n).val('False');
-}
-function chk_amenity_changed(n) {
-    if ($("#chk_amenity" + n).is(":checked"))
-        $("#hd_amenity" + n).val('True');
-    else
-        $("#hd_amenity" + n).val('False');
-}
-
 
 var modalIsOpen = false;
 
@@ -437,9 +423,20 @@ var SccessAjax_AdvancedSearch = function (result) {
     var score = result.searchriteria.Guest_Rating;
     var center = result.searchriteria.distance_city_center;
     var airport = result.searchriteria.distance_airport;
- 
-    var search_url = "/Website/SearchHotel/ShowSearchResult?HoteName=" + hotelName + "&cityId=" + city + "&score=" + score + "&center=" + center + "&airport=" + airport
-        + "&Star1=" + Star1 + "&Star2=" + Star2 + "&Star3=" + Star3 + "&Star4=" + Star4 + "&Star5=" + Star5 ;
+
+    var amenity_list = result.searchriteria.lst_amenity;
+    var selected_amenities='';
+    for (var i = 0; i < amenity_list.length; i++) {
+        if (amenity_list[i].hotel_selected)
+            selected_amenities += (amenity_list[i].AmenityID + ',');
+    }
+
+    if (selected_amenities != '')
+        selected_amenities=selected_amenities.slice(0, -1);
+
+
+    var search_url = "/Website/SearchHotel/ShowSearchResult?HotelName=" + hotelName + "&cityId=" + city + "&score=" + score + "&center=" + center + "&airport=" + airport
+        + "&Star1=" + Star1 + "&Star2=" + Star2 + "&Star3=" + Star3 + "&Star4=" + Star4 + "&Star5=" + Star5 + "&amenity=" + selected_amenities;
     location.href = search_url;
 
 }

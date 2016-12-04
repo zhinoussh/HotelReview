@@ -24,18 +24,18 @@ namespace HotelAdvice.Areas.WebSite.Controllers
 
         [HttpGet]
         public ActionResult ShowSearchResult( bool? citySearch,string HotelName, int? cityId, int? center, int? airport, string score
-                                            , bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star5)
+                                            , bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star5,string amenity)
         {
-            SearchPageViewModel vm=DataService.Get_SearchResults(User.Identity.GetUserId(), citySearch, HotelName, cityId, center, airport, score, Star1, Star2, Star3, Star4, Star5);
+            SearchPageViewModel vm = DataService.Get_SearchResults(User.Identity.GetUserId(), citySearch, HotelName, cityId, center, airport, score, Star1, Star2, Star3, Star4, Star5, amenity);
             return View(vm);
         }
 
         [HttpGet]
         [ActionName("HotelResults")]
         public PartialViewResult ShowSearchResult(int? page, string sort, int? cityId, string HotelName, int? center, int? airport, string score
-                                            , bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star5)
+                                            , bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star5, string amenity)
         {
-            IPagedList page_list_hotels=DataService.Get_PartialHotelResults(User.Identity.GetUserId(),cityId, page, sort, HotelName, center, airport, score, Star1, Star2, Star3, Star4, Star5);
+            IPagedList page_list_hotels=DataService.Get_PartialHotelResults(User.Identity.GetUserId(),cityId, page, sort, HotelName, center, airport, score, Star1, Star2, Star3, Star4, Star5,amenity);
          
             return PartialView("_PartialHotelListResults", page_list_hotels);
         }
@@ -46,7 +46,7 @@ namespace HotelAdvice.Areas.WebSite.Controllers
         public ActionResult Advanced_Search(AdvancedSearchViewModel search_vm, string slider_guest_review)
         {
             search_vm.Guest_Rating = slider_guest_review;
-            return Json(new { searchriteria = search_vm },JsonRequestBehavior.AllowGet);
+            return Json(new { searchriteria = search_vm},JsonRequestBehavior.AllowGet);
         }
 
      

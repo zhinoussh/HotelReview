@@ -51,7 +51,7 @@ namespace HotelAdvice.DataAccessLayer
         List<tbl_room_type> get_hotel_rooms(int hotelID);
 
         List<AmenityViewModel> get_Amenities();
-        List<HotelAmenityViewModel> get_Amenities_For_search();
+        List<HotelAmenityViewModel> get_Amenities_For_search(string selected_amenities);
 
 
         void delete_Amenity(int id);

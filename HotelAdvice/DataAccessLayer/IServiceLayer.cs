@@ -13,7 +13,7 @@ namespace HotelAdvice.DataAccessLayer
         #region HomePage
 
         HomeViewModel Get_HomePage();
-        AdvancedSearchViewModel Set_Advanced_Search();
+        AdvancedSearchViewModel Set_Advanced_Search(string selected_amenities);
 
         #endregion HomePage
 
@@ -88,7 +88,7 @@ namespace HotelAdvice.DataAccessLayer
         /******************************Favorite Hotel PART*******************************/
 
         string[] Post_AddToFavorite(string user_id, Controller ctrl, int hotel_id, int? city_id, int? page, string sort, string HotelName, int? center, int? airport, string score
-                                            , bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star5);
+                                            , bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star5,string amenity);
 
         string Post_AddToFavorite_Detail(string user_id,int hotel_id);
 
@@ -102,10 +102,10 @@ namespace HotelAdvice.DataAccessLayer
         HotelDetailViewModel Get_HotelDetails(string user_id,int hotel_id);
 
         SearchPageViewModel Get_SearchResults(string user_id,bool? citySearch, string HotelName, int? cityId, int? center, int? airport, string score
-                                            , bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star);
+                                            , bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star,string amenity);
 
         IPagedList<HotelSearchViewModel> Get_PartialHotelResults(string user_id, int? cityId, int? page, string sort, string HotelName, int? center, int? airport, string score
-                                            , bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star5);
+                                            , bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star5, string amenity);
         #endregion SearchPage
 
     }

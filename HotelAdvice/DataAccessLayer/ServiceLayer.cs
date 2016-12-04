@@ -49,12 +49,12 @@ namespace HotelAdvice.DataAccessLayer
             // search_city.Add(new CityViewModel{cityID=0,cityName="Select City"});
 
             //set advanced search view model
-            vm.Advanced_Search = Set_Advanced_Search();
+            vm.Advanced_Search = Set_Advanced_Search("");
 
             return vm;
         }
 
-        public AdvancedSearchViewModel Set_Advanced_Search()
+        public AdvancedSearchViewModel Set_Advanced_Search(string selected_amenities)
         {
             AdvancedSearchViewModel vm_search = new AdvancedSearchViewModel();
             List<CityViewModel> lst_city = DataLayer.get_cities().OrderBy(x => x.cityName).ToList();
@@ -71,13 +71,13 @@ namespace HotelAdvice.DataAccessLayer
             lst_locations.Add(new KeyValuePair<int, string>(3, "less than 3 km"));
             lst_locations.Add(new KeyValuePair<int, string>(4, "less than 4 km"));
             lst_locations.Add(new KeyValuePair<int, string>(5, "less than 5 km"));
-            lst_locations.Add(new KeyValuePair<int, string>(10, "less than 10 km"));
-            lst_locations.Add(new KeyValuePair<int, string>(20, "less than 20 km"));
+            lst_locations.Add(new KeyValuePair<int, string>(10,"less than 10 km"));
+            lst_locations.Add(new KeyValuePair<int, string>(20,"less than 20 km"));
             vm_search.Location = new SelectList(lst_locations, "Key", "Value");
             vm_search.distance_city_center = 1000;
             vm_search.distance_airport = 1000;
 
-            vm_search.lst_amenity = DataLayer.get_Amenities_For_search();
+            vm_search.lst_amenity = DataLayer.get_Amenities_For_search(selected_amenities);
 
             return vm_search;
         }
@@ -539,7 +539,7 @@ namespace HotelAdvice.DataAccessLayer
 
 
         public string[] Post_AddToFavorite(string user_id, Controller ctrl, int hotel_id, int? city_id, int? page, string sort, string HotelName, int? center, int? airport, string score
-                                            , bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star5)
+                                            , bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star5,string amenity)
         {
             int result = DataLayer.add_favorite_hotel(hotel_id,user_id);
          
@@ -549,7 +549,7 @@ namespace HotelAdvice.DataAccessLayer
             else
                 msg = "favorite_already_exist";
 
-            IPagedList<HotelSearchViewModel> model =Get_PartialHotelResults(user_id,city_id, page, sort,HotelName,center,airport,score,Star1,Star2,Star3,Star4,Star5);
+            IPagedList<HotelSearchViewModel> model = Get_PartialHotelResults(user_id, city_id, page, sort, HotelName, center, airport, score, Star1, Star2, Star3, Star4, Star5, amenity);
             string partialview_hotels = RenderPartial.RenderRazorViewToString(ctrl
                 , "~/Areas/WebSite/views/SearchHotel/_PartialHotelListResults.cshtml"
                 , model);
@@ -597,10 +597,11 @@ namespace HotelAdvice.DataAccessLayer
             return vm;
         }
 
-        public SearchPageViewModel Get_SearchResults(string user_id, bool? citySearch, string HotelName, int? cityId, int? center, int? airport, string score, bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star5)
+        public SearchPageViewModel Get_SearchResults(string user_id, bool? citySearch, string HotelName, int? cityId
+            , int? center, int? airport, string score, bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star5, string amenity)
         {
             SearchPageViewModel vm = new SearchPageViewModel();
-            vm.Advnaced_Search = Set_Advanced_Search();
+            vm.Advnaced_Search = Set_Advanced_Search(amenity);
 
             if (citySearch.HasValue && citySearch.Value == true)
             {
@@ -670,9 +671,9 @@ namespace HotelAdvice.DataAccessLayer
             return vm;
         }
 
-        public IPagedList<HotelSearchViewModel> Get_PartialHotelResults(string user_id, int? cityId, int? page, string sort, string HotelName, int? center, int? airport, string score, bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star5)
+        public IPagedList<HotelSearchViewModel> Get_PartialHotelResults(string user_id, int? cityId, int? page, string sort, string HotelName, int? center
+            , int? airport, string score, bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star5, string amenity)
         {
-            //get hotel list in this city_id
             AdvancedSearchViewModel vm = new AdvancedSearchViewModel();
             vm.Hotel_Name = HotelName;
             vm.selected_city = cityId.HasValue ? cityId.Value : 0;
