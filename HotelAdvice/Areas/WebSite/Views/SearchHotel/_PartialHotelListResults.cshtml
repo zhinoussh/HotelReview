@@ -23,8 +23,10 @@
                                 @Html.TextBox("txt_star_hotel", Model[i].HotelStars, new { @class = "HotelStars" })
                             </div>
                             <div class="col-xs-2 col-xs-offset-4 nopadding">
+
                                 @using (Ajax.BeginForm("AddToFavorite", "User"
-                                    , new { 
+                                    , new
+                                    {
                                         hotel_id = Model[i].HotelId,
                                         sort = Request["sort"],
                                         page = Request["page"],
@@ -42,17 +44,17 @@
                                         amenity = Request["amenity"]
                                     }
                                     , new AjaxOptions
-                            {
-                                HttpMethod = "Post",
-                                OnSuccess = "SuccessAjax_AddFavorit"
+                                {
+                                    HttpMethod = "Post",
+                                    OnSuccess = "SuccessAjax_AddFavorit"
 
-                            }))
+                                }))
                                 {
                                     @Html.AntiForgeryToken()
 
                                     @Html.BootstrapButton("<i class='fa fa-heart fa-lg hidden-xs'></i> Like it!"
                                          , String.Concat("btn-danger btn-responsive ", !Model[i].is_favorite ? "btn-outline" : "")
-                                         , "", HtmlCommon.ButtonType.submit,Model[i].is_favorite ? "Remove from your wish list" : "Add to your wish list")
+                                         , "", HtmlCommon.ButtonType.submit, Model[i].is_favorite ? "Remove from your wish list" : "Add to your wish list")
                                 }
 
                             </div>

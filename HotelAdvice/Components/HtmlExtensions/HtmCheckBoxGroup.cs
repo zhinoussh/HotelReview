@@ -16,7 +16,7 @@ namespace HotelAdvice
         public static MvcHtmlString AwesomeCheckboxGroupFor(this HtmlHelper htmlHelper,
             string name,List<HotelAmenityViewModel> lst_checkbox, string checkboxCss,string containerCss, Object htmlAttributes = null)
         {
-
+           
             StringBuilder sb = new StringBuilder();
             RouteValueDictionary rvd;
 

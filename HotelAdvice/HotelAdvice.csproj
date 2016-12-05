@@ -192,6 +192,7 @@
   <ItemGroup>
     <Compile Include="App_Code\Bootstrapper.cs" />
     <Compile Include="Areas\Admin\ViewModels\HotelAmenityViewModel.cs" />
+    <Compile Include="Components\AjaxExtensions\AjaxActionLink.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="DataAccessLayer\DataRepository.cs" />
     <Compile Include="App_Code\DateTimeClass.cs" />
@@ -241,12 +242,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="HtmlExtensions\HtmCheckBoxGroup.cs" />
-    <Compile Include="HtmlExtensions\HtmlBootstrapButton.cs" />
-    <Compile Include="HtmlExtensions\HtmlCheckBox.cs" />
-    <Compile Include="HtmlExtensions\HtmlCommon.cs" />
-    <Compile Include="HtmlExtensions\HtmlImage.cs" />
-    <Compile Include="HtmlExtensions\HtmlTextBox.cs" />
+    <Compile Include="Components\HtmlExtensions\HtmCheckBoxGroup.cs" />
+    <Compile Include="Components\HtmlExtensions\HtmlBootstrapButton.cs" />
+    <Compile Include="Components\HtmlExtensions\HtmlCheckBox.cs" />
+    <Compile Include="Components\HtmlExtensions\HtmlCommon.cs" />
+    <Compile Include="Components\HtmlExtensions\HtmlImage.cs" />
+    <Compile Include="Components\HtmlExtensions\HtmlTextBox.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Config_ProjectDB.cs" />
     <Compile Include="DataAccessLayer\HotelAdviceDB.cs" />

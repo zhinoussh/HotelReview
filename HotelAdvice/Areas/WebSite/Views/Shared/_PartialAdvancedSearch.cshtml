@@ -49,7 +49,8 @@
         @Html.LabelFor(model =>model.Guest_Rating)
     </div>
     <div class="col-xs-12 text-center hidden-xs">
-        @Html.TextBoxFor(model => model.Guest_Rating, new { id = "slider_guest_review", Name = "slider_guest_review", @class = "form-control" })
+        @*@Html.TextBoxFor(model => model.Guest_Rating, new { id = "slider_guest_review", Name = "slider_guest_review", @class = "form-control" })*@
+        @Html.BootstrapTextBoxFor(model => model.Guest_Rating, "slider_guest_review")
     </div>
 
     <div class="divider_search col-xs-12"></div>

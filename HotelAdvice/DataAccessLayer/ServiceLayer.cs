@@ -75,6 +75,7 @@ namespace HotelAdvice.DataAccessLayer
                 string[] temp = score.Split(new char[] { ',' });
                 vm_search.Min_Guest_Rating = float.Parse(temp[0]);
                 vm_search.Max_Guest_Rating = float.Parse(temp[1]);
+                vm_search.Guest_Rating = score;
             }
             else
             {

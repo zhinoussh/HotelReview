@@ -234,6 +234,7 @@ function Set_Score_Sliders()
         min: 0, max: 5, value: [0, 5], step: 0.5, focus: true
     });
 
+
     $(".slider_score").bootstrapSlider({
         min: 0, max: 5, step: 0.1, focus: true, enabled: false
     });
@@ -413,18 +414,20 @@ var Success_paging_Results = function (result) {
 }
 
 var SuccessAjax_AdvancedSearch = function (result) {
-    var hotelName = result.searchriteria.Hotel_Name == null ? '' : result.searchriteria.Hotel_Name;
-    var city = result.searchriteria.selected_city;
-    var Star1 = result.searchriteria.Star1;
-    var Star2 = result.searchriteria.Star2;
-    var Star3 = result.searchriteria.Star3;
-    var Star4 = result.searchriteria.Star4;
-    var Star5 = result.searchriteria.Star5;
-    var score = result.searchriteria.Guest_Rating;
-    var center = result.searchriteria.distance_city_center;
-    var airport = result.searchriteria.distance_airport;
+    var hotelName = result.searchcriteria.Hotel_Name;
+    if (hotelName == null)
+        hotelName = '';
+    var city = result.searchcriteria.selected_city;
+    var Star1 = result.searchcriteria.Star1;
+    var Star2 = result.searchcriteria.Star2;
+    var Star3 = result.searchcriteria.Star3;
+    var Star4 = result.searchcriteria.Star4;
+    var Star5 = result.searchcriteria.Star5;
+    var score = result.searchcriteria.Guest_Rating;
+    var center = result.searchcriteria.distance_city_center;
+    var airport = result.searchcriteria.distance_airport;
 
-    var amenity_list = result.searchriteria.lst_amenity;
+    var amenity_list = result.searchcriteria.lst_amenity;
     var selected_amenities='';
     for (var i = 0; i < amenity_list.length; i++) {
         if (amenity_list[i].hotel_selected)
@@ -479,4 +482,16 @@ var set_alert_user_action = function (msg) {
     scroll_to_top();
 
     $("#div_alert").slideDown(500);
+}
+
+function getQueryStringByName(name, url) {
+    if (!url) {
+        url = window.location.href;
+    }
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
