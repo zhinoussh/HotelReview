@@ -49,6 +49,13 @@ body {
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
+h4 {
+font-weight:bold;
+}
+    h4.cityName >a{
+    color:#0770a4;
+ 
+    }
 input,
 select,
 textarea {
@@ -283,10 +290,11 @@ color:#d70707
 .fa-star-yellow{
     color: #f6b54d !important;
 }
-.fa-pencil {
+.fa-pencil{
     color: #3999ed !important;
 }
 /***MODAL*****/
+
 .modal-header-danger{
      height:40px;
 	color:	#fff;
@@ -394,8 +402,7 @@ border-bottom-right-radius:0px;
 .divider_search {
 background:#e6e0e0;
 height:1px;
-margin:10px 0 10px 0;
-
+margin:20px 0 20px 0;
 }
 
 .slider-track {
@@ -429,7 +436,8 @@ cursor:pointer;
 
 
 .btn-sort {
-    /*width:120px;*/
+    width:180px;
+    height:30px;
     background-color:#fdf7d9;
     color:#323232;
     border-color:#aa6b11;
@@ -448,14 +456,15 @@ cursor:pointer;
 }
 .well-sortResult {
     background-image: linear-gradient(to top right, #f6b54d, #f7d9a8);
-      /*background-image: linear-gradient(to top right, #f2bc15, #f7d9a8);*/
+    /*background-image: linear-gradient(to top right, #f2bc15, #f7d9a8);*/
     border: 1px solid #e7a132;
     color: #fff;
     border-bottom-left-radius: 0px;
     border-top-left-radius: 0px;
-    height:62px;
-    padding:15px 5px 5px 15px;
-
+    height: 45px;
+    padding: 5px 5px 5px 15px;
+    margin-top: 11px;
+    box-shadow: 4px 4px 4px 0px #d6d6d6;
 }
 .well-sort-title {
     background-color: #f0ad4e;
@@ -463,19 +472,33 @@ cursor:pointer;
     color: #fff;
     border-bottom-right-radius: 0px;
     border-top-right-radius: 0px;
-    height:62px;
-    padding:17px 0 0 5px;
+    height:45px;
+    padding:10px 0 0 5px;
     text-align:center;
-
+    margin-top:5%;
+    box-shadow: 4px 4px 4px 0px #d6d6d6;
 }
+.well-home {
+    height:310px;
+   background-color: #f9f9f9 !important;
+}
+.well-home:hover {
+box-shadow:#c6c2c2 5px  5px 5px 0px;
+
+    }
 .well-result {
 height:215px;
 overflow-y:auto;
 overflow-x:hidden;
 }
-.well-result:hover,.well-reviewList:hover{
+.well-result:hover,.well-reviewList:hover,.well-home:hover{
 box-shadow:#c6c2c2 5px  5px 5px 0px;
 background-color:#fbf4eb;
+}
+.well-wishlist:hover, .well-rating:hover, .well-review:hover {
+    box-shadow:#c6c2c2 3px  3px 3px 0px;
+background-color:#edecec;
+
 }
 .well-wishlist {
 height:380px;
@@ -528,6 +551,10 @@ height:110px;
 
 .img-wishlist {
 width:290px;
+height:200px;
+}
+.img-city {
+    width:100%;
 height:200px;
 }
 
@@ -589,6 +616,9 @@ margin-top:20px;
     text-decoration:none;
 }
 
+.panel-title {
+font-size:10pt;
+}
 /**************Rating **************/
 .clear-rating:hover{
     color:#d9534f !important;
@@ -616,46 +646,6 @@ color:#0770a4 !important;
 }
 #lbl_rating {
     color:#d9534f
-}
-/**************City SideBar*/
-.panel-city .panel-heading {
-      /*background-image: linear-gradient(to top right, #f2bc15, #f7d9a8);*/
-    background-image: linear-gradient(to top right, #f6b54d, #f7d9a8);
-
-}
-.panel-city .panel-title {
-      font-size:11pt;
-      font-weight:bold;
-      color:#fff;
-
-}
-.panel-city {
-    border-color:#f6b54d !important;
-}
-.panel-city .list-group-item {
-      background-color:#fdf7d9;
-    border-color: #fcdcb1;
-      
-}
-.panel-city .list-group-item:hover{
-     color: #000;
-      background-image:none;
-    background-color: #fcf2c3 !important ;
-    border-color: #f0ad4e;
-}
-.panel-city .list-group-item a
-{
-  text-decoration:none;
-  color:#b68c51;
-  font-weight:bold;
-}
-.badge-city {
-  padding:7px;
-  border-radius: 10em;
-  color:#fff;
-  background-color:#f0ad4e;
-  width:25px;
-  height:25px;  
 }
 
 .badge-review {
@@ -692,8 +682,27 @@ color:#0770a4 !important;
     padding-left:10px !important;
     margin:0;
     border-radius:0;
-    text-align:left;
-    
+    text-align:left;    
+}
+.label-search {
+     background-color:#f3f0f0;
+    border-bottom:4px solid #0770a4;
+    margin:3% 0 7% 0;
+    color:#0770a4;
+    height:45px;
+    padding-top:15px;
+     box-shadow:4px 4px 4px 0px #d6d6d6;
+}
+.label-search:before {
+    content:'';
+    position: absolute;
+    bottom:-30%;
+    left: 45%;
+    width: 0;
+    height: 0;
+    border-top: solid 9px #0770a4;
+    border-left: solid 9px transparent;
+    border-right: solid 9px transparent;
 }
 .well-reviewList::before {
     border-top: 15px solid transparent;

@@ -12,7 +12,7 @@
     OnSuccess = "Success_AjaxReturn"
     ,
     InsertionMode = InsertionMode.ReplaceWith
-}))
+}, new { enctype = "multipart/form-data" ,id="frm_add_city"}))
 {
     @Html.AntiForgeryToken()
 
@@ -27,20 +27,27 @@
                     </h4>
                 </div>
                 <div class="modal-body">
+                   
+                    <div class="form-group">
+                        <div class="kv-avatar center-block">
+                            @Html.TextBoxFor(model => model.PhotoFile, new { id = "image_city", name = "image_city", type = "file", @class = "file" })
+                            @Html.HiddenFor(model => model.imgPath, new { @class = "form-control", id = "img_city" })
+                        </div>
+
+                    </div>
                     <div class="form-group">
                         @Html.BootstrapTextBoxFor(model => model.cityName, "", "City Name", "City Name")
                         @Html.ValidationMessageFor(m => m.cityName, "", new { @class = "text-danger" })
                     </div>
-
-                    <div class="form-group">
-                        @Html.TextAreaFor(model => model.cityAttractions, new { @placeholder = "Tourist Attractions", @class = "form-control", style = "min-height:300px" })
+                    <div class="form-group" style="margin:0">
+                        @Html.TextAreaFor(model => model.cityAttractions, new { @placeholder = "Tourist Attractions", @class = "form-control", style = "min-height:120px" })
                         @Html.ValidationMessageFor(m => m.cityAttractions, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                <div class="modal-footer ">
+                <div class="modal-footer" >
 
                      @Html.BootstrapButton("<span class='glyphicon glyphicon-ok-circle'></span>Save", "btn-default "
-                                            , "", HtmlCommon.ButtonType.submit)
+                                , "", HtmlCommon.ButtonType.button, new { onclick = "add_city_click()" })
 
                     @Html.BootstrapButton("<span class='glyphicon glyphicon-remove-circle'></span>Cancel", "btn-default "
                                          , "", HtmlCommon.ButtonType.button, new {data_dismiss="modal" })

@@ -10,6 +10,7 @@ namespace HotelAdvice.Areas.WebSite.ViewModels
         public int HotelId { get; set; }
 
         public string HotelName { get; set; }
+        public string CityName { get; set; }
 
         public int HotelStars { get; set; }
         public string Website { get; set; }

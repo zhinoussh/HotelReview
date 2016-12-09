@@ -12,7 +12,6 @@ namespace HotelAdvice.Areas.WebSite.ViewModels
         public string Destination_Name { get; set; }
         public int city_id { get; set; }
 
-        public string city_name { get; set; }
 
         public IPagedList<HotelSearchViewModel> paged_list_hotels { get; set; }
 

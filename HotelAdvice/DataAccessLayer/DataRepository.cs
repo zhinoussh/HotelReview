@@ -873,6 +873,7 @@ namespace HotelAdvice.DataAccessLayer
         public List<HotelSearchViewModel> Search_Hotels_in_city(int city_id, string userId)
         {
             List<HotelSearchViewModel> lst_result = (from h in _dbContext.tbl_Hotel.Where(x => x.CityId == city_id)
+                                                     join c in _dbContext.tbl_city on h.CityId equals c.CityId
                                                      join w in _dbContext.tbl_Wish_List.Where(x => x.UserId == userId)
                                                      on h.HotelId equals w.HotelId into WishList
                                                      from ww in WishList.DefaultIfEmpty()
@@ -880,6 +881,7 @@ namespace HotelAdvice.DataAccessLayer
                                                      {
                                                          HotelId = h.HotelId,
                                                          HotelName = h.HotelName,
+                                                         CityName = c.CityName,
                                                          Website = h.Website,
                                                          HotelStars = h.HotelStars,
                                                          Description = h.Description,
@@ -912,6 +914,7 @@ namespace HotelAdvice.DataAccessLayer
                                                          && x.distance_citycenter <= vm.distance_city_center
                                                          && searched_amenities.All(sm=>x.HotelAmenities.Any(am => am.AmenityID.Value == sm))
                                                          )
+                                                     join c in _dbContext.tbl_city on h.CityId equals c.CityId
                                                      join w in _dbContext.tbl_Wish_List.Where(x => x.UserId == userId)
                                                      on h.HotelId equals w.HotelId into WishList
                                                      from ww in WishList.DefaultIfEmpty()
@@ -919,6 +922,7 @@ namespace HotelAdvice.DataAccessLayer
                                                      {
                                                          HotelId = h.HotelId,
                                                          HotelName = h.HotelName,
+                                                         CityName = c.CityName,
                                                          Website = h.Website,
                                                          HotelStars = h.HotelStars,
                                                          Description = h.Description,

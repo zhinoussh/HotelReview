@@ -6,11 +6,16 @@
 @using (Ajax.BeginForm("Advanced_Search", "SearchHotel", null, new AjaxOptions
     {
         HttpMethod = "Get"
-        ,OnSuccess="SuccessAjax_AdvancedSearch"
+        ,
+        OnSuccess = "SuccessAjax_AdvancedSearch"
     }))
 {
+    <div class="col-xs-12 label label-primary label-search">
+        Advanced Search
+    </div>
+    
 <div class="well advanced_search col-xs-12">
-
+  
     <div class="col-xs-12 nopadding">
         @Html.LabelFor(model => model.Hotel_Name)
         @Html.BootstrapTextBoxFor(model => model.Hotel_Name, "", "Hotel Name", "Hotel Name")

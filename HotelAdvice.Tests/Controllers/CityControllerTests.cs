@@ -75,15 +75,15 @@ namespace HotelAdvice.Controllers
         {
             //Arrange
             var repo = new Mock<IServiceLayer>(MockBehavior.Strict);
+            CityController ctrl = new CityController(repo.Object);
 
-            repo.Setup(x => x.Get_AddNewCity(1, 1, ""))
+            repo.Setup(x => x.Get_AddNewCity(ctrl,1, 1, ""))
                 .Returns(new CityViewModel
                 {
                     cityID = 1,
                     cityName = ""
                 });
 
-            CityController ctrl = new CityController(repo.Object);
            
             //Act
             var result = (PartialViewResult)ctrl.ADD_New_City(1, 1, "");
@@ -107,10 +107,10 @@ namespace HotelAdvice.Controllers
                 CurrentFilter = "Myfilter",
                 CurrentPage = 1
             };
-
-            repo.Setup(x => x.Post_AddNewCity(new_city)).Verifiable();
-
             CityController ctrl = new CityController(repo.Object);
+
+            repo.Setup(x => x.Post_AddNewCity(new_city, ctrl)).Verifiable();
+
 
             //Act
             var result = (JsonResult)ctrl.ADD_New_City(new_city);
@@ -183,6 +183,8 @@ namespace HotelAdvice.Controllers
         {
             //Arrange
             var repo = new Mock<IServiceLayer>(MockBehavior.Strict);
+            CityController ctrl = new CityController(repo.Object);
+
             CityViewModel city_to_delete = new CityViewModel
             {
                 cityID = 1,
@@ -191,9 +193,8 @@ namespace HotelAdvice.Controllers
                 CurrentFilter="MyFilter",
                 CurrentPage=1
             };
-            repo.Setup(x => x.Post_DeleteCity(city_to_delete)).Verifiable();
+            repo.Setup(x => x.Post_DeleteCity(ctrl,city_to_delete)).Verifiable();
 
-            CityController ctrl = new CityController(repo.Object);
 
             //Act
             var result = (JsonResult)ctrl.Delete_City(city_to_delete);

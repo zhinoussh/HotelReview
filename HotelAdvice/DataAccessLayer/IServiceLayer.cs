@@ -12,7 +12,7 @@ namespace HotelAdvice.DataAccessLayer
 
         #region HomePage
 
-        HomeViewModel Get_HomePage();
+        HomeViewModel Get_HomePage(int?page);
         AdvancedSearchViewModel Set_Advanced_Search_Fields(string HotelName, int? cityId
             , int? center, int? airport, string score, bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star5, string selected_amenities);
 
@@ -44,15 +44,15 @@ namespace HotelAdvice.DataAccessLayer
         #region City
         IPagedList<CityViewModel> Get_CityList(int? page, string filter);
 
-        CityViewModel Get_AddNewCity(int? city_id, int? page, string filter);
+        CityViewModel Get_AddNewCity(Controller ctrl, int? city_id, int? page, string filter);
 
-        void Post_AddNewCity(CityViewModel city);
+        void Post_AddNewCity(CityViewModel city, Controller ctrl);
 
         CityViewModel GetCityDescription(int city_id);
 
         CityViewModel Get_DeleteCity(int city_id, int? page, string filter);
 
-        void Post_DeleteCity(CityViewModel city);
+        void Post_DeleteCity(Controller ctrl, CityViewModel city);
 
         #endregion City
 
@@ -72,7 +72,7 @@ namespace HotelAdvice.DataAccessLayer
 
         /******************************REVIEW PART*******************************/
 
-        UserPageViewModel Get_UserProfilePage(string user_id, int? page, string tab);
+        UserPageViewModel Get_UserProfilePage(string user_id, int? page);
         ReviewPageViewModel Get_ReviewPage(string user_id, Controller ctrl, int hotel_id, int? page);
         void Post_AddNewReview(AddReviewViewModel review);
         string Get_PartialReviewList(AddReviewViewModel review,string user_id, Controller ctrl);

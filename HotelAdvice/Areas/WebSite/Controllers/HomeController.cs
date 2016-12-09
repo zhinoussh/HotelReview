@@ -17,12 +17,23 @@ namespace HotelAdvice.Areas.WebSite.Controllers
         }
 
     
-        public ActionResult Index(string returnUrl)
+        public ActionResult Index(string returnUrl,int?page,string tab)
         {
             ViewBag.ReturnUrl = returnUrl;
-            HomeViewModel vm = DataService.Get_HomePage();
+            HomeViewModel vm = DataService.Get_HomePage(page);
 
-            return View(vm);
+            if (Request.IsAjaxRequest())
+            {
+                switch (tab)
+                {
+                    case "citylist":
+                        return PartialView("_PartialCityList",vm.lst_city);
+                    default:
+                        return PartialView("_PartialCityList", vm.lst_city);
+                }
+            }
+            else
+                return View(vm);
         }
 
         [HttpPost]

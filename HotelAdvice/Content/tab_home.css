@@ -1,0 +1,112 @@
+﻿/***
+Bootstrap Line Tabs by @keenthemes
+A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
+Licensed under MIT
+***/
+
+/* Tabs panel */
+.tabHome-panel {
+  /*border:1px solid #a6a6a6 ;*/
+  padding: 10px;
+  font-weight:bold;
+  /*background-color:#406196;*/
+  /*border-radius:3px;*/
+}
+
+/* Default mode */
+.tabHome-line > .nav-tabs {
+  border: none;
+  margin: 0px;
+  /*background-color:#f3f0f0;*/
+  background-image: linear-gradient(to top right, #f6b54d, #f7d9a8);
+  box-shadow:4px 4px 4px 0px #d6d6d6;
+  border:1px solid #b8b7b7;
+  border-radius:3px;
+}
+.tabHome-line > .nav-tabs > li {
+  margin-right: 2px;
+  width:33%;
+}
+.tabHome-line > .nav-tabs > li > a {
+  border: 0;
+  margin-right: 0;
+  color: #fff;
+  text-align:center
+}
+.tabHome-line > .nav-tabs > li > a > i {
+  color: #a6a6a6;
+}
+.tabHome-line > .nav-tabs > li.open, .tabHome-line > .nav-tabs > li:hover {
+  border-bottom:4px solid #fdd38e;
+  background-color:#fcf7f0;
+}
+.tabHome-line > .nav-tabs > li.open, .tabHome-line > .nav-tabs > li.active:hover {
+  background-color:#fff;
+}
+
+.tabHome-line > .nav-tabs > li.open > a, .tabHome-line > .nav-tabs > li:hover > a {
+  border: 0;
+  background: none !important;
+  color: #f0ad4e;
+}
+.tabHome-line > .nav-tabs > li.open > a > i, .tabHome-line > .nav-tabs > li:hover > a > i {
+  color: #a6a6a6;
+}
+.tabHome-line > .nav-tabs > li.open .dropdown-menu, .tabHome-line > .nav-tabs > li:hover .dropdown-menu {
+  margin-top: 0px;
+}
+.tabHome-line > .nav-tabs > li.active {
+  border-bottom:4px solid #f5ab35;
+  position: relative;
+}
+
+.tabHome-line > .nav-tabs > li.active:before {
+    content:'';
+    position: absolute;
+    bottom:-30%;
+    left: 45%;
+    width: 0;
+    height: 0;
+    border-top: solid 9px #f5ab35;
+    border-left: solid 9px transparent;
+    border-right: solid 9px transparent;
+}
+
+.tabHome-line > .nav-tabs > li.active > a {
+
+  border-radius:0;
+ background-color:#fff;
+  color:#e7a02f;
+
+}
+.tabHome-line > .nav-tabs > li.active > a:hover {
+  border: 0;
+  /*color:  #333333;*/
+  background-color:#fff !important;
+}
+.tabHome-line > .nav-tabs > li.active > a > i {
+  color: #404040;
+}
+.tab-content {
+  background-color: #fff;
+  border: 0;
+  /*border-top: 1px solid #eee;*/
+  padding: 15px;
+}
+/* Below tabs mode */
+
+.tabHome-line.tabs-below > .nav-tabs > li {
+  border-top: 4px solid transparent;
+}
+.tabHome-line.tabs-below > .nav-tabs > li > a {
+  margin-top: 0;
+}
+.tabHome-line.tabs-below > .nav-tabs > li:hover {
+  border-bottom: 0;
+  border-top: 4px solid #fbcdcf;
+}
+.tabHome-line.tabs-below > .nav-tabs > li.active {
+  margin-bottom: -2px;
+  border-bottom: 0;
+  border-top: 4px solid #f3565d;
+}

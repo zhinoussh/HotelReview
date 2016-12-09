@@ -18,59 +18,63 @@
                         @Html.ImageLink("HotelDetails", "SearchHotel", String.Concat("/Upload/", @Model[i].HotelName, "/main.jpg")
                          , "img-wishlist img-responsive", new { id = @Model[i].HotelId })
                     </div>
-                    <div class="col-xs-12 nopadding">
-                        <div class="col-xs-8 nopadding">
-                            <h4>
-                                @Html.ActionLink(Model[i].HotelName, "HotelDetails", "SearchHotel"
+                    <div class="col-xs-12 col-sm-8 nopadding">
+                        <h4>
+                            @Html.ActionLink(Model[i].HotelName, "HotelDetails", "SearchHotel"
                                 , new { Area = "WebSite", id = Model[i].HotelId }, new { target = "_blank" })
-                            </h4>
-                            @Html.TextBox("txt_star_hotel", Model[i].HotelStars, new { @class = "HotelStars" })
+                        </h4>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 nopadding top-buffer10">
+                        @Html.TextBox("txt_rate_hotel", Model[i].GuestRating, new { @class = "GuestRating" })
+                    </div>
+                    <div class="col-xs-12 col-sm-8 nopadding ">
+                        @Html.TextBox("txt_star_hotel", Model[i].HotelStars, new { @class = "HotelStars" })
+                    </div>
+                    <div class="col-sm-4 nopadding text-small hidden-xs text-center">
+                        overal rating: @Model[i].GuestRating
+                        <div class="col-xs-12 nopadding text-center">
+                            @Html.ActionLink(Model[i].num_reviews + " reviews", "Reviews", "User"
+                        , new { Area = "WebSite", id = Model[i].HotelId }, new { target = "_blank" })
                         </div>
-                        <div class="col-xs-4 nopadding top-buffer10">
-                            @using (Ajax.BeginForm("DeleteFavorite", "User", new { hotel_id = Model[i].HotelId, page = Request["page"] }
+                    </div>
+                    <div class="col-xs-12 nopadding">
+                        visit website <i class="glyphicon glyphicon-hand-right"></i>
+                        <a href="http://@Model[i].Website" target="_blank">@Model[i].Website</a>
+                    </div>
+                      
+
+                    <div class="col-sm-6 col-xs-12 top-buffer10 nopadding_left ">
+                        @using (Ajax.BeginForm("DeleteFavorite", "User", new { hotel_id = Model[i].HotelId, page = Request["page"] }
                                     , new AjaxOptions
                             {
                                 HttpMethod = "Post",
                                 InsertionMode = InsertionMode.ReplaceWith,
                                 UpdateTargetId = "tab_content_wishlist"
                             }))
-                            {
-                                @Html.AntiForgeryToken()
-
-                                
-                                @Html.BootstrapButton("<i class='fa fa-thumbs-down fa-lg hidden-xs'></i> Dislike!"
-                                    ,"btn-danger btn-responsive btn-block","", HtmlCommon.ButtonType.submit
-                                    , "Remove from your wish list" )
-                            }
+                        {
+                            @Html.AntiForgeryToken()
 
 
+                            @Html.BootstrapButton("<i class='fa fa-thumbs-down fa-lg hidden-xs'></i> Dislike!"
+                                    , "btn-danger btn-responsive btn-block", "", HtmlCommon.ButtonType.submit
+                                    , "Remove from your wish list")
+                        }
 
-                        </div>
+
 
                     </div>
-                    <div class="col-xs-12 nopadding">
-                        visit website <i class="glyphicon glyphicon-hand-right"></i>
-                        <a href="http://@Model[i].Website" target="_blank">@Model[i].Website</a>
+
+                    <div class="col-sm-6 col-xs-12 top-buffer10 nopadding_right ">
+                        <a role="button" class="btn btn-primary btn-responsive btn-block"
+                           href="@Url.Action("Reviews", "User", new { id = Model[i].HotelId, Area = "WebSite" })">
+                            Review <i class="glyphicon glyphicon-pencil hidden-xs"></i>
+                        </a>
+                       
                     </div>
 
-                    <div class="col-xs-12 nopadding top-buffer20">
-                        <div class="col-xs-8 nopadding">
-                            @Html.TextBox("txt_rate_hotel", Model[i].GuestRating, new { @class = "GuestRating" })
-                        </div>
-                        <div class="col-xs-4 nopadding">
-                            <a role="button" class="btn btn-primary btn-responsive btn-block"
-                               href="@Url.Action("Reviews", "User", new { id = Model[i].HotelId, Area = "WebSite" })">
-                                Review <i class="glyphicon glyphicon-pencil hidden-xs"></i>
-                            </a>
-                        </div>
-                    </div>
 
-                    <div class="col-xs-12 nopadding">
-                        @Html.ActionLink(Model[i].num_reviews + " reviews", "Reviews", "User"
-                    , new { Area = "WebSite", id = Model[i].HotelId }, new { target = "_blank" })
-                    </div>
 
-                </div>
+                    </div>
             </div>
         }
 

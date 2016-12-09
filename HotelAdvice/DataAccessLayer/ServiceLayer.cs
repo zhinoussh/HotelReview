@@ -4,13 +4,13 @@ using System.Linq;
 using System.Web;
 using HotelAdvice.Areas.Admin.ViewModels;
 using PagedList;
-using PagedList.Mvc;
 using HotelAdvice.Areas.Admin.Models;
 using System.Web.Mvc;
 using System.IO;
 using HotelAdvice.Areas.WebSite.ViewModels;
 using Microsoft.AspNet.Identity.Owin;
 using HotelAdvice.Helper;
+using System.IO;
 
 
 namespace HotelAdvice.DataAccessLayer
@@ -20,8 +20,9 @@ namespace HotelAdvice.DataAccessLayer
         private IDataRepository _dataLayer;
         const int pageSize = 10;
         const int defaultPageSize_userpage = 3;
-        const int defaultPageSize_searchpage = 3;
+        const int defaultPageSize_searchpage = 4;
         const int defaultPageSize_reviewpage = 4;
+        const int defaultPageSize_HomePage = 9;
 
         public IDataRepository DataLayer
         {
@@ -41,9 +42,12 @@ namespace HotelAdvice.DataAccessLayer
 
         #region HomePage
 
-        public HomeViewModel Get_HomePage() {
+        public HomeViewModel Get_HomePage(int?page) {
+
+            int currentPageIndex = page.HasValue ? page.Value : 1;
+
             HomeViewModel vm = new HomeViewModel();
-            vm.lst_city = DataLayer.get_cities().OrderBy(x => x.cityName).ToList();
+            vm.lst_city = DataLayer.get_cities().OrderBy(x => x.cityName).ToPagedList<CityViewModel>(currentPageIndex,defaultPageSize_HomePage);
 
             //set advanced search view model
             vm.Advanced_Search = Set_Advanced_Search_Fields("", null, null, null, "", null, null, null, null, null, "");
@@ -172,7 +176,7 @@ namespace HotelAdvice.DataAccessLayer
                 vm = DataLayer.get_hotel_byId(vm.HotelId);
 
                 string path = "/Upload/" + vm.HotelName + "/main.jpg";
-                if (System.IO.File.Exists(ctrl.Server.MapPath(@path)))
+                if (File.Exists(ctrl.Server.MapPath(@path)))
                     vm.imgPath = path + "?" + DateTime.Now.ToString("ddMMyyyyhhmmsstt");
                 else
                     vm.imgPath = "/images/empty.gif?" + DateTime.Now.ToString("ddMMyyyyhhmmsstt");
@@ -326,8 +330,8 @@ namespace HotelAdvice.DataAccessLayer
         {
             DataLayer.delete_hotel_image(photo.PhotoName);
             string file_path = ctrl.Server.MapPath(@"\Upload\" + photo.PhotoName.Substring(0, photo.PhotoName.LastIndexOf('_')) + "\\" + photo.PhotoName);
-            if (System.IO.File.Exists(file_path))
-                System.IO.File.Delete(file_path);
+            if (File.Exists(file_path))
+                File.Delete(file_path);
         }
 
 
@@ -364,20 +368,25 @@ namespace HotelAdvice.DataAccessLayer
 
             return paged_list_city;
         }
-
-
-
-        public CityViewModel Get_AddNewCity(int? city_id, int? page, string filter)
+        
+        public CityViewModel Get_AddNewCity(Controller ctrl, int? city_id, int? page, string filter)
         {
             CityViewModel vm = new CityViewModel();
             vm.cityID = city_id.HasValue ? city_id.Value : 0;
-
+            vm.imgPath = "/images/empty.gif?" + DateTime.Now.ToString("ddMMyyyyhhmmsstt");
+           
             //this is edit
             if (vm.cityID != 0)
             {
                 List<string> city_prop = DataLayer.get_city_byId(vm.cityID);
                 vm.cityName = city_prop[0];
                 vm.cityAttractions = city_prop[1];
+
+                string path = "/Upload/City/" + vm.cityName + ".jpg";
+                if (File.Exists(ctrl.Server.MapPath(@path)))
+                    vm.imgPath = path + "?" + DateTime.Now.ToString("ddMMyyyyhhmmsstt");
+                else
+                    vm.imgPath = "/images/empty.gif?" + DateTime.Now.ToString("ddMMyyyyhhmmsstt");
             }
 
             vm.CurrentPage = page.HasValue ? page.Value : 1;
@@ -386,9 +395,32 @@ namespace HotelAdvice.DataAccessLayer
             return vm;
         }
 
-        public void Post_AddNewCity(CityViewModel city)
+        public void Post_AddNewCity(CityViewModel city, Controller ctrl)
         {
+            string original_city_name = "";
+            if (city.cityID != 0)
+                original_city_name = DataLayer.get_city_byId(city.cityID)[0];
+
             DataLayer.add_city(city.cityID, city.cityName, city.cityAttractions);
+
+            //save image
+            string new_img_path = ctrl.Server.MapPath(@"~\Upload\City\" + city.cityName + ".jpg");
+
+            //this is edit
+            if (city.cityID != 0)
+            {
+                string old_img_path = ctrl.Server.MapPath(@"~\Upload\City\" + original_city_name + ".jpg");
+
+                if (File.Exists(old_img_path) && original_city_name.ToLower() != city.cityName.ToLower())
+                    File.Move(old_img_path, new_img_path);
+            }
+            
+            if (city.PhotoFile != null)
+            {
+                HttpPostedFileBase file = city.PhotoFile;
+                var filename = file.FileName;
+                file.SaveAs(new_img_path);
+            }
         }
 
         public CityViewModel GetCityDescription(int city_id)
@@ -404,7 +436,7 @@ namespace HotelAdvice.DataAccessLayer
         public CityViewModel Get_DeleteCity(int city_id, int? page, string filter)
         {
             CityViewModel vm = new CityViewModel();
-            vm.cityID = city_id;
+            vm.cityID = city_id;           
             vm.CurrentPage = page.HasValue ? page.Value : 1;
             vm.CurrentFilter = !String.IsNullOrEmpty(filter) ? filter.ToString() : "";
 
@@ -412,9 +444,17 @@ namespace HotelAdvice.DataAccessLayer
            
         }
 
-        public void Post_DeleteCity(CityViewModel city)
+        public void Post_DeleteCity(Controller ctrl, CityViewModel city)
         {
+            List<string> city_prop = DataLayer.get_city_byId(city.cityID);
+            if (city_prop != null)
+                city.cityName = city_prop[0];
+
             DataLayer.delete_city(city.cityID);
+
+            string img_path = ctrl.Server.MapPath(@"~\Upload\City\" + city.cityName + ".jpg");
+            if (File.Exists(img_path))
+                File.Delete(img_path);
         }
 
         #endregion City
@@ -474,7 +514,7 @@ namespace HotelAdvice.DataAccessLayer
 
         #region UserPage
 
-        public UserPageViewModel Get_UserProfilePage(string user_id, int? page, string tab)
+        public UserPageViewModel Get_UserProfilePage(string user_id, int? page)
         {
             int currentPageIndex = page.HasValue ? page.Value : 1;
             UserPageViewModel vm = new UserPageViewModel();
@@ -648,10 +688,6 @@ namespace HotelAdvice.DataAccessLayer
 
             if (citySearch.HasValue && citySearch.Value == true)
             {
-                List<string> city_prop = DataLayer.get_city_byId(cityId.Value);
-                if (city_prop != null)
-                    vm.city_name = "Hotels in " + city_prop[0];
-
                 //get hotel list in this city_id
                 List<HotelSearchViewModel> lst_hotels = DataLayer.Search_Hotels_in_city(cityId.Value, user_id);
 
@@ -659,10 +695,6 @@ namespace HotelAdvice.DataAccessLayer
             }
             else
             {
-                
-                //this is advanced search
-                vm.city_name = "Matching results for your search....";
-              
                 //get hotel list by these criterias
                 List<HotelSearchViewModel> lst_hotels = DataLayer.Advanced_Search(vm.Advnaced_Search, user_id);
 

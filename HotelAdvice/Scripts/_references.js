@@ -22,4 +22,4 @@
 /// <reference path="moment.min.js" />
 /// <reference path="bootstrap-slider.min.js" />
 /// <reference path="../areas/admin/scripts/admin.js" />
-/// <reference path="../areas/website/scripts/WebSite.js" />
+/// <reference path="../Areas/WebSite/Scripts/homePage.js" />

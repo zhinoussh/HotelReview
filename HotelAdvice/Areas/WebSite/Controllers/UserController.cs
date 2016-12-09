@@ -20,7 +20,7 @@ namespace HotelAdvice.Areas.WebSite.Controllers
         [Authorize(Roles = "PublicUser")]
         public ActionResult Index(int ?page,string tab)
         {
-            UserPageViewModel vm = DataService.Get_UserProfilePage(User.Identity.GetUserId(), page, tab);
+            UserPageViewModel vm = DataService.Get_UserProfilePage(User.Identity.GetUserId(), page);
 
             if (Request.IsAjaxRequest())
             {

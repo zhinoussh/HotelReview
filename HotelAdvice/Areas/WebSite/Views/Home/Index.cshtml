@@ -72,39 +72,65 @@
    
 
     @*Advanced Search*@
-       <div class="col-xs-8 col-sm-3 nopadding hidden-xs">
-    @{Html.RenderPartial("_PartialAdvancedSearch", Model.Advanced_Search);}
-</div>
+       <div class="col-xs-6 col-sm-3 nopadding">
+        @{Html.RenderPartial("_PartialAdvancedSearch", Model.Advanced_Search);}
+        </div>
     @*End of Advanced Search*@
     
-        <div class="col-xs-12 col-sm-7">
+        @*Main Tab*@
+        <div class="col-xs-6 col-sm-9">
+            <div class="tabHome-panel" id="tab_homePage">
+                <div class="tabHome-line">
+                    <ul class="nav nav-tabs ">
+                        <li class="active li">
+                            <a href="#tab_city_list" data-toggle="tab">
+                                Hotels in Cities
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#tab_popularHotels" data-toggle="tab">
+                                Popular Hotels
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#tab_topHotels" data-toggle="tab">
+                               Top Hotels
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane active animated fadeIn" id="tab_city_list">
+                    @{Html.RenderPartial("_PartialCityList", Model.lst_city);}
+                </div>
+                <div class="tab-pane animated fadeIn" id="tab_popularHotels">
+                </div>
+                <div class="tab-pane animated fadeIn" id="tab_topHotels">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+       @*End of Main Tab*@
+
+
+
+<div id="CityDescriptionModal" class="modal animated fadeInDown"  tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header modal-header-login">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span aria-hidden="true">&times;</span></button>
+                <div class="modal-title" id="CityTitle"></div>
+            </div>
+            <div class="modal-body" id="CityAttractions">
+            </div>
 
         </div>
-
-       
-
-<div class="col-xs-12 col-sm-2 nopadding " >
-    
-    <div class="panel panel-warning panel-city ">
-        <div class="panel-heading">
-            <h3 class="panel-title text-center">
-                Hotels in Cities
-            </h3>
-        </div>
-        <ul class="list-group">
-            @foreach (var item in Model.lst_city)
-            {
-                <li class="list-group-item text-center">
-                    <span class="badge badge-city pull-left hidden-xs">@item.hotel_count</span>
-                        @Html.ActionLink(item.cityName, "ShowSearchResult", "SearchHotel", new { cityId = @item.cityID,citySearch=true }, null)
-                </li>
-            }
-        </ul>
     </div>
-       
-       
 </div>
-
 
 
 

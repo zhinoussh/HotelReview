@@ -9,7 +9,8 @@ namespace HotelAdvice
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js"
+                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"
@@ -58,6 +59,7 @@ namespace HotelAdvice
                       , "~/Content/bootstrap-slider.min.css"
                       , "~/Content/alert-with-arrow.css"
                       , "~/Content/tab_line.css"
+                      , "~/Content/tab_home.css"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/AdminCss").Include(

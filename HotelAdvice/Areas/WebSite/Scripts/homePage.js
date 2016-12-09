@@ -6,6 +6,7 @@
    
 
     $("#search_destination").autocomplete({
+        
         source: function (request, response) {
             var list_array = new Array();
             $.ajax({
@@ -74,7 +75,7 @@
         $(e.target)
             .prev('.panel-heading')
             .find("i.indicator")
-            .toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
+            .toggleClass('glyphicon-chevron-up glyphicon-chevron-down');
       
         if($(e.target).is( ":visible" ))
             $(e.target).parent().removeClass("panel-default").addClass("panel-info");
@@ -126,10 +127,26 @@
 
         localStorage.clear();
     }
+
+    $('#CityDescriptionModal').on('shown.bs.modal', function (e) {
+        var description = $(e.relatedTarget).data('desc');
+        var cityName =  $(e.relatedTarget).data('name');
+        $(this).find('#CityTitle').html('<b>' + cityName + '</b>');
+        $(this).find('#CityAttractions').html("<p class='text-justify'>" + description + "</p>");
+
+        $('#CityDescriptionModal').removeClass('fadeOutUp').addClass('fadeInDown');
+    });
+
+    $('#CityDescriptionModal').on('hide.bs.modal', function (e) {
+        if ($('#CityDescriptionModal').hasClass('fadeInDown')) {
+            e.preventDefault();
+            $('#CityDescriptionModal').removeClass('fadeInDown').addClass('fadeOutUp');
+            setTimeout("$('#CityDescriptionModal').modal('hide')", 500);
+        }
+    });
    
 });
 
-//$("#btn_edit_review").on('click', showModalReview);
 $(document).on("click", "#btn_edit_review", showEditModalReview);
 $(document).on("click", "#btn_delete_review", showDeleteModalReview);
 
@@ -263,6 +280,7 @@ function Set_Score_Sliders()
         $("#slider_money_value").text(slideEvt.value);
     });
 }
+
 $(window).on('load', function () {
     var returnUrl = $("#hd_return_url").val();
     if (returnUrl != null && returnUrl != '')
@@ -307,6 +325,8 @@ var show_signUp = function () {
             $("#modal_login").modal('show').fadeIn(500);
     });
 }
+
+
 
 var SuccessLogin = function (result) {
     if (result.url)
@@ -443,8 +463,16 @@ var SuccessAjax_AdvancedSearch = function (result) {
     location.href = search_url;
 
 }
-var scroll_to_top = function () {
-    $('html, body').animate({ scrollTop: 0 }, 600);
+
+var Success_paging_Results_Home = function (result) {
+    scroll_to_top('homePage');
+}
+
+var scroll_to_top = function (p) {
+    if(p==null)
+        $('html, body').animate({ scrollTop: 0 }, 600);
+    else if (p == 'homePage')
+        $('html, body').animate({ scrollTop: $("#tab_homePage").offset().top-50 }, 600);
 }
 
 var set_alert_user_action = function (msg) {

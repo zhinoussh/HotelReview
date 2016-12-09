@@ -34,7 +34,7 @@ namespace HotelAdvice.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult ADD_New_City(int ?id,int? page, string filter = null)
         {
-            CityViewModel vm = DataService.Get_AddNewCity(id, page, filter);
+            CityViewModel vm = DataService.Get_AddNewCity(this,id, page, filter);
 
             return PartialView("_PartialAddCity",vm);
         }
@@ -44,13 +44,8 @@ namespace HotelAdvice.Areas.Admin.Controllers
         [ModelValidator]
         public ActionResult ADD_New_City(CityViewModel city)
         {
-            //if (ModelState.IsValid)
-            //{
-                DataService.Post_AddNewCity(city);
+                DataService.Post_AddNewCity(city,this);
                 return Json(new { msg = "The city inserted successfully.", ctrl = "/Admin/City", cur_pg = city.CurrentPage, filter = city.CurrentFilter + "" });
-            //}
-            //else
-            //    return PartialView("_PartialAddCity", city);
         }
 
 
@@ -73,7 +68,7 @@ namespace HotelAdvice.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete_City(CityViewModel city)
         {
-            DataService.Post_DeleteCity(city);
+            DataService.Post_DeleteCity(this,city);
             return Json(new { msg = "Row is deleted successfully!", ctrl = "/Admin/City", cur_pg = city.CurrentPage, filter = city.CurrentFilter + "" });
         }
 

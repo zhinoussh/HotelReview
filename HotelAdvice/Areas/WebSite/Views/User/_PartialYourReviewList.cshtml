@@ -26,6 +26,7 @@
                         </h4>
 
                     </div>
+
                     <div class="col-xs-12 col-sm-4 nopadding top-buffer10">
                         @Html.TextBox("txt_guest_rating", Model[i].GuestRating, new { @class = "GuestRating" })
                     </div>
@@ -35,8 +36,13 @@
                     </div>
                     <div class="col-sm-4 nopadding text-small hidden-xs">
                         overal rating: @Model[i].GuestRating
+                       
+                         <div class="col-xs-12 nopadding text-center">
+                            @Html.ActionLink(Model[i].num_reviews + " reviews", "Reviews", "User"
+                        , new { Area = "WebSite", id = Model[i].HotelId }, new { target = "_blank" })
+                        </div>
                     </div>
-                    <div class="col-xs-12 nopadding">
+                    <div class="col-xs-12 nopadding top-buffer10">
                         visit website <i class="glyphicon glyphicon-hand-right"></i>
                         <a href="http://@Model[i].Website" target="_blank">@Model[i].Website</a>
                     </div>

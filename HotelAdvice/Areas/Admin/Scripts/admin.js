@@ -1,4 +1,7 @@
-﻿$(document).ready(function () {
+﻿/// <reference path="D:\Git_repos\HotelReview\HotelAdvice\Scripts/jquery-3.1.0.intellisense.js" />
+
+
+$(document).ready(function () {
 
     $("#menu-toggle").click(function (e) {
         e.preventDefault();
@@ -50,11 +53,16 @@ $(document).on("click", ".editAmenityButton", function () {
 function showAddModal() {
     
     var url = $(this).data('url');
-
+    var url_parts = url.split('/');
+    var controller=url_parts[2];
+    
     $.get(url, function (data) {
         $("#MyModal").html(data).find('.modal_main').modal('show');
         reparseform();
-        SetUp_AddHotel();        
+        if (controller == 'City')
+            SetUp_AddCity();
+        else if (controller == 'Hotel')
+            SetUp_AddHotel();        
     });
 }
 
@@ -97,6 +105,36 @@ var Success_AjaxReturn_deleteImage = function (result) {
     }
 
 }
+
+function SetUp_AddCity() {
+    var img_path = $('#img_city').val();
+    $("#image_city").fileinput({
+        overwriteInitial: true,
+        cache: false,
+        maxFileSize: 1024,
+        maxFileCount: 1,
+        showClose: false,
+        showCaption: false,
+        browseLabel: 'Choose Image',
+        browseClass: "btn btn-sm btn-success",
+        removeClass: "btn btn-sm btn-danger",
+        removeLabel: 'Delete Image',
+        removeTitle: 'Delete Image',
+        browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+        removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+        elErrorContainer: '#kv-avatar-errors-1',
+        msgErrorClass: 'alert alert-block alert-danger',
+        defaultPreviewContent: "<img src='" + img_path + "' alt='City Image' style='width:220px; height:220px'>",
+        layoutTemplates: { main2: '{preview}  {remove} {browse}' },
+        allowedFileExtensions: ["jpg", "png", "gif"],
+        browseOnZoneClick: true,
+        showZoom: false
+        , deleteUrl: 'http://Admin/City/DeleteMainImage/'
+
+    });
+
+}
+
 
 function SetUp_AddHotel() {
     var img_path = $('#img_hotel').val();
@@ -149,7 +187,6 @@ function SetUp_AddHotel() {
     Set_Rooms_tag();
     Set_Sightseeing_tag();
 }
-
 
 
 function Set_Restaurants_tag()
@@ -282,3 +319,25 @@ function add_hotel_click()
             
 }
 
+function add_city_click() {
+    if ($("#frm_add_city").valid()) {
+        var formData = new FormData($('#frm_add_city')[0]);
+        var action = $("#frm_add_city").attr("action");
+
+        $.ajax({
+            type: "POST",
+            url: action,
+            data: addRequestVerificationToken(formData),
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                Success_AjaxReturn(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                //do your own thing
+                alert(errorThrown);
+            }
+        });
+    }
+
+}

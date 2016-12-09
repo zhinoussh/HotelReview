@@ -296,6 +296,7 @@
     <Content Include="Content\sidebar.css" />
     <Content Include="Content\StarRating\star-rating.min.css" />
     <Content Include="Content\StarRating\theme.min.css" />
+    <Content Include="Content\tab_home.css" />
     <Content Include="Content\tab_line.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -401,6 +402,7 @@
     <Content Include="Areas\WebSite\Views\User\_PartialDeleteReview.cshtml" />
     <Content Include="Areas\WebSite\Views\SearchHotel\_PartialHotelDetailPhoto.cshtml" />
     <Content Include="Areas\WebSite\Views\SearchHotel\_PartialHotelDetailAccordion.cshtml" />
+    <Content Include="Areas\WebSite\Views\Home\_PartialCityList.cshtml" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Scripts\fileinput.min.js" />
     <Content Include="Scripts\jquery-3.1.0.js" />
