@@ -10,7 +10,6 @@ using System.IO;
 using HotelAdvice.Areas.WebSite.ViewModels;
 using Microsoft.AspNet.Identity.Owin;
 using HotelAdvice.Helper;
-using System.IO;
 
 
 namespace HotelAdvice.DataAccessLayer
@@ -47,7 +46,9 @@ namespace HotelAdvice.DataAccessLayer
             int currentPageIndex = page.HasValue ? page.Value : 1;
 
             HomeViewModel vm = new HomeViewModel();
-            vm.lst_city = DataLayer.get_cities().OrderBy(x => x.cityName).ToPagedList<CityViewModel>(currentPageIndex,defaultPageSize_HomePage);
+            vm.lst_city = DataLayer.get_cities().OrderBy(x => x.cityName).ToPagedList<CityViewModel>(currentPageIndex, defaultPageSize_HomePage);
+            vm.lst_poupular_hotels = DataLayer.Search_Popular_Hotels().ToPagedList<HotelSearchViewModel>(currentPageIndex, defaultPageSize_HomePage);
+            vm.lst_top_hotels = DataLayer.Search_Top_Hotels().ToPagedList<HotelSearchViewModel>(currentPageIndex, defaultPageSize_HomePage);
 
             //set advanced search view model
             vm.Advanced_Search = Set_Advanced_Search_Fields("", null, null, null, "", null, null, null, null, null, "");
@@ -325,7 +326,15 @@ namespace HotelAdvice.DataAccessLayer
             }
 
         }
-     
+
+        public HotelImagesViewModel Get_DeleteHotelPhoto(string photo_name)
+        {
+            HotelImagesViewModel vm = new HotelImagesViewModel();
+            vm.PhotoName = photo_name;
+
+            return vm;
+        }
+
         public void Post_DeleteHotelPhoto(HotelImagesViewModel photo, Controller ctrl)
         {
             DataLayer.delete_hotel_image(photo.PhotoName);

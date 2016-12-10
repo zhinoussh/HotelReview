@@ -36,8 +36,12 @@ namespace HotelAdvice.DataAccessLayer
         HotelImagesViewModel Get_HotelPhoto(string photoName);
 
         void Post_AddHotelPhoto(HotelImagesViewModel vm, int hotel_ID, Controller ctrl);
-        
+
+        HotelImagesViewModel Get_DeleteHotelPhoto(string photo_name);
+
         void Post_DeleteHotelPhoto(HotelImagesViewModel photo, Controller ctrl);
+
+
 
         #endregion Hotel
 

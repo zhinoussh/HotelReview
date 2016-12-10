@@ -109,6 +109,10 @@ namespace HotelAdvice.DataAccessLayer
 
         List<HotelSearchViewModel> Advanced_Search(AdvancedSearchViewModel vm, string userId);
 
+        List<HotelSearchViewModel> Search_Popular_Hotels();
+
+        List<HotelSearchViewModel> Search_Top_Hotels();
+
         #endregion Home Page
     }
 }

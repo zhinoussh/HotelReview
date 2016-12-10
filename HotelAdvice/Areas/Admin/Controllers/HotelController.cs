@@ -30,9 +30,10 @@ namespace HotelAdvice.Areas.Admin.Controllers
 
             IPagedList paged_list_hotels = DataService.Get_HotelList(page, filter);
 
-            return Request.IsAjaxRequest()
-                ? (ActionResult)PartialView("_PartialHotelList", paged_list_hotels)
-                : View(paged_list_hotels);
+            if(Request.IsAjaxRequest())
+                return (ActionResult)PartialView("_PartialHotelList", paged_list_hotels);
+            else
+                return View(paged_list_hotels);
         }
 
         [HttpGet]
@@ -91,7 +92,6 @@ namespace HotelAdvice.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult DeleteMainImage(HotelImagesViewModel vm, int hotel_ID)
         {
-            
             return Json(new { msg = "images were uploaded successfully!" });
         }
 
@@ -107,8 +107,7 @@ namespace HotelAdvice.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Delete_HotelPhoto(string photo_name)
         {
-            HotelImagesViewModel vm = new HotelImagesViewModel();
-            vm.PhotoName = photo_name;
+            HotelImagesViewModel vm = DataService.Get_DeleteHotelPhoto(photo_name);
 
             return PartialView("_PartialDeletePhoto", vm);
         }
@@ -135,9 +134,9 @@ namespace HotelAdvice.Areas.Admin.Controllers
         public JsonResult Get_Restaurants(string Prefix)
         {
             List<tbl_Restuarant> restList = DataService.DataLayer.get_restaurants();
-                
 
-            var result = restList.Where(x => x.RestaurantName.ToLower().Contains(Prefix.ToLower()))
+            var result = restList.Where(x => x.RestaurantName.ToLower()
+                .Contains(Prefix.ToLower()))
                 .Select(x => new { RestName = x.RestaurantName }).ToList();
 
             return Json(result, JsonRequestBehavior.AllowGet);

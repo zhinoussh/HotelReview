@@ -31,9 +31,10 @@ namespace HotelAdvice.Controllers
                );
 
             CityController ctrl = new CityController(repo.Object);
-            ctrl.MakeNormalRequest();    
             
             //Act
+            ctrl.MakeNormalRequest();    
+            
             var result = (ViewResult)ctrl.Index(1, "");
             IPagedList<CityViewModel> model = (IPagedList<CityViewModel>)result.Model;
 
@@ -58,9 +59,10 @@ namespace HotelAdvice.Controllers
                 );
 
             CityController ctrl = new CityController(repo.Object);
-            ctrl.MakeAjaxRequest();
 
             //Act
+            ctrl.MakeAjaxRequest();
+
             var result = (PartialViewResult)ctrl.Index(1, "");
             IPagedList<CityViewModel> model = (IPagedList<CityViewModel>)result.Model;
 
@@ -71,7 +73,7 @@ namespace HotelAdvice.Controllers
         }
 
         [TestMethod]
-        public void Get_ADDNewCity_Return_PartialModal()
+        public void Get_ADDNewCity_Return_PartialView_AS_Modal()
         {
             //Arrange
             var repo = new Mock<IServiceLayer>(MockBehavior.Strict);
@@ -129,7 +131,7 @@ namespace HotelAdvice.Controllers
         }
 
         [TestMethod]
-        public void Get_CityDescription_Return_PartialModal()
+        public void Get_CityDescription_Return_PartialView_As_Modal()
         {
             //Arrange
             var repo = new Mock<IServiceLayer>(MockBehavior.Strict);
@@ -154,7 +156,7 @@ namespace HotelAdvice.Controllers
         }
 
         [TestMethod]
-        public void Get_DeleteCity_Return_PartialModal()
+        public void Get_DeleteCity_Return_PartialView_AS_Modal()
         {
             //Arrange
             var repo = new Mock<IServiceLayer>(MockBehavior.Strict);

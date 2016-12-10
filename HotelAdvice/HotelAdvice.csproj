@@ -288,7 +288,6 @@
     <Content Include="Content\bootstrap-timepicker.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\CitySidebar.css" />
     <Content Include="Content\fileinput.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
@@ -403,6 +402,8 @@
     <Content Include="Areas\WebSite\Views\SearchHotel\_PartialHotelDetailPhoto.cshtml" />
     <Content Include="Areas\WebSite\Views\SearchHotel\_PartialHotelDetailAccordion.cshtml" />
     <Content Include="Areas\WebSite\Views\Home\_PartialCityList.cshtml" />
+    <Content Include="Areas\WebSite\Views\Home\_PartialPopularHotels.cshtml" />
+    <Content Include="Areas\WebSite\Views\Home\_PartialTopHotels.cshtml" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Scripts\fileinput.min.js" />
     <Content Include="Scripts\jquery-3.1.0.js" />

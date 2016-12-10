@@ -11,6 +11,8 @@ namespace HotelAdvice.Areas.WebSite.ViewModels
     public class HomeViewModel
     {
         public IPagedList<CityViewModel> lst_city { get; set; }
+        public IPagedList<HotelSearchViewModel> lst_poupular_hotels { get; set; }
+        public IPagedList<HotelSearchViewModel> lst_top_hotels { get; set; }
 
         public AdvancedSearchViewModel Advanced_Search { get; set; }
     }

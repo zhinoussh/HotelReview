@@ -107,8 +107,10 @@
                     @{Html.RenderPartial("_PartialCityList", Model.lst_city);}
                 </div>
                 <div class="tab-pane animated fadeIn" id="tab_popularHotels">
+                    @{Html.RenderPartial("_PartialPopularHotels", Model.lst_poupular_hotels);}
                 </div>
                 <div class="tab-pane animated fadeIn" id="tab_topHotels">
+                    @{Html.RenderPartial("_PartialTopHotels", Model.lst_top_hotels);}
                 </div>
                 <div class="clearfix"></div>
             </div>

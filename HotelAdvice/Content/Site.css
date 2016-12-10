@@ -49,7 +49,7 @@ body {
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-h4 {
+h4,h5 {
 font-weight:bold;
 }
     h4.cityName >a{
@@ -482,10 +482,14 @@ cursor:pointer;
     height:310px;
    background-color: #f9f9f9 !important;
 }
-.well-home:hover {
-box-shadow:#c6c2c2 5px  5px 5px 0px;
+.well-hotel {
+    height:330px;
+   background-color: #f9f9f9 !important;
+}
 
-    }
+.well-hotel:hover ,.well-home:hover {
+box-shadow:#c6c2c2 5px  5px 5px 0px;
+}
 .well-result {
 height:215px;
 overflow-y:auto;
@@ -555,7 +559,7 @@ height:200px;
 }
 .img-city {
     width:100%;
-height:200px;
+    height:200px;
 }
 
 /**********AUTO Compelete*/

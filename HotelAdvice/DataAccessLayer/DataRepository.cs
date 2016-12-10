@@ -888,7 +888,7 @@ namespace HotelAdvice.DataAccessLayer
                                                          distance_citycenter = h.distance_citycenter,
                                                          num_reviews = _dbContext.tbl_Rating.Count(x => x.HotelId == h.HotelId),
                                                          is_favorite = (ww == null ? false : true),
-                                                         GuestRating = _dbContext.tbl_Rating.Where(x => x.HotelId == h.HotelId).Average(x => (float?)x.rating) ?? 0
+                                                         GuestRating = (float)Math.Round(_dbContext.tbl_Rating.Where(x => x.HotelId == h.HotelId).Average(x => (float?)x.rating) ?? 0,1)
                                                      }).ToList();
 
 
@@ -929,7 +929,7 @@ namespace HotelAdvice.DataAccessLayer
                                                          distance_citycenter = h.distance_citycenter,
                                                          num_reviews = _dbContext.tbl_Rating.Count(x => x.HotelId == h.HotelId),
                                                          is_favorite = (ww == null ? false : true),
-                                                         GuestRating = _dbContext.tbl_Rating.Where(x => x.HotelId == h.HotelId).Average(x => (float?)x.rating) ?? 0
+                                                         GuestRating = (float)Math.Round(_dbContext.tbl_Rating.Where(x => x.HotelId == h.HotelId).Average(x => (float?)x.rating) ?? 0,1)
 
                                                      })
                                                         .Where(x => x.GuestRating >= vm.Min_Guest_Rating && x.GuestRating <= vm.Max_Guest_Rating)
@@ -939,7 +939,42 @@ namespace HotelAdvice.DataAccessLayer
             return lst_result;
         }
 
-     
+        public List<HotelSearchViewModel> Search_Popular_Hotels()
+        {
+            List<HotelSearchViewModel> lst_result = (from h in _dbContext.tbl_Hotel//.Where(x => x.CityId == city_id)
+                                                     join c in _dbContext.tbl_city on h.CityId equals c.CityId
+                                                     select new HotelSearchViewModel
+                                                     {
+                                                         HotelId = h.HotelId,
+                                                         HotelName = h.HotelName,
+                                                         CityName = c.CityName,
+                                                         HotelStars = h.HotelStars,
+                                                         num_reviews = _dbContext.tbl_Rating.Count(x => x.HotelId == h.HotelId),
+                                                         GuestRating = (float)Math.Round(_dbContext.tbl_Rating.Where(x => x.HotelId == h.HotelId).Average(x => (float?)x.rating) ?? 0,1)
+                                                     }
+                                                     ).OrderByDescending(x=>x.GuestRating).ToList();
+
+            return lst_result;
+        }
+
+        public List<HotelSearchViewModel> Search_Top_Hotels()
+        {
+            List<HotelSearchViewModel> lst_result = (from h in _dbContext.tbl_Hotel.Where(x => x.HotelStars >=4)
+                                                     join c in _dbContext.tbl_city on h.CityId equals c.CityId
+                                                     select new HotelSearchViewModel
+                                                     {
+                                                         HotelId = h.HotelId,
+                                                         HotelName = h.HotelName,
+                                                         CityName = c.CityName,
+                                                         HotelStars = h.HotelStars,
+                                                         num_reviews = _dbContext.tbl_Rating.Count(x => x.HotelId == h.HotelId),
+                                                         GuestRating = (float)Math.Round(_dbContext.tbl_Rating.Where(x => x.HotelId == h.HotelId).Average(x => (float?)x.rating) ?? 0,1)
+                                                     }
+                                                     ).OrderBy(x => x.HotelStars).ToList();
+
+            return lst_result;
+        }
+        
         #endregion Home Page
 
     }

@@ -54,7 +54,6 @@ namespace HotelAdvice
                       , "~/Content/animate.min.css"
                       , "~/Content/bootstrap-social.css"
                       , "~/Content/themes/base/jquery-ui.css"
-                      , "~/Content/CitySidebar.css"
                       , "~/Content/awesome-bootstrap-checkbox.css"
                       , "~/Content/bootstrap-slider.min.css"
                       , "~/Content/alert-with-arrow.css"

@@ -10,13 +10,11 @@ namespace HotelAdvice.Areas.WebSite.Controllers
 {
     public class HomeController : BaseController
     {
-
         public HomeController(IServiceLayer service)
             : base(service)
         {
         }
 
-    
         public ActionResult Index(string returnUrl,int?page,string tab)
         {
             ViewBag.ReturnUrl = returnUrl;
@@ -28,8 +26,12 @@ namespace HotelAdvice.Areas.WebSite.Controllers
                 {
                     case "citylist":
                         return PartialView("_PartialCityList",vm.lst_city);
+                    case "popularlist":
+                        return PartialView("_PartialPopularHotels", vm.lst_poupular_hotels);
+                    case "toplist":
+                        return PartialView("_PartialTopHotels", vm.lst_top_hotels);
                     default:
-                        return PartialView("_PartialCityList", vm.lst_city);
+                        return PartialView("_PartialTopHotels", vm.lst_city);
                 }
             }
             else
@@ -46,9 +48,6 @@ namespace HotelAdvice.Areas.WebSite.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
-     
-
      
     }
 }
