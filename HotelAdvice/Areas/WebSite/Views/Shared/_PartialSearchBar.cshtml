@@ -4,14 +4,22 @@
 
 
 <div id="searchbar" class="well">
+   @using (Ajax.BeginForm("GeneralSearch", "SearchHotel", new AjaxOptions
+   {
+        HttpMethod="GET",
+        OnSuccess="Success_Ajax_SearchBar"
+   }))
+   { 
     <div class="form-horizontal">
         <div class="form-group">
             <div class="col-xs-7 col-xs-offset-0 col-sm-9 col-sm-offset-1 nopadding_right">
                 @Html.BootstrapTextBoxFor(model => model.Destination_Name, "search_destination", "Find Hotel, City or Destination...", "Search Hotel, City or Destination")
             </div>
             <div class="col-xs-1 col-sm-2  nopadding_left">
-                @Html.BootstrapButton("<i class='glyphicon glyphicon-search'></i>&nbsp;Search", "btn_search", "", HtmlCommon.ButtonType.submit)
+                @Html.BootstrapButton("<span class='glyphicon glyphicon-search'></span> Search "
+                , "btn_search","", HtmlCommon.ButtonType.submit, new {target = "_blank"})
             </div>
         </div>
     </div>
+   }
 </div>

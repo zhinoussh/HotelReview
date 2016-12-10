@@ -895,6 +895,34 @@ namespace HotelAdvice.DataAccessLayer
             return lst_result;
         }
 
+        public List<HotelSearchViewModel> Search_Hotels_in_Detination(string destination_name, string userId)
+        {
+            List<HotelSearchViewModel> lst_result = (from h in _dbContext.tbl_Hotel                                             
+                                                     join c in _dbContext.tbl_city on h.CityId equals c.CityId
+                                                     join w in _dbContext.tbl_Wish_List.Where(x => x.UserId == userId)
+                                                     on h.HotelId equals w.HotelId into WishList
+                                                     from ww in WishList.DefaultIfEmpty()
+                                                     where  h.HotelName.Contains(destination_name) ||
+                                                            c.CityName.Contains(destination_name)  ||
+                                                            h.HotelAddress.Contains(destination_name)
+                                                     select new HotelSearchViewModel
+                                                     {
+                                                         HotelId = h.HotelId,
+                                                         HotelName = h.HotelName,
+                                                         CityName = c.CityName,
+                                                         Website = h.Website,
+                                                         HotelStars = h.HotelStars,
+                                                         Description = h.Description,
+                                                         distance_citycenter = h.distance_citycenter,
+                                                         num_reviews = _dbContext.tbl_Rating.Count(x => x.HotelId == h.HotelId),
+                                                         is_favorite = (ww == null ? false : true),
+                                                         GuestRating = (float)Math.Round(_dbContext.tbl_Rating.Where(x => x.HotelId == h.HotelId).Average(x => (float?)x.rating) ?? 0, 1)
+                                                     }).ToList();
+
+
+            return lst_result;
+        }
+
         public List<HotelSearchViewModel> Advanced_Search(AdvancedSearchViewModel vm, string userId)
         {
 

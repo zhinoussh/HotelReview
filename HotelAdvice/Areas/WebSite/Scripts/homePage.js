@@ -14,7 +14,7 @@
                 type: "POST",
                 dataType: "json",
                 data: { Prefix: request.term },
-                success: function (data) {                   
+                success: function (data) {
                     response($.map(data, function (item) {
                         return { label: item.CName, value: item.CID };
                     }))
@@ -25,11 +25,11 @@
         }
         , select: function (event, ui) {
             event.preventDefault();
-            $("#txt_dest_name").val(ui.item.label);
+            $("#search_destination").val(ui.item.label);
         }
         , focus: function (event, ui) {
             event.preventDefault();
-            $("#txt_dest_name").val(ui.item.label);
+            $("#search_destination").val(ui.item.label);
         },
         messages: {
             noResults: "", results: function (resultsCount) { }
@@ -464,6 +464,10 @@ var SuccessAjax_AdvancedSearch = function (result) {
 
 }
 
+var Success_Ajax_SearchBar = function (result) {
+    var search_url = "/Website/SearchHotel/ShowSearchResult?destination_name=" +result.destination_name;
+    location.href = search_url;
+}
 var Success_paging_Results_Home = function (result) {
     scroll_to_top('homePage');
 }

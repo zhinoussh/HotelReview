@@ -82,7 +82,6 @@
 
     <div class="divider_search col-xs-12"></div>
 
-
     <div class="col-xs-12 nopadding">
         @Html.LabelFor(model => model.lst_amenity)
     </div>
@@ -91,7 +90,8 @@
     </div>
 
     <div class="col-xs-12 top-buffer20">       
-        @Html.BootstrapButton("<span class='glyphicon glyphicon-search'></span> Search Hotels", "btn-primary btn-responsive btn-block", "", HtmlCommon.ButtonType.submit)
+        @Html.BootstrapButton("<span class='glyphicon glyphicon-search'></span> Search Hotels"
+        , "btn-primary btn-responsive btn-block", "", HtmlCommon.ButtonType.submit)
     </div>
 </div> @*END of WELL*@
  } 

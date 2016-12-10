@@ -37,6 +37,8 @@ namespace HotelAdvice
             routeValues.Add("sort", sortField);
             routeValues.Add("page", QueryStringCollection.Get("page"));
             routeValues.Add("cityId", QueryStringCollection.Get("cityId"));
+            routeValues.Add("citySearch", QueryStringCollection.Get("citySearch"));
+            routeValues.Add("destination_name", QueryStringCollection.Get("destination_name"));
             routeValues.Add("HotelName", QueryStringCollection.Get("HotelName"));
             routeValues.Add("center", QueryStringCollection.Get("center"));
             routeValues.Add("airport", QueryStringCollection.Get("airport"));

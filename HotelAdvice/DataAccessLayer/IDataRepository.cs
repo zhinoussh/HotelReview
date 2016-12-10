@@ -107,6 +107,8 @@ namespace HotelAdvice.DataAccessLayer
 
         List<HotelSearchViewModel> Search_Hotels_in_city(int city_id, string userId);
 
+        List<HotelSearchViewModel> Search_Hotels_in_Detination(string destination_name, string userId);
+        
         List<HotelSearchViewModel> Advanced_Search(AdvancedSearchViewModel vm, string userId);
 
         List<HotelSearchViewModel> Search_Popular_Hotels();

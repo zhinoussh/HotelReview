@@ -19,7 +19,7 @@ namespace HotelAdvice.DataAccessLayer
         private IDataRepository _dataLayer;
         const int pageSize = 10;
         const int defaultPageSize_userpage = 3;
-        const int defaultPageSize_searchpage = 4;
+        const int defaultPageSize_searchpage = 2;
         const int defaultPageSize_reviewpage = 4;
         const int defaultPageSize_HomePage = 9;
 
@@ -629,7 +629,7 @@ namespace HotelAdvice.DataAccessLayer
         }
 
 
-        public string[] Post_AddToFavorite(string user_id, Controller ctrl, int hotel_id, int? city_id, int? page, string sort, string HotelName, int? center, int? airport, string score
+        public string[] Post_AddToFavorite(string user_id, Controller ctrl,string destination_name, bool? citySearch, int hotel_id, int? city_id, int? page, string sort, string HotelName, int? center, int? airport, string score
                                             , bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star5,string amenity)
         {
             int result = DataLayer.add_favorite_hotel(hotel_id,user_id);
@@ -640,7 +640,7 @@ namespace HotelAdvice.DataAccessLayer
             else
                 msg = "favorite_already_exist";
 
-            IPagedList<HotelSearchViewModel> model = Get_PartialHotelResults(user_id, city_id, page, sort, HotelName, center, airport, score, Star1, Star2, Star3, Star4, Star5, amenity);
+            IPagedList<HotelSearchViewModel> model = Get_PartialHotelResults(user_id,destination_name,citySearch, city_id, page, sort, HotelName, center, airport, score, Star1, Star2, Star3, Star4, Star5, amenity);
             string partialview_hotels = RenderPartial.RenderRazorViewToString(ctrl
                 , "~/Areas/WebSite/views/SearchHotel/_PartialHotelListResults.cshtml"
                 , model);
@@ -688,38 +688,51 @@ namespace HotelAdvice.DataAccessLayer
             return vm;
         }
 
-        public SearchPageViewModel Get_SearchResults(string user_id, bool? citySearch, string HotelName, int? cityId
-            , int? center, int? airport, string score, bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star5, string amenity)
+        public SearchPageViewModel Get_SearchResults(string user_id, string destination_name
+            , bool? citySearch, string HotelName, int? cityId, int? center, int? airport, string score
+            , bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star5, string amenity)
         {
             SearchPageViewModel vm = new SearchPageViewModel();
            
             vm.Advnaced_Search = Set_Advanced_Search_Fields(HotelName,cityId,center,airport,score,Star1, Star2, Star3, Star4,Star5, amenity);
-
+            
+            List<HotelSearchViewModel> lst_hotels;
+            
             if (citySearch.HasValue && citySearch.Value == true)
-            {
-                //get hotel list in this city_id
-                List<HotelSearchViewModel> lst_hotels = DataLayer.Search_Hotels_in_city(cityId.Value, user_id);
-
-                vm.paged_list_hotels = lst_hotels.ToPagedList(1, defaultPageSize_searchpage);
-            }
+                lst_hotels = DataLayer.Search_Hotels_in_city(cityId.Value, user_id);
+            else if (!String.IsNullOrEmpty(destination_name))
+                lst_hotels = DataLayer.Search_Hotels_in_Detination(destination_name, user_id);
             else
-            {
-                //get hotel list by these criterias
-                List<HotelSearchViewModel> lst_hotels = DataLayer.Advanced_Search(vm.Advnaced_Search, user_id);
-
-                vm.paged_list_hotels = lst_hotels.ToPagedList(1, defaultPageSize_searchpage);
-
-            }
+               lst_hotels = DataLayer.Advanced_Search(vm.Advnaced_Search, user_id);
+           
+            vm.paged_list_hotels = lst_hotels.ToPagedList(1, defaultPageSize_searchpage);
 
             return vm;
         }
 
-        public IPagedList<HotelSearchViewModel> Get_PartialHotelResults(string user_id, int? cityId, int? page, string sort, string HotelName, int? center
+        public SearchPageViewModel Get_Hotels_in_Detination(string destination, string userId)
+        {
+            SearchPageViewModel vm = new SearchPageViewModel();
+            vm.Advnaced_Search = Set_Advanced_Search_Fields("", null, null, null, "", null, null, null, null, null, "");
+
+            vm.paged_list_hotels = DataLayer.Search_Hotels_in_Detination(destination, userId)
+                                          .ToPagedList(1, defaultPageSize_searchpage);
+            
+            return vm;
+        }
+
+        public IPagedList<HotelSearchViewModel> Get_PartialHotelResults(string user_id, string destination_name, bool? citySearch, int? cityId, int? page, string sort, string HotelName, int? center
             , int? airport, string score, bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star5, string amenity)
         {
             AdvancedSearchViewModel vm = Set_Advanced_Search_Fields(HotelName, cityId, center, airport, score, Star1, Star2, Star3, Star4, Star5, amenity);
             
-            List<HotelSearchViewModel> lst_hotels = DataLayer.Advanced_Search(vm, user_id);
+            List<HotelSearchViewModel> lst_hotels;
+             if (citySearch.HasValue && citySearch.Value == true)
+                lst_hotels = DataLayer.Search_Hotels_in_city(cityId.Value, user_id);
+            else if (!String.IsNullOrEmpty(destination_name))
+                lst_hotels = DataLayer.Search_Hotels_in_Detination(destination_name, user_id);
+            else
+                 lst_hotels = DataLayer.Advanced_Search(vm, user_id);
 
             //sort
             switch (sort)
