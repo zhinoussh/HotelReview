@@ -93,6 +93,7 @@
   <ItemGroup>
     <Compile Include="Controllers\CityControllerTests.cs" />
     <Compile Include="Controllers\HotelControllerTests.cs" />
+    <Compile Include="Controllers\AmenityControllerTests.cs" />
     <Compile Include="Helpers\JsonDecoder.cs" />
     <Compile Include="Helpers\MakeRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

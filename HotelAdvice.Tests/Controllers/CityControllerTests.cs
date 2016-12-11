@@ -22,25 +22,25 @@ namespace HotelAdvice.Controllers
         {
             //Arrange
             var repo = new Mock<IServiceLayer>(MockBehavior.Strict);
-            repo.Setup(x => x.Get_CityList(1, ""))
+            repo.Setup(x => x.Get_CityList(1, "Myfilter"))
                .Returns((new List<CityViewModel>(){
-                new CityViewModel{},
-                new CityViewModel{},
-                new CityViewModel{}
+                new CityViewModel(){},
+                new CityViewModel(){},
+                new CityViewModel(){}
                 }).ToPagedList(1, 10)
                );
 
             CityController ctrl = new CityController(repo.Object);
             
             //Act
-            ctrl.MakeNormalRequest();    
-            
-            var result = (ViewResult)ctrl.Index(1, "");
+            ctrl.MakeNormalRequest();
+
+            var result = (ViewResult)ctrl.Index(1, "Myfilter");
             IPagedList<CityViewModel> model = (IPagedList<CityViewModel>)result.Model;
 
             //Assert
             Assert.IsNotNull(result);
-          //  Assert.AreEqual("Myfilter", result.ViewData["filter"]);
+            Assert.AreEqual("Myfilter", result.ViewData["filter"]);
             Assert.AreEqual(3, model.Count);
         }
 

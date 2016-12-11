@@ -29,9 +29,10 @@ namespace HotelAdvice.Areas.Admin.Controllers
 
             IPagedList paged_list_amenity = DataService.Get_AmenityList(page, filter);
 
-            return  Request.IsAjaxRequest()
-                ? (ActionResult)PartialView("_PartialAmenityList", paged_list_amenity)
-                : View(paged_list_amenity);
+            if(Request.IsAjaxRequest())
+                return (ActionResult)PartialView("_PartialAmenityList", paged_list_amenity);
+            else
+                return  View(paged_list_amenity);
         }
 
         [HttpPost]
@@ -57,7 +58,7 @@ namespace HotelAdvice.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Delete_Amenity(AmenityViewModel vm)
         {
-           
+            DataService.Post_DeleteAmenity(vm);
             return Json(new { msg = "Row deleted successfully!", ctrl = "/Admin/Amenity", cur_pg = vm.CurrentPage, filter = vm.CurrentFilter });
         }
     }

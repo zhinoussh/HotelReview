@@ -20,7 +20,7 @@ namespace HotelAdvice.Controllers
         {
             //Arrange
             var repo = new Mock<IServiceLayer>(MockBehavior.Strict);
-            repo.Setup(x => x.Get_HotelList(1, "")).Returns(new List<HotelViewModel>{
+            repo.Setup(x => x.Get_HotelList(1, "filter")).Returns(new List<HotelViewModel>{
                 new HotelViewModel(){},
                 new HotelViewModel(){},
                 new HotelViewModel(){}
@@ -30,12 +30,14 @@ namespace HotelAdvice.Controllers
             
             //Act
             ctrl.MakeNormalRequest();
-            var result=(ViewResult)ctrl.Index(1, "");
+            var result=(ViewResult)ctrl.Index(1, "filter");
             IPagedList<HotelViewModel> model=(IPagedList<HotelViewModel>)result.Model;
            
             //Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(3, model.Count);
+            Assert.AreEqual("filter", result.ViewData["filter"]);
+
         }
 
         [TestMethod]
