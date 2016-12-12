@@ -1,4 +1,7 @@
-﻿$(document).ready(function () {
+﻿/// <reference path="D:\Git_repos\HotelReview\HotelAdvice\Scripts/jquery-3.1.0.intellisense.js" />
+
+
+$(document).ready(function () {
 
     Set_Rating_Plugins();
 
@@ -434,6 +437,7 @@ var Success_paging_Results = function (result) {
 }
 
 var SuccessAjax_AdvancedSearch = function (result) {
+  
     var hotelName = result.searchcriteria.Hotel_Name;
     if (hotelName == null)
         hotelName = '';
@@ -457,13 +461,40 @@ var SuccessAjax_AdvancedSearch = function (result) {
     if (selected_amenities != '')
         selected_amenities=selected_amenities.slice(0, -1);
 
+    var url = window.location.pathname.split("/");
+    var actionName = url[2];
+    if (window.location.pathname == '/' || actionName == 'Home') {
+        var search_url = "/Website/SearchHotel/ShowSearchResult?HotelName=" + hotelName + "&cityId=" + city + "&score=" + score + "&center=" + center + "&airport=" + airport
+            + "&Star1=" + Star1 + "&Star2=" + Star2 + "&Star3=" + Star3 + "&Star4=" + Star4 + "&Star5=" + Star5 + "&amenity=" + selected_amenities;
+        location.href = search_url;
+    }
+    else if (actionName == 'SearchHotel') {
+        $.ajax({
+            url: "/WebSite/SearchHotel/ShowSearchResult",
+            type: "get",
+            dataType: "json",
+            data: {
+                "HotelName": hotelName, "cityId": city, "score": score, "center": center, "airport": airport
+                , "Star1": Star1, "Star2": Star2, "Star3": Star3, "Star4": Star4, "Star5": Star5, "amenity": selected_amenities
+            },
+            success: function (data) {
+                if (data.partial) {
+                    alert('here');
+                    $("#table_container").html = data.partial;
+                }
+            }
 
-    var search_url = "/Website/SearchHotel/ShowSearchResult?HotelName=" + hotelName + "&cityId=" + city + "&score=" + score + "&center=" + center + "&airport=" + airport
-        + "&Star1=" + Star1 + "&Star2=" + Star2 + "&Star3=" + Star3 + "&Star4=" + Star4 + "&Star5=" + Star5 + "&amenity=" + selected_amenities;
-    location.href = search_url;
+        });
+    }
+    
 
 }
 
+var Success_ajax_HotelSearch=function(result)
+{
+    if (result.partial)
+        $("#table_container").html = result.partial;
+}
 var Success_Ajax_SearchBar = function (result) {
     var search_url = "/Website/SearchHotel/ShowSearchResult?destination_name=" +result.destination_name;
     location.href = search_url;

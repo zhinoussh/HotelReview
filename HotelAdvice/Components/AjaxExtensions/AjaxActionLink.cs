@@ -52,8 +52,7 @@ namespace HotelAdvice
             AjaxOptions options = new AjaxOptions()
             {
                 HttpMethod = "Get",
-                UpdateTargetId = "table_container",
-                InsertionMode = InsertionMode.Replace
+                OnSuccess = "Success_ajax_HotelSearch"
             };
 
             return AjaxExtensions.ActionLink(ajaxHelper, linkText, ActionName, ControllerName, routeValues, options, attr);
