@@ -869,6 +869,7 @@ namespace HotelAdvice.DataAccessLayer
         #endregion UserPage
 
         #region Home Page
+       
 
         public List<HotelSearchViewModel> Search_Hotels_in_city(int city_id, string userId)
         {
