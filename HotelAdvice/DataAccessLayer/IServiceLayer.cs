@@ -1,6 +1,7 @@
 ﻿using HotelAdvice.Areas.Admin.ViewModels;
 using HotelAdvice.Areas.WebSite.ViewModels;
 using PagedList;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace HotelAdvice.DataAccessLayer
@@ -15,6 +16,8 @@ namespace HotelAdvice.DataAccessLayer
         HomeViewModel Get_HomePage(int?page);
         AdvancedSearchViewModel Set_Advanced_Search_Fields(string HotelName, int? cityId
             , int? center, int? airport, string score, bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star5, string selected_amenities);
+
+        List<string> search_destinations_by_prefix(string Prefix);
 
         #endregion HomePage
 
@@ -104,6 +107,7 @@ namespace HotelAdvice.DataAccessLayer
 
         #region SearchPage
 
+       
         HotelDetailViewModel Get_HotelDetails(string user_id,int hotel_id);
 
         SearchPageViewModel Get_SearchResults(string user_id, string destination_name, bool? citySearch, string HotelName, int? cityId, int? center, int? airport, string score

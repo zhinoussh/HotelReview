@@ -129,6 +129,23 @@ namespace HotelAdvice.DataAccessLayer
             return vm_search;
         }
 
+        public List<string> search_destinations_by_prefix(string Prefix)
+        {
+            List<CityViewModel> cityList = DataLayer.get_cities();
+            List<HotelViewModel> HotelList = DataLayer.get_hotels();
+
+            List<string> search_city = cityList.Where(x => x.cityName.ToLower().Contains(Prefix.ToLower()))
+                                               .Select(x => x.cityName).ToList();
+
+            List<string> search_hotels = HotelList.Where(x => x.HotelName.ToLower().Contains(Prefix.ToLower()))
+                                         .Select(x => x.HotelName).ToList();
+
+            List<string> result = new List<string>();
+            result.AddRange(search_city);
+            result.AddRange(search_hotels);
+
+            return result;
+        }
         #endregion HomePage
 
         #region Hotel

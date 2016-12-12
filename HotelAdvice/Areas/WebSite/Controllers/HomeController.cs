@@ -31,7 +31,7 @@ namespace HotelAdvice.Areas.WebSite.Controllers
                     case "toplist":
                         return PartialView("_PartialTopHotels", vm.lst_top_hotels);
                     default:
-                        return PartialView("_PartialTopHotels", vm.lst_city);
+                        return PartialView("_PartialCityList", vm.lst_city);
                 }
             }
             else
@@ -41,11 +41,7 @@ namespace HotelAdvice.Areas.WebSite.Controllers
         [HttpPost]
         public JsonResult SearchList(string Prefix)
         {
-            List<CityViewModel> cityList = DataService.DataLayer.get_cities();
-
-            var result = cityList.Where(x => x.cityName.ToLower().Contains(Prefix.ToLower()))
-                .Select(x => new { CName=x.cityName,CID=x.cityID}).ToList();
-
+            List<string> result=DataService.search_destinations_by_prefix(Prefix);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
      

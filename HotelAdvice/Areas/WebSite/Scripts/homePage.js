@@ -16,7 +16,7 @@
                 data: { Prefix: request.term },
                 success: function (data) {
                     response($.map(data, function (item) {
-                        return { label: item.CName, value: item.CID };
+                        return { label: item };
                     }))
                     
                 }
@@ -25,11 +25,11 @@
         }
         , select: function (event, ui) {
             event.preventDefault();
-            $("#search_destination").val(ui.item.label);
+            $("#search_destination").val(ui.item.value);
         }
         , focus: function (event, ui) {
             event.preventDefault();
-            $("#search_destination").val(ui.item.label);
+            $("#search_destination").val(ui.item.value);
         },
         messages: {
             noResults: "", results: function (resultsCount) { }
