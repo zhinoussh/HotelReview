@@ -19,7 +19,7 @@ namespace HotelAdvice.DataAccessLayer
         private IDataRepository _dataLayer;
         const int pageSize = 10;
         const int defaultPageSize_userpage = 3;
-        const int defaultPageSize_searchpage = 2;
+        const int defaultPageSize_searchpage = 4;
         const int defaultPageSize_reviewpage = 4;
         const int defaultPageSize_HomePage = 9;
 

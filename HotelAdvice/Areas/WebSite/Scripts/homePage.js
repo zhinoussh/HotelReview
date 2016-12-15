@@ -386,6 +386,7 @@ var Success_DeleteReview = function (result) {
     $("#DeleteModalReview").find(".modal_main").modal('hide');
 
 }
+
 var SuccessAjax_AddFavorit = function (result) {
     
     if (result.msg) {
@@ -479,8 +480,7 @@ var SuccessAjax_AdvancedSearch = function (result) {
             },
             success: function (data) {
                 if (data.partial) {
-                    alert('here');
-                    $("#table_container").html = data.partial;
+                    $("#table_container").html(data.partial);
                 }
             }
 
@@ -493,12 +493,36 @@ var SuccessAjax_AdvancedSearch = function (result) {
 var Success_ajax_HotelSearch=function(result)
 {
     if (result.partial)
-        $("#table_container").html = result.partial;
+        $("#table_container").html(result.partial);
 }
+
 var Success_Ajax_SearchBar = function (result) {
-    var search_url = "/Website/SearchHotel/ShowSearchResult?destination_name=" +result.destination_name;
-    location.href = search_url;
+
+    var url = window.location.pathname.split("/");
+    var actionName = url[2];
+    if (window.location.pathname == '/' || actionName == 'Home') {
+        var search_url = "/Website/SearchHotel/ShowSearchResult?destination_name=" + result.destination_name;
+        location.href = search_url;
+    }
+    else if (actionName == 'SearchHotel') {
+        $.ajax({
+            url: "/WebSite/SearchHotel/ShowSearchResult",
+            type: "get",
+            dataType: "json",
+            data: {
+                "destination_name": result.destination_name
+            },
+            success: function (data) {
+                if (data.partial) {
+                    $("#table_container").html(data.partial);
+                }
+            }
+
+        });
+    }
+
 }
+
 var Success_paging_Results_Home = function (result) {
     scroll_to_top('homePage');
 }

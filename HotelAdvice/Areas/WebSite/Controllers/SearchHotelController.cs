@@ -30,7 +30,6 @@ namespace HotelAdvice.Areas.WebSite.Controllers
             if (Request.IsAjaxRequest())
             {
                 IPagedList page_list_hotels = DataService.Get_PartialHotelResults(User.Identity.GetUserId(), destination_name, citySearch, cityId, page, sort, HotelName, center, airport, score, Star1, Star2, Star3, Star4, Star5, amenity);
-              //  return PartialView("_PartialHotelListResults", page_list_hotels);
 
                 string partialview_hotels = RenderPartial.RenderRazorViewToString(this
                                          , "~/Areas/WebSite/views/SearchHotel/_PartialHotelListResults.cshtml"
