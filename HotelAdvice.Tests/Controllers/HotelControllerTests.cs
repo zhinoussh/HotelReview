@@ -29,7 +29,7 @@ namespace HotelAdvice.Controllers
             HotelController ctrl = new HotelController(repo.Object);
             
             //Act
-            ctrl.MakeNormalRequest();
+            MakeRequest.MakeNormalRequest(ctrl,false);
             var result=(ViewResult)ctrl.Index(1, "filter");
             IPagedList<HotelViewModel> model=(IPagedList<HotelViewModel>)result.Model;
            
@@ -55,7 +55,7 @@ namespace HotelAdvice.Controllers
             HotelController ctrl = new HotelController(repo.Object);
 
             //act
-            ctrl.MakeAjaxRequest();
+            MakeRequest.MakeAjaxRequest(ctrl,false);
             var result=(PartialViewResult)ctrl.Index(1, "");
             IPagedList<HotelViewModel> model = (IPagedList<HotelViewModel>)result.Model;
 

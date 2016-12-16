@@ -33,7 +33,7 @@ namespace HotelAdvice.Controllers
             CityController ctrl = new CityController(repo.Object);
             
             //Act
-            ctrl.MakeNormalRequest();
+            MakeRequest.MakeNormalRequest(ctrl,false);
 
             var result = (ViewResult)ctrl.Index(1, "Myfilter");
             IPagedList<CityViewModel> model = (IPagedList<CityViewModel>)result.Model;
@@ -61,7 +61,7 @@ namespace HotelAdvice.Controllers
             CityController ctrl = new CityController(repo.Object);
 
             //Act
-            ctrl.MakeAjaxRequest();
+            MakeRequest.MakeAjaxRequest(ctrl,false);
 
             var result = (PartialViewResult)ctrl.Index(1, "");
             IPagedList<CityViewModel> model = (IPagedList<CityViewModel>)result.Model;

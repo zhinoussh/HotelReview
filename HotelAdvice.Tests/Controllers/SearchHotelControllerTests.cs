@@ -32,7 +32,7 @@ namespace HotelAdvice.Tests.Controllers
                    .Returns(It.IsNotIn<string>());
          
             //Act
-            MakeRequest.MakeAjaxRequest(ctrl);
+            MakeRequest.MakeAjaxRequest(ctrl,false);
 
             var result = (JsonResult)ctrl.ShowSearchResult(1, "", "isfahan", false, "", 1, 1, 1, "", false, false, false, false, false, "");
             string partial_Json=JsonDecoder.GetValueFromJsonResult<string>(result, "partial");
@@ -55,7 +55,7 @@ namespace HotelAdvice.Tests.Controllers
             SearchHotelController ctrl = new SearchHotelController(service.Object);
 
             //Act
-            MakeRequest.MakeNormalRequest(ctrl);
+            MakeRequest.MakeNormalRequest(ctrl,false);
 
             var result = (ViewResult)ctrl.ShowSearchResult(1, "", "isfahan", false, "", 1, 1, 1, "", false, false, false, false, false, "");
             var model = result.Model;
@@ -125,7 +125,7 @@ namespace HotelAdvice.Tests.Controllers
             SearchHotelController ctrl = new SearchHotelController(service.Object);
 
             //ACT
-            MakeRequest.MakeNormalRequest(ctrl);
+            MakeRequest.MakeNormalRequest(ctrl,false);
 
             var result = (ViewResult)ctrl.HotelDetails(8);
             HotelDetailViewModel model = (HotelDetailViewModel)result.Model;

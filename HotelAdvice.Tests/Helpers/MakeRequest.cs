@@ -14,7 +14,7 @@ namespace HotelAdvice.Helpers
 {
     public static class MakeRequest
     {
-        public static void MakeAjaxRequest(this Controller controller)
+        public static void MakeAjaxRequest(Controller controller, bool? IsAuthenticated)
         {
             // First create request with X-Requested-With header set
             Mock<HttpRequestBase> httpRequest = new Mock<HttpRequestBase>();
@@ -30,13 +30,15 @@ namespace HotelAdvice.Helpers
 
             //set user id
             var mockIdentity = new Mock<IIdentity>();
+            if (IsAuthenticated.HasValue)
+                mockIdentity.Setup(x => x.IsAuthenticated).Returns(IsAuthenticated.Value);
             httpContext.SetupGet(x => x.User.Identity).Returns(mockIdentity.Object);
 
             // Set controllerContext
             controller.ControllerContext = new ControllerContext(httpContext.Object, new RouteData(), controller);
         }
 
-        public static void MakeNormalRequest(this Controller controller)
+        public static void MakeNormalRequest(Controller controller, bool? IsAuthenticated)
         {
             // First create request with X-Requested-With header set
             Mock<HttpRequestBase> httpRequest = new Mock<HttpRequestBase>();
@@ -52,12 +54,23 @@ namespace HotelAdvice.Helpers
 
             //set user id
             var mockIdentity = new Mock<IIdentity>();
+            if (IsAuthenticated.HasValue)
+                mockIdentity.Setup(x => x.IsAuthenticated).Returns(IsAuthenticated.Value);
             httpContext.SetupGet(x => x.User.Identity).Returns(mockIdentity.Object);
 
             // Set controllerContext
             controller.ControllerContext = new ControllerContext(httpContext.Object, new RouteData(), controller);
         }
 
-      
+        public static void MakeAuthenticationRequest(Controller controller,bool IsAuthenticated)
+        {
+            Mock<HttpContextBase> httpContext = new Mock<HttpContextBase>();
+           
+             var mockIdentity = new Mock<IIdentity>();
+             mockIdentity.Setup(x => x.IsAuthenticated).Returns(IsAuthenticated);
+             httpContext.SetupGet(x => x.User.Identity).Returns(mockIdentity.Object);
+
+             controller.ControllerContext = new ControllerContext(httpContext.Object, new RouteData(), controller);
+        }
     }
 }

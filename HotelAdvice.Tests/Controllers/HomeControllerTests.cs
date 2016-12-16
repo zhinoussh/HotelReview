@@ -24,7 +24,7 @@ namespace HotelAdvice.Tests.Controllers
             HomeController ctrl = new HomeController(service.Object);
 
             //Act
-            MakeRequest.MakeNormalRequest(ctrl);
+            MakeRequest.MakeNormalRequest(ctrl,false);
             var result=(ViewResult)ctrl.Index("returnUrl", 1, "");
 
             //Assert
@@ -48,7 +48,7 @@ namespace HotelAdvice.Tests.Controllers
             HomeController ctrl = new HomeController(service.Object);
 
             //Act
-            MakeRequest.MakeAjaxRequest(ctrl);
+            MakeRequest.MakeAjaxRequest(ctrl,false);
             var result = (PartialViewResult)ctrl.Index("returnUrl", 1, "citylist");
             IPagedList<CityViewModel> vm = (IPagedList<CityViewModel>)result.Model;
 
@@ -74,7 +74,7 @@ namespace HotelAdvice.Tests.Controllers
             HomeController ctrl = new HomeController(service.Object);
 
             //Act
-            MakeRequest.MakeAjaxRequest(ctrl);
+            MakeRequest.MakeAjaxRequest(ctrl,false);
             var result = (PartialViewResult)ctrl.Index("returnUrl", 1, "popularlist");
             IPagedList<HotelSearchViewModel> vm = (IPagedList<HotelSearchViewModel>)result.Model;
 
@@ -100,7 +100,7 @@ namespace HotelAdvice.Tests.Controllers
             HomeController ctrl = new HomeController(service.Object);
 
             //Act
-            MakeRequest.MakeAjaxRequest(ctrl);
+            MakeRequest.MakeAjaxRequest(ctrl,false);
             var result = (PartialViewResult)ctrl.Index("returnUrl", 1, "toplist");
             IPagedList<HotelSearchViewModel> vm = (IPagedList<HotelSearchViewModel>)result.Model;
 
@@ -126,7 +126,7 @@ namespace HotelAdvice.Tests.Controllers
             HomeController ctrl = new HomeController(service.Object);
 
             //Act
-            MakeRequest.MakeAjaxRequest(ctrl);
+            MakeRequest.MakeAjaxRequest(ctrl,false);
             var result = (PartialViewResult)ctrl.Index("returnUrl", 1, "");
             IPagedList<CityViewModel> vm = (IPagedList<CityViewModel>)result.Model;
 
