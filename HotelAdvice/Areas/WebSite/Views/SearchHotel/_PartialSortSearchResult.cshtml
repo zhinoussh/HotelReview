@@ -12,11 +12,11 @@
     <div class="well well-sortResult" >
 
         <div class="col-sm-4 col-xs-12 " >
-            @Ajax.SortLink("Distance", "HotelResults", "SearchHotel", "distance"
+            @Ajax.SortLink("Distance", "ShowSearchResult", "SearchHotel", "distance"
             , "btn btn-sort btn-responsive btn-block", "Hotels located closest to Downtown")
         </div>
         <div class="col-sm-4 col-xs-12 ">
-            @Ajax.SortLink("Guest Rating", "HotelResults", "SearchHotel", "rating"
+            @Ajax.SortLink("Guest Rating", "ShowSearchResult", "SearchHotel", "rating"
             , "btn btn-sort btn-responsive btn-block", "Popular hotels based on guest rating")
         </div>
 
@@ -26,10 +26,10 @@
 
             <ul class="dropdown-menu dropdown-menu-sort" role="menu">
                 <li>
-                    @Ajax.SortLink("5 to 1 Stars", "HotelResults", "SearchHotel", "5to1")
+                    @Ajax.SortLink("5 to 1 Stars", "ShowSearchResult", "SearchHotel", "5to1")
                 </li>
                 <li>
-                    @Ajax.SortLink("1 to 5 Stars", "HotelResults", "SearchHotel", "1to5")
+                    @Ajax.SortLink("1 to 5 Stars", "ShowSearchResult", "SearchHotel", "1to5")
                 </li>
             </ul>
         </div>

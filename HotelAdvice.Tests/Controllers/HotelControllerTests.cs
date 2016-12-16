@@ -114,9 +114,6 @@ namespace HotelAdvice.Controllers
             Assert.AreEqual("/Admin/Hotel", Json_ctrl);
             Assert.AreEqual("Hotelfilter",Json_filter);
             Assert.AreEqual(1, Json_cur_pg);
-
-
-
         }
 
         [TestMethod]

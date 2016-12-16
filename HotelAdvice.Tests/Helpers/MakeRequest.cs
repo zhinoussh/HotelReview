@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -27,6 +28,10 @@ namespace HotelAdvice.Helpers
             Mock<HttpContextBase> httpContext = new Mock<HttpContextBase>();
             httpContext.SetupGet(x => x.Request).Returns(httpRequest.Object);
 
+            //set user id
+            var mockIdentity = new Mock<IIdentity>();
+            httpContext.SetupGet(x => x.User.Identity).Returns(mockIdentity.Object);
+
             // Set controllerContext
             controller.ControllerContext = new ControllerContext(httpContext.Object, new RouteData(), controller);
         }
@@ -45,8 +50,14 @@ namespace HotelAdvice.Helpers
             httpRequest.SetupGet(x => x.Headers).Returns(new System.Net.WebHeaderCollection { { "X-Requested-With", "NotAjaxRequest" } });
             httpRequest.SetupGet(x => x["X-Requested-With"]).Returns("NotAjaxRequest");
 
+            //set user id
+            var mockIdentity = new Mock<IIdentity>();
+            httpContext.SetupGet(x => x.User.Identity).Returns(mockIdentity.Object);
+
             // Set controllerContext
             controller.ControllerContext = new ControllerContext(httpContext.Object, new RouteData(), controller);
         }
+
+      
     }
 }

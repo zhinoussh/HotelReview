@@ -110,8 +110,11 @@ namespace HotelAdvice.DataAccessLayer
        
         HotelDetailViewModel Get_HotelDetails(string user_id,int hotel_id);
 
-        SearchPageViewModel Get_SearchResults(string user_id, string destination_name, bool? citySearch, string HotelName, int? cityId, int? center, int? airport, string score
+        SearchPageViewModel Get_SearchResults_AsView(string user_id, string destination_name, bool? citySearch, string HotelName, int? cityId, int? center, int? airport, string score
                                             , bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star,string amenity);
+
+        string Get_SearchResults_AsPartialView(string user_id, Controller ctrl, int? page, string sort, string destination_name, bool? citySearch, string HotelName, int? cityId, int? center, int? airport, string score
+                                            , bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star, string amenity);
 
         SearchPageViewModel Get_Hotels_in_Detination(string destination, string userId);
 
