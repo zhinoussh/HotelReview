@@ -584,7 +584,7 @@ namespace HotelAdvice.DataAccessLayer
         public string Get_PartialReviewList(AddReviewViewModel review, string user_id, Controller ctrl)
         {
             IPagedList<HotelSearchViewModel> model = DataLayer.get_reviewList(user_id).ToPagedList<HotelSearchViewModel>(review.currentPageIndex, defaultPageSize_userpage);
-            string partialview = RenderPartial.RenderRazorViewToString(ctrl
+            string partialview = RenderPartialView.RenderRazorViewToString(ctrl
                  , "~/Areas/WebSite/views/User/_PartialYourReviewList.cshtml"
                  , model);
 
@@ -638,7 +638,7 @@ namespace HotelAdvice.DataAccessLayer
         {
             int currentPageIndex = page.HasValue ? page.Value : 1;
             IPagedList<HotelSearchViewModel> model = DataLayer.get_ratingList(user_id).ToPagedList<HotelSearchViewModel>(currentPageIndex, defaultPageSize_userpage);
-            string partialview_rating = RenderPartial.RenderRazorViewToString(ctrl
+            string partialview_rating = RenderPartialView.RenderRazorViewToString(ctrl
                  , "~/Areas/WebSite/views/User/_PartialRatingList.cshtml"
                  , model);
 
@@ -658,7 +658,7 @@ namespace HotelAdvice.DataAccessLayer
                 msg = "favorite_already_exist";
 
             IPagedList<HotelSearchViewModel> model = Get_PartialHotelResults(user_id,destination_name,citySearch, city_id, page, sort, HotelName, center, airport, score, Star1, Star2, Star3, Star4, Star5, amenity);
-            string partialview_hotels = RenderPartial.RenderRazorViewToString(ctrl
+            string partialview_hotels = RenderPartialView.RenderRazorViewToString(ctrl
                 , "~/Areas/WebSite/views/SearchHotel/_PartialHotelListResults.cshtml"
                 , model);
 
@@ -705,7 +705,7 @@ namespace HotelAdvice.DataAccessLayer
             return vm;
         }
 
-        public SearchPageViewModel Get_SearchResults(string user_id, string destination_name
+        public SearchPageViewModel Get_SearchResults_AsView(string user_id, string destination_name
             , bool? citySearch, string HotelName, int? cityId, int? center, int? airport, string score
             , bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star5, string amenity)
         {
@@ -725,6 +725,20 @@ namespace HotelAdvice.DataAccessLayer
             vm.paged_list_hotels = lst_hotels.ToPagedList(1, defaultPageSize_searchpage);
 
             return vm;
+        }
+
+
+        public string Get_SearchResults_AsPartialView(string user_id,Controller ctrl,int?page,string sort, string destination_name
+            , bool? citySearch, string HotelName, int? cityId, int? center, int? airport, string score
+            , bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star5, string amenity)
+        {
+            IPagedList page_list_hotels = Get_PartialHotelResults(user_id, destination_name, citySearch, cityId, page, sort, HotelName, center, airport, score, Star1, Star2, Star3, Star4, Star5, amenity);
+
+            string partialview_hotels = RenderPartialView.RenderRazorViewToString(ctrl
+                                     , "~/Areas/WebSite/views/SearchHotel/_PartialHotelListResults.cshtml"
+                                     , page_list_hotels);
+
+            return partialview_hotels;
         }
 
         public SearchPageViewModel Get_Hotels_in_Detination(string destination, string userId)

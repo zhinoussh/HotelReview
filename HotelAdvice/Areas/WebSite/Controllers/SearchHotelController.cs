@@ -26,21 +26,16 @@ namespace HotelAdvice.Areas.WebSite.Controllers
         public ActionResult ShowSearchResult(int? page, string sort,string destination_name, bool? citySearch, string HotelName, int? cityId, int? center, int? airport, string score
                                             , bool? Star1, bool? Star2, bool? Star3, bool? Star4, bool? Star5,string amenity)
         {
-            //form sort links or pager
             if (Request.IsAjaxRequest())
             {
-                IPagedList page_list_hotels = DataService.Get_PartialHotelResults(User.Identity.GetUserId(), destination_name, citySearch, cityId, page, sort, HotelName, center, airport, score, Star1, Star2, Star3, Star4, Star5, amenity);
-
-                string partialview_hotels = RenderPartial.RenderRazorViewToString(this
-                                         , "~/Areas/WebSite/views/SearchHotel/_PartialHotelListResults.cshtml"
-                                         , page_list_hotels);
-
+                string partialview_hotels = DataService.Get_SearchResults_AsPartialView(User.Identity.GetUserId(), this, page, sort
+                    , destination_name, citySearch, HotelName, cityId, center, airport, score, Star1, Star2, Star3, Star4, Star5, amenity);
+                
                 return Json(new {partial=partialview_hotels},JsonRequestBehavior.AllowGet);
-
             }
             else
             {
-                SearchPageViewModel vm = DataService.Get_SearchResults(User.Identity.GetUserId(), destination_name
+                SearchPageViewModel vm = DataService.Get_SearchResults_AsView(User.Identity.GetUserId(), destination_name
                     , citySearch, HotelName, cityId, center, airport, score, Star1, Star2, Star3, Star4, Star5, amenity);
 
                 return View(vm);
