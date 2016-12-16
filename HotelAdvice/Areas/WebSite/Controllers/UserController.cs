@@ -149,20 +149,19 @@ namespace HotelAdvice.Areas.WebSite.Controllers
             {
                 return Json(new { msg = "login_required" });
             }
-
-            DataService.Post_RateHotel(User.Identity.GetUserId(),your_rating,hotel_id);
-
-            if (Request.IsAjaxRequest())
-            {
-                string partialview_rating = DataService.Get_PartialRatingList(this, User.Identity.GetUserId(), page);
-                return Json(new { msg = "rating_success", partial = partialview_rating });
-            }
             else
-                return Json(new { msg = "rating_success" });
+            {
+                DataService.Post_RateHotel(User.Identity.GetUserId(), your_rating, hotel_id);
+
+                if (Request.IsAjaxRequest())
+                {
+                    string partialview_rating = DataService.Get_PartialRatingList(this, User.Identity.GetUserId(), page);
+                    return Json(new { msg = "rating_success", partial = partialview_rating });
+                }
+                else
+                    return Json(new { msg = "rating_success" });
+            }
         }
-
-        
-
 
     }
 }

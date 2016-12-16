@@ -127,6 +127,7 @@
     <Compile Include="Controllers\AdminControllerTests.cs" />
     <Compile Include="Controllers\HomeControllerTests.cs" />
     <Compile Include="Controllers\SearchHotelControllerTests.cs" />
+    <Compile Include="Controllers\UserControllerTests.cs" />
     <Compile Include="Helpers\JsonDecoder.cs" />
     <Compile Include="Helpers\MakeRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

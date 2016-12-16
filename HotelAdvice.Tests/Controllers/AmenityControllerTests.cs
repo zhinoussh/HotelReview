@@ -29,7 +29,7 @@ namespace HotelAdvice.Tests.Controllers
             AmenityController ctrl = new AmenityController(repo.Object);
 
             //Act
-            MakeRequest.MakeNormalRequest(ctrl);
+            MakeRequest.MakeNormalRequest(ctrl,false);
             var result=(ViewResult)ctrl.Index(1, "amenityFilter");
             IPagedList<AmenityViewModel> model = (IPagedList<AmenityViewModel>)result.Model;
 
@@ -54,7 +54,7 @@ namespace HotelAdvice.Tests.Controllers
             AmenityController ctrl = new AmenityController(repo.Object);
 
             //Act
-            MakeRequest.MakeAjaxRequest(ctrl);
+            MakeRequest.MakeAjaxRequest(ctrl,null);
             var result=(PartialViewResult)ctrl.Index(1, "myFilter");
             IPagedList<AmenityViewModel> model = (IPagedList<AmenityViewModel>)result.Model;
 
