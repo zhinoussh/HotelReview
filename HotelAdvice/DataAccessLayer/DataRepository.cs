@@ -15,7 +15,7 @@ namespace HotelAdvice.DataAccessLayer
     {
         private HotelAdviceDB _dbContext;
 
-        public virtual DataRepository(HotelAdviceDB dbContext)
+        public DataRepository(HotelAdviceDB dbContext)
         {
             _dbContext = dbContext;
         }

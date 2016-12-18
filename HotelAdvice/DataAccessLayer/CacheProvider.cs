@@ -9,10 +9,10 @@ namespace HotelAdvice.DataAccessLayer
     public interface ICacheProvider
     {
         IEnumerable<T> GetOrSet<T>(string key, Func<IEnumerable<T>> methodToCall, TimeSpan duration
-                                   ,object cacheDependency) where T : class;
+                                   , string[] cacheDependency) where T : class;
         object GetCacheItem(string key);
-        void SetCacheItem(string key, object data, TimeSpan duration, object cacheDependency);
-        void InvalidateCache(string dependencyArray);
+        void SetCacheItem(string key, object data, TimeSpan duration, string[] cacheDependency);
+        void InvalidateCache(string[] dependencyArray);
     }
 
     public class CacheProvider : ICacheProvider
@@ -24,14 +24,14 @@ namespace HotelAdvice.DataAccessLayer
             return HttpRuntime.Cache[key];   
         }
 
-        public void SetCacheItem(string key, object data, TimeSpan duration, object cacheDependency)
+        public void SetCacheItem(string key, object data, TimeSpan duration, string[] cacheDependency)
         {
-            CacheDependency dependency=new CacheDependency(null,(string[])cacheDependency);
+            CacheDependency dependency=new CacheDependency(null,cacheDependency);
             HttpRuntime.Cache.Insert(key,data,dependency, DateTime.Now.Add(duration),Cache.NoSlidingExpiration);
         }
 
 
-        public IEnumerable<T> GetOrSet<T>(string key, Func<IEnumerable<T>> methodToCall, TimeSpan duration, object cacheDependency) where T : class
+        public IEnumerable<T> GetOrSet<T>(string key, Func<IEnumerable<T>> methodToCall, TimeSpan duration, string[] cacheDependency) where T : class
         {
             IEnumerable<T> result = GetCacheItem(key) as IEnumerable<T>;
             if (result == null)
@@ -45,7 +45,7 @@ namespace HotelAdvice.DataAccessLayer
             return result;
         }
 
-        public void InvalidateCache(string dependencyArray)
+        public void InvalidateCache(string[] dependencyArray)
         {
             HttpRuntime.Cache.Remove(dependencyArray[0]);
         }
