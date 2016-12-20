@@ -310,10 +310,10 @@ namespace HotelAdvice.Controllers
             //Arrange
             var repo = new Mock<IServiceLayer>(MockBehavior.Strict);
             repo.Setup(x=>x.DataLayer.get_restaurants())
-                .Returns(new List<tbl_Restuarant>(){
-                    new tbl_Restuarant(){RestaurantName="res1"},
-                    new tbl_Restuarant(){RestaurantName="res2"},
-                    new tbl_Restuarant(){RestaurantName="sssss"}
+                .Returns(new List<string>(){
+                    "res1",
+                   "res2",
+                   "sssss"
                 });
 
             HotelController ctrl = new HotelController(repo.Object);
@@ -335,11 +335,11 @@ namespace HotelAdvice.Controllers
             //arrange
             var repo = new Mock<IServiceLayer>(MockBehavior.Strict);
             repo.Setup(x => x.DataLayer.get_roomTypes())
-                .Returns(new List<tbl_room_type>()
+                .Returns(new List<string>()
                 {
-                    new tbl_room_type(){Room_Type="pre1"},
-                    new tbl_room_type(){Room_Type="pre2"},
-                    new tbl_room_type(){Room_Type="lllll"},
+                    "pre1",
+                    "pre2",
+                    "lllll",
                 }
             );
 
@@ -363,11 +363,11 @@ namespace HotelAdvice.Controllers
             //arrange
             var repo = new Mock<IServiceLayer>(MockBehavior.Strict);
             repo.Setup(x => x.DataLayer.get_Sightseeing())
-                .Returns(new List<tbl_sightseeing>()
+                .Returns(new List<string>()
                 {
-                     new tbl_sightseeing(){Sightseeing_Type="sight1"},
-                     new tbl_sightseeing(){Sightseeing_Type="sight2"},
-                     new tbl_sightseeing(){Sightseeing_Type="llll"},
+                    "sight1",
+                     "sight2",
+                     "llll",
                 });
 
             HotelController ctrl = new HotelController(repo.Object);

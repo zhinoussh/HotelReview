@@ -9,7 +9,7 @@ namespace HotelAdvice.DataAccessLayer
     public interface IServiceLayer
     {
 
-        IDataRepository DataLayer { get; set; }
+        IDataRepository DataLayer{get;}
 
         #region HomePage
 
@@ -44,7 +44,9 @@ namespace HotelAdvice.DataAccessLayer
 
         void Post_DeleteHotelPhoto(HotelImagesViewModel photo, Controller ctrl);
 
-
+        List<string> search_restaurants_by_prefix(string Prefix);
+        List<string> search_rooms_by_prefix(string Prefix);
+        List<string> search_sightseeing_by_prefix(string Prefix);
 
         #endregion Hotel
 

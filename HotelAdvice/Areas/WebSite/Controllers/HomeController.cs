@@ -42,6 +42,7 @@ namespace HotelAdvice.Areas.WebSite.Controllers
         public JsonResult SearchList(string Prefix)
         {
             List<string> result=DataService.search_destinations_by_prefix(Prefix);
+
             return Json(result, JsonRequestBehavior.AllowGet);
         }
      

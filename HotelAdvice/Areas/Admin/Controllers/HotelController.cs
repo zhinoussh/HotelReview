@@ -133,35 +133,22 @@ namespace HotelAdvice.Areas.Admin.Controllers
         [HttpPost]
         public JsonResult Get_Restaurants(string Prefix)
         {
-            List<tbl_Restuarant> restList = DataService.DataLayer.get_restaurants();
-
-            var result = restList.Where(x => x.RestaurantName.ToLower()
-                .Contains(Prefix.ToLower()))
-                .Select(x => new { RestName = x.RestaurantName }).ToList();
-
-            return Json(result, JsonRequestBehavior.AllowGet);
+            List<string> restList = DataService.search_restaurants_by_prefix(Prefix);
+            return Json(restList, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
          public JsonResult Get_Rooms(string Prefix)
          {
-             List<tbl_room_type> RoomList = DataService.DataLayer.get_roomTypes();
-
-             var result = RoomList.Where(x => x.Room_Type.ToLower().Contains(Prefix.ToLower()))
-                 .Select(x => new { RoomType = x.Room_Type }).ToList();
-
-             return Json(result, JsonRequestBehavior.AllowGet);
+             List<string> RoomList = DataService.search_rooms_by_prefix(Prefix);
+             return Json(RoomList, JsonRequestBehavior.AllowGet);
          }
 
          [HttpPost]
          public JsonResult Get_SightSeeing(string Prefix)
          {
-             List<tbl_sightseeing> SightList = DataService.DataLayer.get_Sightseeing();
-
-             var result = SightList.Where(x => x.Sightseeing_Type.ToLower().Contains(Prefix.ToLower()))
-                 .Select(x => new { SightSeeing = x.Sightseeing_Type }).ToList();
-
-             return Json(result, JsonRequestBehavior.AllowGet);
+             List<string> SightList = DataService.search_sightseeing_by_prefix(Prefix);
+             return Json(SightList, JsonRequestBehavior.AllowGet);
          }
         
     }

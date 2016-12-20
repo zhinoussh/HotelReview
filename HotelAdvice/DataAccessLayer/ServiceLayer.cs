@@ -27,15 +27,13 @@ namespace HotelAdvice.DataAccessLayer
         {
             get
             {
-                if (_dataLayer == null)
-                    _dataLayer = new DataRepository(new HotelAdviceDB());
+               return _dataLayer;
+            }
+        }
 
-                return _dataLayer;
-            }
-            set
-            {
-                _dataLayer = value;
-            }
+        public ServiceLayer(IDataRepository dataLayer)
+        {
+            _dataLayer = dataLayer;
         }
 
 
@@ -146,6 +144,7 @@ namespace HotelAdvice.DataAccessLayer
 
             return result;
         }
+       
         #endregion HomePage
 
         #region Hotel
@@ -200,25 +199,24 @@ namespace HotelAdvice.DataAccessLayer
                     vm.imgPath = "/images/empty.gif?" + DateTime.Now.ToString("ddMMyyyyhhmmsstt");
 
                 //add restaurants
-                List<tbl_Restuarant> lst_rest = DataLayer.get_hotel_restaurants(vm.HotelId);
-                if (lst_rest.Count > 0)
+                List<string> lst_rest = DataLayer.get_hotel_restaurants(vm.HotelId);
+                if (lst_rest!=null && lst_rest.Count > 0)
                 {
-                    vm.restaurants = string.Join(",", lst_rest.Select(x => x.RestaurantName));
+                    vm.restaurants = string.Join(",", lst_rest);
                 }
 
                 //add rooms
-                List<tbl_room_type> lst_room = DataLayer.get_hotel_rooms(vm.HotelId);
-                if (lst_room.Count > 0)
+                List<string> lst_room = DataLayer.get_hotel_rooms(vm.HotelId);
+                if (lst_room != null && lst_room.Count > 0)
                 {
-                    vm.rooms = string.Join(",", lst_room.Select(x => x.Room_Type));
+                    vm.rooms = string.Join(",", lst_room);
                 }
 
-
                 //add sightseeings
-                List<tbl_sightseeing> lst_sightseeing = DataLayer.get_hotel_sightseeings(vm.HotelId);
-                if (lst_sightseeing.Count > 0)
+                List<string> lst_sightseeing = DataLayer.get_hotel_sightseeings(vm.HotelId);
+                if (lst_sightseeing!=null && lst_sightseeing.Count > 0)
                 {
-                    vm.sightseeing = string.Join(",", lst_sightseeing.Select(x => x.Sightseeing_Type));
+                    vm.sightseeing = string.Join(",", lst_sightseeing);
                 }
             }
 
@@ -241,6 +239,12 @@ namespace HotelAdvice.DataAccessLayer
 
             //save hotel
             DataLayer.add_hotel(Hotel);
+
+            //Save Restaurants,Rooms,SightSeeings,Amenities          
+            DataLayer.Save_Restaurants(Hotel.restaurants, Hotel.HotelId);
+            DataLayer.Save_Rooms(Hotel.rooms, Hotel.HotelId);
+            DataLayer.Save_Amenities(Hotel.amenities, Hotel.HotelId);
+            DataLayer.Save_Sighseeings(Hotel.sightseeing, Hotel.HotelId);
 
             //set a folder for hotel
             string hotel_dir = ctrl.Server.MapPath(@"~\Upload\" + Hotel.HotelName);
@@ -318,8 +322,11 @@ namespace HotelAdvice.DataAccessLayer
         {
             HotelImagesViewModel vm = new HotelImagesViewModel();
 
-            vm.PhotoName = DataLayer.get_hotel_name_by_photo(photoName) + "\\" + photoName;
-
+            string[] hotel_prop = DataLayer.get_hotel_prop_by_photo(photoName);
+            if (hotel_prop != null)
+            {
+                vm.PhotoName = hotel_prop[1]+"\\" + photoName;
+            }
             return vm;
         }
 
@@ -347,19 +354,46 @@ namespace HotelAdvice.DataAccessLayer
         public HotelImagesViewModel Get_DeleteHotelPhoto(string photo_name)
         {
             HotelImagesViewModel vm = new HotelImagesViewModel();
-            vm.PhotoName = photo_name;
-
+            string [] hotel_prop=DataLayer.get_hotel_prop_by_photo(photo_name);
+            if (hotel_prop != null)
+            {
+                vm.PhotoName = hotel_prop[1];
+                vm.HotelId =Int32.Parse(hotel_prop[0]);
+            }
             return vm;
         }
 
         public void Post_DeleteHotelPhoto(HotelImagesViewModel photo, Controller ctrl)
         {
-            DataLayer.delete_hotel_image(photo.PhotoName);
+            DataLayer.delete_hotel_image(photo.HotelId, photo.PhotoName);
             string file_path = ctrl.Server.MapPath(@"\Upload\" + photo.PhotoName.Substring(0, photo.PhotoName.LastIndexOf('_')) + "\\" + photo.PhotoName);
             if (File.Exists(file_path))
                 File.Delete(file_path);
         }
 
+        public List<string> search_restaurants_by_prefix(string Prefix)
+        {
+            List<string> result = DataLayer.get_restaurants().Where(x => x.ToLower().Contains(Prefix.ToLower()))
+                                                             .OrderBy(x => x).ToList();
+
+            return result;            
+        }
+
+        public List<string> search_rooms_by_prefix(string Prefix)
+        {
+            List<string> result = DataLayer.get_roomTypes().Where(x => x.ToLower().Contains(Prefix.ToLower()))
+                                                             .OrderBy(x => x).ToList();
+
+            return result;
+        }
+
+        public List<string> search_sightseeing_by_prefix(string Prefix)
+        {
+            List<string> result = DataLayer.get_Sightseeing().Where(x => x.ToLower().Contains(Prefix.ToLower()))
+                                                             .OrderBy(x => x).ToList();
+
+            return result;
+        }
 
         #endregion Hotel
 
@@ -702,6 +736,19 @@ namespace HotelAdvice.DataAccessLayer
         public HotelDetailViewModel Get_HotelDetails(string user_id, int hotel_id)
         {
             HotelDetailViewModel vm = DataLayer.get_hoteldetails(hotel_id, user_id);
+
+            vm.accordion_detail = DataLayer.get_hotelAccordionDetails(hotel_id);
+
+            vm.photos = new HotelPhotoAlbumViewModel { HotelName = vm.HotelName, photos = DataLayer.get_hotel_PhotoList(hotel_id) };
+
+            vm.accordion_detail.rooms = DataLayer.get_hotel_rooms(hotel_id);
+
+            vm.accordion_detail.restaurants = DataLayer.get_hotel_restaurants(hotel_id);
+
+            vm.accordion_detail.sightseeing = DataLayer.get_hotel_sightseeings(hotel_id);
+
+            vm.accordion_detail.amenities = DataLayer.get_hotel_amenities(hotel_id);
+
             return vm;
         }
 
