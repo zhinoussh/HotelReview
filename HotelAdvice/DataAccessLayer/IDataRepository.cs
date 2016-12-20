@@ -40,15 +40,20 @@ namespace HotelAdvice.DataAccessLayer
         HotelViewModel get_hotel_byId(int id);
 
         HotelDetailViewModel get_hoteldetails(int id, string userId);
+
+        HotelDetailAccordionViewModel get_hotelAccordionDetails(int id);
+        
+        List<string> get_hotel_PhotoList(int hotel_id);
+
         void delete_hotel(int id);
 
-        List<tbl_Restuarant> get_restaurants();
+        List<string> get_restaurants();
 
-        List<tbl_Restuarant> get_hotel_restaurants(int hotelID);
+        List<string> get_hotel_restaurants(int hotelID);
 
-        List<tbl_room_type> get_roomTypes();
+        List<string> get_roomTypes();
 
-        List<tbl_room_type> get_hotel_rooms(int hotelID);
+        List<string> get_hotel_rooms(int hotelID);
 
         List<AmenityViewModel> get_Amenities();
         List<HotelAmenityViewModel> get_Amenities_For_search(string selected_amenities);
@@ -60,15 +65,15 @@ namespace HotelAdvice.DataAccessLayer
 
         List<HotelAmenityViewModel> get_hotel_amenities(int hotelID);
 
-        List<tbl_sightseeing> get_Sightseeing();
+        List<string> get_Sightseeing();
 
-        List<tbl_sightseeing> get_hotel_sightseeings(int hotelID);
+        List<string> get_hotel_sightseeings(int hotelID);
 
-        string get_hotel_name_by_photo(string photo_name);
+        string[] get_hotel_prop_by_photo(string photo_name);
 
         string save_hotel_image(int hotel_id);
 
-        void delete_hotel_image(string photo_name);
+        void delete_hotel_image(int hotel_id,string photo_name);
 
         #endregion Hotel
 

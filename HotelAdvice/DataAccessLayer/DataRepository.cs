@@ -22,7 +22,7 @@ namespace HotelAdvice.DataAccessLayer
 
         #region City
 
-        public void add_city(int id, string name,string attractions)
+        public virtual void add_city(int id, string name,string attractions)
         {
             tbl_City new_obj;
 
@@ -47,7 +47,7 @@ namespace HotelAdvice.DataAccessLayer
 
         }
 
-        public List<CityViewModel> get_cities()
+        public virtual List<CityViewModel> get_cities()
         {
             List<CityViewModel> lst_city =_dbContext.tbl_city.Select(c =>
                 new CityViewModel
@@ -60,7 +60,7 @@ namespace HotelAdvice.DataAccessLayer
 
             return lst_city;
         }
-        public List<String> get_city_byId(int id)
+        public virtual List<String> get_city_byId(int id)
         {
             List<string> city_prop=new List<string>();
             tbl_City c = _dbContext.tbl_city.Find(id);
@@ -70,7 +70,7 @@ namespace HotelAdvice.DataAccessLayer
             return city_prop;
         }
 
-        public void delete_city(int id)
+        public virtual void delete_city(int id)
         {
             tbl_City c=_dbContext.tbl_city.Find(id);
             if(c!=null)
@@ -82,7 +82,7 @@ namespace HotelAdvice.DataAccessLayer
         #endregion City
 
         #region Hotel
-        public void add_hotel(HotelViewModel hotel)
+        public virtual void add_hotel(HotelViewModel hotel)
         {
             tbl_Hotel new_obj;
 
@@ -121,17 +121,10 @@ namespace HotelAdvice.DataAccessLayer
             {
                 _dbContext.SaveChanges();
             }
-           
-            //Save Restaurants,Rooms           
-            Save_Restaurants(hotel.restaurants, hotel_id);
-            Save_Rooms(hotel.rooms, hotel_id);
-            Save_Amenities(hotel.amenities, hotel_id);
-            Save_Sighseeings(hotel.sightseeing, hotel_id);
-            
 
         }
 
-        public void Save_Restaurants(string restaurants, int HotelId)
+        public virtual void Save_Restaurants(string restaurants, int HotelId)
         {
             //Edit
             if (HotelId != 0)
@@ -161,11 +154,10 @@ namespace HotelAdvice.DataAccessLayer
                     });
                     _dbContext.SaveChanges();
                 }
-
             }
         }
 
-        public void Save_Rooms(string rooms, int HotelId)
+        public virtual void Save_Rooms(string rooms, int HotelId)
         {
             //Edit
             if (HotelId != 0)
@@ -199,7 +191,7 @@ namespace HotelAdvice.DataAccessLayer
             }
         }
 
-        public void Save_Amenities(List<HotelAmenityViewModel> amenities, int HotelId)
+        public virtual void Save_Amenities(List<HotelAmenityViewModel> amenities, int HotelId)
         {
             //Edit
             if (HotelId != 0)
@@ -224,7 +216,7 @@ namespace HotelAdvice.DataAccessLayer
 
         }
 
-        public void Save_Sighseeings(string sightseeing, int HotelId)
+        public virtual void Save_Sighseeings(string sightseeing, int HotelId)
         {
             //Edit
             if (HotelId != 0)
@@ -258,7 +250,7 @@ namespace HotelAdvice.DataAccessLayer
             }
         }
 
-        public List<HotelViewModel> get_hotels()
+        public virtual List<HotelViewModel> get_hotels()
         {
             List<HotelViewModel> lst_hotel = _dbContext.tbl_Hotel.Join(_dbContext.tbl_city, h => h.CityId, c => c.CityId, (hotel, city) =>
                 new HotelViewModel
@@ -270,36 +262,38 @@ namespace HotelAdvice.DataAccessLayer
                 }).ToList();
 
             return lst_hotel;
-
         }
         
-        public HotelViewModel get_hotel_byId(int id)
+        public virtual HotelViewModel get_hotel_byId(int id)
         {
-           HotelViewModel hotel_prop = (from h in _dbContext.tbl_Hotel
-                                         where h.HotelId==id
-                                          select new HotelViewModel
-                                          {
-                                              HotelId=h.HotelId,
-                                              HotelName = h.HotelName,
-                                              CityId = h.CityId,
-                                              Description = h.Description,
-                                              HotelStars = h.HotelStars,
-                                              checkin = h.checkin,
-                                              checkout = h.checkout,
-                                              Tel = h.Tel,
-                                              Fax = h.Fax,
-                                              Website = h.Website,
-                                              Email = h.Email,
-                                              HotelAddress = h.HotelAddress,
-                                              distance_airport=h.distance_airport,
-                                              distance_citycenter = h.distance_citycenter 
-                                          }).FirstOrDefault();
-                                     
+            tbl_Hotel h = _dbContext.tbl_Hotel.Find(id);
+            HotelViewModel hotel_prop = null;
+
+            if (h != null)
+            {
+                hotel_prop = new HotelViewModel()
+                            {
+                                HotelId = h.HotelId,
+                                HotelName = h.HotelName,
+                                CityId = h.CityId,
+                                Description = h.Description,
+                                HotelStars = h.HotelStars,
+                                checkin = h.checkin,
+                                checkout = h.checkout,
+                                Tel = h.Tel,
+                                Fax = h.Fax,
+                                Website = h.Website,
+                                Email = h.Email,
+                                HotelAddress = h.HotelAddress,
+                                distance_airport = h.distance_airport,
+                                distance_citycenter = h.distance_citycenter
+                            };
+            }
            
             return hotel_prop;
         }
 
-        public HotelDetailViewModel get_hoteldetails(int id,string userId)
+        public virtual HotelDetailViewModel get_hoteldetails(int id,string userId)
         {
             HotelDetailViewModel detail = (from h in _dbContext.tbl_Hotel.Where(x => x.HotelId == id)
                                            join c in _dbContext.tbl_city on h.CityId.Value equals (int?)c.CityId
@@ -318,52 +312,46 @@ namespace HotelAdvice.DataAccessLayer
                                                YourRating = (rr == null ? 0 : rr.rating),
                                                review_num = _dbContext.tbl_Rating.Count(x => x.HotelId == h.HotelId),
                                                is_favorite = (ww == null ? false : true),
-                                               accordion_detail = new HotelDetailAccordionViewModel()
-                                               {
-                                                   CityName=c.CityName,
-                                                   CityDescription=c.CityAttractions,
-                                                   Description = h.Description,
-                                                   checkin = h.checkin,
-                                                   checkout = h.checkout,
-                                                   Tel = h.Tel,
-                                                   Fax = h.Fax,
-                                                   Website = h.Website,
-                                                   Email = h.Email,
-                                                   HotelAddress = h.HotelAddress,
-                                                   distance_airport = h.distance_airport,
-                                                   distance_citycenter = h.distance_citycenter
-                                               }
+                                               GuestRating=(float)Math.Round(_dbContext.tbl_Rating.Where(x => x.HotelId == h.HotelId).Average(x => (float?)x.rating) ?? 0,1)
                                            }).FirstOrDefault();
-
-            string rating_avg="0";
-            var query_rating=_dbContext.tbl_Rating.Where(x => x.HotelId == id);
-            if(query_rating.Any())
-                 rating_avg= query_rating.Average(x => x.rating).ToString();
-
-            detail.GuestRating = float.Parse(rating_avg);
-
-            List<string> photo_list = _dbContext.tbl_Hotel_Photo.Where(x => x.HotelID == id).Select(x => x.photo_name).ToList<String>();
-
-            detail.photos = new HotelPhotoAlbumViewModel { HotelName=detail.HotelName,photos=photo_list};
-
-            detail.accordion_detail.rooms = (from r in _dbContext.tbl_Hotel_Rooms.Where(x => x.HotelID == id)
-                                     join t in _dbContext.tbl_Room_Type on r.RoomTypeID equals t.RoomTypeID
-                                     select t.Room_Type).ToList();
-
-            detail.accordion_detail.restaurants = (from r in _dbContext.tbl_Hotel_Restaurants.Where(x => x.HotelID == id)
-                            join t in _dbContext.tbl_Restaurant on r.RestaurantID equals t.RestaurantID
-                            select t.RestaurantName).ToList();
-
-            detail.accordion_detail.sightseeing = (from r in _dbContext.tbl_Hotel_Sightseeings.Where(x => x.HotelID == id)
-                                  join t in _dbContext.tbl_Sightseeing on r.SightseeingID equals t.SightseeingID
-                                  select t.Sightseeing_Type).ToList();
-
-            detail.accordion_detail.amenities = get_hotel_amenities(id);
 
             return detail;
             
         }
-        public void delete_hotel(int id)
+
+        public virtual HotelDetailAccordionViewModel get_hotelAccordionDetails(int id)
+        {
+            HotelDetailAccordionViewModel accordion_detail = (from h in _dbContext.tbl_Hotel.Where(x => x.HotelId == id)
+                                                              join c in _dbContext.tbl_city on h.CityId.Value equals (int?)c.CityId
+                                                              select new HotelDetailAccordionViewModel
+                                                               {
+                                                                   CityName = c.CityName,
+                                                                   CityDescription = c.CityAttractions,
+                                                                   Description = h.Description,
+                                                                   checkin = h.checkin,
+                                                                   checkout = h.checkout,
+                                                                   Tel = h.Tel,
+                                                                   Fax = h.Fax,
+                                                                   Website = h.Website,
+                                                                   Email = h.Email,
+                                                                   HotelAddress = h.HotelAddress,
+                                                                   distance_airport = h.distance_airport,
+                                                                   distance_citycenter = h.distance_citycenter
+                                                               }
+                                                           ).FirstOrDefault();
+
+            return accordion_detail;
+        }
+       
+        public virtual List<string> get_hotel_PhotoList(int hotel_id)
+        {
+            List<string> photo_list = _dbContext.tbl_Hotel_Photo.Where(x => x.HotelID == hotel_id)
+                                                                .Select(x => x.photo_name).ToList<String>();
+            
+            return photo_list;
+        }
+       
+        public virtual void delete_hotel(int id)
         {
             tbl_Hotel c = _dbContext.tbl_Hotel.Find(id);
             if (c != null)
@@ -373,45 +361,39 @@ namespace HotelAdvice.DataAccessLayer
             }
         }
 
-        public List<tbl_Restuarant> get_restaurants()
+        public virtual List<string> get_restaurants()
         {
-            List<tbl_Restuarant> lst_restaurant = _dbContext.tbl_Restaurant.Select(r =>r)
-                .OrderBy(r => r.RestaurantName).ToList();
+            List<string> lst_restaurant = _dbContext.tbl_Restaurant.Select(r =>r.RestaurantName).ToList();
 
             return lst_restaurant;
-            
         }
 
-        public List<tbl_Restuarant> get_hotel_restaurants(int hotelID)
+        public virtual List<string> get_hotel_restaurants(int hotelID)
         {
-            List<tbl_Restuarant> lst_restaurant = (from r in _dbContext.tbl_Hotel_Restaurants.Where(x=>x.HotelID==hotelID)
+            List<string> lst_restaurant = (from r in _dbContext.tbl_Hotel_Restaurants.Where(x=>x.HotelID==hotelID)
                                                   join Rest in _dbContext.tbl_Restaurant on r.RestaurantID equals Rest.RestaurantID
-                                                   select Rest)
-                                                   .OrderBy(r => r.RestaurantName).ToList();
+                                                   select Rest.RestaurantName).ToList();
 
             return lst_restaurant;
 
         }
 
-        public List<tbl_room_type> get_roomTypes()
+        public virtual List<string> get_roomTypes()
         {
-            List<tbl_room_type> lst_rooms= _dbContext.tbl_Room_Type.Select(r => r)
-                .OrderBy(r => r.Room_Type).ToList();
+            List<string> lst_rooms = _dbContext.tbl_Room_Type.Select(r => r.Room_Type).ToList();
 
             return lst_rooms;
-            
         }
 
-        public List<tbl_room_type> get_hotel_rooms(int hotelID)
+        public virtual List<string> get_hotel_rooms(int hotelID)
         {
-            List<tbl_room_type> lst_rooms = (from t in _dbContext.tbl_Hotel_Rooms.Where(r => r.HotelID == hotelID)
+            List<string> lst_rooms = (from t in _dbContext.tbl_Hotel_Rooms.Where(r => r.HotelID == hotelID)
                                              join r in _dbContext.tbl_Room_Type on t.RoomTypeID equals r.RoomTypeID
-                                             select r)
-                                          .OrderBy(x => x.Room_Type).ToList();
+                                             select r.Room_Type).ToList();
             return lst_rooms;
         }
 
-        public List<AmenityViewModel> get_Amenities()
+        public virtual List<AmenityViewModel> get_Amenities()
         {
             List<AmenityViewModel> lst_amenity = _dbContext.tbl_Amenity.Select(r=>new AmenityViewModel { 
                 AmenityID=r.AmenityID,
@@ -422,9 +404,7 @@ namespace HotelAdvice.DataAccessLayer
 
         }
 
-
-
-        public List<HotelAmenityViewModel> get_Amenities_For_search(string selected_amenities)
+        public virtual List<HotelAmenityViewModel> get_Amenities_For_search(string selected_amenities)
         {
             List<HotelAmenityViewModel> lst_amenity =
                 (from a in _dbContext.tbl_Amenity
@@ -440,7 +420,7 @@ namespace HotelAdvice.DataAccessLayer
         }
 
 
-        public void delete_Amenity(int id)
+        public virtual void delete_Amenity(int id)
         {
            tbl_amenity a= _dbContext.tbl_Amenity.Find(id);
            if (a != null)
@@ -450,7 +430,7 @@ namespace HotelAdvice.DataAccessLayer
            }
         }
 
-        public void add_amenity(int id, string amenity_name)
+        public virtual void add_amenity(int id, string amenity_name)
         {
             tbl_amenity new_obj;
 
@@ -472,7 +452,7 @@ namespace HotelAdvice.DataAccessLayer
             _dbContext.SaveChanges();
         }
        
-        public List<HotelAmenityViewModel> get_hotel_amenities(int hotelID)
+        public virtual List<HotelAmenityViewModel> get_hotel_amenities(int hotelID)
         {
             List<HotelAmenityViewModel> lst_amenities = (from a in _dbContext.tbl_Amenity
                                                     join h in _dbContext.tbl_Hotel_Amenities.Where(x => x.HotelID == hotelID) 
@@ -488,40 +468,47 @@ namespace HotelAdvice.DataAccessLayer
             return lst_amenities;
         }
 
-        public List<tbl_sightseeing> get_Sightseeing()
+        public virtual List<string> get_Sightseeing()
         {
-            List<tbl_sightseeing> lst_sightseeing = _dbContext.tbl_Sightseeing.Select(r => r)
-                .OrderBy(r => r.Sightseeing_Type).ToList();
+            List<string> lst_sightseeing = _dbContext.tbl_Sightseeing.Select(r => r.Sightseeing_Type).ToList();
 
             return lst_sightseeing;
 
         }
 
-        public List<tbl_sightseeing> get_hotel_sightseeings(int hotelID)
+        public virtual List<string> get_hotel_sightseeings(int hotelID)
         {
-            List<tbl_sightseeing> lst_sightseeing = (from h in _dbContext.tbl_Hotel_Sightseeings.Where(r => r.HotelID == hotelID)
+            List<string> lst_sightseeing = (from h in _dbContext.tbl_Hotel_Sightseeings.Where(r => r.HotelID == hotelID)
                                              join s in _dbContext.tbl_Sightseeing on h.SightseeingID equals s.SightseeingID
-                                             select s)
-                                          .OrderBy(x => x.Sightseeing_Type).ToList();
+                                             select s.Sightseeing_Type).ToList();
             return lst_sightseeing;
         }
 
-        public string get_hotel_name_by_photo(string photo_name) {
+        public virtual string[] get_hotel_prop_by_photo(string photo_name) {
 
-            string hotel_name = (from h in _dbContext.tbl_Hotel
+            tbl_Hotel hotel = (from h in _dbContext.tbl_Hotel
                                 join p in _dbContext.tbl_Hotel_Photo on h.HotelId equals p.HotelID
                                 where p.photo_name == photo_name
-                                select h.HotelName).FirstOrDefault();
+                                select h).FirstOrDefault();
 
-            return hotel_name;
+            string []prop = new string[2];
+            if (hotel != null)
+            {
+                prop[0] = hotel.HotelId+"";
+                prop[1] = hotel.HotelName;
+            }
+
+            return prop;
         }
 
-        public string save_hotel_image(int hotel_id)
+        public virtual string save_hotel_image(int hotel_id)
         {
             string file_name="";
-            string hotel_name=_dbContext.tbl_Hotel.Where(x=>x.HotelId==hotel_id).Select(x=>x.HotelName).FirstOrDefault();
-            if(hotel_name!=null)
+            tbl_Hotel hotel = _dbContext.tbl_Hotel.Find(hotel_id);
+            if(hotel!=null)
             {
+                string hotel_name = hotel.HotelName;
+
                tbl_Hotel_Photo last_photo= _dbContext.tbl_Hotel_Photo.Where(x => x.HotelID == hotel_id).OrderByDescending(x => x.PhotoID).FirstOrDefault();
                if (last_photo!=null)
                {
@@ -545,9 +532,7 @@ namespace HotelAdvice.DataAccessLayer
             return file_name;
         }
 
-
-
-        public void delete_hotel_image(string photo_name)
+        public virtual void delete_hotel_image(int hotel_id,string photo_name)
         {
             tbl_Hotel_Photo c = _dbContext.tbl_Hotel_Photo.Where(x=>x.photo_name==photo_name).FirstOrDefault();
             if (c != null)
@@ -561,7 +546,7 @@ namespace HotelAdvice.DataAccessLayer
 
         #region UserPage
         
-        public int add_favorite_hotel(int hotel_id,string userId)
+        public virtual int add_favorite_hotel(int hotel_id,string userId)
         {
            tbl_WishList w= _dbContext.tbl_Wish_List.Where(x => x.HotelId == hotel_id && x.UserId == userId).FirstOrDefault();
 
@@ -582,7 +567,7 @@ namespace HotelAdvice.DataAccessLayer
         }
 
        
-        public void remove_favorite_hotel(int hotel_id, string userId)
+        public virtual void remove_favorite_hotel(int hotel_id, string userId)
         {
             tbl_WishList w = _dbContext.tbl_Wish_List.Where(x => x.HotelId == hotel_id && x.UserId == userId).FirstOrDefault();
 
@@ -590,7 +575,7 @@ namespace HotelAdvice.DataAccessLayer
             _dbContext.SaveChanges();
         }
 
-        public List<HotelSearchViewModel> get_wishList(string userId)
+        public virtual List<HotelSearchViewModel> get_wishList(string userId)
         {
             List<HotelSearchViewModel> lst_result = (from w in _dbContext.tbl_Wish_List.Where(x => x.UserId == userId)
                                                      join h in _dbContext.tbl_Hotel
@@ -609,7 +594,7 @@ namespace HotelAdvice.DataAccessLayer
             return lst_result;
         }
 
-        public List<HotelSearchViewModel> get_reviewList(string userId)
+        public virtual List<HotelSearchViewModel> get_reviewList(string userId)
         {
             List<HotelSearchViewModel> lst_result = (from w in _dbContext.tbl_Rating.Where(x => x.UserId == userId && x.review_date!=null)
                                                      join h in _dbContext.tbl_Hotel
@@ -628,7 +613,7 @@ namespace HotelAdvice.DataAccessLayer
             return lst_result;
         }
 
-        public void delete_review(int hotel_id,string userId)
+        public virtual void delete_review(int hotel_id,string userId)
         {
             tbl_rating r=_dbContext.tbl_Rating.Where(x => x.HotelId == hotel_id && x.UserId == userId).FirstOrDefault();
             
@@ -648,7 +633,7 @@ namespace HotelAdvice.DataAccessLayer
             }
             
         }
-        public void rate_hotel(int hotel_id, string userId,int rating)
+        public virtual void rate_hotel(int hotel_id, string userId,int rating)
         {
             tbl_rating r = _dbContext.tbl_Rating.Where(x => x.HotelId == hotel_id && x.UserId == userId).FirstOrDefault();
 
@@ -666,7 +651,7 @@ namespace HotelAdvice.DataAccessLayer
             
         }
 
-        public List<HotelSearchViewModel> get_ratingList(string userId)
+        public virtual List<HotelSearchViewModel> get_ratingList(string userId)
         {
             List<HotelSearchViewModel> lst_result = (from r in _dbContext.tbl_Rating.Where(x => x.UserId == userId)
                                                      join h in _dbContext.tbl_Hotel
@@ -686,7 +671,7 @@ namespace HotelAdvice.DataAccessLayer
             return lst_result;
         }
 
-        public AddReviewViewModel get_previous_review(int hotelId, string userId)
+        public virtual AddReviewViewModel get_previous_review(int hotelId, string userId)
         {
             AddReviewViewModel review = (from r in _dbContext.tbl_Rating.Where(x => x.HotelId == hotelId && x.UserId == userId)
                                 select new AddReviewViewModel { 
@@ -709,7 +694,7 @@ namespace HotelAdvice.DataAccessLayer
             return review;
         }
     
-        public void add_review(AddReviewViewModel review)
+        public virtual void add_review(AddReviewViewModel review)
         {
             if (review.RateId == 0)
             {
@@ -751,7 +736,7 @@ namespace HotelAdvice.DataAccessLayer
             _dbContext.SaveChanges();
         }
 
-        public ReviewPageViewModel get_review_page(int hotelId)
+        public virtual ReviewPageViewModel get_review_page(int hotelId)
         {
             ReviewPageViewModel result = new ReviewPageViewModel();
 
@@ -797,7 +782,7 @@ namespace HotelAdvice.DataAccessLayer
             return result;
         }
 
-        public List<ReviewListViewModel> get_reviews_for_hotel(int hotelId,ApplicationUserManager userMgr)
+        public virtual List<ReviewListViewModel> get_reviews_for_hotel(int hotelId,ApplicationUserManager userMgr)
         {
            
             List<ReviewListViewModel> lst_result = (from r in _dbContext.tbl_Rating.Where(x => x.HotelId == hotelId && x.review_date!=null)
@@ -820,7 +805,7 @@ namespace HotelAdvice.DataAccessLayer
             return lst_result;
         }
 
-        public int get_rank_hotel(int hotelId)
+        public virtual int get_rank_hotel(int hotelId)
         {
 
             var query = (from r in _dbContext.tbl_Rating
@@ -842,7 +827,7 @@ namespace HotelAdvice.DataAccessLayer
             return rank;
         }
 
-        public List<CompareViewModel> get_compare_hotels_in_city(int cityID, int hotelId)
+        public virtual List<CompareViewModel> get_compare_hotels_in_city(int cityID, int hotelId)
         {
             List<CompareViewModel> lst_result = (from h in _dbContext.tbl_Hotel.Where(x => x.CityId == cityID)
                                                      join r in _dbContext.tbl_Rating on h.HotelId equals r.HotelId into Rating
@@ -871,7 +856,7 @@ namespace HotelAdvice.DataAccessLayer
         #region Home Page
        
 
-        public List<HotelSearchViewModel> Search_Hotels_in_city(int city_id, string userId)
+        public virtual List<HotelSearchViewModel> Search_Hotels_in_city(int city_id, string userId)
         {
             List<HotelSearchViewModel> lst_result = (from h in _dbContext.tbl_Hotel.Where(x => x.CityId == city_id)
                                                      join c in _dbContext.tbl_city on h.CityId equals c.CityId
@@ -896,7 +881,7 @@ namespace HotelAdvice.DataAccessLayer
             return lst_result;
         }
 
-        public List<HotelSearchViewModel> Search_Hotels_in_Detination(string destination_name, string userId)
+        public virtual List<HotelSearchViewModel> Search_Hotels_in_Detination(string destination_name, string userId)
         {
             List<HotelSearchViewModel> lst_result = (from h in _dbContext.tbl_Hotel                                             
                                                      join c in _dbContext.tbl_city on h.CityId equals c.CityId
@@ -924,7 +909,7 @@ namespace HotelAdvice.DataAccessLayer
             return lst_result;
         }
 
-        public List<HotelSearchViewModel> Advanced_Search(AdvancedSearchViewModel vm, string userId)
+        public virtual List<HotelSearchViewModel> Advanced_Search(AdvancedSearchViewModel vm, string userId)
         {
 
             List<int> searched_amenities = new List<int>();
@@ -968,7 +953,7 @@ namespace HotelAdvice.DataAccessLayer
             return lst_result;
         }
 
-        public List<HotelSearchViewModel> Search_Popular_Hotels()
+        public virtual List<HotelSearchViewModel> Search_Popular_Hotels()
         {
             List<HotelSearchViewModel> lst_result = (from h in _dbContext.tbl_Hotel//.Where(x => x.CityId == city_id)
                                                      join c in _dbContext.tbl_city on h.CityId equals c.CityId
@@ -986,7 +971,7 @@ namespace HotelAdvice.DataAccessLayer
             return lst_result;
         }
 
-        public List<HotelSearchViewModel> Search_Top_Hotels()
+        public virtual List<HotelSearchViewModel> Search_Top_Hotels()
         {
             List<HotelSearchViewModel> lst_result = (from h in _dbContext.tbl_Hotel.Where(x => x.HotelStars >=4)
                                                      join c in _dbContext.tbl_city on h.CityId equals c.CityId

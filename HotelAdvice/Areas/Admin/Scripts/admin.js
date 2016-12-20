@@ -205,7 +205,7 @@ function Set_Restaurants_tag()
             },
             filter: function (list) {
                 return $.map(list, function (object) {
-                    return object.RestName;
+                    return object;
                 });
             }
         }
