@@ -238,13 +238,13 @@ namespace HotelAdvice.DataAccessLayer
                 original_hotel_name = DataLayer.get_hotel_byId(Hotel.HotelId).HotelName;
 
             //save hotel
-            DataLayer.add_hotel(Hotel);
+            int hotel_id=DataLayer.add_hotel(Hotel);
 
             //Save Restaurants,Rooms,SightSeeings,Amenities          
-            DataLayer.Save_Restaurants(Hotel.restaurants, Hotel.HotelId);
-            DataLayer.Save_Rooms(Hotel.rooms, Hotel.HotelId);
-            DataLayer.Save_Amenities(Hotel.amenities, Hotel.HotelId);
-            DataLayer.Save_Sighseeings(Hotel.sightseeing, Hotel.HotelId);
+            DataLayer.Save_Restaurants(Hotel.restaurants, hotel_id);
+            DataLayer.Save_Rooms(Hotel.rooms, hotel_id);
+            DataLayer.Save_Amenities(Hotel.amenities, hotel_id);
+            DataLayer.Save_Sighseeings(Hotel.sightseeing, hotel_id);
 
             //set a folder for hotel
             string hotel_dir = ctrl.Server.MapPath(@"~\Upload\" + Hotel.HotelName);

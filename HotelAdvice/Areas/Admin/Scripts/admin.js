@@ -14,6 +14,7 @@ $(document).ready(function () {
         $("#div_alert").slideDown(500);
         localStorage.clear();
     }
+ 
 
     $("#close_alert").click(function () {
         $("#div_alert").slideUp(500);
@@ -40,6 +41,54 @@ $(document).ready(function () {
    
 });
 
+$(document).on("click", "#btn_add_hotel", add_hotel_click);
+$(document).on("click", "#btn_add_city", add_city_click);
+
+function add_hotel_click() {
+    if ($("#frm_add_hotel").valid()) {
+        var formData = new FormData($('#frm_add_hotel')[0]);
+        var action = $("#frm_add_hotel").attr("action");
+
+        $.ajax({
+            type: "POST",
+            url: action,
+            data: addRequestVerificationToken(formData),
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                Success_AjaxReturn(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                //do your own thing
+                alert('my_error:' + errorThrown);
+            }
+        });
+    }
+
+}
+
+function add_city_click() {
+    if ($("#frm_add_city").valid()) {
+        var formData = new FormData($('#frm_add_city')[0]);
+        var action = $("#frm_add_city").attr("action");
+
+        $.ajax({
+            type: "POST",
+            url: action,
+            data: addRequestVerificationToken(formData),
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                Success_AjaxReturn(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                //do your own thing
+                alert(errorThrown);
+            }
+        });
+    }
+
+}
 $(document).on("click", ".editButton", showAddModal);
 $(document).on("click", ".actionButton", showModal);
 
@@ -238,7 +287,7 @@ function Set_Rooms_tag() {
             },
             filter: function (list) {
                 return $.map(list, function (object) {
-                    return object.RoomType;
+                    return object;
                 });
             }
         }
@@ -272,7 +321,7 @@ function Set_Sightseeing_tag() {
             },
             filter: function (list) {
                 return $.map(list, function (object) {
-                    return object.SightSeeing;
+                    return object;
                 });
             }
         }
@@ -295,49 +344,5 @@ function addRequestVerificationToken(data) {
     return data;
 };
 
-function add_hotel_click()
-{
-    if ($("#frm_add_hotel").valid()) {
-        var formData = new FormData($('#frm_add_hotel')[0]);
-        var action = $("#frm_add_hotel").attr("action");
 
-        $.ajax({
-            type: "POST",
-            url: action,
-            data: addRequestVerificationToken(formData),
-            contentType: false,
-            processData: false,
-            success: function (data) {
-                Success_AjaxReturn(data);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                //do your own thing
-                alert(errorThrown);
-            }
-        });
-    }
-            
-}
 
-function add_city_click() {
-    if ($("#frm_add_city").valid()) {
-        var formData = new FormData($('#frm_add_city')[0]);
-        var action = $("#frm_add_city").attr("action");
-
-        $.ajax({
-            type: "POST",
-            url: action,
-            data: addRequestVerificationToken(formData),
-            contentType: false,
-            processData: false,
-            success: function (data) {
-                Success_AjaxReturn(data);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                //do your own thing
-                alert(errorThrown);
-            }
-        });
-    }
-
-}

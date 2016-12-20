@@ -76,12 +76,14 @@ namespace HotelAdvice.DataAccessLayer
 
         #region Hotel
 
-        public override void add_hotel(HotelViewModel hotel)
+        public override int add_hotel(HotelViewModel hotel)
         {
-            base.add_hotel(hotel);
+            int hotel_id=base.add_hotel(hotel);
             _cache.InvalidateCache(HotelListDependency[0]);
             _cache.InvalidateCache(HotelDetailKey + hotel.HotelId);
             _cache.InvalidateCache(HotelPhotoListKey + hotel.HotelId);
+
+            return hotel_id;
         }
 
         public override void Save_Restaurants(string restaurants, int HotelId)

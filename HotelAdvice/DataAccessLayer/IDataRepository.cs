@@ -25,7 +25,7 @@ namespace HotelAdvice.DataAccessLayer
         #endregion City
 
         #region Hotel
-        void add_hotel(HotelViewModel hotel);
+        int add_hotel(HotelViewModel hotel);
 
         void Save_Restaurants(string restaurants, int HotelId);
 

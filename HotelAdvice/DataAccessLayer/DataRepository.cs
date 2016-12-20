@@ -82,7 +82,7 @@ namespace HotelAdvice.DataAccessLayer
         #endregion City
 
         #region Hotel
-        public virtual void add_hotel(HotelViewModel hotel)
+        public virtual int add_hotel(HotelViewModel hotel)
         {
             tbl_Hotel new_obj;
 
@@ -122,6 +122,7 @@ namespace HotelAdvice.DataAccessLayer
                 _dbContext.SaveChanges();
             }
 
+            return hotel_id;
         }
 
         public virtual void Save_Restaurants(string restaurants, int HotelId)
