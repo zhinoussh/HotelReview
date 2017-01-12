@@ -238,8 +238,9 @@
                     @Html.BootstrapButton("<span class='glyphicon glyphicon-ok-circle'></span>Save", "btn-default "
                                  , "btn_add_hotel", HtmlCommon.ButtonType.button)
 
+
                     @Html.BootstrapButton("<span class='glyphicon glyphicon-remove-circle'></span>Cancel", "btn-default "
-                              , "btn_add_city", HtmlCommon.ButtonType.button)
+                                         , "", HtmlCommon.ButtonType.button, new { data_dismiss = "modal" })
                 </div>
 
             </div>

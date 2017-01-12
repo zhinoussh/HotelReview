@@ -82,7 +82,7 @@ namespace HotelAdvice
             {
 
                 // first we create Admin rool   
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                var role = new IdentityRole();
                 role.Name = "Administrator";
                 roleManager.Create(role);
 
@@ -109,7 +109,7 @@ namespace HotelAdvice
             // creating Creating Employee role    
             if (!roleManager.RoleExists("PublicUser"))
             {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                var role = new IdentityRole();
                 role.Name = "PublicUser";
                 roleManager.Create(role);
 

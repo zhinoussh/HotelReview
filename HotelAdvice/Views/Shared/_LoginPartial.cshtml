@@ -16,7 +16,7 @@
                 {
                 @Html.ActionLink("Welcome " + ((ClaimsIdentity)User.Identity).FindFirst("FirstName").Value + "!", "Index", "User", new { Area = "Website" }, htmlAttributes: new { title = "Profile", style = " color: #fff" })
                 }
-                else
+                else if (User.IsInRole("Administrator"))
                 {
                     @Html.ActionLink("Welcome " + ((ClaimsIdentity)User.Identity).FindFirst("FirstName").Value + "!", "Index", "Hotel", new { Area = "Admin" }, htmlAttributes: new { title = "Dashboard", style = " color: #fff" })
                 }
