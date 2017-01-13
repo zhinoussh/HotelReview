@@ -98,7 +98,7 @@ namespace HotelAdvice
             if (string.IsNullOrEmpty(cssClass))
                 cssClass = "form-control";
             else
-                cssClass = "fomr-control " + cssClass;
+                cssClass = "form-control " + cssClass;
 
             rvd.Add("class", cssClass);
 
