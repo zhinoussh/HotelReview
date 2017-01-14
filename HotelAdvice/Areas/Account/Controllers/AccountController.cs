@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -8,7 +7,6 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using HotelAdvice.Models;
 using HotelAdvice.Areas.Account.ViewModels;
 using HotelAdvice.Areas.Account.Models;
 
@@ -427,7 +425,7 @@ namespace HotelAdvice.Areas.Account.Controllers
        public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home", new { Area="WebSite"});
+           return RedirectToAction("Index", "Home", new { Area="WebSite"});
 
           //  return Json(new { url="/Home/Index"},JsonRequestBehavior.AllowGet);
 
