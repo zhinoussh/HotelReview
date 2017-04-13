@@ -110,9 +110,7 @@ namespace HotelAdvice.Areas.WebSite.Controllers
             }
             else
             {
-                string[] result = DataService.Post_AddToFavorite(User.Identity.GetUserId()
-                    , this,destination_name,citySearch, hotel_id, cityId, page, sort, HotelName, center
-                    , airport, score, Star1, Star2, Star3, Star4, Star5,amenity);
+                string[] result = DataService.Post_AddToFavorite(User.Identity.GetUserId(), this,destination_name,citySearch, hotel_id, cityId, page, sort, HotelName, center, airport, score, Star1, Star2, Star3, Star4, Star5,amenity);
              
                 return Json(new { msg = result[0], partial = result[1] });
             }

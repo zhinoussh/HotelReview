@@ -98,6 +98,7 @@ namespace HotelAdvice.Areas.Account.Controllers
                             return Json(new { url = model.returnUrl });
                         else
                             return Json(new { url = "/WebSite/Home/Index" });
+
                     }
                     case SignInStatus.LockedOut:
                         return View("Lockout");
