@@ -130,7 +130,6 @@ var reparseform = function () {
     $("form").removeData("validator");
     $("form").removeData("unobtrusiveValidation");
     $.validator.unobtrusive.parse("form");
-
 };
 
 var Success_AjaxReturn = function (result) {
