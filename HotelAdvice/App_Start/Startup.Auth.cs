@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
+using System.Linq;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
@@ -8,6 +12,8 @@ using Owin;
 using HotelAdvice.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using HotelAdvice.Areas.Account.Models;
+using HotelAdvice.Areas.Admin.Models;
+using HotelAdvice.DataAccessLayer;
 
 namespace HotelAdvice
 {
@@ -67,55 +73,12 @@ namespace HotelAdvice
             //    ClientId = "",
             //    ClientSecret = ""
             //});
-
-            createRolesandUsers();
+          
+         
         }
 
-        private void createRolesandUsers()
-        {
-            ApplicationDbContext context = new ApplicationDbContext();
+      
+        
 
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-
-
-            // In Startup i am creating first Admin Role and creating a default Admin User    
-            if (!roleManager.RoleExists("Administrator"))
-            {
-
-                // first we create Admin rool   
-                var role = new IdentityRole();
-                role.Name = "Administrator";
-                roleManager.Create(role);
-
-                //create admin user
-                var user = new ApplicationUser
-                {
-                    UserName = "admin@hoteladvice.com",
-                    Email = "admin@hoteladvice.com",
-                    FirstName = "admin",
-                    LastName = "admin"
-                };
-                var chkUser =  UserManager.Create(user, "123456");
-                
-                //Add default User to Role Admin   
-                if (chkUser.Succeeded)
-                {
-                    var result1 = UserManager.AddToRole(user.Id, "Administrator");
-
-                } 
-            }
-
-            
-
-            // creating Creating Employee role    
-            if (!roleManager.RoleExists("PublicUser"))
-            {
-                var role = new IdentityRole();
-                role.Name = "PublicUser";
-                roleManager.Create(role);
-
-            }
-        } 
     }
 }

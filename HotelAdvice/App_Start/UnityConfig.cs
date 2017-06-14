@@ -1,6 +1,8 @@
 using System;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
+using HotelAdvice.DataAccessLayer;
+using HotelAdvice.Areas.Account.Controllers;
 
 namespace HotelAdvice.App_Start
 {
@@ -32,6 +34,13 @@ namespace HotelAdvice.App_Start
         /// change the defaults), as Unity allows resolving a concrete type even if it was not previously registered.</remarks>
         public static void RegisterTypes(IUnityContainer container)
         {
+            container.RegisterType<IServiceLayer, ServiceLayer>(new ContainerControlledLifetimeManager());
+
+            HotelAdviceDB db = new HotelAdviceDB();
+            container.RegisterType<IDataRepository, DataRepository>(new ContainerControlledLifetimeManager()
+                                                                   , new InjectionConstructor(db));
+            container.RegisterType<AccountController>(new InjectionConstructor());
+
             // NOTE: To load from web.config uncomment the line below. Make sure to add a Microsoft.Practices.Unity.Configuration to the using statements.
             // container.LoadConfiguration();
 

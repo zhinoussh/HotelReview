@@ -191,6 +191,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\Bootstrapper.cs" />
+    <Compile Include="App_Code\HotelDataBaseInitializer.cs" />
     <Compile Include="Areas\Admin\ViewModels\HotelAmenityViewModel.cs" />
     <Compile Include="Components\AjaxExtensions\AjaxActionLink.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -198,6 +199,7 @@
     <Compile Include="DataAccessLayer\CacheRepository.cs" />
     <Compile Include="DataAccessLayer\DataRepository.cs" />
     <Compile Include="App_Code\DateTimeClass.cs" />
+    <Compile Include="DataAccessLayer\HotelAdviceDBInitializer.cs" />
     <Compile Include="DataAccessLayer\IDataRepository.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />

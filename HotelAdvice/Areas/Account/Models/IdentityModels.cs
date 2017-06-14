@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Data.Entity;
+using HotelAdvice.DataAccessLayer;
 
 namespace HotelAdvice.Areas.Account.Models
 {
@@ -37,8 +38,9 @@ namespace HotelAdvice.Areas.Account.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("HotelAdviceConnection", throwIfV1Schema: false)
+            : base("HotelAdvice2", throwIfV1Schema: false)
         {
+           
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

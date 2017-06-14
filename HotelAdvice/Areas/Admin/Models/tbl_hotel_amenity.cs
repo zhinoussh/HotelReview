@@ -1,20 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HotelAdvice.Areas.Admin.Models
 {
     public class tbl_hotel_amenity
     {
-        public tbl_hotel_amenity()
-        {
-
-        }
-
-       [Key]
+        [Key]
         public int HotelAmenityID { get; set; }
         
         public int? HotelID { get; set; }

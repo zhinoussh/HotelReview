@@ -1,8 +1,4 @@
 ﻿using HotelAdvice.App_Code;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -18,7 +14,26 @@ namespace HotelAdvice
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            Bootstrapper.Initialise();
+            //Database.SetInitializer<HotelAdviceDB>(new HotelAdviceDBInitializer());
+            //Database.SetInitializer<ApplicationDbContext>(new IdentityDBInitializer());
+
+            //Database.SetInitializer<HotelAdviceDB>(new HotelAdviceDBInitializer());
+            //HotelAdviceDB context = new HotelAdviceDB();
+            //context.Database.Initialize(false);
+
+            //Database.SetInitializer<ApplicationDbContext>(new IdentityDBInitializer());
+            //ApplicationDbContext context2 = new ApplicationDbContext();
+            //context2.Database.Initialize(false);
+
+         //   UnityWebActivator.Start();
+          //  Bootstrapper.Initialise();
+
+            HotelDataBaseInitializer.Initialize();
+
         }
+
+        
     }
+
+
 }

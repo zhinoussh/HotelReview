@@ -6,6 +6,7 @@ using System.Data.Entity;
 using HotelAdvice.Areas.Admin.Models;
 using HotelAdvice.Areas.WebSite.Models;
 using HotelAdvice.Areas.Account.Models;
+using HotelAdvice.DataAccessLayer;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace HotelAdvice
@@ -28,7 +29,7 @@ namespace HotelAdvice
 
 
         public HotelAdviceDB()
-            : base("name=HotelAdviceConnection")
+            : base("HotelAdvice2")
         {
         }
 
